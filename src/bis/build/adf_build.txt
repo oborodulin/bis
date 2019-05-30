@@ -1,0 +1,3 @@
+D:\utils\bis\Distribution\icons\exe-icon.ico	ohw.cmd	D:\utils\releases\adf\ohw.exe
+D:\utils\bis\Distribution\icons\exe-icon.ico	ohw_dev.cmd	D:\utils\releases\adf\ohw_dev.exe
+D:\utils\bis\Distribution\icons\exe-icon.ico	ohw_prod.cmd	D:\utils\releases\adf\ohw_prod.exe

@@ -1,0 +1,4 @@
+copyright=Copyright (C) 2015 Oleg Borodulin (admin@bis.unimansys.com)
+product=Victory ADF: Replace OHW baseURI
+description=Утилита изменения хостов приложения автономной справки OHW в Adf-библиотеках проектов ViewController
+company=Victory UMS

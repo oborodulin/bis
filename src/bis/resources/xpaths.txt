@@ -1,0 +1,23 @@
+Код ресурса			Номер	Категория	Значение ресурса
+;
+;XPath выражения для поиска значений тегов и атрибутов
+;===========================================
+XPathPkgs			001	1CON	/package
+XPathMods			002	1CON	/package/os/windows/modules/module
+XPathOSParams		003	1CON	/package/os/windows
+XPathModExecs		004	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution
+XPathPhaseDownload	005	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='download']/../configuration/processor/architecture[text()='{V3}']
+XPathPhaseConfig	006	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../configuration
+XPathModBinDirs		007	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='install']/../configuration/modBinDirs
+XPathPhaseGoals		008	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../goals
+XPathInstallVer		009	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='install']/../configuration/installedVersion
+XPathCmdCommands	010	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../configuration/commands/*
+XPathCmdCopySrc		011	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../configuration/commands/copy[{V4}]/source
+XPathCmdCopyDst		012	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../configuration/commands/copy[{V4}]/destination
+XPathCmdMoveSrc		013	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../configuration/commands/move[{V4}]/source
+XPathCmdMoveDst		014	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../configuration/commands/move[{V4}]/destination
+XPathCmdMdDirs		015	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../configuration/commands/md[{V4}]
+XPathCfgFile		016	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='config']/../configuration/configFiles/configFile
+XPathCfgParams		017	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='config']/../configuration/configFiles/configFile/name[text()='{V3}']/../parameters/param
+XPathCmdBatch		018	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../configuration/commands/batch
+

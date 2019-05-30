@@ -1,0 +1,2 @@
+D:\utils\bis\Distribution\utils_x86\fnr.exe
+D:\utils\bis\Distribution\utils_x86\chgcolor.exe

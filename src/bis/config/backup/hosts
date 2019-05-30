@@ -1,0 +1,76 @@
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+127.0.0.1	localhost
+127.0.0.1	webadmin.testserver.com
+127.0.0.1	www.webadmin.testserver.com
+127.0.0.1	ums.testserver.com
+127.0.0.1	www.ums.testserver.com
+127.0.0.1	help.testserver.com
+127.0.0.1	www.help.testserver.com
+127.0.0.1	test.testserver.com
+127.0.0.1	www.test.testserver.com
+127.0.0.1	oborodulin.testserver.com
+127.0.0.1	www.oborodulin.testserver.com
+127.0.0.1	phpdoc.testserver.com
+127.0.0.1	www.phpdoc.testserver.com
+127.0.0.1	documents.testserver.com
+127.0.0.1	www.documents.testserver.com
+127.0.0.1	support.testserver.com
+127.0.0.1	www.support.testserver.com
+127.0.0.1	tender.testserver.com
+127.0.0.1	www.tender.testserver.com
+127.0.0.1	webspider.testserver.com
+127.0.0.1	www.webspider.testserver.com
+127.0.0.1	forex.testserver.com
+127.0.0.1	www.forex.testserver.com
+#192.168.0.1	localhost
+192.168.0.1	host50.akhz.com
+#127.0.0.1	oilmanager.ux
+#127.0.0.1	projecttracker.ux
+#127.0.0.1	garage2.home
+#127.0.0.1	fileservice.ux
+#127.0.0.1	calendar.ux
+#127.0.0.1	phpmyadmin.home
+127.0.0.1	appsdev.home
+#123.124.60.55	ns.akhz.com
+#123.124.60.100	orant.akhz.com
+#123.124.61.250	orant1.akhz.com
+#123.124.60.01 avcohim
+#123.124.60.74 avcohim4
+#123.124.60.76 avcohim6.akhz.com
+#123.124.60.77 avcohim7.akhz.com
+#123.124.61.77 avcohim77.akhz.com
+#123.124.60.77 avcohim7.akhz.com
+#123.124.60.80   avcohim8.akhz.com
+#123.124.60.11 linora    linora.akhz.com
+#123.124.61.83 linoraas
+#123.124.61.83 linoraAS.akhz.com
+#123.124.61.83 linoraAS.akhz.com LinoraAS
+#123.124.61.84 LinoraDB	linoraDB.akhz.com
+#10.180.30.136 LinoraDB	linoraDB.akhz.com
+10.180.30.134 tester	tester.akhz.com
+10.180.10.111 tester_new	sak-oebst01.duk.root.local
+10.180.10.206 linoraas.akhz.com linoraas
+10.180.10.207 linoradb.akhz.com linoradb
+#123.124.60.11 tester	tester.akhz.com
+#10.180.10.24 portal.akhz.com
+#10.180.10.24 spp.akhz.com.ua

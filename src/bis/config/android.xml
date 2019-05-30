@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'windows-1251'?>
+<package>
+    <name>ANDROID</name>
+    <description>Android Development</description>
+    <useLog>true</useLog>
+    <logLevel>5</logLevel>
+    <proxy>
+        <host>proxyakhz.duk.root.local:3128</host>
+        <login>ak.o.borodulin</login>
+        <password>vavilon_61</password>
+    </proxy>
+    <os>
+        <windows>
+            <setupDir>D:/Android</setupDir>
+            <modules>
+                <module>
+                    <name>git</name>
+                    <version>2.18.0</version>
+                    <description>Система контроля версий (portable)</description>
+                    <executions>
+                        <execution>
+                            <id>git-download</id>
+                            <phase>download</phase>
+                            <configuration>
+                                <processor>
+                                    <architecture>x64</architecture>
+                                    <distribUrl>https://github.com/git-for-windows/git/releases/download/v2.18.0.windows.1/PortableGit-2.18.0-64-bit.7z.exe</distribUrl>
+                                    <distribFile>PortableGit-2.18.0-64-bit.7z.exe</distribFile>
+                                </processor>
+                                <processor>
+                                    <architecture>x86</architecture>
+                                    <distribUrl>https://github.com/git-for-windows/git/releases/download/v2.18.0.windows.1/PortableGit-2.18.0-32-bit.7z.exe</distribUrl>
+                                    <distribFile>PortableGit-2.18.0-32-bit.7z.exe</distribFile>
+                                </processor>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>git-install</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>unpack-7z-sfx</goal>
+                            </goals>
+                            <configuration>
+                                <modSetupDir>D:/Programs/Git</modSetupDir>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </module>
+            </modules>
+        </windows>
+    </os>
+</package>
