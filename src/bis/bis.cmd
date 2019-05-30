@@ -1907,12 +1907,14 @@ call :get_proc_arch
 if not defined proc_arch set proc_arch=%PA_X86%
 
 rem РАЗБОР ПАРАМЕТРОВ ЗАПУСКА:
-set bis_param_defs="-ul,p_use_log;-ll,p_log_level;-pa,proc_arch,%proc_arch%;-lc,locale;-ld,bis_log_dir,%DEF_LOG_DIR%;-dd,bis_distrib_dir,%DEF_DISTRIB_DIR%/windows/%proc_arch%;-ud,bis_utils_dir,%DEF_UTL_DIR%/%proc_arch%;-bd,bis_backup_data_dir,%DEF_BAK_DAT_DIR%;-bc,bis_backup_config_dir,%DEF_BAK_CFG_DIR%;-md,bis_modules_dir,%DEF_MOD_DIR%;-cd,bis_config_dir,%DEF_CFG_DIR%;-rd,bis_res_dir,%DEF_RES_DIR%;-lf,p_license_file;-em,EXEC_MODE,#,%EM_RUN%;-pc,p_pkg_choice;-mc,p_mod_choice;-ec,p_exec_choice;-pn,p_pkg_name;-mn,p_mod_name"
+set bis_param_defs="-ul,p_use_log;-ll,p_log_level;-pa,proc_arch,%proc_arch%;-lc,locale;-ld,bis_log_dir,%DEF_LOG_DIR%;-dd,bis_distrib_dir,%DEF_DISTRIB_DIR%;-ud,bis_utils_dir,%DEF_UTL_DIR%;-bd,bis_backup_data_dir,%DEF_BAK_DAT_DIR%;-bc,bis_backup_config_dir,%DEF_BAK_CFG_DIR%;-md,bis_modules_dir,%DEF_MOD_DIR%;-cd,bis_config_dir,%DEF_CFG_DIR%;-rd,bis_res_dir,%DEF_RES_DIR%;-lf,p_license_file;-em,EXEC_MODE,#,%EM_RUN%;-pc,p_pkg_choice;-mc,p_mod_choice;-ec,p_exec_choice;-pn,p_pkg_name;-mn,p_mod_name"
 call :parse_params %~0 %bis_param_defs% %*
 rem ошибка разбора определений параметров
 rem if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
 rem вывод справки
 if ERRORLEVEL 1 call :bis_help & endlocal & exit /b 0
+
+rem вывод значений параметров запуска системы
 if /i "%EXEC_MODE%" EQU "%EM_DBG%" (
 	call :print_params %~0
 ) else if %p_log_level% GTR %LL_INF% call :print_params %~0
@@ -1924,6 +1926,10 @@ if /i "%p_use_log%" EQU "%VL_TRUE%" set g_log_file=%bis_log_dir%/BIS.log
 
 rem Определяем локаль системы
 if not defined locale call :get_locale 1>nul 2>&1
+
+rem каталоги системы, зависящие от разрядности ОС
+set bis_distrib_dir=%bis_distrib_dir%/windows/%proc_arch%
+set bis_utils_dir=%bis_utils_dir%/%proc_arch%
 
 rem файлы ресурсов
 set g_res_file=%bis_res_dir%/strings_%locale%.txt
