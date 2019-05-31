@@ -5,6 +5,10 @@ rem Сценарий глобальных определений и констант
 
 ::Define a BS variable containing a backspace (0x08) character
 for /f %%A in ('"prompt $H & echo on & for %%B in (1) do rem"') do set "BS=%%A"
+rem разделитель каталогов ОС
+set DIR_SEP=\
+rem разделитель файлов ОС
+set PATH_SEP=;
 rem уровни логгирования: 0 - сообщения в файл, 1 - сообщения на экран, 2 - ошибки, 3 - предупреждения, 4 - информация, 5 - отладка
 set LL_FILE=0
 set LL_CON=1

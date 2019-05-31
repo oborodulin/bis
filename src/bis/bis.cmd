@@ -44,7 +44,7 @@ call :get_pkg_dirs "%g_pkg_name%"
 rem при необходимости, если задано логгирование в пакете, переопределяем общий лог-файл на пакетный
 if /i "%use_log%" EQU "%VL_TRUE%" (
 	if not exist "!pkgs[%g_pkg_name%]#LogDir!" 1>nul MD "!pkgs[%g_pkg_name%]#LogDir!"
-	set g_log_file=!pkgs[%g_pkg_name%]#LogDir!/%g_pkg_name%.log
+	set g_log_file=!pkgs[%g_pkg_name%]#LogDir!%DIR_SEP%%g_pkg_name%.log
 )
 rem Цикл отображения меню выбора модулей
 :mod_menu_loop
@@ -116,7 +116,7 @@ rem выводим их
 	rem получаем имена, описания и уровни логгирования всех пакетов из файлов конфигураций в конфигурационном каталоге
 	for /F %%i in ('dir *.xml /b /o:n /a-d') do (
 		set l_pkg_cfg_file=%%i
-		for /F "tokens=1-4 delims=	()" %%a in ('%xml_sel_% "!res_val!" -v "./name" -o "	(" -v "./description" -o ")	" -v "./useLog" -o "	" -v "./logLevel" -n "%bis_config_dir%/!l_pkg_cfg_file!"') do (
+		for /F "tokens=1-4 delims=	()" %%a in ('%xml_sel_% "!res_val!" -v "./name" -o "	(" -v "./description" -o ")	" -v "./useLog" -o "	" -v "./logLevel" -n "%bis_config_dir%%DIR_SEP%!l_pkg_cfg_file!"') do (
 			set l_pkg_name=%%~a
 			set l_pkg_descr=%%~b
 			call :trim !l_pkg_name! l_trim_pkg_name
@@ -153,7 +153,7 @@ for /f "usebackq delims==# tokens=1-3" %%j in (`set g_pkg[%pkg_num%]`) do (
 	rem echo %%j %%k %%l
 	set l_pkg_cur#%%k=%%l
 ) 
-set %3=%bis_config_dir%/%l_pkg_cur#File%
+set %3=%bis_config_dir%%DIR_SEP%%l_pkg_cur#File%
 set %4=%l_pkg_cur#Name%
 set %5=%l_pkg_cur#Descr%
 set %6=%l_pkg_cur#UseLog%
@@ -265,7 +265,7 @@ for /F "tokens=1-5" %%a in ('%xml_sel_% "!res_val!" -v "concat(./setupDir, subst
 		set pkgs[%_pkg_name%]#DistribDir=%%~b
 		call :binding_var "%_pkg_name%" "" "!pkgs[%_pkg_name%]#DistribDir!" pkgs[%_pkg_name%]#DistribDir
 	) else (
-		set pkgs[%_pkg_name%]#DistribDir=%bis_distrib_dir%/%_pkg_name%
+		set pkgs[%_pkg_name%]#DistribDir=%bis_distrib_dir%%DIR_SEP%%_pkg_name%
 	)
 	if "%%~c" NEQ "%EMPTY_NODE%" (
 		set pkgs[%_pkg_name%]#BackupDataDir=%%~c
@@ -307,7 +307,7 @@ rem получаем каталог установки модуля, его каталог бинарных файлов и домашний ка
 call :get_mod_install_dirs "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
 
 rem определяем каталог дистрибутива модуля (должен быть определён до :execute_choice)
-set mods[%_mod_name%]#DistribDir=!pkgs[%_pkg_name%]#DistribDir!/%_mod_name%/%_mod_ver%
+set mods[%_mod_name%]#DistribDir=!pkgs[%_pkg_name%]#DistribDir!%DIR_SEP%%_mod_name%%DIR_SEP%%_mod_ver%
 
 rem определяем установлен ли уже модуль
 call :is_mod_installed "%_mod_name%" "%_mod_ver%"
@@ -408,7 +408,7 @@ for /F "tokens=1,2" %%a in ('%xml_sel_% "%res_val%" -v "../distribUrl" -o "	" -v
 	)
 )
 rem определяем путь к дистрибутиву модуля
-set mods[%_mod_name%]#DistribPath=!mods[%_mod_name%]#DistribDir!/!mods[%_mod_name%]#DistribFile!
+set mods[%_mod_name%]#DistribPath=!mods[%_mod_name%]#DistribDir!%DIR_SEP%!mods[%_mod_name%]#DistribFile!
 exit /b 0
 
 rem ====================================================================================================================
@@ -828,13 +828,13 @@ rem echo %x% %l_src_obj%
 call :echo -ri:ResultOk -rc:0A
 rem если требуется перенести содержимое только одного каталога
 if %x% EQU 1 (
-	call :echo -ri:MoveModDistribSetupDir -v1:"!mods[%_mod_name%]#DistribDir!/%l_src_obj%" -v2:"!mods[%_mod_name%]#SetupDir!" -rc:0F -ln:%VL_FALSE%
-	1>nul %copy_% "!mods[%_mod_name%]#DistribDir!/%l_src_obj%" "!mods[%_mod_name%]#SetupDir!" /E /MOVE
+	call :echo -ri:MoveModDistribSetupDir -v1:"!mods[%_mod_name%]#DistribDir!%DIR_SEP%%l_src_obj%" -v2:"!mods[%_mod_name%]#SetupDir!" -rc:0F -ln:%VL_FALSE%
+	1>nul %copy_% "!mods[%_mod_name%]#DistribDir!%DIR_SEP%%l_src_obj%" "!mods[%_mod_name%]#SetupDir!" /E /MOVE
 	call :echo -ri:ResultOk -rc:0A
 ) else if %x% GTR 1 (
 	rem иначе переносим все каталоги и файлы, кроме дистрибутива
 	call :echo -ri:MoveUnpackSetupDir -v1:"!mods[%_mod_name%]#DistribDir!" -v2:"!mods[%_mod_name%]#SetupDir!" -rc:0F -ln:%VL_FALSE%
-	for /F %%i in ('dir * /b') do if /i "%%i" NEQ "!mods[%_mod_name%]#DistribFile!" 1>nul move "!mods[%_mod_name%]#DistribDir!/%%i" "!mods[%_mod_name%]#SetupDir!"
+	for /F %%i in ('dir * /b') do if /i "%%i" NEQ "!mods[%_mod_name%]#DistribFile!" 1>nul move "!mods[%_mod_name%]#DistribDir!\%%i" "!mods[%_mod_name%]#SetupDir!"
 	call :echo -ri:ResultOk -rc:0A
 )
 popd
@@ -884,7 +884,7 @@ call :echo -ri:UnpackZip -v1:!mods[%_mod_name%]#DistribFile! -v2:"!mods[%_mod_na
 
 call :get_exec_name "%~0"
 call :get_res_val -ri:UnpackDistribFile -v1:"!mods[%_mod_name%]#DistribFile!"
-start "%res_val%" /WAIT "%z7_%" x "!mods[%_mod_name%]#DistribPath!" -o"!mods[%_mod_name%]#SetupDir!" -r 1> "%bis_log_dir%\%_mod_name%-%exec_name%.log" 2>&1
+start "%res_val%" /WAIT "%z7_%" x "!mods[%_mod_name%]#DistribPath!" -o"!mods[%_mod_name%]#SetupDir!" -r 1> "%bis_log_dir%%DIR_SEP%%_mod_name%-%exec_name%.log" 2>&1
 
 call :echo -ri:ResultOk -rc:0A
 
@@ -965,6 +965,7 @@ call :print_exec_name "%~0"
 for /l %%j in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
 	call :echo -ri:DelPathEnv -v1:"!mods[%_mod_name%]#BinDirs[%%j]!" -rc:0F -ln:%VL_FALSE%
 	call :convert_case %CM_LOWER% "!mods[%_mod_name%]#BinDirs[%%j]!" l_bin_dir
+	call :convert_slashes %CSD_WIN% "!l_bin_dir!" l_bin_dir
 	call :reg -oc:%RC_DEL% -vn:PATH -vv:"!l_bin_dir!"
 	call :echo -ri:ResultOk -rc:0A
 )
@@ -981,6 +982,7 @@ set _val=%~2
 call :print_exec_name "%~0"
 
 call :echo -ri:AddEnv -v1:"%_env%" -v2:"%_val%" -rc:0F -ln:%VL_FALSE%
+call :convert_slashes %CSD_WIN% "%_val%" _val
 rem call :reg -oc:%RC_SET% -vn:"%_env%" -vv:"%_val%"
 call :echo -ri:ResultOk -rc:0A
 endlocal & exit /b 0
@@ -1240,7 +1242,7 @@ for /F "tokens=1,2" %%a in ('%xml_sel_% "!res_val!" -v "./directory" -o "	" -v "
 	if "!l_file!" EQU "" call :binding_var "%_pkg_name%" "%_mod_name%" "!l_dir!" %7 & exit /b 0
 	if "!l_file!" EQU "*" call :binding_var "%_pkg_name%" "%_mod_name%" "!l_dir!" %7 & exit /b 0
 
-	set "%8[!i!]=!l_dir!/!l_file!"
+	set "%8[!i!]=!l_dir!%DIR_SEP%!l_file!"
 	set /a "i+=1"
 )
 set /a "%9=%i%-1"
@@ -1279,7 +1281,7 @@ call :echo -ri:ApplyCfgParams -v1:"%l_mod_cfg_path%" -rc:0F -ln:%VL_FALSE%
 
 rem формируем путь к временной копии конфигурационного файла модуля
 for /f %%i in ("%l_mod_cfg_path%") do set l_cfg_file_name=%%~nxi
-set l_tmp_file="%TMP%\%l_cfg_file_name%.tmp"
+set l_tmp_file="%TMP%%DIR_SEP%%l_cfg_file_name%.tmp"
 type NUL > "%l_tmp_file%"
 
 call :echo -ri:CreatedCfgTmpFile -v1:"%l_tmp_file%"
@@ -1874,19 +1876,19 @@ set CMT_SYMBS=";:#"
 
 rem Каталоги по умолчанию:
 rem системные (не меняются)
-set DEF_MOD_DIR=%CUR_DIR%/modules
-set DEF_CFG_DIR=%CUR_DIR%/config
-set DEF_RES_DIR=%CUR_DIR%/resources
-set DEF_UTL_DIR=%CUR_DIR%/utils
+set DEF_MOD_DIR=%CUR_DIR%%DIR_SEP%modules
+set DEF_CFG_DIR=%CUR_DIR%%DIR_SEP%config
+set DEF_RES_DIR=%CUR_DIR%%DIR_SEP%resources
+set DEF_UTL_DIR=%CUR_DIR%%DIR_SEP%utils
 rem пакетные (меняются в зависимости от настроек конкретного пакета)
-set DEF_BAK_DAT_DIR=%CUR_DIR%/backup/data
-set DEF_BAK_CFG_DIR=%CUR_DIR%/backup/config
-set DEF_LOG_DIR=%CUR_DIR%/logs
-set DEF_DISTRIB_DIR=%CUR_DIR%/distrib
+set DEF_BAK_DAT_DIR=%CUR_DIR%%DIR_SEP%backup%DIR_SEP%data
+set DEF_BAK_CFG_DIR=%CUR_DIR%%DIR_SEP%backup%DIR_SEP%config
+set DEF_LOG_DIR=%CUR_DIR%%DIR_SEP%logs
+set DEF_DISTRIB_DIR=%CUR_DIR%%DIR_SEP%distrib
 
 rem определяем путь и праметры утилиты изменения цвета
-call :chgcolor_setup "%DEF_UTL_DIR%/%PA_X86%/"
-if ERRORLEVEL 1 call :chgcolor_setup "%DEF_UTL_DIR%/%PA_X64%/"
+call :chgcolor_setup "%DEF_UTL_DIR%%DIR_SEP%%PA_X86%"
+if ERRORLEVEL 1 call :chgcolor_setup "%DEF_UTL_DIR%%DIR_SEP%%PA_X64%"
 
 rem Фазы (регистр как в конфигурационном файле пакета)
 set PH_DOWNLOAD=download
@@ -1922,20 +1924,20 @@ if /i "%EXEC_MODE%" EQU "%EM_DBG%" (
 rem глобальный уровень логгирования
 set g_log_level=%p_log_level%
 rem лог-файл системы BIS
-if /i "%p_use_log%" EQU "%VL_TRUE%" set g_log_file=%bis_log_dir%/BIS.log
+if /i "%p_use_log%" EQU "%VL_TRUE%" set g_log_file=%bis_log_dir%%DIR_SEP%BIS.log
 
 rem Определяем локаль системы
 if not defined locale call :get_locale 1>nul 2>&1
 
 rem каталоги системы, зависящие от разрядности ОС
-set bis_distrib_dir=%bis_distrib_dir%/windows/%proc_arch%
-set bis_utils_dir=%bis_utils_dir%/%proc_arch%
+set bis_distrib_dir=%bis_distrib_dir%%DIR_SEP%windows%DIR_SEP%%proc_arch%
+set bis_utils_dir=%bis_utils_dir%%DIR_SEP%%proc_arch%
 
 rem файлы ресурсов
-set g_res_file=%bis_res_dir%/strings_%locale%.txt
-set menus_file=%bis_res_dir%/menus_%locale%.txt
-set help_file=%bis_res_dir%/helps_%locale%.txt
-set xpaths_file=%bis_res_dir%/xpaths.txt
+set g_res_file=%bis_res_dir%%DIR_SEP%strings_%locale%.txt
+set menus_file=%bis_res_dir%%DIR_SEP%menus_%locale%.txt
+set help_file=%bis_res_dir%%DIR_SEP%helps_%locale%.txt
+set xpaths_file=%bis_res_dir%%DIR_SEP%xpaths.txt
 
 call :echo -ri:LocaleInfo -v1:%locale%
 
@@ -1954,12 +1956,12 @@ rem call :echo -ri:ProcArchDefError -be:1
 call :echo -ri:ProcArchInfo -v1:%proc_arch%
 
 rem утилиты
-set z7_=%bis_utils_dir%/7-zip/7za.exe
+set z7_=%bis_utils_dir%%DIR_SEP%7-zip%DIR_SEP%7za.exe
 set copy_=robocopy.exe
-set xml_=%bis_utils_dir%/xml.exe
-set xml_sel_=%bis_utils_dir%/xml.exe sel -T -t -m
-set curl_=%bis_utils_dir%/curl/bin/curl.exe
-set wget_=%bis_utils_dir%/wget/wget.exe
+set xml_=%bis_utils_dir%%DIR_SEP%xml.exe
+set xml_sel_=%bis_utils_dir%%DIR_SEP%xml.exe sel -T -t -m
+set curl_=%bis_utils_dir%%DIR_SEP%curl%DIR_SEP%bin%DIR_SEP%curl.exe
+set wget_=%bis_utils_dir%%DIR_SEP%wget%DIR_SEP%wget.exe
 
 rem Формируем пути от начала текущего диска (http://www.rsdn.ru/forum/setup/2810022.hot)
 for /f %%i in ("%bis_log_dir%") do set bis_log_dir=%%~dpnxi

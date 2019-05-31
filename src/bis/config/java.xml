@@ -1,0 +1,54 @@
+<?xml version = '1.0' encoding = 'windows-1251'?>
+<package>
+    <name>JAVA</name>
+    <description>Системы контроля версий</description>
+    <useLog>true</useLog>
+    <logLevel>5</logLevel>
+    <proxy>
+        <host>proxyakhz.duk.root.local:3128</host>
+        <login>ak.o.borodulin</login>
+        <password>vavilon_61</password>
+    </proxy>
+    <os>
+        <windows>
+			<setupDir>C:/Program Files/${package.name}</setupDir>
+            <modules>
+                <module>
+                    <name>openjdk</name>
+                    <version>12.0.1</version>
+                    <description>Free and open-source implementation of the Java SE Platform Edition</description>
+                    <executions>
+                        <execution>
+                            <id>openjdk-download</id>
+                            <phase>download</phase>
+                            <configuration>
+                                <processor>
+                                    <architecture>x64</architecture>
+                                    <distribUrl>https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip</distribUrl>
+                                    <distribFile>openjdk-12.0.1_windows-x64_bin.zip</distribFile>
+                                </processor>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>openjdk-install</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>unpack-zip</goal>
+                            </goals>
+                            <configuration>
+                                <modSetupDir>${setupdir}/jdk-${modversion}</modSetupDir>
+								<modBinDirs>
+									<directory>${setupdir}/jdk-${modversion}/bin</directory>
+								</modBinDirs>
+								<modHomeDir>
+									<envVar>JAVA_HOME</envVar>
+									<directory>${setupdir}/jdk-${modversion}</directory>
+								</modHomeDir>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </module>
+            </modules>
+        </windows>
+    </os>
+</package>

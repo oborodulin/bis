@@ -16,9 +16,9 @@ set mod1_home_dir=${modsetupdir}
 if not exist "%tst_cfg_dir%" endlocal & exit /b 3
 
 rem присоединение модулей, необходимых для работы тестов
-echo APPEND=%src_dir%..\modules\params.cmd
-echo APPEND=%src_dir%..\modules\utils.cmd
-echo APPEND=%src_dir%..\modules\echo.cmd
+echo APPEND=%src_dir%..\..\..\src\modules\params.cmd
+echo APPEND=%src_dir%..\..\..\src\modules\utils.cmd
+echo APPEND=%src_dir%..\..\..\src\modules\echo.cmd
 
 rem формирование тестового конфигурционного файла пакета
 call :create_test_cfg_file "%tst_cfg_file%"

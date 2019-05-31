@@ -419,13 +419,13 @@ rem Определяет путь и праметры утилиты изменения цвета
 rem ---------------------------------------------
 :chgcolor_setup _chgcolor_dir
 set _chgcolor_dir=%~1
-
+if [%_chgcolor_dir:~-1%] EQU [%DIR_SEP%] set _chgcolor_dir=%_chgcolor_dir:~0,-1%
 if not defined chgcolor_path (
 	if exist "%b2eincfilepath%" (
 		set chgcolor_path=%b2eincfilepath%chgcolor.exe
 	) else (
-		if not exist "%_chgcolor_dir%chgcolor.exe" exit /b 1
-		set chgcolor_path=%_chgcolor_dir%chgcolor.exe
+		if not exist "%_chgcolor_dir%%DIR_SEP%chgcolor.exe" exit /b 1
+		set chgcolor_path=%_chgcolor_dir%%DIR_SEP%chgcolor.exe
 	)
 	if defined chgcolor_path (
 		set ChangeColor_8_0="!chgcolor_path!" 08
