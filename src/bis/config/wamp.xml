@@ -11,11 +11,11 @@
 	</proxy>
 	<os>
 		<windows>
-			<setupDir>D:/Programs/${package.name}</setupDir>
-			<distribDir>${bisdir}/distrib/${package.name}</distribDir>
-			<backupDataDir>${bisdir}/backup/data/${package.name}</backupDataDir>
-			<backupConfigDir>${bisdir}/backup/config/${package.name}</backupConfigDir>
-			<logDir>${bisdir}/logs/${package.name}</logDir>
+			<setupDir>D:/Programs/${pkg.name}</setupDir>
+			<distribDir>${bisdir}/distrib/${pkg.name}</distribDir>
+			<backupDataDir>${bisdir}/backup/data/${pkg.name}</backupDataDir>
+			<backupConfigDir>${bisdir}/backup/config/${pkg.name}</backupConfigDir>
+			<logDir>${bisdir}/logs/${pkg.name}</logDir>
 			<modules>
 				<module>
 					<name>vcredist</name>
@@ -134,9 +134,9 @@
 								<goal>unpack-zip</goal>
 							</goals>
 							<configuration>
-								<modSetupDir>${setupdir}/php7</modSetupDir>
+								<modSetupDir>${pkg.setupdir}/php7</modSetupDir>
 								<modBinDirs>
-									<directory>${modsetupdir}</directory>
+									<directory>${mod.setupdir}</directory>
 								</modBinDirs>
 							</configuration>
 						</execution>
@@ -150,27 +150,27 @@
 								<commands>
 									<copy>
 										<source>
-											<directory>${modsetupdir}</directory>
+											<directory>${mod.setupdir}</directory>
 											<includes>
 												<include>php.ini-development</include>
 											</includes>
 										</source>
 										<destination>
-											<directory>${modsetupdir}</directory>
+											<directory>${mod.setupdir}</directory>
 											<includes>
 												<include>php.ini</include>
 											</includes>
 										</destination>
 									</copy>
 									<md>
-										<directory>${modsetupdir}/includes</directory>
-										<directory>${modsetupdir}/upload</directory>
-										<directory>${modsetupdir}/tmp</directory>
+										<directory>${mod.setupdir}/includes</directory>
+										<directory>${mod.setupdir}/upload</directory>
+										<directory>${mod.setupdir}/tmp</directory>
 									</md>
 								</commands>
 								<configFiles>
 									<configFile>
-										<name>${modsetupdir}/php.ini</name>
+										<name>${mod.setupdir}/php.ini</name>
 										<comment>;</comment>
 										<parameters>
 											<param>
@@ -310,27 +310,27 @@
 											<param>
 												<after>[PHP]</after>
 												<name>include_path</name>
-												<value>".;${modsetupdir}/includes"</value>
+												<value>".;${mod.setupdir}/includes"</value>
 												<description>Список директорий, в которых выполняется поиск файлов функциями Include, Fopen, File, Readfile и File_get_contents</description>
 												<entry>2</entry>
 											</param>
 											<param>
 												<after>[PHP]</after>
 												<name>extension_dir</name>
-												<value>"${modsetupdir}/ext"</value>
+												<value>"${mod.setupdir}/ext"</value>
 												<description>Расположение DLL-файлов расширений</description>
 												<entry>2</entry>
 											</param>
 											<param>
 												<after>[PHP]</after>
 												<name>upload_tmp_dir</name>
-												<value>"${modsetupdir}/upload"</value>
+												<value>"${mod.setupdir}/upload"</value>
 												<description>Директория, в которую будут помещаться временные загружаемые файлы</description>
 											</param>
 											<param>
 												<after>[PHP]</after>
 												<name>session.save_path</name>
-												<value>"${modsetupdir}/tmp"</value>
+												<value>"${mod.setupdir}/tmp"</value>
 												<description>Определяет аргумент, который передается в обработчик сохранения</description>
 												<entry>2</entry>
 											</param>
@@ -371,13 +371,13 @@
 								<commands>
 									<move>
 										<source>
-											<directory>${modsetupdir}</directory>
+											<directory>${mod.setupdir}</directory>
 											<includes>
 												<include>ReadMe.txt</include>
 											</includes>
 										</source>
 										<destination>
-											<directory>${modsetupdir}</directory>
+											<directory>${mod.setupdir}</directory>
 											<includes>
 												<include>Main_ReadMe.txt</include>
 											</includes>
@@ -385,18 +385,18 @@
 									</move>
 									<move>
 										<source>
-											<directory>${modsetupdir}/Apache24</directory>
+											<directory>${mod.setupdir}/Apache24</directory>
 											<includes>
 												<include>*</include>
 											</includes>
 										</source>
 										<destination>
-											<directory>${modsetupdir}</directory>
+											<directory>${mod.setupdir}</directory>
 										</destination>
 									</move>
 								</commands>
-								<modSetupDir>${setupdir}/Apache24</modSetupDir>
-								<service>${modsetupdir}/bin/httpd.exe</service>
+								<modSetupDir>${pkg.setupdir}/Apache24</modSetupDir>
+								<service>${mod.setupdir}/bin/httpd.exe</service>
 								<serviceName>Apache2.4</serviceName>
 							</configuration>
 						</execution>
@@ -408,7 +408,7 @@
 								<goal>hosts-file</goal>
 							</goals>
 							<configuration>
-								<webProjectDir>${setupdir}/projects.web</webProjectDir>
+								<webProjectDir>${pkg.setupdir}/projects.web</webProjectDir>
 								<hostFile>${windir}/System32/drivers/etc/hosts</hostFile>
 								<commands>
 									<md>
@@ -437,7 +437,7 @@
 								</hosts>
 								<configFiles>
 									<configFile>
-										<name>${modsetupdir}/conf/httpd.conf</name>
+										<name>${mod.setupdir}/conf/httpd.conf</name>
 										<parameters>
 											<param>
 												<name>Listen</name>
@@ -485,7 +485,7 @@
 											</param>
 											<param>
 												<before>IfModule unixd_module</before>
-												<value>LoadModule php5_module ${php.modsetupdir}/php5apache2_4.dll</value>
+												<value>LoadModule php5_module ${php.mod.setupdir}/php5apache2_4.dll</value>
 												<operation>pre-insert</operation>
 												<quotes>true</quotes>
 											</param>
@@ -496,13 +496,13 @@
 											</param>
 											<param>
 												<before>IfModule unixd_module</before>
-												<value>PHPIniDir ${php.modsetupdir}</value>
+												<value>PHPIniDir ${php.mod.setupdir}</value>
 												<operation>pre-insert</operation>
 												<quotes>true</quotes>
 											</param>
 											<param>
 												<name>ServerRoot</name>
-												<value>${modsetupdir}</value>
+												<value>${mod.setupdir}</value>
 												<operation>update</operation>
 												<expression>false</expression>
 												<quotes>true</quotes>
@@ -537,13 +537,13 @@
 											</param>
 											<param>
 												<oldValue>c:/Apache24</oldValue>
-												<newValue>${modsetupdir}</newValue>
+												<newValue>${mod.setupdir}</newValue>
 												<operation>replace</operation>
 											</param>
 										</parameters>
 									</configFile>
 									<configFile>
-										<name>${modsetupdir}/conf/extra/httpd-vhosts.conf</name>
+										<name>${mod.setupdir}/conf/extra/httpd-vhosts.conf</name>
 										<parameters>
 											<param>
 												<oldValue>&lt;VirtualHost</oldValue>
@@ -635,17 +635,17 @@
 								<goal>cmd-shell</goal>
 							</goals>
 							<configuration>
-								<dataDir>${modsetupdir}</dataDir>
-								<installDir>${modsetupdir}</installDir>
+								<dataDir>${mod.setupdir}</dataDir>
+								<installDir>${mod.setupdir}</installDir>
 								<serviceName>MySQL5.5</serviceName>
 								<commands>
 									<start>
 										<title>Создание и конфигурация экземпляра СУБД</title>
-										<program>${modsetupdir}/bin/MySQLInstanceConfig.exe</program>
-										<params>"-l${logdir}/${module.name}_install_log.txt" "-nMySQL Server 5.5" "-p${modsetupdir}" -v5.5.23 "-t${modsetupdir}/my-template.ini" "-c${modsetupdir}/mydev.ini" ServiceName=${servicename} AddBinToPath=yes ServerType=DEVELOPMENT DatabaseType=MIXED ConnectionUsage=DSS Charset=utf8 RootPassword=pass</params>
+										<program>${mod.setupdir}/bin/MySQLInstanceConfig.exe</program>
+										<params>"-l${logdir}/${module.name}_install_log.txt" "-nMySQL Server 5.5" "-p${mod.setupdir}" -v5.5.23 "-t${mod.setupdir}/my-template.ini" "-c${mod.setupdir}/mydev.ini" ServiceName=${servicename} AddBinToPath=yes ServerType=DEVELOPMENT DatabaseType=MIXED ConnectionUsage=DSS Charset=utf8 RootPassword=pass</params>
 									</start>
 								</commands>
-								<modSetupDir>${setupdir}/MySQL55</modSetupDir>
+								<modSetupDir>${pkg.setupdir}/MySQL55</modSetupDir>
 							</configuration>
 						</execution>
 						<execution>
@@ -654,12 +654,12 @@
 							<configuration>
 								<configFiles>
 									<configFile>
-										<name>${modsetupdir}/mydev.ini</name>
+										<name>${mod.setupdir}/mydev.ini</name>
 										<parameters>
 											<param>
 												<after>3306</after>
 												<values>
-													<value>character-sets-dir=${modsetupdir}/share/charsets</value>
+													<value>character-sets-dir=${mod.setupdir}/share/charsets</value>
 													<value>init-connect=SET NAMES utf8</value>
 												</values>
 												<operation>post-insert</operation>

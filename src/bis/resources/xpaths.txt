@@ -20,4 +20,6 @@ XPathCmdMdDirs		015	1CON	/package/os/windows/modules/module/name[text()='{V1}']/
 XPathCfgFile		016	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='config']/../configuration/configFiles/configFile
 XPathCfgParams		017	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='config']/../configuration/configFiles/configFile/name[text()='{V3}']/../parameters/param
 XPathCmdBatch		018	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../configuration/commands/batch
+XPathPkgTag			019	1CON	/package/os/windows/modules/module/name[text()='{V1}']/../version[text()='{V2}']/../executions/execution/phase[text()='{V3}']/../configuration/commands/batch
+
 

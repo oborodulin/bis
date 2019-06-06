@@ -31,11 +31,11 @@ set tst_pkg_descr=BIS Test package
 set tst_pkg_uselog=true
 set tst_pkg_loglevel=5
 set tst_root_setup_dir=D:\Programs
-set tst_setup_dir=%tst_root_setup_dir%/${package.name}
-set tst_distrib_dir=${bisdir}/%tst_distrib_dir%/${package.name}
-set tst_backup_data_dir=${bisdir}/backup/data/${package.name}
-set tst_backup_config_dir=${bisdir}/backup/config/${package.name}
-set tst_log_dir=${bisdir}/logs/${package.name}
+set tst_setup_dir=%tst_root_setup_dir%/${pkg.name}
+set tst_distrib_dir=${bisdir}/%tst_distrib_dir%/${pkg.name}
+set tst_backup_data_dir=${bisdir}/backup/data/${pkg.name}
+set tst_backup_config_dir=${bisdir}/backup/config/${pkg.name}
+set tst_log_dir=${bisdir}/logs/${pkg.name}
 
 rem параметры модуля test-module1
 set tst_mod1_name=test-module1

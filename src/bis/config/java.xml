@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'windows-1251'?>
 <package>
     <name>JAVA</name>
-    <description>Системы контроля версий</description>
+    <description>Инструментарий для разработки на Java</description>
     <useLog>true</useLog>
     <logLevel>5</logLevel>
     <proxy>
@@ -11,7 +11,7 @@
     </proxy>
     <os>
         <windows>
-			<setupDir>C:/Program Files/${package.name}</setupDir>
+			<setupDir>${env.programfiles}/${pkg.name}</setupDir>
             <modules>
                 <module>
                     <name>openjdk</name>
@@ -36,13 +36,13 @@
                                 <goal>unpack-zip</goal>
                             </goals>
                             <configuration>
-                                <modSetupDir>${setupdir}/jdk-${modversion}</modSetupDir>
+                                <modSetupDir>${pkg.setupdir}/jdk-${mod.version}</modSetupDir>
 								<modBinDirs>
-									<directory>${setupdir}/jdk-${modversion}/bin</directory>
+									<directory>${mod.setupdir}/bin</directory>
 								</modBinDirs>
 								<modHomeDir>
 									<envVar>JAVA_HOME</envVar>
-									<directory>${setupdir}/jdk-${modversion}</directory>
+									<directory>${mod.setupdir}</directory>
 								</modHomeDir>
                             </configuration>
                         </execution>

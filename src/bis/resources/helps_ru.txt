@@ -5,3 +5,89 @@
 ScriptExecFormat	001	1CON	Формат запуска:
 ExecKeysTpl		002	1CON	{V1} [^<ключи^>...]
 ExecKeys		003	1CON	Ключи:
+rem ChangeColor 15 0 
+%ChangeColor_15_0%
+echo %g_script_header%
+rem ChangeColor 8 0 
+%ChangeColor_8_0%
+echo Формат запуска установки пакета:
+rem ChangeColor 15 0 
+%ChangeColor_15_0%
+echo %g_script_name% [^<ключи^>...]
+echo.
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo Ключи:
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -cf"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo :конфигурационный_файл_пакета
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -sd"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo | set /p "dummyName=:каталог_установки_пакета ("
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+echo | set /p "dummyName=абсолютный путь от корня диска"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo )
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -ld"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo | set /p "dummyName=:каталог_логов (по умолчанию "
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+echo | set /p "dummyName=%DEF_LOG_DIR%"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo )
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -dd"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo | set /p "dummyName=:каталог_дистрибутивов (по умолчанию "
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+echo | set /p "dummyName=%DEF_DISTRIB_DIR%"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo )
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -ud"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo | set /p "dummyName=:каталог_внешних_утилит (по умолчанию "
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+echo | set /p "dummyName=%DEF_UTL_DIR%"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo )
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -md"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo | set /p "dummyName=:каталог_вспомогательных_модулей (по умолчанию "
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+echo | set /p "dummyName=%DEF_MOD_DIR%"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo | set /p "dummyName=)"
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+echo - с завершающим обратным слешем '\'
+echo.
+rem ChangeColor 8 0 
+%ChangeColor_8_0%
+echo Если не указано иначе, то все пути указываются от каталога установки системы Victory BIS.

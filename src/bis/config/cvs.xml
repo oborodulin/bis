@@ -11,7 +11,7 @@
     </proxy>
     <os>
         <windows>
-			<setupDir>C:/${package.name}</setupDir>
+			<setupDir>C:/Dev/${pkg.name}</setupDir>
             <modules>
                 <module>
                     <name>git</name>
@@ -41,9 +41,9 @@
                                 <goal>unpack-7z-sfx</goal>
                             </goals>
                             <configuration>
-                                <modSetupDir>${setupdir}/Git</modSetupDir>
+                                <modSetupDir>${pkg.setupdir}/Git</modSetupDir>
 								<modBinDirs>
-									<directory>${setupdir}/Git/bin</directory>
+									<directory>${mod.setupdir}/bin</directory>
 								</modBinDirs>
                             </configuration>
                         </execution>

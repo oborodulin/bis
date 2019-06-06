@@ -6,7 +6,7 @@ set src_dir=%~2
 
 if not exist "%src_script%" endlocal & exit /b 2
 rem подставл€ем в рамках теста необходимый ресурсный файл
-set g_res_file=%src_dir%..\bis\resources\strings_ru.txt
+set g_res_file=%src_dir%..\..\..\src\bis\resources\strings_ru.txt
 
 set src_str=THe~ QuICk@ BrOWn# Fox$ JumPS OVER thE^: LazY dOg Ёй, ∆лоЅ √ƒе_ т”«? ѕря„ь+ ёЌых [сЏ®мўиц] ¬ {шкј‘}.
 set lower_str=the~ quick@ brown# fox$ jumps over the^: lazy dog эй, жлоб где_ туз? пр€чь+ юных [съЄмщиц] в {шкаф}.

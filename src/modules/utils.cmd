@@ -86,4 +86,83 @@ rem :get_date_error
 endlocal & set "%_proc_name:~5%=%l_isodate%"
 exit /b 0
 
+rem ---------------------------------------------
+rem ¬ыводит наименование не€вной цели выполнени€
+rem ---------------------------------------------
+:print_exec_name
+setlocal
+set _proc_name=%~1
+
+call :get_exec_name %_proc_name%
+set $exec=%_proc_name:goal=%
+if /i "%$exec%" NEQ "%_proc_name%" (
+	call :echo -ri:ExecGoal -v1:"%exec_name%" -ae:1
+) else (
+	call :echo -ri:ExecPhaseId -v1:"%exec_name%" -ae:1
+)
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem ¬озвращает наименование этапа выполнени€ фазы/цели
+rem (по наименованию процедуры)
+rem ---------------------------------------------
+:get_exec_name
+setlocal
+set _exec_name=%~0
+set _proc_name=%~1
+
+set $exec=%_proc_name:goal=%
+if /i "%$exec%" NEQ "%_proc_name%" (
+	set l_exec_name=%_proc_name:~6%
+) else (
+	set $exec=%_proc_name:phase=%
+	if /i "!$exec!" NEQ "%_proc_name%" (
+		set l_exec_name=%_proc_name:~7%
+	) else (
+		set l_exec_name=%_proc_name:~5%
+	)
+)
+set l_exec_name=%l_exec_name:_=-%
+endlocal & set %_exec_name:~5%=%l_exec_name%
+exit /b 0
+
+rem ---------------------------------------------
+rem «апрашивает подтверждение выполнени€ процесса
+rem ---------------------------------------------
+:choice_process
+setlocal
+set _proc_name=%~0
+set _exec_name=%~1
+set _res_id=%~2
+set _delay=%~3
+set _def_choice=%~4
+set _res_val=%~5
+set _choice=%~6
+
+if not defined _res_id if not defined _res_val set _res_id=ProcessingChoice
+if not defined _delay set _delay=%DEF_DELAY%
+if not defined _def_choice set _def_choice=Y
+if not defined _choice set _choice=%YN_CHOICE%
+
+if defined _exec_name (
+	set l_exec_name=%_exec_name:~0,1%
+	if "%l_exec_name%" EQU ":" (
+		call :get_exec_name "%l_exec_name%"
+	) else (
+		set exec_name=%_exec_name%
+	)
+)
+if defined _res_id (
+	call :get_res_val -rf:"%menus_file%" -ri:%_res_id% -v1:%_delay% -v2:"%exec_name%"
+) else (
+	set res_val=%_res_val%
+)
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+1>nul chcp 1251
+Choice /C %_choice% /T %_delay% /D %_def_choice% /M "%res_val%"
+set l_result=%ERRORLEVEL%
+rem echo l_result="%l_result%"
+endlocal & (set "%_proc_name:~8%=%exec_name%" & set "%_proc_name:~1,6%=%l_result%" & exit /b %l_result%)
+
 rem ---------------- EOF utils.cmd ----------------

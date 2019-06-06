@@ -60,6 +60,17 @@ if /i "%_case_mark%" EQU "%CM_UPPER%" (
 endlocal & set "%3=%l_conv_str%"
 exit /b 0
 
+rem ---------------------------------------------
+rem Конвертирует регистр первого символа слова
+rem в прописной
+rem ---------------------------------------------
+:capital_case _src_str conv_str
+setlocal
+Set _src_str=%~1
+
+endlocal & set "%2=%l_conv_str%"
+exit /b 0
+
 rem ==========================================================================
 rem Функции LCase() и UCase()
 rem http://www.robvanderwoude.com/battech_convertcase.php

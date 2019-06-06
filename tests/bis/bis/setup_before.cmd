@@ -8,17 +8,20 @@ if not exist "%src_script%" endlocal & exit /b 3
 call "%~dp0set_envs.cmd" "%src_script%"
 
 rem параметры модуля test-module1
-set mod1_setup_dir=${setupdir}/%tst_mod1_name%
-set mod1_bin_dir1=${modsetupdir}/bin1
-set mod1_bin_dir2=${modsetupdir}/bin2
-set mod1_home_dir=${modsetupdir}
+set mod1_setup_dir=${pkg.setupdir}/%tst_mod1_name%
+set mod1_bin_dir1=${mod.setupdir}/bin1
+set mod1_bin_dir2=${mod.setupdir}/bin2
+set mod1_home_dir=${mod.setupdir}
 
 if not exist "%tst_cfg_dir%" endlocal & exit /b 3
 
 rem присоединение модулей, необходимых для работы тестов
-echo APPEND=%src_dir%..\..\..\src\modules\params.cmd
-echo APPEND=%src_dir%..\..\..\src\modules\utils.cmd
-echo APPEND=%src_dir%..\..\..\src\modules\echo.cmd
+echo PREPEND=%src_dir%..\modules\definitions.cmd
+echo APPEND=%src_dir%..\modules\echo.cmd
+echo APPEND=%src_dir%..\modules\params.cmd
+echo APPEND=%src_dir%..\modules\registry.cmd
+echo APPEND=%src_dir%..\modules\strings.cmd
+echo APPEND=%src_dir%..\modules\utils.cmd
 
 rem формирование тестового конфигурционного файла пакета
 call :create_test_cfg_file "%tst_cfg_file%"
@@ -99,27 +102,27 @@ ECHO(                            ^<configuration^>
 ECHO(                                ^<commands^>
 ECHO(                                    ^<copy^>
 ECHO(                                       ^<source^>
-ECHO(                                           ^<directory^>${modsetupdir}^</directory^>
+ECHO(                                           ^<directory^>${mod.setupdir}^</directory^>
 ECHO(                                           ^<includes^>
 ECHO(                                               ^<include^>php.ini-development^</include^>
 ECHO(                                           ^</includes^>
 ECHO(                                       ^</source^>
 ECHO(                                       ^<destination^>
-ECHO(                                           ^<directory^>${modsetupdir}^</directory^>
+ECHO(                                           ^<directory^>${mod.setupdir}^</directory^>
 ECHO(                                           ^<includes^>
 ECHO(                                               ^<include^>php.ini^</include^>
 ECHO(                                           ^</includes^>
 ECHO(                                       ^</destination^>
 ECHO(                                    ^</copy^>
 ECHO(                                    ^<md^>
-ECHO(                                       ^<directory^>${modsetupdir}/includes^</directory^>
-ECHO(                                       ^<directory^>${modsetupdir}/upload^</directory^>
-ECHO(                                       ^<directory^>${modsetupdir}/tmp^</directory^>
+ECHO(                                       ^<directory^>${mod.setupdir}/includes^</directory^>
+ECHO(                                       ^<directory^>${mod.setupdir}/upload^</directory^>
+ECHO(                                       ^<directory^>${mod.setupdir}/tmp^</directory^>
 ECHO(                                    ^</md^>
 ECHO(                                ^</commands^>
 ECHO(                                ^<configFiles^>
 ECHO(                                    ^<configFile^>
-ECHO(                                        ^<name^>${modsetupdir}/php.ini^</name^>
+ECHO(                                        ^<name^>${mod.setupdir}/php.ini^</name^>
 ECHO(                                        ^<comment^>;^</comment^>
 ECHO(                                        ^<parameters^>
 ECHO(                                            ^<param^>
@@ -259,27 +262,27 @@ ECHO(                                            ^</param^>
 ECHO(                                            ^<param^>
 ECHO(                                                ^<after^>[PHP]^</after^>
 ECHO(                                                ^<name^>include_path^</name^>
-ECHO(                                                ^<value^>".;${modsetupdir}/includes"^</value^>
+ECHO(                                                ^<value^>".;${mod.setupdir}/includes"^</value^>
 ECHO(                                                ^<description^>Список директорий, в которых выполняется поиск файлов функциями Include, Fopen, File, Readfile и File_get_contents^</description^>
 ECHO(														^<entry^>2^</entry^>
 ECHO(                                            ^</param^>
 ECHO(                                            ^<param^>
 ECHO(                                                ^<after^>[PHP]^</after^>
 ECHO(                                                ^<name^>extension_dir^</name^>
-ECHO(                                                ^<value^>"${modsetupdir}/ext"^</value^>
+ECHO(                                                ^<value^>"${mod.setupdir}/ext"^</value^>
 ECHO(                                                ^<description^>Расположение DLL-файлов расширений^</description^>
 ECHO(														^<entry^>2^</entry^>
 ECHO(                                            ^</param^>
 ECHO(                                            ^<param^>
 ECHO(                                                ^<after^>[PHP]^</after^>
 ECHO(                                                ^<name^>upload_tmp_dir^</name^>
-ECHO(                                                ^<value^>"${modsetupdir}/upload"^</value^>
+ECHO(                                                ^<value^>"${mod.setupdir}/upload"^</value^>
 ECHO(                                                ^<description^>Директория, в которую будут помещаться временные загружаемые файлы^</description^>
 ECHO(                                            ^</param^>
 ECHO(                                            ^<param^>
 ECHO(                                                ^<after^>[PHP]^</after^>
 ECHO(                                                ^<name^>session.save_path^</name^>
-ECHO(                                                ^<value^>"${modsetupdir}/tmp"^</value^>
+ECHO(                                                ^<value^>"${mod.setupdir}/tmp"^</value^>
 ECHO(                                                ^<description^>Определяет аргумент, который передается в обработчик сохранения^</description^>
 ECHO(														^<entry^>2^</entry^>
 ECHO(                                            ^</param^>

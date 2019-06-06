@@ -1,6 +1,135 @@
 @Echo Off
 rem {Copyright}
 rem {License}
+rem Сценарий глобальных определений и констант
+
+::Define a BS variable containing a backspace (0x08) character
+for /f %%A in ('"prompt $H & echo on & for %%B in (1) do rem"') do set "BS=%%A"
+rem разделитель каталогов ОС
+set DIR_SEP=\
+rem разделитель файлов ОС
+set PATH_SEP=;
+rem уровни логгирования: 0 - сообщения в файл, 1 - сообщения на экран, 2 - ошибки, 3 - предупреждения, 4 - информация, 5 - отладка
+set LL_FILE=0
+set LL_CON=1
+set LL_ERR=2
+set LL_WRN=3
+set LL_INF=4
+set LL_DBG=5
+rem уровень логгирования по умолчанию: ошибки
+set DEF_LOG_LEVEL=%LL_ERR%
+rem логические константы
+set VL_TRUE=true
+set VL_FALSE=false
+rem режимы выполнения системы: эмуляции, тестовый, промышленный, отладки
+set EM_EML=EML
+set EM_TST=TST
+set EM_RUN=RUN
+set EM_DBG=DBG
+rem коды возврата текущего режима выполнения
+set CODE_EML=0
+set CODE_TST=1
+set CODE_RUN=2
+set CODE_DBG=3
+rem задержка выбора в меню по умолчанию (сек.)
+set DEF_DELAY=20
+set SHORT_DELAY=10
+rem признаки простого выбора пользователя в меню
+set YN_CHOICE=yn
+set YES=1
+set NO=2
+rem команды работы с реестром
+set RC_GET=GET
+set RC_SET=SET
+set RC_ADD=ADD
+set RC_DEL=DEL
+rem предопределённые разделы реестра
+set RH_HKLM=HKLM
+set RH_HKCU=HKCU
+rem направления конфертации слешей в путях к файлам
+set CSD_WIN=WIN
+set CSD_NIX=NIX
+rem признаки конвертации регистра строки
+set CM_UPPER=UPPER
+set CM_LOWER=LOWER
+rem форматы представления даты и времени
+set DF_DATE_TIME=DATE_TIME
+set DF_DATE_CODE=DATE_CODE
+set DF_DATE=DATE
+set DF_TIME=TIME
+rem архитектуры (разрядность) процессора и ОС
+set PA_X86=x86
+set PA_X64=x64
+
+rem ---------------- EOF definitions.cmd ----------------
+@Echo Off
+rem Тест BIS: работа со связываемыми переменными
+setlocal EnableExtensions EnableDelayedExpansion
+
+set src_script=%~1
+
+if not exist "%src_script%" endlocal & exit /b 2
+call "%~dp0set_envs.cmd"
+
+for /f %%i in ("%src_script%") do (
+	set src_dir=%%~dpi
+	set src_name=%%~ni
+)
+pushd "%src_dir%"
+rem Устанавливаем все необходимые параметры и ресурсы для работы системы, и проверяем их корректность
+rem echo on
+call :%src_name%_setup -lc:ru -ul:true -ll:5 -em:run -pn:%tst_pkg_name% -mn:%tst_mod1_name%
+call :%src_name%_check_setup
+if ERRORLEVEL 1 popd & endlocal & exit /b 2
+
+call :packages_menu "%p_pkg_name%" "%p_pkg_choice%" g_pkg_cfg_file g_pkg_name g_pkg_descr use_log g_log_level
+echo %g_pkg_cfg_file% %g_pkg_name% %g_pkg_descr% %use_log% %g_log_level%
+rem echo on
+call :get_pkg_dirs "%g_pkg_name%"
+pause
+call :modules_menu "%p_mod_name%" "%p_mod_choice%" "%g_pkg_name%" "%g_pkg_descr%" g_mod_name g_mod_ver
+call :get_mod_install_dirs "%p_pkg_name%" "%g_mod_name%" "%g_mod_ver%"
+echo "%p_pkg_name%" "%g_mod_name%" "%g_mod_ver%"
+pause
+exit
+
+rem Контроль областей видимости переменных
+call :get_var_scope %BV_BIS_DIR% scope_pkg scope_mod
+if /i "%scope_pkg%" NEQ "%DEF_VAR_PKG%" set test_fail=%VL_TRUE%
+if defined scope_mod set test_fail=%VL_TRUE%
+if defined test_fail popd & endlocal & exit /b 10
+
+call :get_var_scope %BV_PROG_FILES_DIR% scope_pkg scope_mod
+if /i "%scope_pkg%" NEQ "%DEF_VAR_PKG%" set test_fail=%VL_TRUE%
+if defined scope_mod set test_fail=%VL_TRUE%
+if defined test_fail popd & endlocal & exit /b 11
+
+call :get_var_scope %BV_PKG_NAME% scope_pkg scope_mod
+if /i "%scope_pkg%" NEQ "%g_pkg_name%" set test_fail=%VL_TRUE%
+if defined scope_mod set test_fail=%VL_TRUE%
+if defined test_fail popd & endlocal & exit /b 11
+pause
+exit
+
+call :set_var_value %BV_BIS_DIR% "%CUR_DIR%"
+call :set_var_value %BV_WIN_DIR% "%windir%"
+call :set_var_value %BV_PROG_FILES_DIR% "%programfiles%"
+
+call :set_var_value %BV_PKG_NAME% "%g_pkg_name%"
+call :set_var_value %BV_PKG_SETUP_DIR% "!pkgs[%_pkg_name%]#SetupDir!"
+
+call :set_var_value %BV_MOD_VERSION% "%g_mod_ver%"
+call :set_var_value %BV_MOD_DISTR_DIR% "!mods[%_mod_name%]#DistribDir!"
+call :set_var_value %BV_MOD_SETUP_DIR% "!mods[%_mod_name%]#SetupDir!"
+
+
+
+popd
+endlocal & exit /b 0
+rem ---------------- EOF test_wb_binding_var.cmd ----------------
+@Echo Off
+rem {Copyright}
+rem {License}
 rem Сценарий загрузки дистрибутивов и установки заданнго пакета модулей Victory BIS
 rem Параметры: запуск сценария без параметров
 
@@ -28,11 +157,7 @@ if ERRORLEVEL %NO% call :echo -ri:SetupAbort & endlocal & exit /b 0
 
 rem Цикл отображения меню выбора конфигураций пакетов
 :pkg_menu_loop
-rem Сбрасываем параметры текущего модуля
-set g_mod_name=
-set g_mod_ver=
-
-call :packages_menu "%p_pkg_name%" "%p_pkg_choice%"
+call :packages_menu "%p_pkg_name%" "%p_pkg_choice%" g_pkg_cfg_file g_pkg_name g_pkg_descr use_log g_log_level
 rem "Выход"
 if ERRORLEVEL 1 endlocal & exit /b 0
 
@@ -57,7 +182,7 @@ if /i "%use_log%" EQU "%VL_TRUE%" (
 rem Цикл отображения меню выбора модулей
 :mod_menu_loop
  
-call :modules_menu "%p_mod_name%" "%p_mod_choice%" "%g_pkg_name%" "%g_pkg_descr%"
+call :modules_menu "%p_mod_name%" "%p_mod_choice%" "%g_pkg_name%" "%g_pkg_descr%" g_mod_name g_mod_ver
 rem "Установить все модули"
 if ERRORLEVEL 3 call :echo -ri:FuncNotImpl & endlocal & exit /b 0
 rem "Возврат"
@@ -77,7 +202,8 @@ if ERRORLEVEL 1 (
 	pause
 	exit /b !l_em_res!
 )
-rem call :print_var_values
+call :print_var_values
+pause
 rem сбрасываем заданный выбор и позволяем системе завершиться самостоятельно
 set p_mod_choice=
 set p_exec_choice=
@@ -159,12 +285,14 @@ for /f "usebackq delims==# tokens=1-3" %%j in (`set g_pkg[%pkg_num%]`) do (
 	rem echo %%j %%k %%l
 	set l_pkg_cur#%%k=%%l
 ) 
-call :trim %l_pkg_cur#Name% g_pkg_name
-call :set_var_value %BV_PKG_NAME% "%g_pkg_name%"
-set g_pkg_cfg_file=%bis_config_dir%%DIR_SEP%%l_pkg_cur#File%
-set g_pkg_descr=%l_pkg_cur#Descr%
-set use_log=%l_pkg_cur#UseLog%
-set g_log_level=%l_pkg_cur#LogLevel%
+call :trim %l_pkg_cur#Name% l_pkg_name
+call :set_var_value %BV_PKG_NAME% "%l_pkg_name%"
+
+set %3=%bis_config_dir%%DIR_SEP%%l_pkg_cur#File%
+set %4=%l_pkg_name%
+set %5=%l_pkg_cur#Descr%
+set %6=%l_pkg_cur#UseLog%
+set %7=%l_pkg_cur#LogLevel%
 exit /b 0
 
 rem ---------------------------------------------
@@ -250,11 +378,13 @@ if %mod_num% GEQ %all_num% exit /b 3
 :module_def
 for /f "usebackq delims==# tokens=1-3,*" %%j in (`set g_mod[%mod_num%]`) do set l_mod_cur#%%k=%%l%%m
 
-call :trim %l_mod_cur#Name% g_mod_name
-call :set_var_value %BV_MOD_NAME% "%g_mod_name%"
-rem call :convert_case %CM_LOWER% "%g_mod_name%" l_lw_mod_name
-set g_mod_ver=%l_mod_cur#Ver%
+call :trim %l_mod_cur#Name% l_trim_mod_name
+call :convert_case %CM_LOWER% "%l_trim_mod_name%" l_lw_mod_name
+call :set_var_value %BV_MOD_NAME% "%l_trim_mod_name%"
 call :set_var_value %BV_MOD_VERSION% "%l_mod_cur#Ver%"
+
+set %5=%l_lw_mod_name%
+set %6=%l_mod_cur#Ver%
 exit /b 0
 
 rem ---------------------------------------------
@@ -270,8 +400,11 @@ set _pkg_name=%~1
 call :get_res_val -rf:"%xpaths_file%" -ri:XPathOSParams
 for /F "tokens=1-5" %%a in ('%xml_sel_% "!res_val!" -v "concat(./setupDir, substring('%EMPTY_NODE%', 1 div not(./setupDir)))" -o "	" -v "concat(./distribDir, substring('%EMPTY_NODE%', 1 div not(./distribDir)))" -o "	" -v "concat(./backupDataDir, substring('%EMPTY_NODE%', 1 div not(./backupDataDir)))" -o "	" -v "concat(./backupConfigDir, substring('%EMPTY_NODE%', 1 div not(./backupConfigDir)))" -o "	" -v "concat(./logDir, substring('%EMPTY_NODE%', 1 div not(./logDir)))" -n "%g_pkg_cfg_file%"') do (
 	set pkgs[%_pkg_name%]#SetupDir=%%~a
-	call :binding_var "%_pkg_name%" "" "!pkgs[%_pkg_name%]#SetupDir!" pkgs[%_pkg_name%]#SetupDir
 	call :set_var_value %BV_PKG_SETUP_DIR% "!pkgs[%_pkg_name%]#SetupDir!"
+	echo 2
+	call :binding_var "%_pkg_name%" "" "!pkgs[%_pkg_name%]#SetupDir!" pkgs[%_pkg_name%]#SetupDir
+	echo 3
+	echo off
 	if "%%~b" NEQ "%EMPTY_NODE%" (
 		set pkgs[%_pkg_name%]#DistribDir=%%~b
 		call :binding_var "%_pkg_name%" "" "!pkgs[%_pkg_name%]#DistribDir!" pkgs[%_pkg_name%]#DistribDir
@@ -536,14 +669,14 @@ rem получаем каталог установки модуля и его домашний каталог
 if not defined mods[%_mod_name%]#SetupDir if not defined mods[%_mod_name%]#HomeDir (
 	call :get_res_val -rf:"%xpaths_file%" -ri:XPathPhaseConfig -v1:"%_mod_name%" -v2:"%_mod_ver%" -v3:%PH_INSTALL%
 	for /F "tokens=1-3" %%a in ('%xml_sel_% "!res_val!" -v "concat(./modSetupDir, substring('%EMPTY_NODE%', 1 div not(./modSetupDir)))" -o "	" -v "concat(./modHomeDir/envVar, substring('%EMPTY_NODE%', 1 div not(./modHomeDir/envVar)))" -o "	" -v "concat(./modHomeDir/directory, substring('%EMPTY_NODE%', 1 div not(./modHomeDir/directory)))" -n "%g_pkg_cfg_file%"') do (
-		if "%%a" NEQ "%EMPTY_NODE%" set mods[%_mod_name%]#SetupDir=%%~a
+		if "%%a" NEQ "%EMPTY_NODE%" (
+			set mods[%_mod_name%]#SetupDir=%%~a
+			call :set_var_value %BV_MOD_SETUP_DIR% "!mods[%_mod_name%]#SetupDir!"
+		)
 		if "%%b" NEQ "%EMPTY_NODE%" set mods[%_mod_name%]#HomeEnv=%%~b
 		if "%%c" NEQ "%EMPTY_NODE%" set mods[%_mod_name%]#HomeDir=%%~c
 	)
-	if defined mods[%_mod_name%]#SetupDir (
-		call :binding_var "%_pkg_name%" "%_mod_name%" "!mods[%_mod_name%]#SetupDir!" mods[%_mod_name%]#SetupDir
-		call :set_var_value %BV_MOD_SETUP_DIR% "!mods[%_mod_name%]#SetupDir!" "%_pkg_name%" "%_mod_name%"
-	)
+	if defined mods[%_mod_name%]#SetupDir call :binding_var "%_pkg_name%" "%_mod_name%" "!mods[%_mod_name%]#SetupDir!" mods[%_mod_name%]#SetupDir
 	if defined mods[%_mod_name%]#HomeDir call :binding_var "%_pkg_name%" "%_mod_name%" "!mods[%_mod_name%]#HomeDir!" mods[%_mod_name%]#HomeDir
 	
 	call :echo -ri:ModSetupDir -v1:%_mod_name% -v2:"!mods[%_mod_name%]#SetupDir!"
@@ -1709,7 +1842,6 @@ set _pkg_name=%~1
 set _mod_name=%~2
 set _var=%~3
 
-rem echo on
 rem echo 1. "%_var%"
 if not defined _var endlocal & set "%4=" & exit /b 0
 set $bind_var=%_var:${=%
@@ -1724,20 +1856,9 @@ for /f "tokens=1* delims=$}" %%i in ("!l_vars!") do (
 	if /i "!$check_var!" EQU "{" (
 		set l_var=!l_var:~1!
 		call :convert_case %CM_LOWER% "!l_var!" l_lc_var
-		rem echo %~0: _var=!_var!; l_var=!l_var!; l_lc_var=!l_lc_var!
-		rem если не определён текущий модуль то используем заданную область видимости
-		if not defined g_mod_name (
-			call :get_var_scope !l_lc_var! l_scope_pkg l_scope_mod
-			if /i "!var_scope!" EQU "%BV_MOD_SCOPE%" (
-				call :get_var_value_by_scope !l_lc_var! "%_pkg_name%" "%_mod_name%"
-				set var_value=!var_value_by_scope!
-			) else (
-				call :get_var_value !l_lc_var!
-			)
-		) else (
-			call :get_var_value !l_lc_var!
-		)
-		rem echo %~0: var_value=!var_value!
+		rem echo "!_var!" "!l_var!" "!l_lc_var!"
+		call :get_var_value !l_lc_var!
+		rem echo var_value=!var_value!
 		rem echo if defined var_value call :binding_var_value "!_var!" "!l_var!" "!var_value!" _var
 		if defined var_value call :binding_var_value "!_var!" "!l_var!" "!var_value!" _var
 	)
@@ -1792,30 +1913,12 @@ rem Возвращает: scope_pkg scope_mod
 rem ---------------------------------------------
 :get_var_scope _var_name
 setlocal
-set _proc_name=%~0
 set _svname=%~1
 
-set l_scope_mark=%BV_PKG_SCOPE%
 set $check_var_name=%_svname:.=%
-rem echo %~0: _svname=%_svname% - %_svname:~0,4%
-if /i "%$check_var_name%" EQU "%_svname%" (
-	set l_scope_pkg=%DEF_VAR_PKG%
-	set l_scope_mod=
-) else if /i "%_svname:~0,4%" EQU "%BV_PKG_SCOPE%" (
-	set l_scope_pkg=%g_pkg_name%
-	set l_scope_mod=
-	rem echo %~0: pkg.
-) else if /i "%_svname:~0,4%" EQU "%BV_MOD_SCOPE%" (
-	set l_scope_pkg=%g_pkg_name%
-	set l_scope_mod=%g_mod_name%
-	set l_scope_mark=%BV_MOD_SCOPE%
-	rem echo %~0: mod.
-) else (
-	set l_scope_pkg=%DEF_VAR_PKG%
-	set l_scope_mod=
-)
-rem echo %~0: l_scope_pkg=%l_scope_pkg%; l_scope_mod=%l_scope_mod%
-endlocal & (set "%_proc_name:~5%=%l_scope_mark%" & set "%2=%l_scope_pkg%" & set "%3=%l_scope_mod%") & exit /b 0
+if /i "%$check_var_name%" EQU "%_svname%" endlocal & (set "%2=%DEF_VAR_PKG%" & set "%3=") & exit /b 0
+if /i "%_svname:~0,4%" EQU "pkg." endlocal & (set "%2=%g_pkg_name%" & set "%3=") & exit /b 0
+if /i "%_svname:~0,4%" EQU "mod." endlocal & (set "%2=%g_pkg_name%" & set "%3=%g_mod_name%") & exit /b 0
 
 set l_var_scopes=%_svname%
 set vs=0
@@ -1834,69 +1937,35 @@ rem ---------------------------------------------
 rem Устанавливает для подстановочных переменных
 rem связываемые значения
 rem ---------------------------------------------
-:set_var_value _var_name _var_value _svv_pkg_name _svv_mod_name
+:set_var_value _var_name _var_value
 set _var_name=%~1
 set _var_value=%~2
-set _svv_pkg_name=%~3
-set _svv_mod_name=%~4
+	echo 4
 
-rem echo %~0: _var_name=%_var_name%; _var_value=%_var_value%; _svv_pkg_name=%_svv_pkg_name%; _svv_mod_name=%_svv_mod_name%
-rem если не задана область видимости переменной, то определяем её по имени
-if not defined _svv_pkg_name (
-	call :get_var_scope %_var_name% svv_scope_pkg svv_scope_mod
+call :get_var_value %_var_name% scope_pkg scope_mod
+if defined scope_mod (
+	set l_curr_var_idx=!g_vars[%scope_pkg%][%scope_mod%]#Cnt!
 ) else (
-	set svv_scope_pkg=%_svv_pkg_name%
-	set svv_scope_mod=%_svv_mod_name%
+	set l_curr_var_idx=!g_vars[%scope_pkg%]#Cnt!
 )
-rem echo %~0: svv_scope_pkg=%svv_scope_pkg%; svv_scope_mod=%svv_scope_mod%
-rem вытаемся получить значение переменной в определённой области видимости
-call :get_var_value_by_scope %_var_name% %svv_scope_pkg% %svv_scope_mod%
-rem echo %~0: var_value_by_scope=%var_value_by_scope%; svv_scope_pkg=%svv_scope_pkg%; svv_scope_mod=%svv_scope_mod%
-rem pause
-rem необходимо использование дополнительной переменной http://qaru.site/questions/14072091/batch-set-a-missing-operator
-if defined svv_scope_mod (
-	set l_curr_var_idx=!g_vars[%svv_scope_pkg%][%svv_scope_mod%]#Cnt!
-) else (
-	set l_curr_var_idx=!g_vars[%svv_scope_pkg%]#Cnt!
-)
-rem echo %~0: l_curr_var_idx=%l_curr_var_idx%
-if defined svv_scope_mod (
+echo "%_var_name%" "%scope_pkg%" "%scope_mod%"
+echo 5
+echo on
+if defined scope_mod (
 	if not defined l_curr_var_idx set l_curr_var_idx=-1
-	if not defined var_value_by_scope set /a "l_curr_var_idx+=1"
-	set g_vars[%svv_scope_pkg%][%svv_scope_mod%][!l_curr_var_idx!]#Name=%_var_name%
-	set g_vars[%svv_scope_pkg%][%svv_scope_mod%][!l_curr_var_idx!]#Val=%_var_value%
-	set g_vars[%svv_scope_pkg%][%svv_scope_mod%]#Cnt=!l_curr_var_idx!
+	if not defined var_value set /a "l_curr_var_idx+=1"
+	set g_vars[%scope_pkg%][%scope_mod%][!l_curr_var_idx!]#Name=%_var_name%
+	set g_vars[%scope_pkg%][%scope_mod%][!l_curr_var_idx!]#Val=%_var_value%
+	set g_vars[%scope_pkg%][%scope_mod%]#Cnt=!l_curr_var_idx!
 ) else (
 	if not defined l_curr_var_idx set l_curr_var_idx=-1
-	if not defined var_value_by_scope set /a "l_curr_var_idx+=1"
-	set g_vars[%svv_scope_pkg%][!l_curr_var_idx!]#Name=%_var_name%
-	set g_vars[%svv_scope_pkg%][!l_curr_var_idx!]#Val=%_var_value%
-	set g_vars[%svv_scope_pkg%]#Cnt=!l_curr_var_idx!
+	if not defined var_value set /a "l_curr_var_idx+=1"
+	set g_vars[%scope_pkg%][!l_curr_var_idx!]#Name=%_var_name%
+	set g_vars[%scope_pkg%][!l_curr_var_idx!]#Val=%_var_value%
+	set g_vars[%scope_pkg%]#Cnt=!l_curr_var_idx!
 )
-rem echo %~0: l_curr_var_idx=%l_curr_var_idx%
-exit /b 0
-
-rem ---------------------------------------------
-rem Возвращает для подстановочной переменной
-rem связываемое значение в заданной области
-rem видимости
-rem ---------------------------------------------
-:get_var_value_by_scope _var_name _scope_pkg _scope_mod
-setlocal
-set _proc_name=%~0
-set _var_name=%~1
-set _scope_pkg=%~2
-set _scope_mod=%~3
-
-rem echo %~0: _var_name=%_var_name%; _scope_pkg=%_scope_pkg%; _scope_mod=%_scope_mod%
-if defined _scope_mod (
-	for /l %%n in (0,1,!g_vars[%_scope_pkg%][%_scope_mod%]#Cnt!) do if /i "!g_vars[%_scope_pkg%][%_scope_mod%][%%n]#Name!" EQU "%_var_name%" (set "l_var_value=!g_vars[%_scope_pkg%][%_scope_mod%][%%n]#Val!" & goto end_get_var_value_by_scope)
-) else (
-	for /l %%n in (0,1,!g_vars[%_scope_pkg%]#Cnt!) do if /i "!g_vars[%_scope_pkg%][%%n]#Name!" EQU "%_var_name%" (set "l_var_value=!g_vars[%_scope_pkg%][%%n]#Val!" & goto end_get_var_value_by_scope)
-)
-:end_get_var_value_by_scope
-rem echo %~0: l_var_value=%l_var_value%
-endlocal & set "%_proc_name:~5%=%l_var_value%"
+echo 6
+echo off
 exit /b 0
 
 rem ---------------------------------------------
@@ -1910,12 +1979,18 @@ set _proc_name=%~0
 set _var_name=%~1
 
 call :get_var_scope %_var_name% scope_pkg scope_mod
-rem echo %~0: _var_name=%_var_name%; scope_pkg=%scope_pkg%; scope_mod=%scope_mod%
 
-call :get_var_value_by_scope %_var_name% %scope_pkg% %scope_mod%
-
-rem echo %~0: var_value_by_scope=%var_value_by_scope%
-endlocal & set "%_proc_name:~5%=%var_value_by_scope%"
+if defined scope_mod (
+	for /l %%n in (0,1,!g_vars[%scope_pkg%][%scope_mod%]#Cnt!) do if /i "!g_vars[%scope_pkg%][%scope_mod%][%%n]#Name!" EQU "%_var_name%" (set "l_var_value=!g_vars[%scope_pkg%][%scope_mod%][%%n]#Val!" & goto end_get_var_value)
+) else (
+	for /l %%n in (0,1,!g_vars[%scope_pkg%]#Cnt!) do if /i "!g_vars[%scope_pkg%][%%n]#Name!" EQU "%_var_name%" (set "l_var_value=!g_vars[%scope_pkg%][%%n]#Val!" & goto end_get_var_value)
+)
+:end_get_var_value
+if defined scope_mod (
+	endlocal & (set "%_proc_name:~5%=%l_var_value%" & set "%2=%scope_pkg%" & set "%3=%scope_mod%")
+) else (
+	endlocal & (set "%_proc_name:~5%=%l_var_value%" & set "%2=%scope_pkg%")
+)
 exit /b 0
 
 rem ---------------------------------------------
@@ -1982,9 +2057,6 @@ set CMT_SYMBS=";:#"
 
 rem Пакет по умолчанию для значений связываемых переменных
 set DEF_VAR_PKG=VARS
-rem Идентификаторы областей видимости связываемых переменных:
-set BV_PKG_SCOPE=pkg.
-set BV_MOD_SCOPE=mod.
 rem Идентификаторы связываемых переменных:
 set BV_BIS_DIR=bisdir
 set BV_WIN_DIR=windir
@@ -2154,3 +2226,1329 @@ echo.
 endlocal & exit /b 1
 
 rem ---------------- EOF bis.cmd ----------------
+@Echo Off
+rem {Copyright}
+rem {License}
+rem Сценарий получения и отображения ресурсов (строковых) заданным цветом и возможностью логгирования
+
+setlocal EnableExtensions EnableDelayedExpansion
+
+rem УСТАНОВКА И ОПРЕДЕЛЕНИЕ ЗНАЧЕНИЙ ПО УМОЛЧАНИЮ:
+set g_script_name=%~nx0
+
+call :echo %*
+if ERRORLEVEL 1 endlocal & exit /b 1
+
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Получает и отображает ресурс (строковый)
+rem ---------------------------------------------
+:echo %*
+setlocal
+rem Устанавливаем все необходимые параметры и ресурсы для работы скрипта, и проверяем их корректность
+call :echo_res_setup %*
+call :echo_res_check_setup
+if ERRORLEVEL 1 endlocal & exit /b 1
+
+if defined p_cmd if /i "%p_cmd%" EQU "GET" call :get_res_val & echo !res_val! & endlocal & exit /b %ERRORLEVEL%
+rem echo "%script_hdr%" "%res_path%" "%p_res_id%"
+
+rem если передано значение ресурса
+if defined res_val (
+	if /i "%categ_name%" NEQ "" set res_val=%categ_name%: %res_val%
+	call :set_res_color %res_color% 
+	call :echo_level_res "%res_val%" "%ln%" "%log_lvl%" "%categ_num%"
+) else if /i "%p_res_val_empty%" EQU "%VL_TRUE%" (
+	call :echo_level_res "%res_val%" "%ln%" "%log_lvl%" "%categ_num%"
+) else (
+	rem иначе получаем ресурс по его ИД
+	call :get_res_val
+	rem echo !res_code! !res_categ! !categ_num! !categ_name! !res_val! "!result!"
+	if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
+
+	rem если не только вывод в файл
+	if /i "!categ_name!" NEQ "%CTG_FILE%" (
+		rem определяем цвет символов и формат вывода по категории ресурса
+		if /i "!categ_name!" EQU "%CTG_ERR%" (
+			rem ресурс-ошибка
+			set l_res_color=0C
+			set res_val=!categ_name!-!res_code!: %p_res_id%: !res_val!
+		) else if /i "!categ_name!" EQU "%CTG_WRN%" (
+			rem ресурс-предупреждение
+			set l_res_color=0E
+			set res_val=!categ_name!-!res_code!: %p_res_id%: !res_val!
+		) else if /i "!categ_name!" EQU "%CTG_INF%" (
+			rem ресурс-информация
+			set l_res_color=09
+			set res_val=!categ_name!-!res_code!: !res_val!
+		) else if /i "!categ_name!" EQU "%CTG_FINE%" (
+			rem ресурс-отладка
+			set l_res_color=08
+			set res_val=!categ_name!-!res_code!: !res_val!
+		) else (
+			set l_res_color=%res_color%
+		)
+		call :set_res_color !l_res_color!
+		call :echo_level_res "!res_val!" "%ln%" "%log_lvl%" "!categ_num!"
+	)
+)
+call :echo_log "%log_path%" "%res_val%" "%categ_num%" "%log_lvl%" "%script_hdr%"
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Выводит ресурс в лог-файл
+rem ---------------------------------------------
+:echo_log _log_path _res_val _categ_num _log_lvl _script_hdr
+setlocal
+set _log_path=%~1
+set _res_val=%~2
+set _categ_num=%~3
+set _log_lvl=%~4
+set _script_hdr=%~5
+
+rem если не указан лог файл, то завершаем сценарий
+if "%_log_path%" EQU "" endlocal & exit /b 1
+
+if not exist "%_log_path%" (
+	echo %_script_hdr% > "%_log_path%"
+	echo. >> "%_log_path%"
+)
+rem FOR /F "usebackq tokens=*" %%A IN (`%modules_dir%iso_date.cmd -df:DATE_TIME 2^>nul`) DO set iso_date_time=%%A
+if "%_categ_num%" EQU "" set _categ_num=0
+set l_res_val=%DATE% %TIME%: %_res_val%
+rem для вывода круглых скобок echo должны быть на отдельных строках
+if defined _log_lvl (
+	if %_categ_num% LEQ %_log_lvl% echo %l_res_val% >> "%_log_path%"
+) else (
+	echo %l_res_val% >> "%_log_path%"
+)
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Возвращает значение ресурса (строкового)
+rem (устанавливает: 	g_res[%res_name%][%p_res_id%]#Val
+rem						g_res[%res_name%][%p_res_id%]#Code
+rem						g_res[%res_name%][%p_res_id%]#Categ
+rem						g_res[%res_name%][%p_res_id%]#CategNum
+rem						g_res[%res_name%][%p_res_id%]#CategName)
+rem ---------------------------------------------
+:get_res_val _proc_param...
+set _proc_name=%~0
+set _proc_param=%~1
+
+rem если передан хотя бы один параметр, прогоняем их все через установку
+if "%_proc_param%" NEQ "" call :echo_res_setup %*
+for /f %%i in ("%res_path%") do set res_name=%%~ni
+set g_res_output_cnt=
+
+rem если ресурс был ранее определён, то используем его
+if defined g_res[%res_name%][%p_res_id%]#Val (
+	set res_code=!g_res[%res_name%][%p_res_id%]#Code!
+	set res_categ=!g_res[%res_name%][%p_res_id%]#Categ!
+	set categ_num=!g_res[%res_name%][%p_res_id%]#CategNum!
+	set categ_name=!g_res[%res_name%][%p_res_id%]#CategName!
+	set res_val=!g_res[%res_name%][%p_res_id%]#Val!
+	goto res_found
+) else (
+	rem иначе выполняем поиск ресурса
+	for /F "usebackq eol=; skip=1 tokens=1-4 delims=	" %%i in ("%res_path%") do (
+		rem echo Из ресурсного файла "%res_path%": "%%i" "%%j" "%%k"  "%%l"
+		set l_id=%%i
+		set l_code=%%j
+		set l_categ=%%k
+		set l_val=%%l
+
+		if /i "!l_id!" EQU "%p_res_id%" (
+			set res_code=!l_code!
+			if not defined res_categ (
+				set res_categ=!l_categ!
+				set categ_num=!l_categ:~0,1!
+				set categ_name=!l_categ:~1!
+			)
+			set res_val=!l_val!
+			set g_res[%res_name%][%p_res_id%]#Val=!l_val!
+			set g_res[%res_name%][%p_res_id%]#Code=!l_code!
+			set g_res[%res_name%][%p_res_id%]#Categ=!res_categ!
+			set g_res[%res_name%][%p_res_id%]#CategNum=!categ_num!
+			set g_res[%res_name%][%p_res_id%]#CategName=!categ_name!
+			goto res_found
+		)
+	)
+)
+set l_err_msg=ERR -1: Не найден ресурс [ИД=%p_res_id%] в файле "%res_path%". Проверьте, пожалуйста, его наличие.
+rem если не только вывод в файл
+if /i "%categ_name%" NEQ "%CTG_FILE%" (
+	rem ChangeColor 12 0
+	%ChangeColor_12_0%
+	1>nul chcp %code_page% & echo !l_err_msg!
+) else (
+	call :echo_log "%log_path%" "!l_err_msg!" "%categ_num%" "%log_lvl%" "%script_hdr%"
+)
+exit /b 1
+
+:res_found
+rem если не определён цвет для переменных, то сразу подставляем переменные в строку
+set is_color_defined=%VL_FALSE%
+if defined p_val_color (set is_color_defined=%VL_TRUE%) else (for /l %%i in (1,1,%colors_cnt%) do if defined p_val_color_%%i set "is_color_defined=%VL_TRUE%" & goto :color_defined)
+
+:color_defined
+if /i "%is_color_defined%" NEQ "%VL_TRUE%" goto res_val_create
+
+rem если определён цвет для переменных, то формируем последовательность вывода
+call :create_res_output "%res_name%" "%p_res_id%" "%res_val%"
+goto end_get_res_val
+
+:res_val_create
+rem подставляем значения переменных ресурса
+for /l %%i in (1,1,%values_cnt%) do if defined p_val_%%i (call :res_bind_var "!res_val!" {%V_SYMB%%%i} p_val_%%i & set res_val=!bind_var!) else (goto end_get_res_val)
+
+:end_get_res_val
+set %_proc_name:~5%=!res_val!
+exit /b 0
+
+rem ---------------------------------------------
+rem Подставляет значение переменной ресурса
+rem ---------------------------------------------
+:res_bind_var _res_val _var _val
+setlocal
+set _proc_name=%~0
+set _res_val=%~1
+set _var=%~2
+set _val=!%3!
+
+set _res_val=!_res_val:%_var%=%_val%!
+
+endlocal & set %_proc_name:~5%=%_res_val%
+exit /b 0
+
+rem ---------------------------------------------
+rem Создаёт последовательность вывода ресурса
+rem (устанавливает: 	g_res_tpl[%_res_name%][%_res_id%][0]#Cnt
+rem 					g_res_tpl[%_res_name%][%_res_id%][!er!]#Part
+rem 					g_res_output_cnt
+rem						g_res_output[%%j]#Part
+rem 					g_res_output[%%j]#Color)
+rem ---------------------------------------------
+:create_res_output _res_name _res_id _res_val
+set _res_name=%~1
+set _res_id=%~2
+set _res_val=%~3
+
+rem если определён размер шаблона последовательности вывода, то переходим к её формированию
+if defined g_res_tpl[%_res_name%][%_res_id%][0]#Cnt goto res_parts_loop
+
+rem иначе - опредляем шаблон
+set l_tmp_val=%_res_val%
+set er=0
+set l_vars_cnt=0
+:res_output_loop
+for /f "tokens=1* delims={}" %%a in ("%l_tmp_val%") do (
+	set l_part=%%a
+	rem echo "!l_part!"
+	rem определяем подстановочная ли переменная и если да, то вычисляем их количество в строковом ресурсе
+	if "!l_part:~0,1!" EQU "!V_SYMB!" (
+		set l_var_num=!l_part:~1!
+		set "l_check_var_num="&for /f "delims=0123456789" %%i in ("!l_var_num!") do set l_check_var_num=%%i
+		if not defined l_check_var_num if !l_var_num! GEQ !l_vars_cnt! set l_vars_cnt=!l_var_num!
+	)
+	set g_res_tpl[%_res_name%][%_res_id%][!er!]#Part=!l_part!
+	set l_tmp_val=%%b
+ 	set /a "er+=1"
+)
+if defined l_tmp_val goto :res_output_loop
+set /a "g_res_tpl[%_res_name%][%_res_id%][0]#Cnt=%er%-1"
+
+:res_parts_loop
+set g_res_output_cnt=!g_res_tpl[%_res_name%][%_res_id%][0]#Cnt!
+
+if %g_res_output_cnt% EQU 0 set "g_res_output_cnt=" & exit /b 0
+rem echo "%g_res_output_cnt%"
+
+for /l %%j in (0,1,%g_res_output_cnt%) do (
+	set l_res_part=!g_res_tpl[%_res_name%][%_res_id%][%%j]#Part!
+
+	set $check_part=!l_res_part!
+	for /l %%i in (1,1,%l_vars_cnt%) do (
+		if "!l_res_part!" EQU "!V_SYMB!%%i" (
+			if defined p_val_%%i (
+				set "$check_part=!p_val_%%i!" & set "l_part_color=!p_val_color_%%i!"
+			) else (
+				set "$check_part=" & set "l_part_color="
+			)
+		)
+	)
+	if not defined l_part_color set l_part_color=%p_val_color%
+	rem если не подстановочная переменная, то устанавливаем цвет ресурса
+	if "!$check_part!" EQU "!l_res_part!" (
+		set g_res_output[%%j]#Part=!l_res_part!
+		set g_res_output[%%j]#Color=%res_color%
+	) else (
+		set g_res_output[%%j]#Part=!$check_part!
+		set g_res_output[%%j]#Color=!l_part_color!
+	)
+)
+exit /b 0
+
+rem ---------------------------------------------
+rem Выводит ресурс в завиимости от режима выполнения
+rem и уровня логгирования
+rem (в тестовом режиме сообщения выводятся только
+rem с признаком игнорирования тестового режима)
+rem ---------------------------------------------
+:echo_level_res _res_val _ln _log_lvl _categ_num
+setlocal
+set _res_val=%~1
+set _ln=%~2
+set _log_lvl=%~3
+set _categ_num=%~4
+rem если не в режиме тестирования или в нём, но задано игнорирование этого режима, то выводим ресурс
+if /i "%EXEC_MODE%" NEQ "%EM_TST%" goto echo_res_any_case
+if /i "%ignore_test_exec_mode%" NEQ "%VL_TRUE%" endlocal & exit /b 0
+:echo_res_any_case
+if "%_categ_num%" EQU "" set _categ_num=0
+rem если задан уровень логгирования, то контролируем его
+if "%_log_lvl%" NEQ "" (
+	rem echo if %_categ_num% LEQ %_log_lvl% call :echo_res_val "%_res_val%" "%_ln%"
+	if %_categ_num% LEQ %_log_lvl% call :echo_res_val "%_res_val%" "%_ln%"
+) else (
+	rem иначе просто выводим значение ресурса
+	call :echo_res_val "%_res_val%" "%_ln%"
+)
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Выводит значение ресурса (строкового)
+rem ---------------------------------------------
+:echo_res_val _res_val _ln
+setlocal
+set _res_val=%~1
+set _ln=%~2
+
+rem выполняем заданное кол-во переводов строк до вывода значения ресурса
+for /l %%i in (1,1,%before_echo_cnt%) do echo.
+rem формируем заданное кол-во отступов вправо
+for /l %%i in (1,1,%right_shift_cnt%) do set "l_spaces=!l_spaces! "
+rem если определена последовательность вывода, то выводим значение ресурса согласно ей
+if defined g_res_output_cnt (
+	1>nul chcp %code_page%
+	for /l %%j in (0,1,%g_res_output_cnt%) do (
+		if defined g_res_output[%%j]#Part (
+			call :set_res_color !g_res_output[%%j]#Color!
+			set l_part=!g_res_output[%%j]#Part!
+			call :get_end_space %%j
+			rem для вывода круглых скобок echo должны быть на отдельных строках
+			if %right_shift_cnt% EQU 0 (
+				echo | set /p "dummyName=!l_part!"
+			) else (
+				if %%j EQU 0 (
+					echo | set /p "dummyName=%BS%!l_spaces!!l_part!!end_space!"
+				) else (
+					echo | set /p "dummyName=!l_part!!end_space!"
+				)
+			)
+		)
+	)
+	if /i "%_ln%" EQU "%VL_TRUE%" echo.
+) else (
+	rem  иначе - выводим значение ресурса
+	if /i "%p_res_val_empty%" EQU "%VL_TRUE%" (
+		rem если значение ресурса отсутствует
+		if /i "%_ln%" EQU "%VL_TRUE%" echo.
+	) else (
+		1>nul chcp %code_page%
+		rem  если определено значение ресурса, то учитываем отсутуп справа и перевод строки
+		rem для вывода круглых скобок echo должны быть на отдельных строках
+		if %right_shift_cnt% EQU 0 (
+			if /i "%_ln%" EQU "%VL_TRUE%" (
+				echo %_res_val%
+			) else (
+				echo | set /p "dummyName=%_res_val%"
+			)
+		) else (
+			if /i "%_ln%" EQU "%VL_TRUE%" (
+				echo !l_spaces!%_res_val%
+			) else (
+				echo | set /p "dummyName=%BS%!l_spaces!%_res_val%"
+			)
+		)
+rem 1>&2 - для ошибки		
+	)
+)
+rem выполняем заданное кол-во переводов строк после вывода значения ресурса
+for /l %%i in (1,1,%after_echo_cnt%) do echo.
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Возвращает при необходимости заключительный пробел
+rem ---------------------------------------------
+:get_end_space _cur_idx
+setlocal
+set _proc_name=%~0
+set _cur_idx=%~1
+
+set /a l_next_id=%_cur_idx%+1
+if not defined g_res_output[%l_next_id%]#Part endlocal & set "%_proc_name:~5%=" & exit /b 0
+
+rem echo %l_next_id% "!g_res_output[%l_next_id%]#Part!"
+if "!g_res_output[%l_next_id%]#Part:~0,1!" EQU " " set "l_space= "
+
+endlocal & set %_proc_name:~5%=%l_space%
+exit /b 0
+
+rem ---------------------------------------------
+rem Устанавливает заданный цвет символов выводимой строки
+rem ---------------------------------------------
+:set_res_color _color
+setlocal
+set _color=%~1
+
+if /i "%_color%" EQU "" (
+	rem ChangeColor 8 0
+	%ChangeColor_8_0%
+) else if /i "%_color%" EQU "08" (
+	rem ChangeColor 8 0
+	%ChangeColor_8_0%
+) else if /i "%_color%" EQU "09" (
+	rem ChangeColor 9 0
+	%ChangeColor_9_0%
+) else if /i "%_color%" EQU "0A" (
+	rem ChangeColor 10 0
+	%ChangeColor_10_0%
+) else if /i "%_color%" EQU "0B" (
+	rem ChangeColor 11 0
+	%ChangeColor_11_0%
+) else if /i "%_color%" EQU "0C" (
+	rem ChangeColor 12 0
+	%ChangeColor_12_0%
+) else if /i "%_color%" EQU "0D" (
+	rem ChangeColor 13 0
+	%ChangeColor_13_0%
+) else if /i "%_color%" EQU "0E" (
+	rem ChangeColor 14 0
+	%ChangeColor_14_0%
+) else if /i "%_color%" EQU "0F" (
+	rem ChangeColor 15 0
+	%ChangeColor_15_0%
+) else if /i "%_color%" EQU "AA" (
+	rem ChangeColor 10 10
+	%ChangeColor_10_10%
+) else if /i "%_color%" EQU "CC" (
+	rem ChangeColor 12 12
+	%ChangeColor_12_12%
+) else (
+	rem ChangeColor 8 0
+	%ChangeColor_8_0%
+)
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Определяет путь и праметры утилиты изменения цвета
+rem ---------------------------------------------
+:chgcolor_setup _chgcolor_dir
+set _chgcolor_dir=%~1
+if [%_chgcolor_dir:~-1%] EQU [%DIR_SEP%] set _chgcolor_dir=%_chgcolor_dir:~0,-1%
+if not defined chgcolor_path (
+	if exist "%b2eincfilepath%" (
+		set chgcolor_path=%b2eincfilepath%chgcolor.exe
+	) else (
+		if not exist "%_chgcolor_dir%%DIR_SEP%chgcolor.exe" exit /b 1
+		set chgcolor_path=%_chgcolor_dir%%DIR_SEP%chgcolor.exe
+	)
+	if defined chgcolor_path (
+		set ChangeColor_8_0="!chgcolor_path!" 08
+		set ChangeColor_9_0="!chgcolor_path!" 09
+		set ChangeColor_10_0="!chgcolor_path!" 0A
+		set ChangeColor_11_0="!chgcolor_path!" 0B
+		set ChangeColor_12_0="!chgcolor_path!" 0C
+		set ChangeColor_13_0="!chgcolor_path!" 0D
+		set ChangeColor_14_0="!chgcolor_path!" 0E
+		set ChangeColor_15_0="!chgcolor_path!" 0F
+		set ChangeColor_10_10="!chgcolor_path!" AA
+		set ChangeColor_12_12="!chgcolor_path!" CC
+	)
+)
+exit /b 0
+
+rem ---------------------------------------------
+rem Устанавливает все необходимые параметры
+rem и ресурсы для работы скрипта
+rem ---------------------------------------------
+:echo_res_setup %*
+rem УСТАНОВКА И ОПРЕДЕЛЕНИЕ ЗНАЧЕНИЙ ПО УМОЛЧАНИЮ:
+rem цвет выводимого ресурса
+set DEF_RES_COLOR=08
+rem Категории ресурсов:
+rem вывод значения ресурса только в файл
+set CTG_FILE=FILE
+rem вывод значения ресурса на экран/в файл
+set CTG_CON=CON
+rem ресурс-ошибка
+set CTG_ERR=ERR
+rem ресурс-предупреждение
+set CTG_WRN=WRN
+rem ресурс-информация
+set CTG_INF=INF
+rem ресурс-отладка
+set CTG_FINE=FINE
+
+rem идентификаторы подстановочных переменных
+set V_SYMB=V
+
+rem СБРОС ГЛОБАЛЬНЫХ ПЕРЕМЕННЫХ:
+set res_val=
+set res_categ=
+set categ_num=
+set categ_name=
+
+rem РАЗБОР ПАРАМЕТРОВ ЗАПУСКА:
+set echo_res_param_defs="-sh,script_hdr,%g_script_header%;-cm,p_cmd;-rf,res_path,%g_res_file%;-ri,p_res_id;-rv,res_val,~,p_res_val_empty;-rc,res_color,%DEF_RES_COLOR%;-rl,res_categ;-v,p_val_,~,~,values_cnt;-vc,p_val_color;-c,p_val_color_,~,~,colors_cnt;-ln,ln,%VL_TRUE%;-rs,right_shift_cnt,0;-be,before_echo_cnt,0;-ae,after_echo_cnt,0;-lf,log_path,%g_log_file%;-ll,log_lvl,%g_log_level%;-it,ignore_test_exec_mode,%VL_FALSE%;-cp,code_page,1251"
+call :parse_params %~0 %echo_res_param_defs% %*
+rem ошибка разбора определений параметров
+rem if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
+rem вывод справки
+if ERRORLEVEL 1 call :echo_res_help & endlocal & exit /b 0
+if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :print_params %~0
+
+rem При отсутствии заданных значений, устанавливаем по умолчанию
+if not defined log_lvl set log_lvl=%DEF_LOG_LEVEL%
+rem определяем номер категории ресурса
+if defined res_categ (
+	set categ_num=%res_categ:~0,1%
+	set categ_name=%res_categ:~1%
+)
+rem определяем путь и праметры утилиты изменения цвета
+call :chgcolor_setup "%CUR_DIR%"
+exit /b 0
+
+rem ---------------------------------------------
+rem Проверяет установку всех необходимых параметров
+rem и ресурсов скрипта
+rem ---------------------------------------------
+:echo_res_check_setup
+setlocal
+rem КОНТРОЛЬ:
+rem отсутствие ИД ресурса или файла ресурсов
+if not defined p_res_id if not defined res_val if /i "%p_res_val_empty%" NEQ "%VL_TRUE%" (
+	set l_err_msg=ERR -1: Не задано ни ИД ресурса, ни его значение. Укажите, пожалуйста, корректный ИД ресурса или его значение.
+	rem если не только вывод в файл
+	if /i "%categ_name%" NEQ "%CTG_FILE%" (
+		rem ChangeColor 12 0
+		%ChangeColor_12_0%
+		1>nul chcp %code_page% & echo !l_err_msg!
+		call :echo_res_help
+	) else (
+		call :echo_log "%log_path%" "!l_err_msg!" "%categ_num%" "%log_lvl%" "%script_hdr%"
+	)
+	endlocal & exit /b 1
+)
+if defined p_res_id if not exist "%res_path%" (
+	set l_err_msg=ERR -1: Для ресурса [ИД=%p_res_id%] не найден ресурсный файл "%res_path%". Проверьте, пожалуйста, его наличие.
+	rem если не только вывод в файл
+	if /i "%categ_name%" NEQ "%CTG_FILE%" (
+		rem ChangeColor 12 0
+		%ChangeColor_12_0%
+		1>nul chcp %code_page% & echo !l_err_msg!
+		call :echo_res_help
+	) else (
+		call :echo_log "%log_path%" "!l_err_msg!" "%categ_num%" "%log_lvl%" "%script_hdr%"
+	)
+	endlocal & exit /b 1
+)
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Формат запуска утилиты
+rem ---------------------------------------------
+:echo_res_help
+setlocal
+1>nul chcp %code_page%
+echo.
+rem ChangeColor 15 0 
+%ChangeColor_15_0%
+echo Victory BIS: Resource module for Windows 7/10 v.{Current_Version}. {Copyright} {Current_Date}
+rem ChangeColor 8 0 
+%ChangeColor_8_0%
+echo Формат запуска утилиты:
+rem ChangeColor 15 0 
+%ChangeColor_15_0%
+echo %g_script_name% [^<ключи^>...]
+echo.
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo Ключи:
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -sh"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo :заголовок логгируемой программы (не обязательно). Можно в вызывающем сценарии определить переменную g_script_header
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -rf"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo | set /p "dummyName=:путь к файлу ресурсов (не обязательно, "
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+echo | set /p "dummyName=если в вызывающем сценарии определить переменную g_res_file"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo )
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -ri"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo | set /p "dummyName=:идентификатор ресурса (не обязательно, "
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+echo | set /p "dummyName=если указан ключ -rv"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo )
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -rv"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo | set /p "dummyName=:значение ресурса (не обязательно, "
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+echo | set /p "dummyName=если указан ключ -ri"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo )
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -rc"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo :цвет символов выводимого ресурса (не обязательно). Задаётся в шестнадцатиричной системе [08, 09, 0A, 0B, 0C, 0D, 0E, 0F]
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -rl"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo :уровень логгирования ресурса (не обязательно). Возможны следуюшие значения [0FILE - вывод значения ресурса только в файл, 1CON - вывод значения ресурса на экран/в файл, 2ERR - ресурс-ошибка, 3WRN - ресурс-предупреждение, 4INF - ресурс-информация, 5FINE - ресурс-отладка]
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -v1"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo :переменная подстановки 1 (не обязательно) - используется в значении ресурса
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -v2"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo :переменная подстановки 2 (не обязательно) - используется в значении ресурса
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -v3"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo :переменная подстановки 3 (не обязательно) - используется в значении ресурса
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -v4"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo :переменная подстановки 4 (не обязательно) - используется в значении ресурса
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -lf"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo :путь к файлу лога (не обязательно). Можно в вызывающем сценарии определить переменную g_log_file
+rem ChangeColor 11 0
+%ChangeColor_11_0%
+echo | set /p "dummyName=   -ll"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo | set /p "dummyName=:уровень логгирования (по умолчанию "
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+echo | set /p "dummyName=%DEF_LOG_LEVEL%"
+rem ChangeColor 8 0
+%ChangeColor_8_0%
+echo ). Можно в вызывающем сценарии определить переменную g_log_level [0 - сообщения в файл, 1 - сообщения на экран, 2 - ошибки, 3 - предупреждения, 4 - информация, 5 - отладка]
+echo.
+endlocal & exit /b 0
+rem ---------------- EOF echo.cmd ----------------
+rem {Copyright}
+rem {License}
+rem Сценарий работы с параметрами процедур и других сценариев
+
+rem ---------------------------------------------
+rem Разбирает и устанавливает значения переданным 
+rem параметрам в заданной области видимости
+rem ---------------------------------------------
+:parse_params _scope _prm_defs %*
+set _prm_scope=%~1
+set _prm_defs=%~2
+
+call :get_prm_scope "%_prm_scope%"
+
+rem РАЗБОР ОПРЕДЕЛЕНИЙ ПАРАМЕТРОВ:
+rem если ранее определения параметров были разобраны переходим к сбросу параметров и формированию значений
+if defined g_prms[%prm_scope%]#Count goto end_param_defs
+set l_prm_defs=%_prm_defs%
+set "prm=0"
+:param_defs_loop
+for /f "tokens=1* delims=;" %%i in ("%l_prm_defs%") do (
+	rem echo param definition: "%%i"
+	set l_prm_def=%%i
+	for /f "tokens=1-5 delims=," %%a in ("!l_prm_def!") do (
+		rem echo param definition parts: "%%a" "%%b" "%%c" "%%d" "%%e"
+		set l_key=%%~a
+		if not defined l_key set "p_def_prm_err=%VL_TRUE%" & exit /b 2
+		set l_name=%%~b
+		if not defined l_name set "p_def_prm_err=%VL_TRUE%" & exit /b 2
+		set l_def_val=%%~c
+		set l_empty_var=%%~d
+		set l_empty_val=%%~d
+		set l_count_var=%%~e
+		set g_prms[%prm_scope%][!prm!]#Key=!l_key!
+		set g_prms[%prm_scope%][!prm!]#Name=!l_name!
+		set g_prms[%prm_scope%][!prm!]#DefValue=
+		set g_prms[%prm_scope%][!prm!]#EmptyVar=
+		set g_prms[%prm_scope%][!prm!]#EmptyVal=
+		set g_prms[%prm_scope%][!prm!]#CountVar=
+		if defined l_def_val (
+			rem если указано значение по умолчанию только в случае отсутствия параметра
+			if "!l_def_val!" EQU "#" (
+				rem echo not defined: "%%a" "%%b" "%%c" "%%d" "%%e"
+				if defined l_empty_val if "!l_empty_val!" NEQ "~" set g_prms[%prm_scope%][!prm!]#EmptyVal=!l_empty_val!
+			) else (
+				if "!l_def_val!" NEQ "~" set g_prms[%prm_scope%][!prm!]#DefValue=!l_def_val!
+				if defined l_empty_var (
+					if "!l_empty_var!" NEQ "~" set g_prms[%prm_scope%][!prm!]#EmptyVar=!l_empty_var!
+					if defined l_count_var if "!l_count_var!" NEQ "~" set g_prms[%prm_scope%][!prm!]#CountVar=!l_count_var!
+				)
+			)
+		)
+		set g_prms[%prm_scope%][!prm!]#Count=1
+		set /a "prm+=1"
+	)
+	set l_prm_defs=%%j
+)
+if defined l_prm_defs goto :param_defs_loop
+set /a "g_prms[%prm_scope%]#Count=%prm%-1"
+
+:end_param_defs
+rem СБРОС ПАРАМЕТРОВ:
+for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
+	rem echo reset: "!g_prms[%prm_scope%][%%n]#Key!" "!g_prms[%prm_scope%][%%n]#Name!" "!g_prms[%prm_scope%][%%n]#DefValue!"
+	if defined !g_prms[%prm_scope%][%%n]#CountVar! (
+		for /l %%i in (1,1,!g_prms[%prm_scope%][%%n]#Count!) do (
+			set !g_prms[%prm_scope%][%%n]#Name!%%i=
+			set g_prms[%prm_scope%][%%n]#Value%%i=
+		)
+		set !g_prms[%prm_scope%][%%n]#CountVar!=
+		set g_prms[%prm_scope%][%%n]#Count=1
+	) else if defined !g_prms[%prm_scope%][%%n]#Name! (
+		rem если параметр определён,
+		if not defined g_prms[%prm_scope%][%%n]#EmptyVal (
+			rem то сбрасываем его только если не задано значение для не определённого параметра
+			rem echo reset if not empty value: "!g_prms[%prm_scope%][%%n]#Name!"
+			set !g_prms[%prm_scope%][%%n]#Name!=
+			set g_prms[%prm_scope%][%%n]#Value=
+		)
+	)
+)
+rem УСТАНОВКА ЗНАЧЕНИЙ ПО УМОЛЧАНИЮ: без контроля определения параметров
+for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
+	rem если указано значение по умолчанию
+	if defined g_prms[%prm_scope%][%%n]#DefValue (
+		rem echo set default value: !g_prms[%prm_scope%][%%n]#Name!=!g_prms[%prm_scope%][%%n]#DefValue!
+		set !g_prms[%prm_scope%][%%n]#Name!=!g_prms[%prm_scope%][%%n]#DefValue!
+		set g_prms[%prm_scope%][%%n]#Value=!g_prms[%prm_scope%][%%n]#DefValue!
+	)
+)
+rem ОПРЕДЕЛЕНИЕ ЗНАЧЕНИЙ ПАРАМЕТРОВ:
+rem переходим к аргументам-значениям параметров
+shift
+shift
+:start_params_parse
+set p_prm=%~1
+set p_key=%p_prm:~0,3%
+set p_val=%p_prm:~4%
+set p_val=%p_val:"=%
+
+if [%p_prm%] EQU [] goto end_params_parse
+
+rem разбор параметров вывода справки
+if [%p_prm%] EQU [/?] set "p_key_help=%VL_TRUE%" & exit /b 1
+if /i [%p_prm%] EQU [--help] set "p_key_help=%VL_TRUE%" & exit /b 1
+
+rem echo params key=value: %p_key%=%p_val%
+for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
+	rem разбор перечисляемых параметров
+	if "!g_prms[%prm_scope%][%%n]#Key:~0,2!" EQU "!g_prms[%prm_scope%][%%n]#Key:~0,3!" (
+		if "!g_prms[%prm_scope%][%%n]#CountVar!" NEQ "" (
+			rem если полное совпадение ключа
+			rem echo if /i "%p_key%" EQU "!g_prms[%prm_scope%][%%n]#Key!!g_prms[%prm_scope%][%%n]#Count!" 
+			if /i "%p_key%" EQU "!g_prms[%prm_scope%][%%n]#Key!!g_prms[%prm_scope%][%%n]#Count!" (
+				set !g_prms[%prm_scope%][%%n]#Name!!g_prms[%prm_scope%][%%n]#Count!=%p_val%
+				set g_prms[%prm_scope%][%%n]#Value!g_prms[%prm_scope%][%%n]#Count!=%p_val%
+				set !g_prms[%prm_scope%][%%n]#CountVar!=!g_prms[%prm_scope%][%%n]#Count!
+				set /a "g_prms[%prm_scope%][%%n]#Count+=1"
+			) else (
+				rem проверка неполного совпадения ключа
+				set half_key=%p_key:~0,2%
+				set key_num=%p_key:~2%
+				if /i "!half_key!" EQU "!g_prms[%prm_scope%][%%n]#Key!" (
+					set "l_check_key_num="&for /f "delims=0123456789" %%i in ("!key_num!") do set l_check_key_num=%%i
+					if not defined l_check_key_num (
+						if !key_num! GTR !g_prms[%prm_scope%][%%n]#Count! (
+							set g_prms[%prm_scope%][%%n]#Count=!key_num!
+							set !g_prms[%prm_scope%][%%n]#Name!!g_prms[%prm_scope%][%%n]#Count!=%p_val%
+							set g_prms[%prm_scope%][%%n]#Value!g_prms[%prm_scope%][%%n]#Count!=%p_val%
+							set !g_prms[%prm_scope%][%%n]#CountVar!=!g_prms[%prm_scope%][%%n]#Count!
+							set /a "g_prms[%prm_scope%][%%n]#Count+=1"
+						)	
+					)
+				)
+			)
+		)
+	) else if /i "%p_key%" EQU "!g_prms[%prm_scope%][%%n]#Key!" (
+		rem разбор одиночных параметров
+		if defined p_val (
+			rem если указано значение для не определённого параметра
+			if defined g_prms[%prm_scope%][%%n]#EmptyVal (
+				rem то устанавливаем заднное значение, только если он не определён
+				if not defined !g_prms[%prm_scope%][%%n]#Name! (
+					rem echo undefined param set value: !g_prms[%prm_scope%][%%n]#Name!=%p_val%
+					set !g_prms[%prm_scope%][%%n]#Name!=%p_val%
+					set g_prms[%prm_scope%][%%n]#Value=%p_val%
+				)
+			) else (
+				set !g_prms[%prm_scope%][%%n]#Name!=%p_val%
+				set g_prms[%prm_scope%][%%n]#Value=%p_val%
+			)
+		) else (
+			rem установка признака пустого значения
+			if "!g_prms[%prm_scope%][%%n]#EmptyVar!" NEQ "" set !g_prms[%prm_scope%][%%n]#EmptyVar!=true
+		)
+	)
+)
+shift
+goto start_params_parse
+:end_params_parse
+rem УСТАНОВКА ЗНАЧЕНИЙ ПО УМОЛЧАНИЮ: с контролем определения параметров
+for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
+	rem устанавливаем значение только, если задано значение для не определённого параметра и он не определён
+	if defined g_prms[%prm_scope%][%%n]#EmptyVal if not defined !g_prms[%prm_scope%][%%n]#Name! (
+		rem echo set empty value: !g_prms[%prm_scope%][%%n]#Name!=!g_prms[%prm_scope%][%%n]#EmptyVal!
+		set !g_prms[%prm_scope%][%%n]#Name!=!g_prms[%prm_scope%][%%n]#EmptyVal!
+		set g_prms[%prm_scope%][%%n]#Value=!g_prms[%prm_scope%][%%n]#EmptyVal!
+	)
+)
+exit /b 0
+
+rem ---------------------------------------------
+rem Печатает параметры и их значения, в т.ч.
+rem значения по умолчанию
+rem ---------------------------------------------
+:print_params _scope
+setlocal
+set _prm_scope=%~1
+call :get_prm_scope "%_prm_scope%"
+
+for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
+	set l_start_symb=
+	set l_end_bracket=
+	if "!g_prms[%prm_scope%][%%n]#CountVar!" NEQ "" (
+		for /l %%k in (1,1,!g_prms[%prm_scope%][%%n]#Count!) do (
+			if defined !g_prms[%prm_scope%][%%n]#Name!%%k echo %prm_scope%: !g_prms[%prm_scope%][%%n]#Name!%%k=!g_prms[%prm_scope%][%%n]#Value%%k!
+		)
+	) else if defined !g_prms[%prm_scope%][%%n]#Name! (
+				rem для вывода круглых скобок echo должны быть на отдельных строках
+				echo | set /p "dummyName=%prm_scope%: !g_prms[%prm_scope%][%%n]#Name!=!g_prms[%prm_scope%][%%n]#Value! "
+				set l_start_symb=^(
+				if defined g_prms[%prm_scope%][%%n]#DefValue (
+					echo | set /p "dummyName=!l_start_symb!!g_prms[%prm_scope%][%%n]#DefValue!"
+					set "l_start_symb=,"
+					set l_end_bracket=^)
+				) else if defined g_prms[%prm_scope%][%%n]#EmptyVal (
+					echo | set /p "dummyName=!l_start_symb!#!g_prms[%prm_scope%][%%n]#EmptyVal!"
+					set "l_start_symb=,"
+					set l_end_bracket=^)
+				)
+				if defined g_prms[%prm_scope%][%%n]#EmptyVar (
+					echo | set /p "dummyName=!l_start_symb!!g_prms[%prm_scope%][%%n]#EmptyVar!"
+					set l_end_bracket=^)
+				)
+				if defined l_end_bracket (
+					echo !l_end_bracket!
+				) else (
+					echo.
+				)
+			)
+)
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Возвращает нормированный идентификатор области 
+rem видимости параметров
+rem ---------------------------------------------
+:get_prm_scope _scope
+setlocal
+set _proc_name=%~0
+set _prm_scope=%~1
+rem если область видимости процедура
+if "%_prm_scope:~0,1%" EQU ":" (
+	set l_prm_scope=%_prm_scope:~1%
+) else if exist "%_prm_scope%" (
+	rem если область видимости сценарий
+	for /f %%i in ("%_prm_scope%") do set l_prm_scope=%%~ni
+)
+endlocal & set %_proc_name:~5%=%l_prm_scope%
+exit /b 0
+rem ---------------- EOF params.cmd ----------------
+@Echo Off
+rem {Copyright}
+rem {License}
+rem Сценарий работы с параметрами реестра
+rem (доступ к переменным окружения)
+
+rem ---------------------------------------------
+rem Обеспечивает работу с параметрами реестра
+rem ---------------------------------------------
+:reg %*
+setlocal
+set _proc_name=%~0
+rem Устанавливаем все необходимые параметры и ресурсы для работы скрипта, и проверяем их корректность
+call :reg_setup %*
+call :reg_check_setup
+if ERRORLEVEL 1 endlocal & exit /b 1
+
+rem получение значения параметра реестра
+if /i "%oper_code%" NEQ "%RC_GET%" goto reg_not_get_cmd
+
+call :get_reg_value "%oper_code%" "%key_name%" "%value_name%" 
+if "%reg_value%" EQU "" call :echo -ri:RegQueryError -v1:"%value_name%" -rl:5FILE & endlocal & exit /b 1
+call :echo -ri:RegGet -v1:"%key_name%" -v2:"%value_name%" -v3:"%reg_value%" -rl:5FILE
+
+endlocal & set "%_proc_name:~1%=%reg_value%"
+exit /b 0
+
+:reg_not_get_cmd
+rem установка значения параметра реестра
+if /i "%oper_code%" EQU "%RC_SET%" (
+	call :get_reg_value "%oper_code%" "%key_name%" "%value_name%" 
+	if /i "!reg_value!" NEQ "%value_value%" (
+		rem разбор куста
+		if /i "%key_name%" EQU "%RH_HKLM%" (
+			1>nul setx.exe %value_name% "%value_value%" /M
+		) else (
+			1>nul setx.exe %value_name% "%value_value%"
+		)
+		call :echo -ri:RegSet -v1:"%key_name%" -v2:"%value_name%" -v3:"%value_value%" -rl:5FILE
+	)
+	endlocal & exit /b 0
+)
+rem добавление значения параметра реестра
+if /i "%oper_code%" EQU "%RC_ADD%" (
+	call :get_reg_value "%oper_code%" "%key_name%" "%value_name%" 
+	set $check_value=!reg_value:%value_value%=!
+	if /i "!$check_value!" EQU "!reg_value!" (
+		if "!reg_value:~-1!"==";" set reg_value=!reg_value:~0,-1!
+		rem разбор куста
+		if /i "%key_name%" EQU "%RH_HKLM%" (
+			1>nul setx.exe %value_name% "!reg_value!;%value_value%" /M
+		) else (
+			1>nul setx.exe %value_name% "!reg_value!;%value_value%"
+		)
+		call :echo -ri:RegAdd -v1:"%key_name%" -v2:"%value_name%" -v3:"%value_value%" -v4:"!reg_value!;%value_value%" -rl:5FILE
+	)
+	endlocal & exit /b 0
+)
+rem удаление параметра реестра или его значения
+if /i "%oper_code%" EQU "%RC_DEL%" (
+	rem Если удаляемое значение задано
+	if "%value_value%" NEQ "" (
+		call :get_reg_value "%oper_code%" "%key_name%" "%value_name%" 
+		set new_value=!reg_value:;%value_value%=!
+		set new_value=!new_value:%value_value%;=!
+		set new_value=!new_value:%value_value%=!
+		if /i "!new_value!" NEQ "!reg_value!" (
+			rem разбор куста
+			if /i "%key_name%" EQU "%RH_HKLM%" (
+				1>nul setx.exe %value_name% "!new_value!" /M
+			) else (
+				1>nul setx.exe %value_name% "!new_value!"
+			)
+		)
+		call :echo -ri:RegDelVal -v1:"%key_name%" -v2:"%value_name%" -v3:"%value_value%" -v4:"!new_value!" -rl:5FILE
+	) else (
+		rem разбор куста
+		if /i "%key_name%" EQU "%RH_HKLM%" (
+			1>nul REG delete %HKLM% /F /V %value_name%
+		) else (
+			1>nul REG delete %HKCU% /F /V %value_name%
+		)
+		call :echo -ri:RegDel -v1:"%key_name%" -v2:"%value_name%" -rl:5FILE
+	)
+	endlocal & exit /b 0
+)
+
+call :echo -ri:RegOperUndefError -v1:"%oper_code%"
+endlocal & exit /b 1
+
+rem ---------------------------------------------
+rem Возвращает значение заданной переменной реестра
+rem ---------------------------------------------
+:get_reg_value
+setlocal
+set _proc_name=%~0
+set _oper_code=%~1
+set _key_name=%~2
+set _value_name=%~3
+
+call :reg_setup_globals
+rem Если задан куст HKLM, то читаем из него
+if /i "%_key_name%" EQU "%RH_HKLM%" (
+	FOR /F "usebackq tokens=1,2*" %%A IN (`REG QUERY %HKLM% /v %_value_name% 2^>nul ^| findstr /i %_value_name% 2^>nul`) do set l_value=%%C
+) else if /i "%_key_name%" EQU "%RH_HKCU%" (
+	rem Получаем значение переменной окружения (сначала из куста HKCU)
+	FOR /F "usebackq tokens=1,2*" %%A IN (`REG QUERY %HKCU% /v %_value_name% 2^>nul ^| findstr /i %_value_name% 2^>nul`) do set l_value=%%C
+	rem Если не получилось, то
+	if "!l_value!" EQU "" (
+		rem только в случае получения значения переменной окружения, пробуем получить из ветки HKLM 
+		if /i "%_oper_code%" EQU "%RC_GET%" (
+			FOR /F "usebackq tokens=1,2*" %%A IN (`REG QUERY %HKLM% /v %_value_name% 2^>nul ^| findstr /i %_value_name% 2^>nul`) do set l_value=%%C
+		)
+	)
+) else (
+	rem если не HKLM и не HKCU
+	FOR /F "usebackq tokens=1,2*" %%A IN (`REG QUERY %_key_name% /v %_value_name% 2^>nul ^| findstr /i %_value_name% 2^>nul`) do set l_value=%%C
+)
+endlocal & set %_proc_name:~5%=%l_value%
+exit /b 0
+
+rem ---------------------------------------------
+rem Устанавливает все необходимые глобальные переменные
+rem ---------------------------------------------
+:reg_setup_globals
+rem ветки переменных окружения
+set HKLM="HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+set HKCU="HKCU\Environment"
+exit /b 0
+
+rem ---------------------------------------------
+rem Устанавливает все необходимые параметры
+rem и ресурсы для работы скрипта
+rem ---------------------------------------------
+:reg_setup %*
+call :reg_setup_globals
+
+rem РАЗБОР ПАРАМЕТРОВ ЗАПУСКА:
+rem если не указан куст, задаём ветку переменных окружения пользователя
+set reg_param_defs="-oc,oper_code;-vn,value_name;-vv,value_value;-kn,key_name,%RH_HKCU%"
+call :parse_params %~0 %reg_param_defs% %*
+rem ошибка разбора определений параметров
+if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
+rem вывод справки
+if ERRORLEVEL 1 call :reg_help & endlocal & exit /b 0
+rem call :print_params %~0
+exit /b 0
+
+rem ---------------------------------------------
+rem Проверяет установку всех необходимых параметров
+rem и ресурсов скрипта
+rem ---------------------------------------------
+:reg_check_setup
+setlocal
+rem КОНТРОЛЬ:
+rem отсутствие операции с параметром реестра
+if "%oper_code%" EQU "" call :echo -ri:RegOperParamError -v1:"%value_name%" & call :reg_help & endlocal & exit /b 1
+
+rem отсутствие имени параметра реестра
+if "%value_name%" EQU "" call :reg_help & endlocal & exit /b 1
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Формат запуска утилиты
+rem ---------------------------------------------
+:reg_help
+echo. 1>&2
+echo Victory BIS. Registry edit module for Windows 7 v.{Current_Version}. {Copyright}  {Current_Date} 1>&2
+echo Формат запуска утилиты: 1>&2
+echo %~nx0 [^<ключи^>...] 1>&2
+echo Ключи: 1>&2
+echo 	-oc:код_операции (^<help-помощь^|get-получить^|set-установить^|add-добавить^|del-удалить^>) 1>&2
+echo 	-vn:имя_переменной_окружения 1>&2
+echo 	-vv:значение_переменной_окружения (обязательно для операций set, add; опционально для del) 1>&2
+echo 	-kn:куст [HKLM-на системном уровне^|HKCU-на уровне пользователя] (по умолчанию используется HKCU) 1>&2
+exit /b 0
+rem ---------------- EOF registry.cmd ----------------
+rem {Copyright}
+rem {License}
+rem Сценарий работы с параметрами процедур и других сценариев
+
+rem ---------------------------------------------
+rem Удаляет ведущие и конечные пробелы
+rem ---------------------------------------------
+:trim
+SET %2=%1
+GOTO :EOF
+
+rem ---------------------------------------------
+rem Конвертирует слеши в обратные слеши и наоборот
+rem согдасно заданному направлению (win|nix)
+rem необходимо для некоторых windows-команд
+rem ---------------------------------------------
+:convert_slashes
+setlocal
+set _direction=%~1
+set _var=%~2
+
+if /i "%_direction%" EQU "%CSD_WIN%" (
+	set _var=!_var:/=\!
+) else (
+	if /i "%_direction%" EQU "%CSD_NIX%" set _var=!_var:\=/!
+)
+endlocal & set "%3=%_var%"
+exit /b 0
+
+rem ---------------------------------------------
+rem Возвращает длину строки
+rem ---------------------------------------------
+:len
+setlocal enabledelayedexpansion&set l=0&set str=%~1
+:len_loop
+set x=!str:~%l%,1!&if not defined x (endlocal&set "%~2=%l%"&exit /b 0)
+set /a l+=1&goto :len_loop
+
+rem ---------------------------------------------
+rem Конвертирует регистр (верхний/нижний) символов 
+rem строки
+rem ---------------------------------------------
+:convert_case _case_mark _src_str conv_str
+setlocal
+Set _case_mark=%~1
+Set _src_str=%~2
+
+if /i "%_case_mark%" EQU "%CM_UPPER%" (
+	CALL :UCase "%_src_str%"
+	call :echo -ri:CaseConvert -v1:"%_src_str%" -v2:"%_case_mark%" -v3:"!UCase!"
+	set l_conv_str=!UCase!
+) else if /i "%_case_mark%" EQU "%CM_LOWER%" (
+	CALL :LCase "%_src_str%"
+	call :echo -ri:CaseConvert -v1:"%_src_str%" -v2:"%_case_mark%" -v3:"!LCase!"
+	set l_conv_str=!LCase!
+) else (
+	call :echo -ri:CaseMarkUndefError
+	rem call :exec_format & endlocal & exit /b 1
+)
+endlocal & set "%3=%l_conv_str%"
+exit /b 0
+
+rem ---------------------------------------------
+rem Конвертирует регистр первого символа слова
+rem в прописной
+rem ---------------------------------------------
+:capital_case _src_str conv_str
+setlocal
+Set _src_str=%~1
+
+endlocal & set "%2=%l_conv_str%"
+exit /b 0
+
+rem ==========================================================================
+rem Функции LCase() и UCase()
+rem http://www.robvanderwoude.com/battech_convertcase.php
+rem ==========================================================================
+:LCase
+:UCase
+:: Converts to upper/lower case variable contents
+:: Syntax: CALL :UCase _VAR1 _VAR2
+:: Syntax: CALL :LCase _VAR1 _VAR2
+:: _VAR1 = Variable NAME whose VALUE is to be converted to upper/lower case
+:: _VAR2 = NAME of variable to hold the converted value
+:: Note: Use variable NAMES in the CALL, not values (pass "by reference")
+    setlocal enableextensions enabledelayedexpansion
+
+	SET _UCase=A B C D E F G H I J K L M N O P Q R S T U V W X Y Z А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я
+	SET _LCase=a b c d e f g h i j k l m n o p q r s t u v w x y z а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я
+	SET _Lib_UCase_Tmp=%~1
+	IF /I "%~0"==":UCase" SET _Abet=%_UCase%
+	IF /I "%~0"==":LCase" SET _Abet=%_LCase%
+	FOR %%Z IN (%_Abet%) DO SET _Lib_UCase_Tmp=!_Lib_UCase_Tmp:%%Z=%%Z!
+	set sProcName=%~0
+    	endlocal & set %sProcName:~1%=%_Lib_UCase_Tmp%
+	rem SET %2=%_Lib_UCase_Tmp%
+exit /b 0
+
+rem ---------------- EOF strings.cmd ----------------
+rem {Copyright}
+rem {License}
+rem Сценарий системных утилит
+
+rem ---------------------------------------------
+rem Возвращает архитектуру процессора (x86|x64)
+rem ---------------------------------------------
+:get_proc_arch
+setlocal
+set _proc_name=%~0
+
+rem Определяем разрядность системы (http://social.technet.microsoft.com/Forums/windowsserver/en-US/cd44d6d3-bdfa-4970-b7db-e3ee746d6213/determine-%PA_X86%-or-%PA_X64%-from-registry?forum=winserverManagement)
+call :reg -oc:%RC_GET% -vn:PROCESSOR_ARCHITECTURE
+if "%reg%" EQU "" call :echo -ri:ProcArchAutoDefError -rl:0FILE & exit /b 1
+
+rem http://social.msdn.microsoft.com/Forums/en-US/5a316848-1ec3-4d01-a395-7c5b17756239/determining-current-cpu-architecture-x32-or-%PA_X64%
+if "%reg%" EQU "%PA_X86%" (set l_proc_arch=%reg%) else (set l_proc_arch=%PA_X64%)
+endlocal & set "%_proc_name:~5%=%l_proc_arch%"
+exit /b 0
+
+rem ---------------------------------------------
+rem Возвращает локаль системы (ru|en|...)
+rem ---------------------------------------------
+:get_locale
+setlocal
+set _proc_name=%~0
+FOR /F "delims==" %%A IN ('systeminfo.exe ^|  findstr ";"') do  (
+	FOR /F "usebackq tokens=2-3 delims=:;" %%B in (`echo %%A`) do (
+		set VERBOSE_SYSTEM_LOCALE=%%C
+		REM Removing useless leading spaces ...
+		FOR /F "usebackq tokens=1 delims= " %%D in (`echo %%B`) do (
+			set SYSTEM_LOCALE=%%D
+			goto :locale_get_success
+		)
+		rem set SYSTEM_LOCALE_WITH_SEMICOLON=!SYSTEM_LOCALE!;
+		rem set | findstr /I locale
+		REM No need to handle second line, quit after first one
+	)
+)
+endlocal & exit /b 1
+
+:locale_get_success
+endlocal & set "%_proc_name:~5%=%SYSTEM_LOCALE%"
+exit /b 0
+
+rem ---------------------------------------------
+rem Возвращает текущую дату или время в формате ISO
+rem http://ss64.com/nt/syntax-getdate.html
+rem ---------------------------------------------
+:get_iso_date
+setlocal
+set _proc_name=%~0
+set _date_format=%~1
+
+if "%_date_format%" EQU "" endlocal & exit /b 1
+
+:: Check WMIC is available
+WMIC.EXE Alias /? >NUL 2>&1 || (endlocal & exit /b 1)
+
+:: Use WMIC to retrieve date and time
+FOR /F "skip=1 tokens=1-6" %%G IN ('WMIC Path Win32_LocalTime Get Day^,Hour^,Minute^,Month^,Second^,Year /Format:table') DO (
+	IF "%%~L"=="" goto s_done
+	Set _yyyy=%%L
+	Set _mm=00%%J
+	Set _dd=00%%G
+	Set _hour=00%%H
+	SET _minute=00%%I
+)
+:s_done
+
+:: Pad digits with leading zeros
+Set _mm=%_mm:~-2%
+Set _dd=%_dd:~-2%
+Set _hour=%_hour:~-2%
+Set _minute=%_minute:~-2%
+
+:: Display the date/time in ISO 8601 format:
+if "%_date_format%" EQU "%DF_DATE_TIME%" Set l_isodate=%_yyyy%-%_mm%-%_dd% %_hour%:%_minute%
+if "%_date_format%" EQU "%DF_DATE_CODE%" Set l_isodate=%_yyyy%%_mm%%_dd%
+if "%_date_format%" EQU "%DF_DATE%" Set l_isodate=%_yyyy%-%_mm%-%_dd%
+if "%_date_format%" EQU "%DF_TIME%" Set l_isodate=%_hour%:%_minute%
+
+rem :get_date_error
+	rem Echo Ошибка формирования текущей даты. 1>&2
+
+endlocal & set "%_proc_name:~5%=%l_isodate%"
+exit /b 0
+
+rem ---------------------------------------------
+rem Выводит наименование неявной цели выполнения
+rem ---------------------------------------------
+:print_exec_name
+setlocal
+set _proc_name=%~1
+
+call :get_exec_name %_proc_name%
+set $exec=%_proc_name:goal=%
+if /i "%$exec%" NEQ "%_proc_name%" (
+	call :echo -ri:ExecGoal -v1:"%exec_name%" -ae:1
+) else (
+	call :echo -ri:ExecPhaseId -v1:"%exec_name%" -ae:1
+)
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Возвращает наименование этапа выполнения фазы/цели
+rem (по наименованию процедуры)
+rem ---------------------------------------------
+:get_exec_name
+setlocal
+set _exec_name=%~0
+set _proc_name=%~1
+
+set $exec=%_proc_name:goal=%
+if /i "%$exec%" NEQ "%_proc_name%" (
+	set l_exec_name=%_proc_name:~6%
+) else (
+	set $exec=%_proc_name:phase=%
+	if /i "!$exec!" NEQ "%_proc_name%" (
+		set l_exec_name=%_proc_name:~7%
+	) else (
+		set l_exec_name=%_proc_name:~5%
+	)
+)
+set l_exec_name=%l_exec_name:_=-%
+endlocal & set %_exec_name:~5%=%l_exec_name%
+exit /b 0
+
+rem ---------------------------------------------
+rem Запрашивает подтверждение выполнения процесса
+rem ---------------------------------------------
+:choice_process
+setlocal
+set _proc_name=%~0
+set _exec_name=%~1
+set _res_id=%~2
+set _delay=%~3
+set _def_choice=%~4
+set _res_val=%~5
+set _choice=%~6
+
+if not defined _res_id if not defined _res_val set _res_id=ProcessingChoice
+if not defined _delay set _delay=%DEF_DELAY%
+if not defined _def_choice set _def_choice=Y
+if not defined _choice set _choice=%YN_CHOICE%
+
+if defined _exec_name (
+	set l_exec_name=%_exec_name:~0,1%
+	if "%l_exec_name%" EQU ":" (
+		call :get_exec_name "%l_exec_name%"
+	) else (
+		set exec_name=%_exec_name%
+	)
+)
+if defined _res_id (
+	call :get_res_val -rf:"%menus_file%" -ri:%_res_id% -v1:%_delay% -v2:"%exec_name%"
+) else (
+	set res_val=%_res_val%
+)
+rem ChangeColor 15 0
+%ChangeColor_15_0%
+1>nul chcp 1251
+Choice /C %_choice% /T %_delay% /D %_def_choice% /M "%res_val%"
+set l_result=%ERRORLEVEL%
+rem echo l_result="%l_result%"
+endlocal & (set "%_proc_name:~8%=%exec_name%" & set "%_proc_name:~1,6%=%l_result%" & exit /b %l_result%)
+
+rem ---------------- EOF utils.cmd ----------------
+

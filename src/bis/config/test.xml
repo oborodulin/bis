@@ -11,11 +11,11 @@
     </proxy>
     <os>
         <windows>
-            <setupDir>D:\Programs/${package.name}</setupDir>
-            <distribDir>${bisdir}/distrib/${package.name}</distribDir>
-            <backupDataDir>${bisdir}/backup/data/${package.name}</backupDataDir>
-            <backupConfigDir>${bisdir}/backup/config/${package.name}</backupConfigDir>
-            <logDir>${bisdir}/logs/${package.name}</logDir>
+            <setupDir>D:\Programs/${pkg.name}</setupDir>
+            <distribDir>${bisdir}/distrib/${pkg.name}</distribDir>
+            <backupDataDir>${bisdir}/backup/data/${pkg.name}</backupDataDir>
+            <backupConfigDir>${bisdir}/backup/config/${pkg.name}</backupConfigDir>
+            <logDir>${bisdir}/logs/${pkg.name}</logDir>
             <modules>
                 <module>
                     <name>test-module1</name>
@@ -44,14 +44,14 @@
                                 <goal>unpack-zip</goal>
                             </goals>
                             <configuration>
-                                <modSetupDir>${setupdir}/test-module1</modSetupDir>
+                                <modSetupDir>${pkg.setupdir}/test-module1</modSetupDir>
                                 <modBinDirs>
-                                       <directory>${modsetupdir}/bin1</directory>
-                                       <directory>${modsetupdir}/bin2</directory>
+                                       <directory>${mod.setupdir}/bin1</directory>
+                                       <directory>${mod.setupdir}/bin2</directory>
                                 </modBinDirs>
 				<modHomeDir>
 					<envVar>BIS_TEST_HOME</envVar>
-					<directory>${modsetupdir}</directory>
+					<directory>${mod.setupdir}</directory>
 				</modHomeDir>
                     </configuration>
                         </execution>
@@ -65,27 +65,27 @@
                                 <commands>
                                     <copy>
                                        <source>
-                                           <directory>${modsetupdir}</directory>
+                                           <directory>${mod.setupdir}</directory>
                                            <includes>
                                                <include>php.ini-development</include>
                                            </includes>
                                        </source>
                                        <destination>
-                                           <directory>${modsetupdir}</directory>
+                                           <directory>${mod.setupdir}</directory>
                                            <includes>
                                                <include>php.ini</include>
                                            </includes>
                                        </destination>
                                     </copy>
                                     <md>
-                                       <directory>${modsetupdir}/includes</directory>
-                                       <directory>${modsetupdir}/upload</directory>
-                                       <directory>${modsetupdir}/tmp</directory>
+                                       <directory>${mod.setupdir}/includes</directory>
+                                       <directory>${mod.setupdir}/upload</directory>
+                                       <directory>${mod.setupdir}/tmp</directory>
                                     </md>
                                 </commands>
                                 <configFiles>
                                     <configFile>
-                                        <name>${modsetupdir}/php.ini</name>
+                                        <name>${mod.setupdir}/php.ini</name>
                                         <comment>;</comment>
                                         <parameters>
                                             <param>
@@ -225,27 +225,27 @@
                                             <param>
                                                 <after>[PHP]</after>
                                                 <name>include_path</name>
-                                                <value>".;${modsetupdir}/includes"</value>
+                                                <value>".;${mod.setupdir}/includes"</value>
                                                 <description>Список директорий, в которых выполняется поиск файлов функциями Include, Fopen, File, Readfile и File_get_contents</description>
 														<entry>2</entry>
                                             </param>
                                             <param>
                                                 <after>[PHP]</after>
                                                 <name>extension_dir</name>
-                                                <value>"${modsetupdir}/ext"</value>
+                                                <value>"${mod.setupdir}/ext"</value>
                                                 <description>Расположение DLL-файлов расширений</description>
 														<entry>2</entry>
                                             </param>
                                             <param>
                                                 <after>[PHP]</after>
                                                 <name>upload_tmp_dir</name>
-                                                <value>"${modsetupdir}/upload"</value>
+                                                <value>"${mod.setupdir}/upload"</value>
                                                 <description>Директория, в которую будут помещаться временные загружаемые файлы</description>
                                             </param>
                                             <param>
                                                 <after>[PHP]</after>
                                                 <name>session.save_path</name>
-                                                <value>"${modsetupdir}/tmp"</value>
+                                                <value>"${mod.setupdir}/tmp"</value>
                                                 <description>Определяет аргумент, который передается в обработчик сохранения</description>
 														<entry>2</entry>
                                             </param>
