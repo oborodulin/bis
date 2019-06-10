@@ -3,6 +3,15 @@ rem {License}
 rem Сценарий системных утилит
 
 rem ---------------------------------------------
+rem Возвращает признак наличия прав администратора
+rem (ERRORLEVEL=0 - права есть, ERRORLEVEL=1 - прав нет)
+rem https://stackoverflow.com/questions/4051883/batch-script-how-to-check-for-admin-rights
+rem ---------------------------------------------
+:check_permissions
+net session >nul 2>&1
+exit /b %ERRORLEVEL%
+
+rem ---------------------------------------------
 rem Возвращает архитектуру процессора (x86|x64)
 rem ---------------------------------------------
 :get_proc_arch

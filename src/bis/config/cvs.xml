@@ -4,11 +4,6 @@
     <description>Системы контроля версий</description>
     <useLog>true</useLog>
     <logLevel>5</logLevel>
-    <proxy>
-        <host>proxyakhz.duk.root.local:3128</host>
-        <login>ak.o.borodulin</login>
-        <password>vavilon_61</password>
-    </proxy>
     <os>
         <windows>
 			<setupDir>C:/Dev/${pkg.name}</setupDir>

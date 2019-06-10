@@ -4,14 +4,9 @@
     <description>Инструментарий для разработки на Java</description>
     <useLog>true</useLog>
     <logLevel>5</logLevel>
-    <proxy>
-        <host>proxyakhz.duk.root.local:3128</host>
-        <login>ak.o.borodulin</login>
-        <password>vavilon_61</password>
-    </proxy>
     <os>
         <windows>
-			<setupDir>${env.programfiles}/${pkg.name}</setupDir>
+			<setupDir>${env.programfiles}</setupDir>
             <modules>
                 <module>
                     <name>openjdk</name>
@@ -34,9 +29,10 @@
                             <phase>install</phase>
                             <goals>
                                 <goal>unpack-zip</goal>
+								<goal>cmd-shell</goal>
                             </goals>
                             <configuration>
-                                <modSetupDir>${pkg.setupdir}/jdk-${mod.version}</modSetupDir>
+                                <modSetupDir>${pkg.setupdir}/${pkg.name}/jdk-${mod.version}</modSetupDir>
 								<modBinDirs>
 									<directory>${mod.setupdir}/bin</directory>
 								</modBinDirs>
@@ -44,6 +40,19 @@
 									<envVar>JAVA_HOME</envVar>
 									<directory>${mod.setupdir}</directory>
 								</modHomeDir>
+								<commands>
+									<move>
+										<source>
+											<directory>${mod.setupdir}/jdk-${mod.version}</directory>
+											<includes>
+												<include>*</include>
+											</includes>
+										</source>
+										<destination>
+											<directory>${mod.setupdir}</directory>
+										</destination>
+									</move>
+								</commands>
                             </configuration>
                         </execution>
                     </executions>
