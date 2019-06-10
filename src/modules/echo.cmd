@@ -23,7 +23,7 @@ call :echo_res_setup %*
 call :echo_res_check_setup
 if ERRORLEVEL 1 endlocal & exit /b 1
 
-if defined p_cmd if /i "%p_cmd%" EQU "GET" call :get_res_val & echo !res_val! & endlocal & exit /b %ERRORLEVEL%
+if defined p_cmd if /i "%p_cmd%" EQU "GET" call :get_res_val & echo !res_val! & endlocal & exit /b !ERRORLEVEL!
 rem echo "%script_hdr%" "%res_path%" "%p_res_id%"
 
 rem если передано значение ресурса

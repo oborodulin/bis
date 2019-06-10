@@ -44,7 +44,7 @@ rem если параметров логгирования нет у пакета, то устанавливаем системные
 if not defined use_log set use_log=%p_use_log%
 if not defined g_log_level set g_log_level=%p_log_level%
 
-call :echo -rv:"%g_pkg_cfg_file% %g_pkg_name% %g_pkg_descr% %use_log% %g_log_level%" -rl:5FINE
+call :echo -rv:"%~0: g_pkg_cfg_file=%g_pkg_cfg_file%; g_pkg_name=%g_pkg_name%; g_pkg_descr=%g_pkg_descr%; use_log=%use_log%; g_log_level=%g_log_level%" -rl:5FINE
 
 rem определяем общий каталог установки
 call :get_pkg_dirs "%g_pkg_name%"
@@ -65,7 +65,7 @@ if ERRORLEVEL 2 goto pkg_menu_loop
 rem "Выход"
 if ERRORLEVEL 1 endlocal & exit /b 0
 
-call :echo -rv:"%g_mod_name% %g_mod_ver%" -rl:5FINE
+call :echo -rv:"%~0: g_mod_name=%g_mod_name%; g_mod_ver=%g_mod_ver%" -rl:5FINE
 
 call :echo -ri:CfgFile -v1:"%g_pkg_cfg_file%"
 call :echo -ri:SetupDir -v1:"!pkgs[%g_pkg_name%]#SetupDir!"
@@ -77,7 +77,8 @@ if ERRORLEVEL 1 (
 	pause
 	exit /b !l_em_res!
 )
-rem call :print_var_values
+call :print_var_values
+pause
 rem сбрасываем заданный выбор и позволяем системе завершиться самостоятельно
 set p_mod_choice=
 set p_exec_choice=
@@ -557,10 +558,10 @@ if not defined mods[%_mod_name%]#BinDirCnt (
 		set mods[%_mod_name%]#BinDirs[!i!]=%%~a
 		set /a "i+=1"
 	)
-	set /a l_bin_dirs_cnt=!i!-1
-	set mods[%_mod_name%]#BinDirCnt=!l_bin_dirs_cnt!
+	set /a mods[%_mod_name%]#BinDirCnt=!i!-1
 	for /l %%j in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
 		call :binding_var "%_pkg_name%" "%_mod_name%" "!mods[%_mod_name%]#BinDirs[%%j]!" mods[%_mod_name%]#BinDirs[%%j]
+		call :set_var_value !BV_MOD_BIN_DIR!%%j "!mods[%_mod_name%]#BinDirs[%%j]!" "%_pkg_name%" "%_mod_name%"
 		call :echo -ri:ModBinDir -v1:%_mod_name% -v2:"!mods[%_mod_name%]#BinDirs[%%j]!"
 	)
 )
@@ -1221,7 +1222,7 @@ call :echo -ri:ResultCountOk -v1:%i% -rc:0A
 endlocal & exit /b 0
 
 rem ---------------------------------------------
-rem Выполняет системные команды
+rem Выполняет пакет системных команд
 rem ---------------------------------------------
 :cmd_batch
 setlocal
@@ -1237,10 +1238,13 @@ call :get_res_val -rf:"%xpaths_file%" -ri:XPathCmdBatch -v1:"%_mod_name%" -v2:"%
 set "i=0"
 for /F "tokens=*" %%a in ('%xml_sel_% "!res_val!" -v "./exec" -n "%g_pkg_cfg_file%"') do (
 	set l_exec_cmd=%%~a
-	call :binding_var "" "" "!l_exec_cmd!" l_exec_cmd
+	call :echo -rv:"%~0: l_exec_cmd=!l_exec_cmd!" -rl:5FINE
+	call :get_batch_cmd "%_pkg_name%" "%_mod_name%" "!l_exec_cmd!"
 	if !ERRORLEVEL! EQU 0 (
-		call :echo -ri:CmdBatchExec -v1:"!l_exec_cmd!" -ln:%VL_FALSE% -rl:5FINE
-		call !l_exec_cmd!
+		rem для вывода полной команды заменяем двойные кавычки одинарными
+		set l_batch_cmd=!batch_cmd:"='!
+		call :echo -ri:CmdBatchExec -v1:"!l_batch_cmd!" -ln:%VL_FALSE% -rl:5FINE
+		call !batch_cmd!
 		set l_exec_res=!ERRORLEVEL!
 		if !l_exec_res! NEQ 0 (
 			call :echo -ri:ResultFailNum -v1:"!l_exec_res!" -rl:5FINE
@@ -1252,6 +1256,52 @@ for /F "tokens=*" %%a in ('%xml_sel_% "!res_val!" -v "./exec" -n "%g_pkg_cfg_fil
 )
 call :echo -ri:ResultCountOk -v1:%i% -rc:0A
 endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Возвращает подготовленную пакетную команду
+rem (со связанными переменными и автоматическим 
+rem определением исполняемого каталога)
+rem Возвращает: batch_cmd
+rem ---------------------------------------------
+:get_batch_cmd _cmd
+setlocal
+set _proc_name=%~0
+set _pkg_name=%~1
+set _mod_name=%~2
+set _cmd=%~3
+
+call :binding_var "" "" "%_cmd%" l_exec_cmd
+rem если прерван ввод параметров команды, то возвращаем код прерывания
+if ERRORLEVEL 1 set "l_result=%ERRORLEVEL%" & endlocal & (set "%_proc_name:~5%=%l_exec_cmd%" & exit /b !l_result!)
+rem получаем исполняемый файл команды
+for /f "tokens=1* delims= " %%a in ("%l_exec_cmd%") do (
+	set l_exec_file=%%~a
+	for /f %%i in ("!l_exec_file!") do set l_exec_ext=%%~xi
+	set l_exec_params=%%b
+)
+call :echo -rv:"%~0: l_exec_file=%l_exec_file%; l_exec_ext=%l_exec_ext%; l_exec_params=%l_exec_params%" -rl:5FINE
+call :convert_slashes %CSD_WIN% "%l_exec_file%" l_exec_file
+set $check_file=!l_exec_file:%DIR_SEP%=!
+rem если в команде указан путь выполнения и указано расширение исполняемого файла, то возвращаем команду на исполнение как есть
+if /i "%$check_file%" NEQ "%l_exec_file%" (
+	if defined l_exec_ext (
+		endlocal & (set "%_proc_name:~5%=%l_exec_cmd%" & exit /b 0)
+	) else (
+		rem при отсутствии расширения пытаемся его определить
+		for %%k in (%PATHEXT%) do if exist "!l_exec_file!%%k" set "l_exec_cmd=!l_exec_file!%%k %l_exec_params%" & goto end_get_batch_cmd
+	)
+)
+rem иначе определяем путь выполнения по бинарным каталогам текущего модуля
+for /l %%j in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
+	call :get_var_value_by_scope !BV_MOD_BIN_DIR!%%j "%_pkg_name%" "%_mod_name%"
+	set l_exec_path=!var_value_by_scope!%DIR_SEP%%l_exec_file%
+	call :echo -rv:"%~0: l_exec_path=!l_exec_path!" -rl:5FINE
+	if not defined l_exec_ext for %%k in (%PATHEXT%) do if exist "!l_exec_path!%%k" set "l_exec_cmd=!l_exec_path!%%k %l_exec_params%" & goto end_get_batch_cmd
+	if exist "!l_exec_path!" set "l_exec_cmd=!l_exec_path! %l_exec_params%" & goto end_get_batch_cmd
+)
+:end_get_batch_cmd
+endlocal & set "%_proc_name:~5%=%l_exec_cmd%"
+exit /b 0
 
 rem ---------------------------------------------
 rem Возвращает объекты источники или назначения
@@ -1710,7 +1760,7 @@ set _mod_name=%~2
 set _var=%~3
 
 rem echo on
-rem echo 1. "%_var%"
+call :echo -rv:"%~0: _var=%_var%" -rl:5FINE
 if not defined _var endlocal & set "%4=" & exit /b 0
 set $bind_var=%_var:${=%
 rem если не нужно связывать переменную, то возвращаем её "как есть"
@@ -1724,7 +1774,7 @@ for /f "tokens=1* delims=$}" %%i in ("!l_vars!") do (
 	if /i "!$check_var!" EQU "{" (
 		set l_var=!l_var:~1!
 		call :convert_case %CM_LOWER% "!l_var!" l_lc_var
-		rem echo %~0: _var=!_var!; l_var=!l_var!; l_lc_var=!l_lc_var!
+		call :echo -rv:"%~0: _var=!_var!; l_var=!l_var!; l_lc_var=!l_lc_var!" -rl:5FINE
 		rem если не определён текущий модуль то используем заданную область видимости
 		if not defined g_mod_name (
 			call :get_var_scope !l_lc_var! l_scope_pkg l_scope_mod
@@ -1737,8 +1787,7 @@ for /f "tokens=1* delims=$}" %%i in ("!l_vars!") do (
 		) else (
 			call :get_var_value !l_lc_var!
 		)
-		rem echo %~0: var_value=!var_value!
-		rem echo if defined var_value call :binding_var_value "!_var!" "!l_var!" "!var_value!" _var
+		call :echo -rv:"%~0: var_value=!var_value!" -rl:5FINE
 		if defined var_value call :binding_var_value "!_var!" "!l_var!" "!var_value!" _var
 	)
 	set l_vars=%%j
@@ -1781,7 +1830,7 @@ setlocal
 set _str=%~1
 set _var=%~2
 set _val=%~3
-rem echo binding_var_value: "%_str%" "%_var%" "%_val%"
+call :echo -rv:"%~0: _str=%_str%; _var=%_var%; _val=%_val%" -rl:5FINE
 set l_bind_str=!_str:${%_var%}=%_val%!
 endlocal & set %4=%l_bind_str%
 exit /b 0
@@ -1797,7 +1846,7 @@ set _svname=%~1
 
 set l_scope_mark=%BV_PKG_SCOPE%
 set $check_var_name=%_svname:.=%
-rem echo %~0: _svname=%_svname% - %_svname:~0,4%
+call :echo -rv:"%~0: _svname=%_svname% - %_svname:~0,4%" -rl:5FINE
 if /i "%$check_var_name%" EQU "%_svname%" (
 	set l_scope_pkg=%DEF_VAR_PKG%
 	set l_scope_mod=
@@ -1814,9 +1863,9 @@ if /i "%$check_var_name%" EQU "%_svname%" (
 	set l_scope_pkg=%DEF_VAR_PKG%
 	set l_scope_mod=
 )
-rem echo %~0: l_scope_pkg=%l_scope_pkg%; l_scope_mod=%l_scope_mod%
+call :echo -rv:"%~0: l_scope_pkg=%l_scope_pkg%; l_scope_mod=%l_scope_mod%" -rl:5FINE
 endlocal & (set "%_proc_name:~5%=%l_scope_mark%" & set "%2=%l_scope_pkg%" & set "%3=%l_scope_mod%") & exit /b 0
-
+rem определение областей видимости по другим пакетам и модулям
 set l_var_scopes=%_svname%
 set vs=0
 :var_scope_loop
@@ -1848,10 +1897,10 @@ if not defined _svv_pkg_name (
 	set svv_scope_pkg=%_svv_pkg_name%
 	set svv_scope_mod=%_svv_mod_name%
 )
-rem echo %~0: svv_scope_pkg=%svv_scope_pkg%; svv_scope_mod=%svv_scope_mod%
-rem вытаемся получить значение переменной в определённой области видимости
+call :echo -rv:"%~0: svv_scope_pkg=%svv_scope_pkg%; svv_scope_mod=%svv_scope_mod%" -rl:5FINE
+rem пытаемся получить значение переменной в определённой области видимости
 call :get_var_value_by_scope %_var_name% %svv_scope_pkg% %svv_scope_mod%
-rem echo %~0: var_value_by_scope=%var_value_by_scope%; svv_scope_pkg=%svv_scope_pkg%; svv_scope_mod=%svv_scope_mod%
+call :echo -rv:"%~0: var_value_by_scope=%var_value_by_scope%; svv_scope_pkg=%svv_scope_pkg%; svv_scope_mod=%svv_scope_mod%" -rl:5FINE
 rem pause
 rem необходимо использование дополнительной переменной http://qaru.site/questions/14072091/batch-set-a-missing-operator
 if defined svv_scope_mod (
@@ -1859,7 +1908,7 @@ if defined svv_scope_mod (
 ) else (
 	set l_curr_var_idx=!g_vars[%svv_scope_pkg%]#Cnt!
 )
-rem echo %~0: l_curr_var_idx=%l_curr_var_idx%
+call :echo -rv:"%~0: l_curr_var_idx=%l_curr_var_idx%" -rl:5FINE
 if defined svv_scope_mod (
 	if not defined l_curr_var_idx set l_curr_var_idx=-1
 	if not defined var_value_by_scope set /a "l_curr_var_idx+=1"
@@ -1873,13 +1922,16 @@ if defined svv_scope_mod (
 	set g_vars[%svv_scope_pkg%][!l_curr_var_idx!]#Val=%_var_value%
 	set g_vars[%svv_scope_pkg%]#Cnt=!l_curr_var_idx!
 )
-rem echo %~0: l_curr_var_idx=%l_curr_var_idx%
+call :echo -rv:"%~0: l_curr_var_idx=%l_curr_var_idx%" -rl:5FINE
 exit /b 0
 
 rem ---------------------------------------------
-rem Возвращает для подстановочной переменной
-rem связываемое значение в заданной области
-rem видимости
+rem Возвращает по заданному имени подстановочной 
+rem переменной связываемое значение в заданной 
+rem области видимости.
+rem (Поиск производится как по полному совпадению имени
+rem  переменной, так и по частичному - возвращается 
+rem  первое попавшееся значение)
 rem ---------------------------------------------
 :get_var_value_by_scope _var_name _scope_pkg _scope_mod
 setlocal
@@ -1888,14 +1940,22 @@ set _var_name=%~1
 set _scope_pkg=%~2
 set _scope_mod=%~3
 
-rem echo %~0: _var_name=%_var_name%; _scope_pkg=%_scope_pkg%; _scope_mod=%_scope_mod%
+call :echo -rv:"%~0: _var_name=%_var_name%; _scope_pkg=%_scope_pkg%; _scope_mod=%_scope_mod%" -rl:5FINE
 if defined _scope_mod (
-	for /l %%n in (0,1,!g_vars[%_scope_pkg%][%_scope_mod%]#Cnt!) do if /i "!g_vars[%_scope_pkg%][%_scope_mod%][%%n]#Name!" EQU "%_var_name%" (set "l_var_value=!g_vars[%_scope_pkg%][%_scope_mod%][%%n]#Val!" & goto end_get_var_value_by_scope)
+	for /l %%n in (0,1,!g_vars[%_scope_pkg%][%_scope_mod%]#Cnt!) do (
+		if /i "!g_vars[%_scope_pkg%][%_scope_mod%][%%n]#Name!" EQU "%_var_name%" set l_find_var_name=%VL_TRUE%
+		if /i "!g_vars[%_scope_pkg%][%_scope_mod%][%%n]#Name!" EQU "%_var_name%0" set l_find_var_name=%VL_TRUE%
+		if defined l_find_var_name set "l_var_value=!g_vars[%_scope_pkg%][%_scope_mod%][%%n]#Val!" & goto end_get_var_value_by_scope
+	)
 ) else (
-	for /l %%n in (0,1,!g_vars[%_scope_pkg%]#Cnt!) do if /i "!g_vars[%_scope_pkg%][%%n]#Name!" EQU "%_var_name%" (set "l_var_value=!g_vars[%_scope_pkg%][%%n]#Val!" & goto end_get_var_value_by_scope)
+	for /l %%n in (0,1,!g_vars[%_scope_pkg%]#Cnt!) do (
+		if /i "!g_vars[%_scope_pkg%][%%n]#Name!" EQU "%_var_name%" set l_find_var_name=%VL_TRUE%
+		if /i "!g_vars[%_scope_pkg%][%%n]#Name!" EQU "%_var_name%0" set l_find_var_name=%VL_TRUE%
+		if defined l_find_var_name set "l_var_value=!g_vars[%_scope_pkg%][%%n]#Val!" & goto end_get_var_value_by_scope
+	)
 )
 :end_get_var_value_by_scope
-rem echo %~0: l_var_value=%l_var_value%
+call :echo -rv:"%~0: l_var_value=%l_var_value%" -rl:5FINE
 endlocal & set "%_proc_name:~5%=%l_var_value%"
 exit /b 0
 
@@ -1910,11 +1970,11 @@ set _proc_name=%~0
 set _var_name=%~1
 
 call :get_var_scope %_var_name% scope_pkg scope_mod
-rem echo %~0: _var_name=%_var_name%; scope_pkg=%scope_pkg%; scope_mod=%scope_mod%
+call :echo -rv:"%~0: _var_name=%_var_name%; scope_pkg=%scope_pkg%; scope_mod=%scope_mod%" -rl:5FINE
 
 call :get_var_value_by_scope %_var_name% %scope_pkg% %scope_mod%
 
-rem echo %~0: var_value_by_scope=%var_value_by_scope%
+call :echo -rv:"%~0: var_value_by_scope=%var_value_by_scope%" -rl:5FINE
 endlocal & set "%_proc_name:~5%=%var_value_by_scope%"
 exit /b 0
 
@@ -1927,7 +1987,7 @@ rem ---------------------------------------------
 setlocal
 set l_prev_idx=-1
 for /f "usebackq delims=[]=# tokens=1-6" %%j in (`set g_vars`) do (
-	rem echo "%%j" "%%k" "%%l" "%%m" "%%n" "%%o"
+	call :echo -rv:"%~0: j=%%j; k=%%k; l=%%l; m=%%m; n=%%n; o=%%o" -rl:5FINE
 	set l_pkg=%%~k
 	set l_val=%%~o
 	if defined l_val (
@@ -1995,6 +2055,7 @@ set BV_MOD_NAME=mod.name
 set BV_MOD_VERSION=mod.version
 set BV_MOD_SETUP_DIR=mod.setupdir
 set BV_MOD_DISTR_DIR=mod.destribdir
+set BV_MOD_BIN_DIR=mod.bindir
 
 rem Каталоги по умолчанию:
 rem системные (не меняются)

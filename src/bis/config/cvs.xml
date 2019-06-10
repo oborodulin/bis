@@ -57,7 +57,7 @@
 								<commands>
 									<batch>
 										<exec>git config --global user.name "${user.name}"</exec>
-										<exec>git config --global user.email ${user.email}</exec>
+										<exec>${mod.bindir}/git config --global user.email ${user.email}</exec>
 										<exec>git config --global core.editor "${core.editor}"</exec>
 									</batch>
 								</commands>
