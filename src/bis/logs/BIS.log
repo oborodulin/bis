@@ -11448,3 +11448,2011 @@
 10.06.2019 22:07:38,62: FINE: :binding_var: _var= 
 10.06.2019 22:07:39,08: FINE-058: каталог: {V1} в {V2} 
 10.06.2019 22:07:39,51: ERR-030: SrcDirExistError: Не найден каталог-источник {V1}. Проверьте, пожалуйста, его наличие. 
+10.09.2019 14:05:19,87: FINE-016: Tюъры№ ёшёЄхьv: ru 
+10.09.2019 14:05:20,69: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+10.09.2019 14:05:21,47: [ 
+10.09.2019 14:05:22,36: MODE: run 
+10.09.2019 14:05:23,15: ; LOG_LEVEL: 5 
+10.09.2019 14:05:23,85: ] 
+10.09.2019 14:05:24,58: (Программа бесплатна для некоммерческого использования
+10.09.2019 14:05:24,58: (Программа бесплатна для некоммерческого использования) 
+10.09.2019 14:05:25,39: Инициализация параметров установки... 
+10.09.2019 14:05:26,14: FINE-015: Архитектура процессора: x64 
+10.09.2019 14:05:26,88: Ok 
+10.09.2019 14:05:27,66: Проверка параметров установки... 
+10.09.2019 14:05:28,41: Ok 
+10.09.2019 14:05:29,16: FINE-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+10.09.2019 14:05:29,91: FINE-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+10.09.2019 14:05:30,67: FINE-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+10.09.2019 14:05:31,42: FINE-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+10.09.2019 14:05:32,16: FINE-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+10.09.2019 14:05:32,89: FINE-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+10.09.2019 14:05:33,65: FINE: :get_var_scope: _svname=bisdir - bisd 
+10.09.2019 14:05:34,36: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+10.09.2019 14:05:35,06: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:05:35,77: FINE: :get_var_value_by_scope: _var_name=bisdir; _scope_pkg=VARS; _scope_mod= 
+10.09.2019 14:05:36,47: FINE: :get_var_value_by_scope: l_var_value= 
+10.09.2019 14:05:37,17: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:05:37,87: FINE: :set_var_value: l_curr_var_idx= 
+10.09.2019 14:05:38,58: FINE: :set_var_value: l_curr_var_idx=0 
+10.09.2019 14:05:39,32: FINE: :get_var_scope: _svname=windir - wind 
+10.09.2019 14:05:40,02: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+10.09.2019 14:05:40,73: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:05:41,45: FINE: :get_var_value_by_scope: _var_name=windir; _scope_pkg=VARS; _scope_mod= 
+10.09.2019 14:05:42,15: FINE: :get_var_value_by_scope: l_var_value= 
+10.09.2019 14:05:42,86: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:05:43,58: FINE: :set_var_value: l_curr_var_idx=0 
+10.09.2019 14:05:44,31: FINE: :set_var_value: l_curr_var_idx=1 
+10.09.2019 14:05:45,07: FINE: :get_var_scope: _svname=env.programfiles - env. 
+10.09.2019 14:05:45,77: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+10.09.2019 14:05:46,47: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:05:47,18: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+10.09.2019 14:05:47,87: FINE: :get_var_value_by_scope: l_var_value= 
+10.09.2019 14:05:48,57: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:05:49,27: FINE: :set_var_value: l_curr_var_idx=1 
+10.09.2019 14:05:49,96: FINE: :set_var_value: l_curr_var_idx=2 
+10.09.2019 14:05:56,20: FINE-013: Установка прервана пользователем 
+10.09.2019 14:50:30,54: FINE-016: Tюъры№ ёшёЄхьv: ru 
+10.09.2019 14:50:31,37: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+10.09.2019 14:50:32,21: [ 
+10.09.2019 14:50:33,08: MODE: run 
+10.09.2019 14:50:33,89: ; LOG_LEVEL: 5 
+10.09.2019 14:50:34,61: ] 
+10.09.2019 14:50:35,36: (Программа бесплатна для некоммерческого использования
+10.09.2019 14:50:35,36: (Программа бесплатна для некоммерческого использования) 
+10.09.2019 14:50:36,20: Инициализация параметров установки... 
+10.09.2019 14:50:36,96: FINE-015: Архитектура процессора: x64 
+10.09.2019 14:50:37,71: Ok 
+10.09.2019 14:50:38,51: Проверка параметров установки... 
+10.09.2019 14:50:39,24: Ok 
+10.09.2019 14:50:39,99: FINE-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+10.09.2019 14:50:40,73: FINE-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+10.09.2019 14:50:41,49: FINE-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+10.09.2019 14:50:42,24: FINE-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+10.09.2019 14:50:43,00: FINE-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+10.09.2019 14:50:43,73: FINE-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+10.09.2019 14:50:44,50: FINE: :get_var_scope: _svname=bisdir - bisd 
+10.09.2019 14:50:45,22: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+10.09.2019 14:50:45,94: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:50:46,67: FINE: :get_var_value_by_scope: _var_name=bisdir; _scope_pkg=VARS; _scope_mod= 
+10.09.2019 14:50:47,37: FINE: :get_var_value_by_scope: l_var_value= 
+10.09.2019 14:50:48,09: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:50:48,81: FINE: :set_var_value: l_curr_var_idx= 
+10.09.2019 14:50:49,50: FINE: :set_var_value: l_curr_var_idx=0 
+10.09.2019 14:50:50,27: FINE: :get_var_scope: _svname=windir - wind 
+10.09.2019 14:50:50,99: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+10.09.2019 14:50:51,70: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:50:52,43: FINE: :get_var_value_by_scope: _var_name=windir; _scope_pkg=VARS; _scope_mod= 
+10.09.2019 14:50:53,15: FINE: :get_var_value_by_scope: l_var_value= 
+10.09.2019 14:50:53,88: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:50:54,58: FINE: :set_var_value: l_curr_var_idx=0 
+10.09.2019 14:50:55,30: FINE: :set_var_value: l_curr_var_idx=1 
+10.09.2019 14:50:56,08: FINE: :get_var_scope: _svname=env.programfiles - env. 
+10.09.2019 14:50:56,80: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+10.09.2019 14:50:57,53: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:50:58,25: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+10.09.2019 14:50:58,97: FINE: :get_var_value_by_scope: l_var_value= 
+10.09.2019 14:50:59,68: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:51:00,41: FINE: :set_var_value: l_curr_var_idx=1 
+10.09.2019 14:51:01,13: FINE: :set_var_value: l_curr_var_idx=2 
+10.09.2019 14:51:06,49: --------------------------------------------------- 
+10.09.2019 14:51:07,31: Выберите устанавливаемый пакет программ [20 секунд] 
+10.09.2019 14:51:08,14: --------------------------------------------------- 
+10.09.2019 14:51:09,40: {V1}=D:\Work\Projects.cmd\bis\src\bis\config\android.xml 
+10.09.2019 14:51:11,62: 1 - Выход [по умолчанию] 
+10.09.2019 14:51:32,34: FINE-076: Пользователь вышел из меню пакетов 
+10.09.2019 14:52:41,11: FINE-016: Tюъры№ ёшёЄхьv: ru 
+10.09.2019 14:52:41,94: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+10.09.2019 14:52:42,76: [ 
+10.09.2019 14:52:43,65: MODE: run 
+10.09.2019 14:52:44,47: ; LOG_LEVEL: 5 
+10.09.2019 14:52:45,19: ] 
+10.09.2019 14:52:45,92: (Программа бесплатна для некоммерческого использования
+10.09.2019 14:52:45,92: (Программа бесплатна для некоммерческого использования) 
+10.09.2019 14:52:46,74: Инициализация параметров установки... 
+10.09.2019 14:52:47,49: FINE-015: Архитектура процессора: x64 
+10.09.2019 14:52:48,23: Ok 
+10.09.2019 14:52:49,02: Проверка параметров установки... 
+10.09.2019 14:52:49,76: Ok 
+10.09.2019 14:52:50,50: FINE-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+10.09.2019 14:52:51,23: FINE-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+10.09.2019 14:52:51,97: FINE-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+10.09.2019 14:52:52,71: FINE-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+10.09.2019 14:52:53,45: FINE-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+10.09.2019 14:52:54,18: FINE-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+10.09.2019 14:52:54,94: FINE: :get_var_scope: _svname=bisdir - bisd 
+10.09.2019 14:52:55,64: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+10.09.2019 14:52:56,34: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:52:57,07: FINE: :get_var_value_by_scope: _var_name=bisdir; _scope_pkg=VARS; _scope_mod= 
+10.09.2019 14:52:57,76: FINE: :get_var_value_by_scope: l_var_value= 
+10.09.2019 14:52:58,47: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:52:59,17: FINE: :set_var_value: l_curr_var_idx= 
+10.09.2019 14:52:59,88: FINE: :set_var_value: l_curr_var_idx=0 
+10.09.2019 14:53:00,65: FINE: :get_var_scope: _svname=windir - wind 
+10.09.2019 14:53:01,35: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+10.09.2019 14:53:02,07: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:53:02,79: FINE: :get_var_value_by_scope: _var_name=windir; _scope_pkg=VARS; _scope_mod= 
+10.09.2019 14:53:03,48: FINE: :get_var_value_by_scope: l_var_value= 
+10.09.2019 14:53:04,19: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:53:04,91: FINE: :set_var_value: l_curr_var_idx=0 
+10.09.2019 14:53:05,62: FINE: :set_var_value: l_curr_var_idx=1 
+10.09.2019 14:53:06,37: FINE: :get_var_scope: _svname=env.programfiles - env. 
+10.09.2019 14:53:07,06: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+10.09.2019 14:53:07,77: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:53:08,49: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+10.09.2019 14:53:09,19: FINE: :get_var_value_by_scope: l_var_value= 
+10.09.2019 14:53:09,91: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+10.09.2019 14:53:10,63: FINE: :set_var_value: l_curr_var_idx=1 
+10.09.2019 14:53:11,37: FINE: :set_var_value: l_curr_var_idx=2 
+10.09.2019 14:53:15,13: --------------------------------------------------- 
+10.09.2019 14:53:15,95: Выберите устанавливаемый пакет программ [20 секунд] 
+10.09.2019 14:53:16,75: --------------------------------------------------- 
+27.09.2019 20:29:48,79: FINE-016: Tюъры№ ёшёЄхьv: ru 
+27.09.2019 20:29:49,56: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+27.09.2019 20:29:50,31: [ 
+27.09.2019 20:29:51,23: MODE: run 
+27.09.2019 20:29:52,00: ; LOG_LEVEL: 5 
+27.09.2019 20:29:52,68: ] 
+27.09.2019 20:29:53,37: (Программа бесплатна для некоммерческого использования
+27.09.2019 20:29:53,37: (Программа бесплатна для некоммерческого использования) 
+27.09.2019 20:29:54,14: Инициализация параметров установки... 
+27.09.2019 20:29:54,86: FINE-015: Архитектура процессора: x64 
+27.09.2019 20:29:55,58: Ok 
+27.09.2019 20:29:56,35: Проверка параметров установки... 
+27.09.2019 20:29:57,05: Ok 
+27.09.2019 20:29:57,76: FINE-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:29:58,46: FINE-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+27.09.2019 20:29:59,18: FINE-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+27.09.2019 20:29:59,88: FINE-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+27.09.2019 20:30:00,67: FINE-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:30:01,44: FINE-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+27.09.2019 20:30:02,15: FINE: :get_var_scope: _svname=bisdir - bisd 
+27.09.2019 20:30:02,86: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:30:03,52: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:30:04,24: FINE: :get_var_value_by_scope: _var_name=bisdir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:30:04,93: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:30:05,63: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:30:06,32: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:30:06,99: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:30:07,72: FINE: :get_var_scope: _svname=windir - wind 
+27.09.2019 20:30:08,41: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:30:09,09: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:30:09,80: FINE: :get_var_value_by_scope: _var_name=windir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:30:10,50: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:30:11,19: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:30:11,87: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:30:12,57: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:30:13,31: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:30:13,99: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:30:14,70: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:30:15,40: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:30:16,10: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:30:16,79: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:30:17,47: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:30:18,17: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:30:21,82: --------------------------------------------------- 
+27.09.2019 20:30:22,60: Выберите устанавливаемый пакет программ [20 секунд] 
+27.09.2019 20:30:23,37: --------------------------------------------------- 
+27.09.2019 20:30:24,57: 1 - ANDROID	Android Development 
+27.09.2019 20:30:25,01: 2 - CVS  	РЎРёСЃС‚РµРјС‹ РєРѕРЅС‚СЂРѕР»СЏ РІРµСЂСЃРёР№ 
+27.09.2019 20:30:25,43: 3 - JAVA	РРЅСЃС‚СЂСѓРјРµРЅС‚Р°СЂРёР№ РґР»СЏ СЂР°Р·СЂР°Р±РѕС‚РєРё РЅР° Java 
+27.09.2019 20:30:25,86: 4 - BIS-TEST	BIS Test package 
+27.09.2019 20:30:26,28: 5 - WAMP	РЎС‚РµРє WAMP РґР»СЏ РІРµР±-СЂР°Р·СЂР°Р±РѕС‚РєРё 
+27.09.2019 20:30:26,78: 6 - Выход [по умолчанию] 
+27.09.2019 20:30:31,67: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:30:31,94: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:30:32,19: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:30:32,46: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:30:32,73: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:30:32,98: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:30:33,25: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:30:33,49: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:30:33,78: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_pkg_cfg_file=D:\Work\Projects.cmd\bis\src\bis\config\java.xml; g_pkg_name=JAVA; g_pkg_descr=Инструментарий для разработки на Java; use_log=true; g_log_level=5 
+27.09.2019 20:30:34,31: FINE: :binding_var: _var=${env.programfiles} 
+27.09.2019 20:30:34,58: FINE: :binding_var: l_var={env.programfiles 
+27.09.2019 20:30:34,98: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+27.09.2019 20:30:35,24: FINE: :binding_var: _var=${env.programfiles}; l_var=env.programfiles; l_lc_var=env.programfiles 
+27.09.2019 20:30:35,52: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:30:35,77: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:30:36,07: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:30:36,34: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:30:36,59: FINE: :get_var_value: _var_name=env.programfiles; scope_pkg=VARS; scope_mod= 
+27.09.2019 20:30:36,89: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:30:37,14: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:30:37,41: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:30:37,68: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:30:37,95: FINE: :binding_var_value: _str=${env.programfiles}; _var=env.programfiles; _val=C:\Program Files 
+27.09.2019 20:30:38,26: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:30:38,53: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:30:38,80: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:30:39,05: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:30:39,33: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:30:39,58: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:30:39,85: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:30:40,12: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:30:40,52: FINE-067: Каталог установки пакета JAVA: C:\Program Files 
+27.09.2019 20:30:40,92: FINE-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:30:41,32: FINE-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+27.09.2019 20:30:41,74: FINE-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:30:42,16: FINE-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+27.09.2019 20:30:42,63: --------------------------------------------------- 
+27.09.2019 20:30:43,00: Выберите устанавливаемый модуль пакета [20 секунд] 
+27.09.2019 20:30:43,27: JAVA [Инструментарий для разработки на Java] 
+27.09.2019 20:30:43,61: --------------------------------------------------- 
+27.09.2019 20:30:44,22: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:30:44,49: FINE: :get_var_value_by_scope: _var_name=mod.name; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:30:44,75: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:30:45,02: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:30:45,27: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:30:45,54: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:30:45,82: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:30:46,09: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:30:46,35: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:30:46,61: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:30:46,88: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:30:47,14: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:30:47,54:          1 - openjdk v.12.0.1  
+27.09.2019 20:30:48,26: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version} 
+27.09.2019 20:30:48,51: FINE: :binding_var: l_var={pkg.setupdir 
+27.09.2019 20:30:48,93: Регистр символов строки pkg.setupdir по признаку LOWER преобразован в pkg.setupdir 
+27.09.2019 20:30:49,20: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; l_var=pkg.setupdir; l_lc_var=pkg.setupdir 
+27.09.2019 20:30:49,46: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:30:49,75: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:30:50,03: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:30:50,30: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:30:50,57: FINE: :get_var_value: _var_name=pkg.setupdir; scope_pkg=JAVA; scope_mod= 
+27.09.2019 20:30:50,87: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:30:51,14: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:30:51,41: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:30:51,67: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:30:51,96: FINE: :binding_var_value: _str=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; _var=pkg.setupdir; _val=C:\Program Files 
+27.09.2019 20:30:52,26: FINE: :binding_var: l_var=/ 
+27.09.2019 20:30:52,54: FINE: :binding_var: l_var={pkg.name 
+27.09.2019 20:30:52,96: Регистр символов строки pkg.name по признаку LOWER преобразован в pkg.name 
+27.09.2019 20:30:53,21: FINE: :binding_var: _var=C:\Program Files/${pkg.name}/jdk-${mod.version}; l_var=pkg.name; l_lc_var=pkg.name 
+27.09.2019 20:30:53,50: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:30:53,76: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:30:54,06: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:30:54,33: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:30:54,60: FINE: :get_var_value: _var_name=pkg.name; scope_pkg=JAVA; scope_mod= 
+27.09.2019 20:30:54,90: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:30:55,17: FINE: :get_var_value_by_scope: l_var_value=JAVA 
+27.09.2019 20:30:55,44: FINE: :get_var_value: var_value_by_scope=JAVA 
+27.09.2019 20:30:55,71: FINE: :binding_var: var_value=JAVA 
+27.09.2019 20:30:55,98: FINE: :binding_var_value: _str=C:\Program Files/${pkg.name}/jdk-${mod.version}; _var=pkg.name; _val=JAVA 
+27.09.2019 20:30:56,29: FINE: :binding_var: l_var=/jdk- 
+27.09.2019 20:30:56,57: FINE: :binding_var: l_var={mod.version 
+27.09.2019 20:30:56,99: Регистр символов строки mod.version по признаку LOWER преобразован в mod.version 
+27.09.2019 20:30:57,26: FINE: :binding_var: _var=C:\Program Files/JAVA/jdk-${mod.version}; l_var=mod.version; l_lc_var=mod.version 
+27.09.2019 20:30:57,53: FINE: :get_var_scope: _svname=mod.version - mod. 
+27.09.2019 20:30:57,81: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:30:58,08: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:30:58,35: FINE: :get_var_value_by_scope: l_var_value=12.0.1 
+27.09.2019 20:30:58,62: FINE: :binding_var: var_value=12.0.1 
+27.09.2019 20:30:58,89: FINE: :binding_var_value: _str=C:\Program Files/JAVA/jdk-${mod.version}; _var=mod.version; _val=12.0.1 
+27.09.2019 20:30:59,18: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:30:59,47: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:30:59,72: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:31:00,00: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:31:00,27: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:31:00,54: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:31:00,82: FINE: :binding_var: _var=${mod.setupdir} 
+27.09.2019 20:31:01,10: FINE: :binding_var: l_var={mod.setupdir 
+27.09.2019 20:31:01,52: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+27.09.2019 20:31:01,79: FINE: :binding_var: _var=${mod.setupdir}; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+27.09.2019 20:31:02,06: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+27.09.2019 20:31:02,33: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:31:02,61: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:31:02,88: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:31:03,16: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:31:03,43: FINE: :binding_var_value: _str=${mod.setupdir}; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:31:03,71: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:31:04,00: FINE: :get_var_value_by_scope: _var_name=mod.homedir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:31:04,27: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:31:04,54: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:31:04,80: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:31:05,07: FINE: :set_var_value: l_curr_var_idx=3 
+27.09.2019 20:31:05,44: FINE-022: Каталог установки модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:31:05,89: FINE-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:31:06,52: FINE: :binding_var: _var=${mod.setupdir}/bin 
+27.09.2019 20:31:06,81: FINE: :binding_var: l_var={mod.setupdir 
+27.09.2019 20:31:07,22: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+27.09.2019 20:31:07,49: FINE: :binding_var: _var=${mod.setupdir}/bin; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+27.09.2019 20:31:07,76: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+27.09.2019 20:31:08,04: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:31:08,31: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:31:08,58: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:31:08,86: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:31:09,14: FINE: :binding_var_value: _str=${mod.setupdir}/bin; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:31:09,43: FINE: :binding_var: l_var=/bin 
+27.09.2019 20:31:09,71: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:31:10,00: FINE: :get_var_value_by_scope: _var_name=mod.bindir0; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:31:10,27: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:31:10,53: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:31:10,82: FINE: :set_var_value: l_curr_var_idx=3 
+27.09.2019 20:31:11,09: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:31:11,46: FINE-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+27.09.2019 20:31:11,77: Установлен ли модуль openjdk 
+27.09.2019 20:31:12,09: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+27.09.2019 20:31:12,39: Да 
+27.09.2019 20:31:12,76: [+] 
+27.09.2019 20:31:13,13: Free and open-source implementation of the Java SE Platform Edition 
+27.09.2019 20:31:13,61: 2 - Установить все модули 
+27.09.2019 20:31:14,03: 3 - Возврат в меню пакетов [по умолчанию] 
+27.09.2019 20:31:14,50: 4 - Выход 
+27.09.2019 20:31:23,48: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_mod_name=openjdk; g_mod_ver=12.0.1 
+27.09.2019 20:31:23,79: FINE-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+27.09.2019 20:31:24,11: FINE-012: Каталог установки пакета: C:\Program Files 
+27.09.2019 20:31:24,46: FINE: :get_var_scope: _svname=mod.destribdir - mod. 
+27.09.2019 20:31:24,73: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod=openjdk 
+27.09.2019 20:31:25,01: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:31:25,28: FINE: :get_var_value_by_scope: _var_name=mod.destribdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:31:25,56: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:31:25,83: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:31:26,10: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:31:26,38: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:31:27,37: Выбор действия для модуля openjdk [20 секунд]: 
+27.09.2019 20:31:28,19: 1 - исправить установку 
+27.09.2019 20:31:28,63: 2 - деинсталлировать 
+27.09.2019 20:31:29,10: 3 - ничего не делать [по умолчанию] 
+27.09.2019 20:32:37,40: --------------------------------------------------- 
+27.09.2019 20:32:37,78: Выберите устанавливаемый модуль пакета [20 секунд] 
+27.09.2019 20:32:38,07: JAVA [Инструментарий для разработки на Java] 
+27.09.2019 20:32:38,44: --------------------------------------------------- 
+27.09.2019 20:32:39,04: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:32:39,31: FINE: :get_var_value_by_scope: _var_name=mod.name; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:32:39,59: FINE: :get_var_value_by_scope: l_var_value=openjdk 
+27.09.2019 20:32:39,86: FINE: :set_var_value: var_value_by_scope=openjdk; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:32:40,13: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:32:40,40: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:32:40,67: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:32:40,96: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:32:41,23: FINE: :get_var_value_by_scope: l_var_value=12.0.1 
+27.09.2019 20:32:41,50: FINE: :set_var_value: var_value_by_scope=12.0.1; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:32:41,76: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:32:42,05: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:32:42,48:          1 - openjdk v.12.0.1  
+27.09.2019 20:32:42,88: [+] 
+27.09.2019 20:32:43,24: Free and open-source implementation of the Java SE Platform Edition 
+27.09.2019 20:32:43,72: 2 - Установить все модули 
+27.09.2019 20:32:44,16: 3 - Возврат в меню пакетов [по умолчанию] 
+27.09.2019 20:32:44,61: 4 - Выход 
+27.09.2019 20:32:47,82: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_mod_name=openjdk; g_mod_ver=12.0.1 
+27.09.2019 20:32:48,15: FINE-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+27.09.2019 20:32:48,46: FINE-012: Каталог установки пакета: C:\Program Files 
+27.09.2019 20:32:49,08: Выбор действия для модуля openjdk [20 секунд]: 
+27.09.2019 20:32:49,52: 1 - исправить установку 
+27.09.2019 20:32:49,95: 2 - деинсталлировать 
+27.09.2019 20:32:50,42: 3 - ничего не делать [по умолчанию] 
+27.09.2019 20:32:53,98: FINE-014: Фаза выполнения: openjdk-uninstall [install] 
+27.09.2019 20:32:57,85: FINE-023: Цель выполнения: del-path-env 
+27.09.2019 20:32:58,30: Удаление каталога C:\Program Files/JAVA/jdk-12.0.1/bin из переменной среды PATH... 
+27.09.2019 20:32:59,17: Удалено значение C:\Program Files\JAVA\jdk-12.0.1\bin параметра реестра HKCU/PATH: C:\Users\acs-i\AppData\Local\Microsoft\WindowsApps;d:/programs/wamp/php7;C:\Dev\CVS\Git\bin 
+27.09.2019 20:32:59,47: Ok 
+27.09.2019 20:32:59,88: FINE-023: Цель выполнения: del-env 
+27.09.2019 20:33:00,36: Удаление переменной среды JAVA_HOME... 
+27.09.2019 20:33:00,68: Ok 
+27.09.2019 20:33:01,01: FINE-023: Цель выполнения: cmd-shell 
+27.09.2019 20:33:01,34: FINE-023: Цель выполнения: unpack-zip 
+27.09.2019 20:33:01,77: Удаление каталога установки модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1... 
+27.09.2019 20:33:07,24: Ok 
+27.09.2019 20:33:13,40: --------------------------------------------------- 
+27.09.2019 20:33:13,77: Выберите устанавливаемый модуль пакета [20 секунд] 
+27.09.2019 20:33:14,05: JAVA [Инструментарий для разработки на Java] 
+27.09.2019 20:33:14,42: --------------------------------------------------- 
+27.09.2019 20:33:15,22: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:33:15,49: FINE: :get_var_value_by_scope: _var_name=mod.name; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:33:15,78: FINE: :get_var_value_by_scope: l_var_value=openjdk 
+27.09.2019 20:33:16,06: FINE: :set_var_value: var_value_by_scope=openjdk; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:33:16,33: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:33:16,61: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:33:16,91: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:33:17,18: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:33:17,46: FINE: :get_var_value_by_scope: l_var_value=12.0.1 
+27.09.2019 20:33:17,75: FINE: :set_var_value: var_value_by_scope=12.0.1; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:33:18,02: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:33:18,30: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:33:18,72:          1 - openjdk v.12.0.1  
+27.09.2019 20:33:19,09: Free and open-source implementation of the Java SE Platform Edition 
+27.09.2019 20:33:19,59: 2 - Установить все модули 
+27.09.2019 20:33:20,01: 3 - Возврат в меню пакетов [по умолчанию] 
+27.09.2019 20:33:20,49: 4 - Выход 
+27.09.2019 20:33:35,74: FINE-077: Пользователь вышел из меню модулей пакета JAVA 
+27.09.2019 20:33:57,31: FINE-016: Tюъры№ ёшёЄхьv: ru 
+27.09.2019 20:33:58,13: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+27.09.2019 20:33:58,95: [ 
+27.09.2019 20:33:59,84: ADMIN;  
+27.09.2019 20:34:00,65: MODE: run 
+27.09.2019 20:34:01,46: ; LOG_LEVEL: 5 
+27.09.2019 20:34:02,16: ] 
+27.09.2019 20:34:02,89: (Программа бесплатна для некоммерческого использования
+27.09.2019 20:34:02,89: (Программа бесплатна для некоммерческого использования) 
+27.09.2019 20:34:03,73: Инициализация параметров установки... 
+27.09.2019 20:34:04,48: FINE-015: Архитектура процессора: x64 
+27.09.2019 20:34:05,22: Ok 
+27.09.2019 20:34:06,02: Проверка параметров установки... 
+27.09.2019 20:34:06,76: Ok 
+27.09.2019 20:34:07,49: FINE-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:34:08,23: FINE-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+27.09.2019 20:34:08,97: FINE-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+27.09.2019 20:34:09,72: FINE-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+27.09.2019 20:34:10,45: FINE-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:34:11,19: FINE-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+27.09.2019 20:34:11,94: FINE: :get_var_scope: _svname=bisdir - bisd 
+27.09.2019 20:34:12,66: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:34:13,36: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:34:14,09: FINE: :get_var_value_by_scope: _var_name=bisdir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:34:14,79: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:34:15,51: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:34:16,23: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:34:16,93: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:34:17,68: FINE: :get_var_scope: _svname=windir - wind 
+27.09.2019 20:34:18,40: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:34:19,10: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:34:19,82: FINE: :get_var_value_by_scope: _var_name=windir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:34:20,54: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:34:21,26: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:34:21,98: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:34:22,70: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:34:23,47: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:34:24,17: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:34:24,89: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:34:25,63: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:34:26,35: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:34:27,06: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:34:27,77: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:34:28,49: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:34:50,31: --------------------------------------------------- 
+27.09.2019 20:34:51,13: Выберите устанавливаемый пакет программ [20 секунд] 
+27.09.2019 20:34:51,94: --------------------------------------------------- 
+27.09.2019 20:34:53,14: 1 - ANDROID	Android Development 
+27.09.2019 20:34:53,64: 2 - CVS  	РЎРёСЃС‚РµРјС‹ РєРѕРЅС‚СЂРѕР»СЏ РІРµСЂСЃРёР№ 
+27.09.2019 20:34:54,13: 3 - JAVA	РРЅСЃС‚СЂСѓРјРµРЅС‚Р°СЂРёР№ РґР»СЏ СЂР°Р·СЂР°Р±РѕС‚РєРё РЅР° Java 
+27.09.2019 20:34:54,63: 4 - BIS-TEST	BIS Test package 
+27.09.2019 20:34:55,13: 5 - WAMP	РЎС‚РµРє WAMP РґР»СЏ РІРµР±-СЂР°Р·СЂР°Р±РѕС‚РєРё 
+27.09.2019 20:34:55,66: 6 - Выход [по умолчанию] 
+27.09.2019 20:34:58,14: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:34:58,44: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:34:58,72: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:34:59,03: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:34:59,33: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:34:59,61: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:34:59,90: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:35:00,20: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:35:00,51: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_pkg_cfg_file=D:\Work\Projects.cmd\bis\src\bis\config\java.xml; g_pkg_name=JAVA; g_pkg_descr=Инструментарий для разработки на Java; use_log=true; g_log_level=5 
+27.09.2019 20:35:01,12: FINE: :binding_var: _var=${env.programfiles} 
+27.09.2019 20:35:01,42: FINE: :binding_var: l_var={env.programfiles 
+27.09.2019 20:35:01,82: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+27.09.2019 20:35:02,10: FINE: :binding_var: _var=${env.programfiles}; l_var=env.programfiles; l_lc_var=env.programfiles 
+27.09.2019 20:35:02,41: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:35:02,70: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:35:03,02: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:35:03,31: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:35:03,61: FINE: :get_var_value: _var_name=env.programfiles; scope_pkg=VARS; scope_mod= 
+27.09.2019 20:35:03,93: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:35:04,21: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:35:04,51: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:35:04,81: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:35:05,11: FINE: :binding_var_value: _str=${env.programfiles}; _var=env.programfiles; _val=C:\Program Files 
+27.09.2019 20:35:05,45: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:35:05,73: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:35:06,02: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:35:06,32: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:35:06,62: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:35:06,91: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:35:07,20: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:35:07,50: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:35:07,94: FINE-067: Каталог установки пакета JAVA: C:\Program Files 
+27.09.2019 20:35:08,39: FINE-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:35:08,83: FINE-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+27.09.2019 20:35:09,26: FINE-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:35:09,69: FINE-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+27.09.2019 20:35:10,19: --------------------------------------------------- 
+27.09.2019 20:35:10,58: Выберите устанавливаемый модуль пакета [20 секунд] 
+27.09.2019 20:35:10,88: JAVA [Инструментарий для разработки на Java] 
+27.09.2019 20:35:11,27: --------------------------------------------------- 
+27.09.2019 20:35:11,94: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:35:12,24: FINE: :get_var_value_by_scope: _var_name=mod.name; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:35:12,53: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:35:12,82: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:35:13,10: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:35:13,41: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:35:13,71: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:35:14,01: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:35:14,29: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:35:14,59: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:35:14,88: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:35:15,16: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:35:15,61:          1 - openjdk v.12.0.1  
+27.09.2019 20:35:16,37: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version} 
+27.09.2019 20:35:16,67: FINE: :binding_var: l_var={pkg.setupdir 
+27.09.2019 20:35:17,07: Регистр символов строки pkg.setupdir по признаку LOWER преобразован в pkg.setupdir 
+27.09.2019 20:35:17,39: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; l_var=pkg.setupdir; l_lc_var=pkg.setupdir 
+27.09.2019 20:35:17,69: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:35:17,97: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:35:18,31: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:35:18,61: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:35:18,89: FINE: :get_var_value: _var_name=pkg.setupdir; scope_pkg=JAVA; scope_mod= 
+27.09.2019 20:35:19,23: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:35:19,51: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:35:19,81: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:35:20,11: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:35:20,41: FINE: :binding_var_value: _str=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; _var=pkg.setupdir; _val=C:\Program Files 
+27.09.2019 20:35:20,75: FINE: :binding_var: l_var=/ 
+27.09.2019 20:35:21,07: FINE: :binding_var: l_var={pkg.name 
+27.09.2019 20:35:21,47: Регистр символов строки pkg.name по признаку LOWER преобразован в pkg.name 
+27.09.2019 20:35:21,77: FINE: :binding_var: _var=C:\Program Files/${pkg.name}/jdk-${mod.version}; l_var=pkg.name; l_lc_var=pkg.name 
+27.09.2019 20:35:22,07: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:35:22,37: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:35:22,71: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:35:22,99: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:35:23,29: FINE: :get_var_value: _var_name=pkg.name; scope_pkg=JAVA; scope_mod= 
+27.09.2019 20:35:23,63: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:35:23,93: FINE: :get_var_value_by_scope: l_var_value=JAVA 
+27.09.2019 20:35:24,23: FINE: :get_var_value: var_value_by_scope=JAVA 
+27.09.2019 20:35:24,53: FINE: :binding_var: var_value=JAVA 
+27.09.2019 20:35:24,83: FINE: :binding_var_value: _str=C:\Program Files/${pkg.name}/jdk-${mod.version}; _var=pkg.name; _val=JAVA 
+27.09.2019 20:35:25,15: FINE: :binding_var: l_var=/jdk- 
+27.09.2019 20:35:25,46: FINE: :binding_var: l_var={mod.version 
+27.09.2019 20:35:25,88: Регистр символов строки mod.version по признаку LOWER преобразован в mod.version 
+27.09.2019 20:35:26,17: FINE: :binding_var: _var=C:\Program Files/JAVA/jdk-${mod.version}; l_var=mod.version; l_lc_var=mod.version 
+27.09.2019 20:35:26,48: FINE: :get_var_scope: _svname=mod.version - mod. 
+27.09.2019 20:35:26,77: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:35:27,07: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:35:27,37: FINE: :get_var_value_by_scope: l_var_value=12.0.1 
+27.09.2019 20:35:27,67: FINE: :binding_var: var_value=12.0.1 
+27.09.2019 20:35:27,97: FINE: :binding_var_value: _str=C:\Program Files/JAVA/jdk-${mod.version}; _var=mod.version; _val=12.0.1 
+27.09.2019 20:35:28,29: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:35:28,60: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:35:28,90: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:35:29,19: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:35:29,50: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:35:29,80: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:35:30,10: FINE: :binding_var: _var=${mod.setupdir} 
+27.09.2019 20:35:30,40: FINE: :binding_var: l_var={mod.setupdir 
+27.09.2019 20:35:30,80: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+27.09.2019 20:35:31,10: FINE: :binding_var: _var=${mod.setupdir}; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+27.09.2019 20:35:31,40: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+27.09.2019 20:35:31,71: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:35:32,02: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:35:32,32: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:35:32,62: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:35:32,91: FINE: :binding_var_value: _str=${mod.setupdir}; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:35:33,23: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:35:33,54: FINE: :get_var_value_by_scope: _var_name=mod.homedir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:35:33,84: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:35:34,15: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:35:34,43: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:35:34,73: FINE: :set_var_value: l_curr_var_idx=3 
+27.09.2019 20:35:35,13: FINE-022: Каталог установки модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:35:35,58: FINE-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:35:36,28: FINE: :binding_var: _var=${mod.setupdir}/bin 
+27.09.2019 20:35:36,59: FINE: :binding_var: l_var={mod.setupdir 
+27.09.2019 20:35:37,00: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+27.09.2019 20:35:37,30: FINE: :binding_var: _var=${mod.setupdir}/bin; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+27.09.2019 20:35:37,60: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+27.09.2019 20:35:37,91: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:35:38,21: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:35:38,51: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:35:38,81: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:35:39,11: FINE: :binding_var_value: _str=${mod.setupdir}/bin; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:35:39,43: FINE: :binding_var: l_var=/bin 
+27.09.2019 20:35:39,75: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:35:40,05: FINE: :get_var_value_by_scope: _var_name=mod.bindir0; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:35:40,35: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:35:40,65: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:35:40,94: FINE: :set_var_value: l_curr_var_idx=3 
+27.09.2019 20:35:41,24: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:35:41,66: FINE-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+27.09.2019 20:35:41,97: Установлен ли модуль openjdk 
+27.09.2019 20:35:42,29: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+27.09.2019 20:35:42,61: Да 
+27.09.2019 20:35:43,01: [+] 
+27.09.2019 20:35:43,41: Free and open-source implementation of the Java SE Platform Edition 
+27.09.2019 20:35:43,95: 2 - Установить все модули 
+27.09.2019 20:35:44,40: 3 - Возврат в меню пакетов [по умолчанию] 
+27.09.2019 20:35:44,90: 4 - Выход 
+27.09.2019 20:36:00,63: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_mod_name=openjdk; g_mod_ver=12.0.1 
+27.09.2019 20:36:00,97: FINE-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+27.09.2019 20:36:01,32: FINE-012: Каталог установки пакета: C:\Program Files 
+27.09.2019 20:36:01,69: FINE: :get_var_scope: _svname=mod.destribdir - mod. 
+27.09.2019 20:36:01,99: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod=openjdk 
+27.09.2019 20:36:02,29: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:36:02,59: FINE: :get_var_value_by_scope: _var_name=mod.destribdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:36:02,89: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:36:03,19: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:36:03,49: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:36:03,80: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:36:04,85: Выбор действия для модуля openjdk [20 секунд]: 
+27.09.2019 20:36:05,73: 1 - исправить установку 
+27.09.2019 20:36:06,19: 2 - деинсталлировать 
+27.09.2019 20:36:06,68: 3 - ничего не делать [по умолчанию] 
+27.09.2019 20:36:10,40: FINE-014: Фаза выполнения: openjdk-uninstall [install] 
+27.09.2019 20:36:14,30: FINE-023: Цель выполнения: del-path-env 
+27.09.2019 20:36:14,78: Удаление каталога C:\Program Files/JAVA/jdk-12.0.1/bin из переменной среды PATH... 
+27.09.2019 20:36:15,69: Удалено значение C:\Program Files\JAVA\jdk-12.0.1\bin параметра реестра HKCU/PATH: C:\Users\acs-i\AppData\Local\Microsoft\WindowsApps;d:/programs/wamp/php7;C:\Dev\CVS\Git\bin 
+27.09.2019 20:36:16,01: Ok 
+27.09.2019 20:36:16,44: FINE-023: Цель выполнения: del-env 
+27.09.2019 20:36:16,96: Удаление переменной среды JAVA_HOME... 
+27.09.2019 20:36:17,29: Ok 
+27.09.2019 20:36:17,66: FINE-023: Цель выполнения: cmd-shell 
+27.09.2019 20:36:18,02: FINE-023: Цель выполнения: unpack-zip 
+27.09.2019 20:36:18,47: Удаление каталога установки модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1... 
+27.09.2019 20:36:22,60: Ok 
+27.09.2019 20:36:25,36: --------------------------------------------------- 
+27.09.2019 20:36:25,78: Выберите устанавливаемый модуль пакета [20 секунд] 
+27.09.2019 20:36:26,08: JAVA [Инструментарий для разработки на Java] 
+27.09.2019 20:36:26,50: --------------------------------------------------- 
+27.09.2019 20:36:27,23: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:36:27,54: FINE: :get_var_value_by_scope: _var_name=mod.name; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:36:27,84: FINE: :get_var_value_by_scope: l_var_value=openjdk 
+27.09.2019 20:36:28,14: FINE: :set_var_value: var_value_by_scope=openjdk; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:36:28,44: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:36:28,76: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:36:29,06: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:36:29,38: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:36:29,69: FINE: :get_var_value_by_scope: l_var_value=12.0.1 
+27.09.2019 20:36:30,01: FINE: :set_var_value: var_value_by_scope=12.0.1; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:36:30,31: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:36:30,67: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:36:31,13:          1 - openjdk v.12.0.1  
+27.09.2019 20:36:31,55: Free and open-source implementation of the Java SE Platform Edition 
+27.09.2019 20:36:32,09: 2 - Установить все модули 
+27.09.2019 20:36:32,55: 3 - Возврат в меню пакетов [по умолчанию] 
+27.09.2019 20:36:33,06: 4 - Выход 
+27.09.2019 20:36:36,33: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_mod_name=openjdk; g_mod_ver=12.0.1 
+27.09.2019 20:36:36,68: FINE-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+27.09.2019 20:36:37,03: FINE-012: Каталог установки пакета: C:\Program Files 
+27.09.2019 20:36:37,57: FINE-014: Фаза выполнения: openjdk-download 
+27.09.2019 20:36:41,40: FINE-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:36:41,81: FINE-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:36:42,19: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:45:10,20: FINE-016: Tюъры№ ёшёЄхьv: ru 
+27.09.2019 20:45:11,01: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+27.09.2019 20:45:11,83: [ 
+27.09.2019 20:45:12,72: ADMIN;  
+27.09.2019 20:45:13,54: MODE: run 
+27.09.2019 20:45:14,34: ; LOG_LEVEL: 5 
+27.09.2019 20:45:15,06: ] 
+27.09.2019 20:45:15,79: (Программа бесплатна для некоммерческого использования
+27.09.2019 20:45:15,79: (Программа бесплатна для некоммерческого использования) 
+27.09.2019 20:45:16,62: Инициализация параметров установки... 
+27.09.2019 20:45:17,37: FINE-015: Архитектура процессора: x64 
+27.09.2019 20:45:18,11: Ok 
+27.09.2019 20:45:18,91: Проверка параметров установки... 
+27.09.2019 20:45:19,66: Ok 
+27.09.2019 20:45:20,41: FINE-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:45:21,15: FINE-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+27.09.2019 20:45:21,88: FINE-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+27.09.2019 20:45:22,62: FINE-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+27.09.2019 20:45:23,37: FINE-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:45:24,12: FINE-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+27.09.2019 20:45:24,88: FINE: :get_var_scope: _svname=bisdir - bisd 
+27.09.2019 20:45:25,60: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:45:26,32: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:45:27,04: FINE: :get_var_value_by_scope: _var_name=bisdir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:45:27,74: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:45:28,46: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:45:29,18: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:45:29,88: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:45:30,65: FINE: :get_var_scope: _svname=windir - wind 
+27.09.2019 20:45:31,37: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:45:32,07: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:45:32,81: FINE: :get_var_value_by_scope: _var_name=windir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:45:33,53: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:45:34,24: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:45:34,95: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:45:35,67: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:45:36,44: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:45:37,14: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:45:37,87: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:45:38,60: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:45:39,33: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:45:40,05: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:45:40,77: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:45:41,49: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:46:03,32: --------------------------------------------------- 
+27.09.2019 20:46:04,13: Выберите устанавливаемый пакет программ [20 секунд] 
+27.09.2019 20:46:04,94: --------------------------------------------------- 
+27.09.2019 20:46:06,13: 1 - ANDROID	Android Development 
+27.09.2019 20:46:06,63: 2 - CVS  	РЎРёСЃС‚РµРјС‹ РєРѕРЅС‚СЂРѕР»СЏ РІРµСЂСЃРёР№ 
+27.09.2019 20:46:07,13: 3 - JAVA	РРЅСЃС‚СЂСѓРјРµРЅС‚Р°СЂРёР№ РґР»СЏ СЂР°Р·СЂР°Р±РѕС‚РєРё РЅР° Java 
+27.09.2019 20:46:07,62: 4 - BIS-TEST	BIS Test package 
+27.09.2019 20:46:08,12: 5 - WAMP	РЎС‚РµРє WAMP РґР»СЏ РІРµР±-СЂР°Р·СЂР°Р±РѕС‚РєРё 
+27.09.2019 20:46:08,66: 6 - Выход [по умолчанию] 
+27.09.2019 20:46:29,40: FINE-076: Пользователь вышел из меню пакетов 
+27.09.2019 20:48:01,26: FINE-016: Tюъры№ ёшёЄхьv: ru 
+27.09.2019 20:48:02,09: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+27.09.2019 20:48:02,90: [ 
+27.09.2019 20:48:03,78: ADMIN;  
+27.09.2019 20:48:04,60: MODE: run 
+27.09.2019 20:48:05,41: ; LOG_LEVEL: 5 
+27.09.2019 20:48:06,12: ] 
+27.09.2019 20:48:06,85: (Программа бесплатна для некоммерческого использования
+27.09.2019 20:48:06,85: (Программа бесплатна для некоммерческого использования) 
+27.09.2019 20:48:07,67: Инициализация параметров установки... 
+27.09.2019 20:48:08,43: FINE-015: Архитектура процессора: x64 
+27.09.2019 20:48:09,17: Ok 
+27.09.2019 20:48:09,98: Проверка параметров установки... 
+27.09.2019 20:48:10,86: Ok 
+27.09.2019 20:48:11,61: FINE-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:48:12,36: FINE-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+27.09.2019 20:48:13,10: FINE-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+27.09.2019 20:48:13,85: FINE-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+27.09.2019 20:48:14,59: FINE-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:48:15,34: FINE-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+27.09.2019 20:48:16,10: FINE: :get_var_scope: _svname=bisdir - bisd 
+27.09.2019 20:48:16,83: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:48:17,55: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:48:18,27: FINE: :get_var_value_by_scope: _var_name=bisdir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:48:18,99: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:48:19,71: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:48:20,43: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:48:21,15: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:48:21,92: FINE: :get_var_scope: _svname=windir - wind 
+27.09.2019 20:48:22,64: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:48:23,35: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:48:24,07: FINE: :get_var_value_by_scope: _var_name=windir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:48:24,77: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:48:25,49: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:48:26,22: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:48:26,92: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:48:27,70: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:48:28,42: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:48:29,14: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:48:29,86: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:48:30,58: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:48:31,30: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:48:32,00: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:48:32,72: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:48:42,90: --------------------------------------------------- 
+27.09.2019 20:48:43,72: Выберите устанавливаемый пакет программ [20 секунд] 
+27.09.2019 20:48:44,52: --------------------------------------------------- 
+27.09.2019 20:48:45,71: 1 - ANDROID	Android Development 
+27.09.2019 20:48:46,21: 2 - CVS  	РЎРёСЃС‚РµРјС‹ РєРѕРЅС‚СЂРѕР»СЏ РІРµСЂСЃРёР№ 
+27.09.2019 20:48:46,70: 3 - JAVA	РРЅСЃС‚СЂСѓРјРµРЅС‚Р°СЂРёР№ РґР»СЏ СЂР°Р·СЂР°Р±РѕС‚РєРё РЅР° Java 
+27.09.2019 20:48:47,20: 4 - BIS-TEST	BIS Test package 
+27.09.2019 20:48:47,69: 5 - WAMP	РЎС‚РµРє WAMP РґР»СЏ РІРµР±-СЂР°Р·СЂР°Р±РѕС‚РєРё 
+27.09.2019 20:48:48,24: 6 - Выход [по умолчанию] 
+27.09.2019 20:48:54,20: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:48:54,50: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:48:54,78: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:48:55,08: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:48:55,38: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:48:55,66: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:48:55,95: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:48:56,23: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:48:56,55: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_pkg_cfg_file=D:\Work\Projects.cmd\bis\src\bis\config\java.xml; g_pkg_name=JAVA; g_pkg_descr=Инструментарий для разработки на Java; use_log=true; g_log_level=5 
+27.09.2019 20:48:57,15: FINE: :binding_var: _var=${env.programfiles} 
+27.09.2019 20:48:57,44: FINE: :binding_var: l_var={env.programfiles 
+27.09.2019 20:48:57,85: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+27.09.2019 20:48:58,14: FINE: :binding_var: _var=${env.programfiles}; l_var=env.programfiles; l_lc_var=env.programfiles 
+27.09.2019 20:48:58,43: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:48:58,71: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:48:59,03: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:48:59,33: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:48:59,61: FINE: :get_var_value: _var_name=env.programfiles; scope_pkg=VARS; scope_mod= 
+27.09.2019 20:48:59,93: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:49:00,23: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:49:00,52: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:49:00,82: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:49:01,12: FINE: :binding_var_value: _str=${env.programfiles}; _var=env.programfiles; _val=C:\Program Files 
+27.09.2019 20:49:01,45: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:49:01,74: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:49:02,02: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:49:02,32: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:49:02,61: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:49:02,91: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:49:03,20: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:49:03,49: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:49:03,93: FINE-067: Каталог установки пакета JAVA: C:\Program Files 
+27.09.2019 20:49:04,36: FINE-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:49:04,79: FINE-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+27.09.2019 20:49:05,23: FINE-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:49:05,67: FINE-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+27.09.2019 20:49:06,17: --------------------------------------------------- 
+27.09.2019 20:49:06,57: Выберите устанавливаемый модуль пакета [20 секунд] 
+27.09.2019 20:49:06,85: JAVA [Инструментарий для разработки на Java] 
+27.09.2019 20:49:07,24: --------------------------------------------------- 
+27.09.2019 20:49:07,93: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:49:08,23: FINE: :get_var_value_by_scope: _var_name=mod.name; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:49:08,52: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:49:08,81: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:49:09,09: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:49:09,39: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:49:09,70: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:49:10,00: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:49:10,28: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:49:10,57: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:49:10,87: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:49:11,15: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:49:11,60:          1 - openjdk v.12.0.1  
+27.09.2019 20:49:12,37: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version} 
+27.09.2019 20:49:12,66: FINE: :binding_var: l_var={pkg.setupdir 
+27.09.2019 20:49:13,08: Регистр символов строки pkg.setupdir по признаку LOWER преобразован в pkg.setupdir 
+27.09.2019 20:49:13,38: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; l_var=pkg.setupdir; l_lc_var=pkg.setupdir 
+27.09.2019 20:49:13,68: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:49:13,96: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:49:14,30: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:49:14,58: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:49:14,88: FINE: :get_var_value: _var_name=pkg.setupdir; scope_pkg=JAVA; scope_mod= 
+27.09.2019 20:49:15,20: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:49:15,48: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:49:15,79: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:49:16,09: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:49:16,39: FINE: :binding_var_value: _str=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; _var=pkg.setupdir; _val=C:\Program Files 
+27.09.2019 20:49:16,70: FINE: :binding_var: l_var=/ 
+27.09.2019 20:49:17,02: FINE: :binding_var: l_var={pkg.name 
+27.09.2019 20:49:17,44: Регистр символов строки pkg.name по признаку LOWER преобразован в pkg.name 
+27.09.2019 20:49:17,72: FINE: :binding_var: _var=C:\Program Files/${pkg.name}/jdk-${mod.version}; l_var=pkg.name; l_lc_var=pkg.name 
+27.09.2019 20:49:18,04: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:49:18,33: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:49:18,66: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:49:18,97: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:49:19,26: FINE: :get_var_value: _var_name=pkg.name; scope_pkg=JAVA; scope_mod= 
+27.09.2019 20:49:19,57: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:49:19,87: FINE: :get_var_value_by_scope: l_var_value=JAVA 
+27.09.2019 20:49:20,17: FINE: :get_var_value: var_value_by_scope=JAVA 
+27.09.2019 20:49:20,47: FINE: :binding_var: var_value=JAVA 
+27.09.2019 20:49:20,77: FINE: :binding_var_value: _str=C:\Program Files/${pkg.name}/jdk-${mod.version}; _var=pkg.name; _val=JAVA 
+27.09.2019 20:49:21,09: FINE: :binding_var: l_var=/jdk- 
+27.09.2019 20:49:21,41: FINE: :binding_var: l_var={mod.version 
+27.09.2019 20:49:21,81: Регистр символов строки mod.version по признаку LOWER преобразован в mod.version 
+27.09.2019 20:49:22,11: FINE: :binding_var: _var=C:\Program Files/JAVA/jdk-${mod.version}; l_var=mod.version; l_lc_var=mod.version 
+27.09.2019 20:49:22,41: FINE: :get_var_scope: _svname=mod.version - mod. 
+27.09.2019 20:49:22,71: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:49:23,03: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:49:23,33: FINE: :get_var_value_by_scope: l_var_value=12.0.1 
+27.09.2019 20:49:23,61: FINE: :binding_var: var_value=12.0.1 
+27.09.2019 20:49:23,91: FINE: :binding_var_value: _str=C:\Program Files/JAVA/jdk-${mod.version}; _var=mod.version; _val=12.0.1 
+27.09.2019 20:49:24,25: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:49:24,53: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:49:24,83: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:49:25,15: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:49:25,43: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:49:25,74: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:49:26,05: FINE: :binding_var: _var=${mod.setupdir} 
+27.09.2019 20:49:26,34: FINE: :binding_var: l_var={mod.setupdir 
+27.09.2019 20:49:26,76: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+27.09.2019 20:49:27,06: FINE: :binding_var: _var=${mod.setupdir}; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+27.09.2019 20:49:27,36: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+27.09.2019 20:49:27,64: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:49:27,96: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:49:28,24: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:49:28,55: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:49:28,85: FINE: :binding_var_value: _str=${mod.setupdir}; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:49:29,16: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:49:29,46: FINE: :get_var_value_by_scope: _var_name=mod.homedir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:49:29,77: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:49:30,07: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:49:30,35: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:49:30,65: FINE: :set_var_value: l_curr_var_idx=3 
+27.09.2019 20:49:31,05: FINE-022: Каталог установки модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:49:31,51: FINE-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:49:32,21: FINE: :binding_var: _var=${mod.setupdir}/bin 
+27.09.2019 20:49:32,51: FINE: :binding_var: l_var={mod.setupdir 
+27.09.2019 20:49:32,93: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+27.09.2019 20:49:33,23: FINE: :binding_var: _var=${mod.setupdir}/bin; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+27.09.2019 20:49:33,53: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+27.09.2019 20:49:33,83: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:49:34,13: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:49:34,44: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:49:34,74: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:49:35,04: FINE: :binding_var_value: _str=${mod.setupdir}/bin; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:49:35,35: FINE: :binding_var: l_var=/bin 
+27.09.2019 20:49:35,67: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:49:35,97: FINE: :get_var_value_by_scope: _var_name=mod.bindir0; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:49:36,27: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:49:36,57: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:49:36,87: FINE: :set_var_value: l_curr_var_idx=3 
+27.09.2019 20:49:37,18: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:49:37,56: FINE-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+27.09.2019 20:49:37,88: Установлен ли модуль openjdk 
+27.09.2019 20:49:38,19: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+27.09.2019 20:49:38,85: Нет 
+27.09.2019 20:49:39,24: Free and open-source implementation of the Java SE Platform Edition 
+27.09.2019 20:49:39,77: 2 - Установить все модули 
+27.09.2019 20:49:40,22: 3 - Возврат в меню пакетов [по умолчанию] 
+27.09.2019 20:49:40,70: 4 - Выход 
+27.09.2019 20:50:01,22: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_mod_name=openjdk; g_mod_ver=12.0.1 
+27.09.2019 20:50:01,59: FINE-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+27.09.2019 20:50:01,94: FINE-012: Каталог установки пакета: C:\Program Files 
+27.09.2019 20:50:02,31: FINE: :get_var_scope: _svname=mod.destribdir - mod. 
+27.09.2019 20:50:02,61: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod=openjdk 
+27.09.2019 20:50:02,89: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:50:03,21: FINE: :get_var_value_by_scope: _var_name=mod.destribdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:50:03,49: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:50:03,80: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:50:04,10: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:50:04,38: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:50:05,75: FINE-014: Фаза выполнения: openjdk-download 
+27.09.2019 20:50:09,61: FINE-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:50:10,01: FINE-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:50:10,40: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:53:17,01: FINE-016: Tюъры№ ёшёЄхьv: ru 
+27.09.2019 20:53:17,83: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+27.09.2019 20:53:18,64: [ 
+27.09.2019 20:53:19,52: ADMIN;  
+27.09.2019 20:53:20,33: MODE: run 
+27.09.2019 20:53:21,11: ; LOG_LEVEL: 5 
+27.09.2019 20:53:21,81: ] 
+27.09.2019 20:53:22,53: (Программа бесплатна для некоммерческого использования
+27.09.2019 20:53:22,53: (Программа бесплатна для некоммерческого использования) 
+27.09.2019 20:53:23,36: Инициализация параметров установки... 
+27.09.2019 20:53:24,11: FINE-015: Архитектура процессора: x64 
+27.09.2019 20:53:24,83: Ok 
+27.09.2019 20:53:25,64: Проверка параметров установки... 
+27.09.2019 20:53:26,38: Ok 
+27.09.2019 20:53:27,12: FINE-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:53:27,85: FINE-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+27.09.2019 20:53:28,58: FINE-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+27.09.2019 20:53:29,31: FINE-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+27.09.2019 20:53:30,06: FINE-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:53:30,80: FINE-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+27.09.2019 20:53:31,55: FINE: :get_var_scope: _svname=bisdir - bisd 
+27.09.2019 20:53:32,25: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:53:32,97: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:53:33,69: FINE: :get_var_value_by_scope: _var_name=bisdir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:53:34,40: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:53:35,12: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:53:35,83: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:53:36,57: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:53:37,32: FINE: :get_var_scope: _svname=windir - wind 
+27.09.2019 20:53:38,04: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:53:38,76: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:53:39,48: FINE: :get_var_value_by_scope: _var_name=windir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:53:40,18: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:53:40,90: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:53:41,62: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:53:42,36: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:53:43,13: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:53:43,85: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:53:44,56: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:53:45,30: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:53:46,00: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:53:46,72: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:53:47,44: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:53:48,16: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:53:59,31: --------------------------------------------------- 
+27.09.2019 20:54:00,11: Выберите устанавливаемый пакет программ [20 секунд] 
+27.09.2019 20:54:00,93: --------------------------------------------------- 
+27.09.2019 20:54:02,10: 1 - ANDROID	Android Development 
+27.09.2019 20:54:02,60: 2 - CVS  	РЎРёСЃС‚РµРјС‹ РєРѕРЅС‚СЂРѕР»СЏ РІРµСЂСЃРёР№ 
+27.09.2019 20:54:03,09: 3 - JAVA	РРЅСЃС‚СЂСѓРјРµРЅС‚Р°СЂРёР№ РґР»СЏ СЂР°Р·СЂР°Р±РѕС‚РєРё РЅР° Java 
+27.09.2019 20:54:03,59: 4 - BIS-TEST	BIS Test package 
+27.09.2019 20:54:04,08: 5 - WAMP	РЎС‚РµРє WAMP РґР»СЏ РІРµР±-СЂР°Р·СЂР°Р±РѕС‚РєРё 
+27.09.2019 20:54:04,61: 6 - Выход [по умолчанию] 
+27.09.2019 20:54:21,44: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:54:21,73: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:54:22,01: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:54:22,31: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:54:22,60: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:54:22,89: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:54:23,18: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:54:23,48: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:54:23,78: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_pkg_cfg_file=D:\Work\Projects.cmd\bis\src\bis\config\java.xml; g_pkg_name=JAVA; g_pkg_descr=Инструментарий для разработки на Java; use_log=true; g_log_level=5 
+27.09.2019 20:54:24,38: FINE: :binding_var: _var=${env.programfiles} 
+27.09.2019 20:54:24,68: FINE: :binding_var: l_var={env.programfiles 
+27.09.2019 20:54:25,08: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+27.09.2019 20:54:25,37: FINE: :binding_var: _var=${env.programfiles}; l_var=env.programfiles; l_lc_var=env.programfiles 
+27.09.2019 20:54:25,67: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:54:25,96: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:54:26,27: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:54:26,57: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:54:26,86: FINE: :get_var_value: _var_name=env.programfiles; scope_pkg=VARS; scope_mod= 
+27.09.2019 20:54:27,18: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:54:27,46: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:54:27,76: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:54:28,05: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:54:28,35: FINE: :binding_var_value: _str=${env.programfiles}; _var=env.programfiles; _val=C:\Program Files 
+27.09.2019 20:54:28,70: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:54:28,98: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:54:29,27: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:54:29,57: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:54:29,85: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:54:30,16: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:54:30,44: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:54:30,74: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:54:31,17: FINE-067: Каталог установки пакета JAVA: C:\Program Files 
+27.09.2019 20:54:31,61: FINE-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:54:32,05: FINE-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+27.09.2019 20:54:32,48: FINE-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:54:32,91: FINE-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+27.09.2019 20:54:33,41: --------------------------------------------------- 
+27.09.2019 20:54:33,81: Выберите устанавливаемый модуль пакета [20 секунд] 
+27.09.2019 20:54:34,10: JAVA [Инструментарий для разработки на Java] 
+27.09.2019 20:54:34,49: --------------------------------------------------- 
+27.09.2019 20:54:35,16: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:54:35,46: FINE: :get_var_value_by_scope: _var_name=mod.name; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:54:35,74: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:54:36,04: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:54:36,32: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:54:36,62: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:54:36,93: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:54:37,23: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:54:37,51: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:54:37,80: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:54:38,10: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:54:38,38: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:54:38,82:          1 - openjdk v.12.0.1  
+27.09.2019 20:54:39,59: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version} 
+27.09.2019 20:54:39,89: FINE: :binding_var: l_var={pkg.setupdir 
+27.09.2019 20:54:40,31: Регистр символов строки pkg.setupdir по признаку LOWER преобразован в pkg.setupdir 
+27.09.2019 20:54:40,61: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; l_var=pkg.setupdir; l_lc_var=pkg.setupdir 
+27.09.2019 20:54:40,91: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:54:41,19: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:54:41,53: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:54:41,83: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:54:42,13: FINE: :get_var_value: _var_name=pkg.setupdir; scope_pkg=JAVA; scope_mod= 
+27.09.2019 20:54:42,46: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:54:42,76: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:54:43,05: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:54:43,35: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:54:43,66: FINE: :binding_var_value: _str=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; _var=pkg.setupdir; _val=C:\Program Files 
+27.09.2019 20:54:43,99: FINE: :binding_var: l_var=/ 
+27.09.2019 20:54:44,32: FINE: :binding_var: l_var={pkg.name 
+27.09.2019 20:54:44,74: Регистр символов строки pkg.name по признаку LOWER преобразован в pkg.name 
+27.09.2019 20:54:45,05: FINE: :binding_var: _var=C:\Program Files/${pkg.name}/jdk-${mod.version}; l_var=pkg.name; l_lc_var=pkg.name 
+27.09.2019 20:54:45,34: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:54:45,64: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:54:45,98: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:54:46,27: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:54:46,58: FINE: :get_var_value: _var_name=pkg.name; scope_pkg=JAVA; scope_mod= 
+27.09.2019 20:54:46,90: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:54:47,20: FINE: :get_var_value_by_scope: l_var_value=JAVA 
+27.09.2019 20:54:47,50: FINE: :get_var_value: var_value_by_scope=JAVA 
+27.09.2019 20:54:47,80: FINE: :binding_var: var_value=JAVA 
+27.09.2019 20:54:48,10: FINE: :binding_var_value: _str=C:\Program Files/${pkg.name}/jdk-${mod.version}; _var=pkg.name; _val=JAVA 
+27.09.2019 20:54:48,42: FINE: :binding_var: l_var=/jdk- 
+27.09.2019 20:54:48,73: FINE: :binding_var: l_var={mod.version 
+27.09.2019 20:54:49,15: Регистр символов строки mod.version по признаку LOWER преобразован в mod.version 
+27.09.2019 20:54:49,45: FINE: :binding_var: _var=C:\Program Files/JAVA/jdk-${mod.version}; l_var=mod.version; l_lc_var=mod.version 
+27.09.2019 20:54:49,75: FINE: :get_var_scope: _svname=mod.version - mod. 
+27.09.2019 20:54:50,05: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:54:50,36: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:54:50,66: FINE: :get_var_value_by_scope: l_var_value=12.0.1 
+27.09.2019 20:54:50,96: FINE: :binding_var: var_value=12.0.1 
+27.09.2019 20:54:51,26: FINE: :binding_var_value: _str=C:\Program Files/JAVA/jdk-${mod.version}; _var=mod.version; _val=12.0.1 
+27.09.2019 20:54:51,58: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:54:51,88: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:54:52,18: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:54:52,48: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:54:52,76: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:54:53,07: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:54:53,38: FINE: :binding_var: _var=${mod.setupdir} 
+27.09.2019 20:54:53,68: FINE: :binding_var: l_var={mod.setupdir 
+27.09.2019 20:54:54,08: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+27.09.2019 20:54:54,39: FINE: :binding_var: _var=${mod.setupdir}; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+27.09.2019 20:54:54,69: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+27.09.2019 20:54:54,99: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:54:55,29: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:54:55,61: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:54:55,89: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:54:56,19: FINE: :binding_var_value: _str=${mod.setupdir}; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:54:56,51: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:54:56,82: FINE: :get_var_value_by_scope: _var_name=mod.homedir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:54:57,12: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:54:57,42: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:54:57,72: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:54:58,01: FINE: :set_var_value: l_curr_var_idx=3 
+27.09.2019 20:54:58,40: FINE-022: Каталог установки модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:54:58,87: FINE-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:54:59,59: FINE: :binding_var: _var=${mod.setupdir}/bin 
+27.09.2019 20:54:59,89: FINE: :binding_var: l_var={mod.setupdir 
+27.09.2019 20:55:00,29: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+27.09.2019 20:55:00,61: FINE: :binding_var: _var=${mod.setupdir}/bin; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+27.09.2019 20:55:00,91: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+27.09.2019 20:55:01,21: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:55:01,51: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:55:01,81: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:55:02,11: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:55:02,41: FINE: :binding_var_value: _str=${mod.setupdir}/bin; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:55:02,74: FINE: :binding_var: l_var=/bin 
+27.09.2019 20:55:03,05: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:55:03,37: FINE: :get_var_value_by_scope: _var_name=mod.bindir0; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:55:03,66: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:55:03,96: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:55:04,26: FINE: :set_var_value: l_curr_var_idx=3 
+27.09.2019 20:55:04,56: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:55:04,96: FINE-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+27.09.2019 20:55:05,28: Установлен ли модуль openjdk 
+27.09.2019 20:55:05,59: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+27.09.2019 20:55:06,26: Нет 
+27.09.2019 20:55:06,65: Free and open-source implementation of the Java SE Platform Edition 
+27.09.2019 20:55:07,17: 2 - Установить все модули 
+27.09.2019 20:55:07,62: 3 - Возврат в меню пакетов [по умолчанию] 
+27.09.2019 20:55:08,12: 4 - Выход 
+27.09.2019 20:55:29,05: --------------------------------------------------- 
+27.09.2019 20:55:29,46: Выберите устанавливаемый пакет программ [20 секунд] 
+27.09.2019 20:55:29,84: --------------------------------------------------- 
+27.09.2019 20:55:30,23: 1 - ANDROID	Android Development 
+27.09.2019 20:55:30,60: 2 - CVS  	РЎРёСЃС‚РµРјС‹ РєРѕРЅС‚СЂРѕР»СЏ РІРµСЂСЃРёР№ 
+27.09.2019 20:55:30,98: 3 - JAVA	РРЅСЃС‚СЂСѓРјРµРЅС‚Р°СЂРёР№ РґР»СЏ СЂР°Р·СЂР°Р±РѕС‚РєРё РЅР° Java 
+27.09.2019 20:55:31,36: 4 - BIS-TEST	BIS Test package 
+27.09.2019 20:55:31,75: 5 - WAMP	РЎС‚РµРє WAMP РґР»СЏ РІРµР±-СЂР°Р·СЂР°Р±РѕС‚РєРё 
+27.09.2019 20:55:32,29: 6 - Выход [по умолчанию] 
+27.09.2019 20:55:34,99: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:55:35,29: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:55:35,57: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:55:35,87: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:55:36,17: FINE: :get_var_value_by_scope: l_var_value=JAVA 
+27.09.2019 20:55:36,46: FINE: :set_var_value: var_value_by_scope=JAVA; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:55:36,76: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:55:37,06: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:55:37,36: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_pkg_cfg_file=D:\Work\Projects.cmd\bis\src\bis\config\java.xml; g_pkg_name=JAVA; g_pkg_descr=Инструментарий для разработки на Java; use_log=true; g_log_level=5 
+27.09.2019 20:55:38,00: FINE: :binding_var: _var=${env.programfiles} 
+27.09.2019 20:55:38,28: FINE: :binding_var: l_var={env.programfiles 
+27.09.2019 20:55:38,71: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+27.09.2019 20:55:39,00: FINE: :binding_var: _var=${env.programfiles}; l_var=env.programfiles; l_lc_var=env.programfiles 
+27.09.2019 20:55:39,29: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:55:39,59: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:55:39,91: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:55:40,21: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:55:40,51: FINE: :get_var_value: _var_name=env.programfiles; scope_pkg=VARS; scope_mod= 
+27.09.2019 20:55:40,83: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:55:41,13: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:55:41,43: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:55:41,75: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:55:42,05: FINE: :binding_var_value: _str=${env.programfiles}; _var=env.programfiles; _val=C:\Program Files 
+27.09.2019 20:55:42,40: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:55:42,70: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:55:43,00: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:55:43,32: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:55:43,62: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:55:43,92: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:55:44,24: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:55:44,53: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:55:44,97: FINE-067: Каталог установки пакета JAVA: C:\Program Files 
+27.09.2019 20:55:45,42: FINE-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:55:45,86: FINE-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+27.09.2019 20:55:46,31: FINE-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:55:46,76: FINE-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+27.09.2019 20:55:47,27: --------------------------------------------------- 
+27.09.2019 20:55:47,67: Выберите устанавливаемый модуль пакета [20 секунд] 
+27.09.2019 20:55:47,97: JAVA [Инструментарий для разработки на Java] 
+27.09.2019 20:55:48,35: --------------------------------------------------- 
+27.09.2019 20:55:49,04: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:55:49,34: FINE: :get_var_value_by_scope: _var_name=mod.name; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:55:49,62: FINE: :get_var_value_by_scope: l_var_value=openjdk 
+27.09.2019 20:55:49,92: FINE: :set_var_value: var_value_by_scope=openjdk; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:55:50,22: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:55:50,51: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:55:50,83: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:55:51,11: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:55:51,41: FINE: :get_var_value_by_scope: l_var_value=12.0.1 
+27.09.2019 20:55:51,71: FINE: :set_var_value: var_value_by_scope=12.0.1; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:55:52,01: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:55:52,30: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:55:52,75:          1 - openjdk v.12.0.1  
+27.09.2019 20:55:53,16: Free and open-source implementation of the Java SE Platform Edition 
+27.09.2019 20:55:53,66: 2 - Установить все модули 
+27.09.2019 20:55:54,12: 3 - Возврат в меню пакетов [по умолчанию] 
+27.09.2019 20:55:54,59: 4 - Выход 
+27.09.2019 20:56:06,99: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_mod_name=openjdk; g_mod_ver=12.0.1 
+27.09.2019 20:56:07,34: FINE-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+27.09.2019 20:56:07,68: FINE-012: Каталог установки пакета: C:\Program Files 
+27.09.2019 20:56:08,04: FINE: :get_var_scope: _svname=mod.destribdir - mod. 
+27.09.2019 20:56:08,34: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod=openjdk 
+27.09.2019 20:56:08,64: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:56:08,96: FINE: :get_var_value_by_scope: _var_name=mod.destribdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:56:09,24: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:56:09,55: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:56:09,85: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:56:10,15: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:56:11,52: FINE-014: Фаза выполнения: openjdk-download 
+27.09.2019 20:56:15,66: FINE-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:56:16,06: FINE-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:56:16,45: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:57:00,41: FINE-016: Tюъры№ ёшёЄхьv: ru 
+27.09.2019 20:57:01,22: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+27.09.2019 20:57:02,03: [ 
+27.09.2019 20:57:02,92: ADMIN;  
+27.09.2019 20:57:03,73: MODE: run 
+27.09.2019 20:57:04,54: ; LOG_LEVEL: 5 
+27.09.2019 20:57:05,24: ] 
+27.09.2019 20:57:05,96: (Программа бесплатна для некоммерческого использования
+27.09.2019 20:57:05,96: (Программа бесплатна для некоммерческого использования) 
+27.09.2019 20:57:06,79: Инициализация параметров установки... 
+27.09.2019 20:57:07,53: FINE-015: Архитектура процессора: x64 
+27.09.2019 20:57:08,28: Ok 
+27.09.2019 20:57:09,08: Проверка параметров установки... 
+27.09.2019 20:57:09,82: Ok 
+27.09.2019 20:57:10,57: FINE-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:57:11,31: FINE-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+27.09.2019 20:57:12,05: FINE-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+27.09.2019 20:57:12,80: FINE-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+27.09.2019 20:57:13,54: FINE-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:57:14,28: FINE-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+27.09.2019 20:57:15,04: FINE: :get_var_scope: _svname=bisdir - bisd 
+27.09.2019 20:57:15,76: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:57:16,48: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:57:17,20: FINE: :get_var_value_by_scope: _var_name=bisdir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:57:17,91: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:57:18,62: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:57:19,33: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:57:20,04: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:57:20,81: FINE: :get_var_scope: _svname=windir - wind 
+27.09.2019 20:57:21,51: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:57:22,23: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:57:22,95: FINE: :get_var_value_by_scope: _var_name=windir; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:57:23,67: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:57:24,39: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:57:25,11: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:57:25,81: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:57:26,58: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:57:27,30: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:57:28,03: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:57:28,75: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:57:29,48: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:57:30,19: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+27.09.2019 20:57:30,91: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:57:31,63: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:57:40,07: --------------------------------------------------- 
+27.09.2019 20:57:40,90: Выберите устанавливаемый пакет программ [20 секунд] 
+27.09.2019 20:57:41,72: --------------------------------------------------- 
+27.09.2019 20:57:42,92: 1 - ANDROID	Android Development 
+27.09.2019 20:57:43,42: 2 - CVS  	РЎРёСЃС‚РµРјС‹ РєРѕРЅС‚СЂРѕР»СЏ РІРµСЂСЃРёР№ 
+27.09.2019 20:57:43,94: 3 - JAVA	РРЅСЃС‚СЂСѓРјРµРЅС‚Р°СЂРёР№ РґР»СЏ СЂР°Р·СЂР°Р±РѕС‚РєРё РЅР° Java 
+27.09.2019 20:57:44,44: 4 - BIS-TEST	BIS Test package 
+27.09.2019 20:57:44,94: 5 - WAMP	РЎС‚РµРє WAMP РґР»СЏ РІРµР±-СЂР°Р·СЂР°Р±РѕС‚РєРё 
+27.09.2019 20:57:45,48: 6 - Выход [по умолчанию] 
+27.09.2019 20:57:52,54: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:57:52,84: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:57:53,13: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:57:53,43: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:57:53,72: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:57:54,01: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:57:54,29: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:57:54,59: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:57:54,89: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_pkg_cfg_file=D:\Work\Projects.cmd\bis\src\bis\config\java.xml; g_pkg_name=JAVA; g_pkg_descr=Инструментарий для разработки на Java; use_log=true; g_log_level=5 
+27.09.2019 20:57:55,50: FINE: :binding_var: _var=${env.programfiles} 
+27.09.2019 20:57:55,80: FINE: :binding_var: l_var={env.programfiles 
+27.09.2019 20:57:56,20: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+27.09.2019 20:57:56,50: FINE: :binding_var: _var=${env.programfiles}; l_var=env.programfiles; l_lc_var=env.programfiles 
+27.09.2019 20:57:56,79: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:57:57,07: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:57:57,40: FINE: :get_var_scope: _svname=env.programfiles - env. 
+27.09.2019 20:57:57,69: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+27.09.2019 20:57:57,99: FINE: :get_var_value: _var_name=env.programfiles; scope_pkg=VARS; scope_mod= 
+27.09.2019 20:57:58,31: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+27.09.2019 20:57:58,59: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:57:58,88: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:57:59,18: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:57:59,46: FINE: :binding_var_value: _str=${env.programfiles}; _var=env.programfiles; _val=C:\Program Files 
+27.09.2019 20:57:59,81: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:58:00,14: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:58:00,43: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:58:00,73: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:58:01,02: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:58:01,32: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+27.09.2019 20:58:01,60: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:58:01,90: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:58:02,34: FINE-067: Каталог установки пакета JAVA: C:\Program Files 
+27.09.2019 20:58:02,78: FINE-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+27.09.2019 20:58:03,21: FINE-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+27.09.2019 20:58:03,64: FINE-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+27.09.2019 20:58:04,08: FINE-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+27.09.2019 20:58:04,58: --------------------------------------------------- 
+27.09.2019 20:58:04,98: Выберите устанавливаемый модуль пакета [20 секунд] 
+27.09.2019 20:58:05,28: JAVA [Инструментарий для разработки на Java] 
+27.09.2019 20:58:05,67: --------------------------------------------------- 
+27.09.2019 20:58:06,35: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:06,65: FINE: :get_var_value_by_scope: _var_name=mod.name; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:58:06,94: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:58:07,22: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:07,52: FINE: :set_var_value: l_curr_var_idx= 
+27.09.2019 20:58:07,81: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:58:08,14: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:08,44: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:58:08,73: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:58:09,03: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:09,33: FINE: :set_var_value: l_curr_var_idx=0 
+27.09.2019 20:58:09,62: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:58:10,06:          1 - openjdk v.12.0.1  
+27.09.2019 20:58:10,82: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version} 
+27.09.2019 20:58:11,14: FINE: :binding_var: l_var={pkg.setupdir 
+27.09.2019 20:58:11,54: Регистр символов строки pkg.setupdir по признаку LOWER преобразован в pkg.setupdir 
+27.09.2019 20:58:11,82: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; l_var=pkg.setupdir; l_lc_var=pkg.setupdir 
+27.09.2019 20:58:12,14: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:58:12,42: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:58:12,76: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+27.09.2019 20:58:13,06: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:58:13,36: FINE: :get_var_value: _var_name=pkg.setupdir; scope_pkg=JAVA; scope_mod= 
+27.09.2019 20:58:13,68: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:58:13,98: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+27.09.2019 20:58:14,26: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+27.09.2019 20:58:14,56: FINE: :binding_var: var_value=C:\Program Files 
+27.09.2019 20:58:14,86: FINE: :binding_var_value: _str=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; _var=pkg.setupdir; _val=C:\Program Files 
+27.09.2019 20:58:15,20: FINE: :binding_var: l_var=/ 
+27.09.2019 20:58:15,50: FINE: :binding_var: l_var={pkg.name 
+27.09.2019 20:58:15,91: Регистр символов строки pkg.name по признаку LOWER преобразован в pkg.name 
+27.09.2019 20:58:16,21: FINE: :binding_var: _var=C:\Program Files/${pkg.name}/jdk-${mod.version}; l_var=pkg.name; l_lc_var=pkg.name 
+27.09.2019 20:58:16,51: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:58:16,81: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:58:17,14: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+27.09.2019 20:58:17,44: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:58:17,74: FINE: :get_var_value: _var_name=pkg.name; scope_pkg=JAVA; scope_mod= 
+27.09.2019 20:58:18,06: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+27.09.2019 20:58:18,36: FINE: :get_var_value_by_scope: l_var_value=JAVA 
+27.09.2019 20:58:18,66: FINE: :get_var_value: var_value_by_scope=JAVA 
+27.09.2019 20:58:18,96: FINE: :binding_var: var_value=JAVA 
+27.09.2019 20:58:19,26: FINE: :binding_var_value: _str=C:\Program Files/${pkg.name}/jdk-${mod.version}; _var=pkg.name; _val=JAVA 
+27.09.2019 20:58:19,58: FINE: :binding_var: l_var=/jdk- 
+27.09.2019 20:58:19,90: FINE: :binding_var: l_var={mod.version 
+27.09.2019 20:58:20,32: Регистр символов строки mod.version по признаку LOWER преобразован в mod.version 
+27.09.2019 20:58:20,62: FINE: :binding_var: _var=C:\Program Files/JAVA/jdk-${mod.version}; l_var=mod.version; l_lc_var=mod.version 
+27.09.2019 20:58:20,92: FINE: :get_var_scope: _svname=mod.version - mod. 
+27.09.2019 20:58:21,22: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:58:21,52: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:58:21,83: FINE: :get_var_value_by_scope: l_var_value=12.0.1 
+27.09.2019 20:58:22,13: FINE: :binding_var: var_value=12.0.1 
+27.09.2019 20:58:22,43: FINE: :binding_var_value: _str=C:\Program Files/JAVA/jdk-${mod.version}; _var=mod.version; _val=12.0.1 
+27.09.2019 20:58:22,74: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:23,05: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:58:23,35: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:58:23,65: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:23,93: FINE: :set_var_value: l_curr_var_idx=1 
+27.09.2019 20:58:24,25: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:58:24,55: FINE: :binding_var: _var=${mod.setupdir} 
+27.09.2019 20:58:24,85: FINE: :binding_var: l_var={mod.setupdir 
+27.09.2019 20:58:25,27: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+27.09.2019 20:58:25,57: FINE: :binding_var: _var=${mod.setupdir}; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+27.09.2019 20:58:25,87: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+27.09.2019 20:58:26,17: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:58:26,49: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:58:26,77: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:58:27,07: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:58:27,39: FINE: :binding_var_value: _str=${mod.setupdir}; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:58:27,71: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:28,01: FINE: :get_var_value_by_scope: _var_name=mod.homedir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:58:28,31: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:58:28,61: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:28,91: FINE: :set_var_value: l_curr_var_idx=2 
+27.09.2019 20:58:29,23: FINE: :set_var_value: l_curr_var_idx=3 
+27.09.2019 20:58:29,61: FINE-022: Каталог установки модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:58:30,08: FINE-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:58:30,79: FINE: :binding_var: _var=${mod.setupdir}/bin 
+27.09.2019 20:58:31,09: FINE: :binding_var: l_var={mod.setupdir 
+27.09.2019 20:58:31,51: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+27.09.2019 20:58:31,81: FINE: :binding_var: _var=${mod.setupdir}/bin; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+27.09.2019 20:58:32,12: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+27.09.2019 20:58:32,42: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+27.09.2019 20:58:32,73: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:58:33,03: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:58:33,33: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:58:33,63: FINE: :binding_var_value: _str=${mod.setupdir}/bin; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+27.09.2019 20:58:33,96: FINE: :binding_var: l_var=/bin 
+27.09.2019 20:58:34,27: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:34,57: FINE: :get_var_value_by_scope: _var_name=mod.bindir0; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:58:34,87: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:58:35,17: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:35,47: FINE: :set_var_value: l_curr_var_idx=3 
+27.09.2019 20:58:35,77: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:58:36,17: FINE-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+27.09.2019 20:58:36,49: Установлен ли модуль openjdk 
+27.09.2019 20:58:36,81: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+27.09.2019 20:58:37,48: Нет 
+27.09.2019 20:58:37,86: Free and open-source implementation of the Java SE Platform Edition 
+27.09.2019 20:58:38,41: 2 - Установить все модули 
+27.09.2019 20:58:38,86: 3 - Возврат в меню пакетов [по умолчанию] 
+27.09.2019 20:58:39,36: 4 - Выход 
+27.09.2019 20:58:41,69: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_mod_name=openjdk; g_mod_ver=12.0.1 
+27.09.2019 20:58:42,05: FINE-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+27.09.2019 20:58:42,41: FINE-012: Каталог установки пакета: C:\Program Files 
+27.09.2019 20:58:42,77: FINE: :get_var_scope: _svname=mod.destribdir - mod. 
+27.09.2019 20:58:43,07: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod=openjdk 
+27.09.2019 20:58:43,39: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:43,70: FINE: :get_var_value_by_scope: _var_name=mod.destribdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+27.09.2019 20:58:44,00: FINE: :get_var_value_by_scope: l_var_value= 
+27.09.2019 20:58:44,30: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+27.09.2019 20:58:44,59: FINE: :set_var_value: l_curr_var_idx=4 
+27.09.2019 20:58:44,89: FINE: :set_var_value: l_curr_var_idx=5 
+27.09.2019 20:58:46,28: FINE-014: Фаза выполнения: openjdk-download 
+27.09.2019 20:58:50,44: FINE-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:58:50,85: FINE-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+27.09.2019 20:58:51,23: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 12:51:38,63: FINE-016: Tюъры№ ёшёЄхьv: ru 
+29.09.2019 12:51:39,45: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+29.09.2019 12:51:40,27: [ 
+29.09.2019 12:51:41,22: ADMIN;  
+29.09.2019 12:51:42,06: MODE: run 
+29.09.2019 12:51:42,88: ; LOG_LEVEL: 5 
+29.09.2019 12:51:43,61: ] 
+29.09.2019 12:51:44,35: (Программа бесплатна для некоммерческого использования
+29.09.2019 12:51:44,35: (Программа бесплатна для некоммерческого использования) 
+29.09.2019 12:51:45,17: Инициализация параметров установки... 
+29.09.2019 12:51:45,94: FINE-015: Архитектура процессора: x64 
+29.09.2019 12:51:46,69: Ok 
+29.09.2019 12:51:47,52: Проверка параметров установки... 
+29.09.2019 12:51:48,27: Ok 
+29.09.2019 12:51:49,00: FINE-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 12:51:49,74: FINE-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+29.09.2019 12:51:50,49: FINE-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+29.09.2019 12:51:51,24: FINE-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+29.09.2019 12:51:51,99: FINE-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 12:51:52,74: FINE-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+29.09.2019 12:51:53,50: FINE: :get_var_scope: _svname=bisdir - bisd 
+29.09.2019 12:51:54,22: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+29.09.2019 12:51:54,94: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+29.09.2019 12:51:55,67: FINE: :get_var_value_by_scope: _var_name=bisdir; _scope_pkg=VARS; _scope_mod= 
+29.09.2019 12:51:56,38: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:51:57,10: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+29.09.2019 12:51:57,81: FINE: :set_var_value: l_curr_var_idx= 
+29.09.2019 12:51:58,53: FINE: :set_var_value: l_curr_var_idx=0 
+29.09.2019 12:51:59,30: FINE: :get_var_scope: _svname=windir - wind 
+29.09.2019 12:52:00,03: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+29.09.2019 12:52:00,75: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+29.09.2019 12:52:01,47: FINE: :get_var_value_by_scope: _var_name=windir; _scope_pkg=VARS; _scope_mod= 
+29.09.2019 12:52:02,19: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:52:02,92: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+29.09.2019 12:52:03,64: FINE: :set_var_value: l_curr_var_idx=0 
+29.09.2019 12:52:04,36: FINE: :set_var_value: l_curr_var_idx=1 
+29.09.2019 12:52:05,14: FINE: :get_var_scope: _svname=env.programfiles - env. 
+29.09.2019 12:52:05,86: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+29.09.2019 12:52:06,60: FINE: :set_var_value: svv_scope_pkg=VARS; svv_scope_mod= 
+29.09.2019 12:52:07,31: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+29.09.2019 12:52:08,03: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:52:08,75: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=VARS; svv_scope_mod= 
+29.09.2019 12:52:09,52: FINE: :set_var_value: l_curr_var_idx=1 
+29.09.2019 12:52:10,25: FINE: :set_var_value: l_curr_var_idx=2 
+29.09.2019 12:52:16,30: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+29.09.2019 12:52:16,58: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+29.09.2019 12:52:16,88: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+29.09.2019 12:52:17,17: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+29.09.2019 12:52:17,45: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:52:17,75: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+29.09.2019 12:52:18,03: FINE: :set_var_value: l_curr_var_idx= 
+29.09.2019 12:52:18,33: FINE: :set_var_value: l_curr_var_idx=0 
+29.09.2019 12:52:18,63: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_pkg_cfg_file=D:\Work\Projects.cmd\bis\src\bis\config\java.xml; g_pkg_name=JAVA; g_pkg_descr=Инструментарий для разработки на Java; use_log=true; g_log_level=5 
+29.09.2019 12:52:19,24: FINE: :binding_var: _var=${env.programfiles} 
+29.09.2019 12:52:19,53: FINE: :binding_var: l_var={env.programfiles 
+29.09.2019 12:52:19,94: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+29.09.2019 12:52:20,22: FINE: :binding_var: _var=${env.programfiles}; l_var=env.programfiles; l_lc_var=env.programfiles 
+29.09.2019 12:52:20,52: FINE: :get_var_scope: _svname=env.programfiles - env. 
+29.09.2019 12:52:20,81: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+29.09.2019 12:52:21,13: FINE: :get_var_scope: _svname=env.programfiles - env. 
+29.09.2019 12:52:21,42: FINE: :get_var_scope: l_scope_pkg=VARS; l_scope_mod= 
+29.09.2019 12:52:21,70: FINE: :get_var_value: _var_name=env.programfiles; scope_pkg=VARS; scope_mod= 
+29.09.2019 12:52:22,02: FINE: :get_var_value_by_scope: _var_name=env.programfiles; _scope_pkg=VARS; _scope_mod= 
+29.09.2019 12:52:22,31: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+29.09.2019 12:52:22,63: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+29.09.2019 12:52:22,92: FINE: :binding_var: var_value=C:\Program Files 
+29.09.2019 12:52:23,20: FINE: :binding_var_value: _str=${env.programfiles}; _var=env.programfiles; _val=C:\Program Files 
+29.09.2019 12:52:23,55: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+29.09.2019 12:52:23,83: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+29.09.2019 12:52:24,13: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod= 
+29.09.2019 12:52:24,42: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+29.09.2019 12:52:24,72: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:52:25,00: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod= 
+29.09.2019 12:52:25,30: FINE: :set_var_value: l_curr_var_idx=0 
+29.09.2019 12:52:25,58: FINE: :set_var_value: l_curr_var_idx=1 
+29.09.2019 12:52:26,02: FINE-067: Каталог установки пакета JAVA: C:\Program Files 
+29.09.2019 12:52:26,45: FINE-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 12:52:26,89: FINE-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+29.09.2019 12:52:27,33: FINE-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 12:52:27,77: FINE-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+29.09.2019 12:52:28,56: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:52:28,86: FINE: :get_var_value_by_scope: _var_name=mod.name; _scope_pkg=JAVA; _scope_mod=openjdk 
+29.09.2019 12:52:29,14: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:52:29,44: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:52:29,74: FINE: :set_var_value: l_curr_var_idx= 
+29.09.2019 12:52:30,02: FINE: :set_var_value: l_curr_var_idx=0 
+29.09.2019 12:52:30,33: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:52:30,63: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+29.09.2019 12:52:30,91: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:52:31,20: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:52:31,50: FINE: :set_var_value: l_curr_var_idx=0 
+29.09.2019 12:52:31,78: FINE: :set_var_value: l_curr_var_idx=1 
+29.09.2019 12:52:32,53: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version} 
+29.09.2019 12:52:32,83: FINE: :binding_var: l_var={pkg.setupdir 
+29.09.2019 12:52:33,24: Регистр символов строки pkg.setupdir по признаку LOWER преобразован в pkg.setupdir 
+29.09.2019 12:52:33,55: FINE: :binding_var: _var=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; l_var=pkg.setupdir; l_lc_var=pkg.setupdir 
+29.09.2019 12:52:33,85: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+29.09.2019 12:52:34,14: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+29.09.2019 12:52:34,47: FINE: :get_var_scope: _svname=pkg.setupdir - pkg. 
+29.09.2019 12:52:34,78: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+29.09.2019 12:52:35,08: FINE: :get_var_value: _var_name=pkg.setupdir; scope_pkg=JAVA; scope_mod= 
+29.09.2019 12:52:35,41: FINE: :get_var_value_by_scope: _var_name=pkg.setupdir; _scope_pkg=JAVA; _scope_mod= 
+29.09.2019 12:52:35,70: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files 
+29.09.2019 12:52:36,00: FINE: :get_var_value: var_value_by_scope=C:\Program Files 
+29.09.2019 12:52:36,30: FINE: :binding_var: var_value=C:\Program Files 
+29.09.2019 12:52:36,60: FINE: :binding_var_value: _str=${pkg.setupdir}/${pkg.name}/jdk-${mod.version}; _var=pkg.setupdir; _val=C:\Program Files 
+29.09.2019 12:52:36,91: FINE: :binding_var: l_var=/ 
+29.09.2019 12:52:37,24: FINE: :binding_var: l_var={pkg.name 
+29.09.2019 12:52:37,64: Регистр символов строки pkg.name по признаку LOWER преобразован в pkg.name 
+29.09.2019 12:52:37,94: FINE: :binding_var: _var=C:\Program Files/${pkg.name}/jdk-${mod.version}; l_var=pkg.name; l_lc_var=pkg.name 
+29.09.2019 12:52:38,24: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+29.09.2019 12:52:38,53: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+29.09.2019 12:52:38,88: FINE: :get_var_scope: _svname=pkg.name - pkg. 
+29.09.2019 12:52:39,17: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+29.09.2019 12:52:39,47: FINE: :get_var_value: _var_name=pkg.name; scope_pkg=JAVA; scope_mod= 
+29.09.2019 12:52:39,78: FINE: :get_var_value_by_scope: _var_name=pkg.name; _scope_pkg=JAVA; _scope_mod= 
+29.09.2019 12:52:40,08: FINE: :get_var_value_by_scope: l_var_value=JAVA 
+29.09.2019 12:52:40,38: FINE: :get_var_value: var_value_by_scope=JAVA 
+29.09.2019 12:52:40,67: FINE: :binding_var: var_value=JAVA 
+29.09.2019 12:52:40,99: FINE: :binding_var_value: _str=C:\Program Files/${pkg.name}/jdk-${mod.version}; _var=pkg.name; _val=JAVA 
+29.09.2019 12:52:41,31: FINE: :binding_var: l_var=/jdk- 
+29.09.2019 12:52:41,64: FINE: :binding_var: l_var={mod.version 
+29.09.2019 12:52:42,06: Регистр символов строки mod.version по признаку LOWER преобразован в mod.version 
+29.09.2019 12:52:42,36: FINE: :binding_var: _var=C:\Program Files/JAVA/jdk-${mod.version}; l_var=mod.version; l_lc_var=mod.version 
+29.09.2019 12:52:42,67: FINE: :get_var_scope: _svname=mod.version - mod. 
+29.09.2019 12:52:42,97: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+29.09.2019 12:52:43,27: FINE: :get_var_value_by_scope: _var_name=mod.version; _scope_pkg=JAVA; _scope_mod=openjdk 
+29.09.2019 12:52:43,56: FINE: :get_var_value_by_scope: l_var_value=12.0.1 
+29.09.2019 12:52:43,88: FINE: :binding_var: var_value=12.0.1 
+29.09.2019 12:52:44,17: FINE: :binding_var_value: _str=C:\Program Files/JAVA/jdk-${mod.version}; _var=mod.version; _val=12.0.1 
+29.09.2019 12:52:44,50: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:52:44,81: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+29.09.2019 12:52:45,11: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:52:45,41: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:52:45,70: FINE: :set_var_value: l_curr_var_idx=1 
+29.09.2019 12:52:46,00: FINE: :set_var_value: l_curr_var_idx=2 
+29.09.2019 12:52:46,31: FINE: :binding_var: _var=${mod.setupdir} 
+29.09.2019 12:52:46,61: FINE: :binding_var: l_var={mod.setupdir 
+29.09.2019 12:52:47,03: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 12:52:47,33: FINE: :binding_var: _var=${mod.setupdir}; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+29.09.2019 12:52:47,64: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+29.09.2019 12:52:47,94: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+29.09.2019 12:52:48,24: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+29.09.2019 12:52:48,53: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 12:52:48,85: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 12:52:49,14: FINE: :binding_var_value: _str=${mod.setupdir}; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 12:52:49,47: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:52:49,77: FINE: :get_var_value_by_scope: _var_name=mod.homedir; _scope_pkg=JAVA; _scope_mod=openjdk 
+29.09.2019 12:52:50,06: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:52:50,66: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:52:50,95: FINE: :set_var_value: l_curr_var_idx=2 
+29.09.2019 12:52:51,25: FINE: :set_var_value: l_curr_var_idx=3 
+29.09.2019 12:52:51,66: FINE-022: Каталог установки модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 12:52:52,13: FINE-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 12:52:52,83: FINE: :binding_var: _var=${mod.setupdir}/bin 
+29.09.2019 12:52:53,13: FINE: :binding_var: l_var={mod.setupdir 
+29.09.2019 12:52:53,55: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 12:52:53,85: FINE: :binding_var: _var=${mod.setupdir}/bin; l_var=mod.setupdir; l_lc_var=mod.setupdir 
+29.09.2019 12:52:54,16: FINE: :get_var_scope: _svname=mod.setupdir - mod. 
+29.09.2019 12:52:54,45: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod= 
+29.09.2019 12:52:54,77: FINE: :get_var_value_by_scope: _var_name=mod.setupdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+29.09.2019 12:52:55,08: FINE: :get_var_value_by_scope: l_var_value=C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 12:52:55,38: FINE: :binding_var: var_value=C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 12:52:55,69: FINE: :binding_var_value: _str=${mod.setupdir}/bin; _var=mod.setupdir; _val=C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 12:52:56,02: FINE: :binding_var: l_var=/bin 
+29.09.2019 12:52:56,33: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:52:56,63: FINE: :get_var_value_by_scope: _var_name=mod.bindir0; _scope_pkg=JAVA; _scope_mod=openjdk 
+29.09.2019 12:52:56,92: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:52:57,24: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:52:57,53: FINE: :set_var_value: l_curr_var_idx=3 
+29.09.2019 12:52:57,85: FINE: :set_var_value: l_curr_var_idx=4 
+29.09.2019 12:52:58,24: FINE-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+29.09.2019 12:52:58,56: Установлен ли модуль openjdk 
+29.09.2019 12:52:58,88: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+29.09.2019 12:52:59,53: Нет 
+29.09.2019 12:52:59,95: FINE: D:\Work\Projects.cmd\bis\src\bis\bis_.cmd: g_mod_name=openjdk; g_mod_ver=12.0.1 
+29.09.2019 12:53:00,31: FINE-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+29.09.2019 12:53:00,70: FINE-012: Каталог установки пакета: C:\Program Files 
+29.09.2019 12:53:01,08: FINE: :get_var_scope: _svname=mod.destribdir - mod. 
+29.09.2019 12:53:01,39: FINE: :get_var_scope: l_scope_pkg=JAVA; l_scope_mod=openjdk 
+29.09.2019 12:53:01,69: FINE: :set_var_value: svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:53:02,00: FINE: :get_var_value_by_scope: _var_name=mod.destribdir; _scope_pkg=JAVA; _scope_mod=openjdk 
+29.09.2019 12:53:02,31: FINE: :get_var_value_by_scope: l_var_value= 
+29.09.2019 12:53:02,61: FINE: :set_var_value: var_value_by_scope=; svv_scope_pkg=JAVA; svv_scope_mod=openjdk 
+29.09.2019 12:53:02,91: FINE: :set_var_value: l_curr_var_idx=4 
+29.09.2019 12:53:03,20: FINE: :set_var_value: l_curr_var_idx=5 
+29.09.2019 12:53:04,60: FINE-014: Фаза выполнения: openjdk-download 
+29.09.2019 12:53:09,10: FINE-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 12:53:09,50: FINE-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 12:53:09,89: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 15:02:39,28: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+29.09.2019 15:02:40,10: [ 
+29.09.2019 15:02:40,99: ADMIN;  
+29.09.2019 15:02:41,81: MODE: run 
+29.09.2019 15:02:42,63: ; LOG_LEVEL: 4 
+29.09.2019 15:02:43,33: ] 
+29.09.2019 15:02:44,05: (Программа бесплатна для некоммерческого использования
+29.09.2019 15:02:44,05: (Программа бесплатна для некоммерческого использования) 
+29.09.2019 15:02:44,88: Инициализация параметров установки... 
+29.09.2019 15:02:46,35: Ok 
+29.09.2019 15:02:47,16: Проверка параметров установки... 
+29.09.2019 15:02:47,91: Ok 
+29.09.2019 15:02:48,66: INF-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 15:02:49,39: INF-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+29.09.2019 15:02:50,14: INF-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+29.09.2019 15:02:50,89: INF-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+29.09.2019 15:02:51,64: INF-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 15:02:52,39: INF-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+29.09.2019 15:03:13,80: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+29.09.2019 15:03:19,10: INF-067: Каталог установки пакета JAVA: C:\Program Files 
+29.09.2019 15:03:19,52: INF-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 15:03:19,95: INF-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+29.09.2019 15:03:20,38: INF-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 15:03:20,81: INF-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+29.09.2019 15:03:25,75: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.setupdir 
+29.09.2019 15:03:29,61: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.name пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.name 
+29.09.2019 15:03:33,50: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.version пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.version 
+29.09.2019 15:03:37,85: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.setupdir 
+29.09.2019 15:03:41,66: INF-022: ??????? ????????? ?????? openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 15:03:42,13: INF-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 15:03:43,49: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 15:03:47,58: INF-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+29.09.2019 15:03:47,92: Установлен ли модуль openjdk 
+29.09.2019 15:03:48,24: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+29.09.2019 15:03:48,89: Нет 
+29.09.2019 15:03:49,61: INF-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+29.09.2019 15:03:49,97: INF-012: Каталог установки пакета: C:\Program Files 
+29.09.2019 15:03:53,47: INF-014: Фаза выполнения: openjdk-download 
+29.09.2019 15:03:58,98: INF-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 15:03:59,37: INF-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 15:03:59,76: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 20:54:35,59: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+29.09.2019 20:54:36,42: [ 
+29.09.2019 20:54:37,31: ADMIN;  
+29.09.2019 20:54:38,13: MODE: run 
+29.09.2019 20:54:38,95: ; LOG_LEVEL: 4 
+29.09.2019 20:54:39,67: ] 
+29.09.2019 20:54:40,40: (Программа бесплатна для некоммерческого использования
+29.09.2019 20:54:40,40: (Программа бесплатна для некоммерческого использования) 
+29.09.2019 20:54:41,23: Инициализация параметров установки... 
+29.09.2019 20:54:42,70: Ok 
+29.09.2019 20:54:43,52: Проверка параметров установки... 
+29.09.2019 20:54:44,27: Ok 
+29.09.2019 20:54:45,04: INF-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 20:54:45,77: INF-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+29.09.2019 20:54:46,52: INF-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+29.09.2019 20:54:47,27: INF-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+29.09.2019 20:54:48,02: INF-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 20:54:48,77: INF-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+29.09.2019 20:55:08,20: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+29.09.2019 20:55:12,26: INF-067: Каталог установки пакета JAVA: C:\Program Files 
+29.09.2019 20:55:12,70: INF-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 20:55:13,13: INF-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+29.09.2019 20:55:13,56: INF-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 20:55:14,01: INF-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+29.09.2019 20:55:18,01: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.setupdir 
+29.09.2019 20:55:21,04: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.name пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.name 
+29.09.2019 20:55:24,26: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.version пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.version 
+29.09.2019 20:55:27,88: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.setupdir 
+29.09.2019 20:55:30,90: INF-022: ??????? ????????? ?????? openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 20:55:31,37: INF-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 20:55:32,67: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 20:55:36,79: INF-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+29.09.2019 20:55:37,31: Установлен ли модуль openjdk 
+29.09.2019 20:55:37,73: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+29.09.2019 20:55:38,59: Нет 
+29.09.2019 20:55:39,29: INF-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+29.09.2019 20:55:39,67: INF-012: Каталог установки пакета: C:\Program Files 
+29.09.2019 20:55:43,62: INF-014: Фаза выполнения: openjdk-download 
+29.09.2019 20:56:04,62: INF-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 20:56:05,07: INF-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 20:56:05,48: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:01:25,67: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+29.09.2019 21:01:26,49: [ 
+29.09.2019 21:01:27,40: ADMIN;  
+29.09.2019 21:01:28,23: MODE: run 
+29.09.2019 21:01:29,04: ; LOG_LEVEL: 4 
+29.09.2019 21:01:29,76: ] 
+29.09.2019 21:01:30,49: (Программа бесплатна для некоммерческого использования
+29.09.2019 21:01:30,49: (Программа бесплатна для некоммерческого использования) 
+29.09.2019 21:01:31,32: Инициализация параметров установки... 
+29.09.2019 21:01:32,79: Ok 
+29.09.2019 21:01:33,62: Проверка параметров установки... 
+29.09.2019 21:01:34,37: Ok 
+29.09.2019 21:01:35,12: INF-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:01:35,87: INF-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+29.09.2019 21:01:36,62: INF-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+29.09.2019 21:01:37,37: INF-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+29.09.2019 21:01:38,12: INF-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:01:38,88: INF-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+29.09.2019 21:01:58,37: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+29.09.2019 21:02:02,42: INF-067: Каталог установки пакета JAVA: C:\Program Files 
+29.09.2019 21:02:02,85: INF-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:02:03,29: INF-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+29.09.2019 21:02:03,73: INF-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:02:04,17: INF-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+29.09.2019 21:02:08,18: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.setupdir 
+29.09.2019 21:02:11,21: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.name пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.name 
+29.09.2019 21:02:14,24: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.version пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.version 
+29.09.2019 21:02:17,59: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.setupdir 
+29.09.2019 21:02:20,52: INF-022: ??????? ????????? ?????? openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:02:20,98: INF-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:02:22,18: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 21:02:25,31: INF-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+29.09.2019 21:02:25,62: Установлен ли модуль openjdk 
+29.09.2019 21:02:25,95: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+29.09.2019 21:02:26,60: Нет 
+29.09.2019 21:02:27,26: INF-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+29.09.2019 21:02:27,62: INF-012: Каталог установки пакета: C:\Program Files 
+29.09.2019 21:02:30,59: INF-014: Фаза выполнения: openjdk-download 
+29.09.2019 21:02:36,26: INF-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:02:36,67: INF-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:02:37,06: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:22:16,49: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+29.09.2019 21:22:17,40: [ 
+29.09.2019 21:22:18,38: ADMIN;  
+29.09.2019 21:22:19,29: MODE: run 
+29.09.2019 21:22:20,18: ; LOG_LEVEL: 4 
+29.09.2019 21:22:20,95: ] 
+29.09.2019 21:22:21,73: (Программа бесплатна для некоммерческого использования
+29.09.2019 21:22:21,73: (Программа бесплатна для некоммерческого использования) 
+29.09.2019 21:22:22,63: Инициализация параметров установки... 
+29.09.2019 21:22:24,21: Ok 
+29.09.2019 21:22:25,07: Проверка параметров установки... 
+29.09.2019 21:22:25,88: Ok 
+29.09.2019 21:22:26,70: INF-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:22:27,49: INF-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+29.09.2019 21:22:28,31: INF-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+29.09.2019 21:22:29,10: INF-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+29.09.2019 21:22:29,92: INF-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:22:30,71: INF-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+29.09.2019 21:22:38,12: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+29.09.2019 21:22:40,96: INF-067: Каталог установки пакета JAVA: C:\Program Files 
+29.09.2019 21:22:41,49: INF-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:22:42,06: INF-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+29.09.2019 21:22:42,60: INF-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:22:43,15: INF-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+29.09.2019 21:22:46,57: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.setupdir 
+29.09.2019 21:22:48,77: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.name пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.name 
+29.09.2019 21:22:50,99: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.version пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.version 
+29.09.2019 21:22:53,38: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.setupdir 
+29.09.2019 21:22:55,49: INF-022: ??????? ????????? ?????? openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:22:56,09: INF-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:22:57,43: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 21:22:59,65: INF-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+29.09.2019 21:23:00,12: Установлен ли модуль openjdk 
+29.09.2019 21:23:00,56: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+29.09.2019 21:23:01,45: Нет 
+29.09.2019 21:23:02,10: INF-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+29.09.2019 21:23:02,54: INF-012: Каталог установки пакета: C:\Program Files 
+29.09.2019 21:23:05,35: INF-014: Фаза выполнения: openjdk-download 
+29.09.2019 21:23:12,92: INF-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:23:13,43: INF-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:23:13,93: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:33:58,07: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+29.09.2019 21:33:58,98: [ 
+29.09.2019 21:33:59,96: ADMIN;  
+29.09.2019 21:34:00,87: MODE: run 
+29.09.2019 21:34:01,76: ; LOG_LEVEL: 4 
+29.09.2019 21:34:02,52: ] 
+29.09.2019 21:34:03,32: (Программа бесплатна для некоммерческого использования
+29.09.2019 21:34:03,32: (Программа бесплатна для некоммерческого использования) 
+29.09.2019 21:34:04,23: Инициализация параметров установки... 
+29.09.2019 21:34:05,84: Ok 
+29.09.2019 21:34:06,71: Проверка параметров установки... 
+29.09.2019 21:34:07,52: Ok 
+29.09.2019 21:34:08,34: INF-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:34:09,15: INF-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+29.09.2019 21:34:09,96: INF-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+29.09.2019 21:34:10,76: INF-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+29.09.2019 21:34:11,57: INF-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:34:12,38: INF-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+29.09.2019 21:34:19,82: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+29.09.2019 21:34:22,68: INF-067: Каталог установки пакета JAVA: C:\Program Files 
+29.09.2019 21:34:23,21: INF-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:34:23,76: INF-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+29.09.2019 21:34:24,31: INF-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:34:24,85: INF-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+29.09.2019 21:34:28,27: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.setupdir 
+29.09.2019 21:34:30,52: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.name пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.name 
+29.09.2019 21:34:32,74: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.version пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.version 
+29.09.2019 21:34:35,13: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.setupdir 
+29.09.2019 21:34:37,24: INF-022: ??????? ????????? ?????? openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:34:37,84: INF-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:34:39,18: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 21:34:41,42: INF-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+29.09.2019 21:34:41,84: Установлен ли модуль openjdk 
+29.09.2019 21:34:42,27: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+29.09.2019 21:34:43,17: Нет 
+29.09.2019 21:34:43,84: INF-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+29.09.2019 21:34:44,27: INF-012: Каталог установки пакета: C:\Program Files 
+29.09.2019 21:34:47,12: INF-014: Фаза выполнения: openjdk-download 
+29.09.2019 21:34:50,79: INF-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:34:51,29: INF-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:34:51,79: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:39:50,21: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+29.09.2019 21:39:51,12: [ 
+29.09.2019 21:39:52,10: ADMIN;  
+29.09.2019 21:39:53,02: MODE: run 
+29.09.2019 21:39:53,92: ; LOG_LEVEL: 4 
+29.09.2019 21:39:54,70: ] 
+29.09.2019 21:39:55,49: (Программа бесплатна для некоммерческого использования
+29.09.2019 21:39:55,49: (Программа бесплатна для некоммерческого использования) 
+29.09.2019 21:39:56,42: Инициализация параметров установки... 
+29.09.2019 21:39:58,01: Ok 
+29.09.2019 21:39:58,90: Проверка параметров установки... 
+29.09.2019 21:39:59,71: Ok 
+29.09.2019 21:40:00,56: INF-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:40:01,43: INF-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+29.09.2019 21:40:02,24: INF-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+29.09.2019 21:40:03,04: INF-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+29.09.2019 21:40:03,85: INF-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:40:04,67: INF-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+29.09.2019 21:40:12,09: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+29.09.2019 21:40:14,95: INF-067: Каталог установки пакета JAVA: C:\Program Files 
+29.09.2019 21:40:15,49: INF-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:40:16,04: INF-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+29.09.2019 21:40:16,59: INF-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:40:17,12: INF-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+29.09.2019 21:40:20,51: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.setupdir 
+29.09.2019 21:40:22,73: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.name пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.name 
+29.09.2019 21:40:24,93: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.version пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.version 
+29.09.2019 21:40:27,34: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.setupdir 
+29.09.2019 21:40:29,45: INF-022: ??????? ????????? ?????? openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:40:30,04: INF-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:40:31,38: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 21:40:33,60: INF-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+29.09.2019 21:40:34,04: Установлен ли модуль openjdk 
+29.09.2019 21:40:34,48: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+29.09.2019 21:40:35,37: Нет 
+29.09.2019 21:40:36,02: INF-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+29.09.2019 21:40:36,46: INF-012: Каталог установки пакета: C:\Program Files 
+29.09.2019 21:40:39,31: INF-014: Фаза выполнения: openjdk-download 
+29.09.2019 21:40:43,74: INF-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:40:44,26: INF-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:40:44,76: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:40:53,81: INF-054: Процесс :phase_download прерван пользователем 
+29.09.2019 21:41:01,01: INF-014: Фаза выполнения: openjdk-install 
+29.09.2019 21:41:14,52: INF-055: Фаза openjdk-install прервана пользователем 
+29.09.2019 21:41:26,63: --------------------------------------------------- 
+29.09.2019 21:41:33,38: Выберите устанавливаемый модуль пакета [20 секунд] 
+29.09.2019 21:41:35,27: JAVA [Инструментарий для разработки на Java] 
+29.09.2019 21:41:38,17: --------------------------------------------------- 
+29.09.2019 21:41:47,82:          1 - openjdk v.12.0.1  
+29.09.2019 21:41:50,65: Free and open-source implementation of the Java SE Platform Edition 
+29.09.2019 21:41:54,46: 2 - Установить все модули 
+29.09.2019 21:41:57,79: 3 - Возврат в меню пакетов [по умолчанию] 
+29.09.2019 21:42:01,74: 4 - Выход 
+29.09.2019 21:42:33,04: --------------------------------------------------- 
+29.09.2019 21:42:39,77: Выберите устанавливаемый пакет программ [20 секунд] 
+29.09.2019 21:42:42,71: --------------------------------------------------- 
+29.09.2019 21:42:45,65: 1 - ANDROID	Android Development 
+29.09.2019 21:42:48,62: 2 - CVS  	РЎРёСЃС‚РµРјС‹ РєРѕРЅС‚СЂРѕР»СЏ РІРµСЂСЃРёР№ 
+29.09.2019 21:42:51,68: 3 - JAVA	РРЅСЃС‚СЂСѓРјРµРЅС‚Р°СЂРёР№ РґР»СЏ СЂР°Р·СЂР°Р±РѕС‚РєРё РЅР° Java 
+29.09.2019 21:42:54,67: 4 - BIS-TEST	BIS Test package 
+29.09.2019 21:42:57,57: 5 - WAMP	РЎС‚РµРє WAMP РґР»СЏ РІРµР±-СЂР°Р·СЂР°Р±РѕС‚РєРё 
+29.09.2019 21:43:01,90: 6 - Выход [по умолчанию] 
+29.09.2019 21:43:11,17: INF-076: Пользователь вышел из меню пакетов 
+29.09.2019 21:44:50,60: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+29.09.2019 21:44:51,51: [ 
+29.09.2019 21:44:52,49: ADMIN;  
+29.09.2019 21:44:53,38: MODE: run 
+29.09.2019 21:44:54,29: ; LOG_LEVEL: 4 
+29.09.2019 21:44:55,06: ] 
+29.09.2019 21:44:55,85: (Программа бесплатна для некоммерческого использования
+29.09.2019 21:44:55,85: (Программа бесплатна для некоммерческого использования) 
+29.09.2019 21:44:56,77: Инициализация параметров установки... 
+29.09.2019 21:44:58,35: Ok 
+29.09.2019 21:44:59,23: Проверка параметров установки... 
+29.09.2019 21:45:00,07: Ok 
+29.09.2019 21:45:00,88: INF-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:45:01,68: INF-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+29.09.2019 21:45:02,49: INF-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+29.09.2019 21:45:03,32: INF-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+29.09.2019 21:45:04,13: INF-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:45:04,95: INF-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+29.09.2019 21:45:12,37: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+29.09.2019 21:45:15,21: INF-067: Каталог установки пакета JAVA: C:\Program Files 
+29.09.2019 21:45:15,76: INF-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:45:16,29: INF-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+29.09.2019 21:45:16,84: INF-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:45:17,37: INF-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+29.09.2019 21:45:20,79: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.setupdir 
+29.09.2019 21:45:22,99: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.name пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.name 
+29.09.2019 21:45:25,20: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.version пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.version 
+29.09.2019 21:45:27,59: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.setupdir 
+29.09.2019 21:45:29,70: INF-022: ??????? ????????? ?????? openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:45:30,31: INF-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:45:31,63: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 21:45:33,85: INF-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+29.09.2019 21:45:34,29: Установлен ли модуль openjdk 
+29.09.2019 21:45:34,71: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+29.09.2019 21:45:35,60: Нет 
+29.09.2019 21:45:36,26: INF-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+29.09.2019 21:45:36,68: INF-012: Каталог установки пакета: C:\Program Files 
+29.09.2019 21:45:39,51: INF-014: Фаза выполнения: openjdk-download 
+29.09.2019 21:46:00,68: INF-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:46:46,84: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+29.09.2019 21:46:47,74: [ 
+29.09.2019 21:46:48,71: ADMIN;  
+29.09.2019 21:46:49,62: MODE: run 
+29.09.2019 21:46:50,51: ; LOG_LEVEL: 4 
+29.09.2019 21:46:51,29: ] 
+29.09.2019 21:46:52,07: (Программа бесплатна для некоммерческого использования
+29.09.2019 21:46:52,07: (Программа бесплатна для некоммерческого использования) 
+29.09.2019 21:46:52,98: Инициализация параметров установки... 
+29.09.2019 21:46:54,57: Ok 
+29.09.2019 21:46:55,45: Проверка параметров установки... 
+29.09.2019 21:46:56,26: Ok 
+29.09.2019 21:46:57,06: INF-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:46:57,85: INF-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+29.09.2019 21:46:58,67: INF-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+29.09.2019 21:46:59,46: INF-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+29.09.2019 21:47:00,27: INF-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:47:01,09: INF-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+29.09.2019 21:47:08,51: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+29.09.2019 21:47:11,35: INF-067: Каталог установки пакета JAVA: C:\Program Files 
+29.09.2019 21:47:11,90: INF-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:47:12,43: INF-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+29.09.2019 21:47:12,98: INF-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:47:13,52: INF-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+29.09.2019 21:47:16,95: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.setupdir 
+29.09.2019 21:47:19,15: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.name пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.name 
+29.09.2019 21:47:21,35: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.version пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.version 
+29.09.2019 21:47:23,73: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.setupdir 
+29.09.2019 21:47:25,87: INF-022: ??????? ????????? ?????? openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:47:26,46: INF-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:47:27,81: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 21:47:30,04: INF-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+29.09.2019 21:47:30,46: Установлен ли модуль openjdk 
+29.09.2019 21:47:30,88: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+29.09.2019 21:47:31,77: Нет 
+29.09.2019 21:47:32,43: INF-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+29.09.2019 21:47:32,87: INF-012: Каталог установки пакета: C:\Program Files 
+29.09.2019 21:47:35,68: INF-014: Фаза выполнения: openjdk-download 
+29.09.2019 21:47:41,17: INF-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:47:41,68: INF-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:47:42,18: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:47:46,34: INF-054: Процесс :phase_download прерван пользователем 
+29.09.2019 21:47:46,85: INF-014: Фаза выполнения: openjdk-install 
+29.09.2019 21:47:53,26: INF-055: Фаза openjdk-install прервана пользователем 
+29.09.2019 21:48:19,76: --------------------------------------------------- 
+29.09.2019 21:48:20,32: Выберите устанавливаемый модуль пакета [20 секунд] 
+29.09.2019 21:48:20,73: JAVA [Инструментарий для разработки на Java] 
+29.09.2019 21:48:21,27: --------------------------------------------------- 
+29.09.2019 21:48:23,82:          1 - openjdk v.12.0.1  
+29.09.2019 21:48:24,40: Free and open-source implementation of the Java SE Platform Edition 
+29.09.2019 21:48:25,13: 2 - Установить все модули 
+29.09.2019 21:48:25,74: 3 - Возврат в меню пакетов [по умолчанию] 
+29.09.2019 21:48:26,45: 4 - Выход 
+29.09.2019 21:48:29,74: INF-077: Пользователь вышел из меню модулей пакета JAVA 
+29.09.2019 21:56:49,51: Victory BIS for Windows 7/10 {Current_Version}. {Copyright} {Current_Date}  
+29.09.2019 21:56:50,42: [ 
+29.09.2019 21:56:51,40: ADMIN 
+29.09.2019 21:56:52,29: ; MODE: run 
+29.09.2019 21:56:53,18: ; LOG_LEVEL: 4 
+29.09.2019 21:56:53,95: ] 
+29.09.2019 21:56:54,73: (Программа бесплатна для некоммерческого использования
+29.09.2019 21:56:54,73: (Программа бесплатна для некоммерческого использования) 
+29.09.2019 21:56:55,63: Инициализация параметров установки... 
+29.09.2019 21:56:57,20: Ok 
+29.09.2019 21:56:58,07: Проверка параметров установки... 
+29.09.2019 21:56:58,87: Ok 
+29.09.2019 21:56:59,67: INF-005: Каталог логов системы: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:57:00,48: INF-006: Каталог дистрибутивов системы: D:\Install\bis\windows\x64 
+29.09.2019 21:57:01,27: INF-007: Каталог утилит системы: D:\Work\Projects.cmd\bis\src\bis\utils\x64 
+29.09.2019 21:57:02,09: INF-008: Каталог модулей системы: D:\Work\Projects.cmd\bis\src\bis\modules 
+29.09.2019 21:57:02,88: INF-009: Каталог бэкапов системы: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:57:03,68: INF-010: Каталог конфигураций системы: D:\Work\Projects.cmd\bis\src\bis\config 
+29.09.2019 21:57:11,09: Регистр символов строки env.programfiles по признаку LOWER преобразован в env.programfiles 
+29.09.2019 21:57:13,96: INF-067: Каталог установки пакета JAVA: C:\Program Files 
+29.09.2019 21:57:14,51: INF-068: Каталог логов пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\logs 
+29.09.2019 21:57:15,06: INF-069: Каталог дистрибутивов пакета JAVA: D:\Install\bis\windows\x64\JAVA 
+29.09.2019 21:57:15,59: INF-070: Каталог бэкапов данных пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\data 
+29.09.2019 21:57:16,13: INF-071: Каталог бэкапов конфигураций пакета JAVA: D:\Work\Projects.cmd\bis\src\bis\backup\config 
+29.09.2019 21:57:19,56: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.setupdir 
+29.09.2019 21:57:21,76: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pkg.name пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ pkg.name 
+29.09.2019 21:57:23,96: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.version пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.version 
+29.09.2019 21:57:26,37: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ mod.setupdir пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LOWER пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mod.setupdir 
+29.09.2019 21:57:28,48: INF-022: ??????? ????????? ?????? openjdk: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:57:29,07: INF-044: Домашний каталог модуля openjdk [JAVA_HOME]: C:\Program Files/JAVA/jdk-12.0.1 
+29.09.2019 21:57:30,42: Регистр символов строки mod.setupdir по признаку LOWER преобразован в mod.setupdir 
+29.09.2019 21:57:32,74: INF-021: Каталог исполняемых файлов модуля openjdk: C:\Program Files/JAVA/jdk-12.0.1/bin 
+29.09.2019 21:57:33,21: Установлен ли модуль openjdk 
+29.09.2019 21:57:33,65: по наличию объектов файловой системы в каталоге C:\Program Files/JAVA/jdk-12.0.1... 
+29.09.2019 21:57:34,56: Нет 
+29.09.2019 21:57:35,26: INF-011: Конфигурация пакета: D:\Work\Projects.cmd\bis\src\bis\config\java.xml 
+29.09.2019 21:57:35,70: INF-012: Каталог установки пакета: C:\Program Files 
+29.09.2019 21:57:38,59: INF-014: Фаза выполнения: openjdk-download 
+29.09.2019 21:57:51,95: INF-018: URL дистрибутива модуля openjdk: https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:57:52,46: INF-017: Путь к дистрибутиву модуля openjdk: D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:57:52,98: Найден дистрибутив D:\Install\bis\windows\x64\JAVA\openjdk\12.0.1\openjdk-12.0.1_windows-x64_bin.zip 
+29.09.2019 21:57:59,40: INF-054: Процесс :phase_download прерван пользователем 
+29.09.2019 21:57:59,93: INF-014: Фаза выполнения: openjdk-install 
+29.09.2019 21:58:05,42: INF-055: Фаза openjdk-install прервана пользователем 
+29.09.2019 21:58:12,40: --------------------------------------------------- 
+29.09.2019 21:58:12,96: Выберите устанавливаемый модуль пакета [20 секунд] 
+29.09.2019 21:58:13,37: JAVA [Инструментарий для разработки на Java] 
+29.09.2019 21:58:13,90: --------------------------------------------------- 
+29.09.2019 21:58:16,42:          1 - openjdk v.12.0.1  
+29.09.2019 21:58:16,96: Free and open-source implementation of the Java SE Platform Edition 
+29.09.2019 21:58:17,70: 2 - Установить все модули 
+29.09.2019 21:58:18,32: 3 - Возврат в меню пакетов [по умолчанию] 
+29.09.2019 21:58:19,01: 4 - Выход 
+29.09.2019 21:58:22,93: INF-077: Пользователь вышел из меню модулей пакета JAVA 

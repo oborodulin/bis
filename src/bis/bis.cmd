@@ -123,21 +123,32 @@ rem выводим их
 	rem получаем имена, описания и уровни логгирования всех пакетов из файлов конфигураций в конфигурационном каталоге
 	for /F %%i in ('dir *.xml /b /o:n /a-d') do (
 		set l_pkg_cfg_file=%%i
-		for /F "tokens=1-4 delims=	()" %%a in ('%xml_sel_% "!res_val!" -v "./name" -o "	(" -v "./description" -o ")	" -v "./useLog" -o "	" -v "./logLevel" -n "%bis_config_dir%%DIR_SEP%!l_pkg_cfg_file!"') do (
-			set l_pkg_name=%%~a
-			set l_pkg_descr=%%~b
-			call :trim !l_pkg_name! l_trim_pkg_name
+		set l_pkg_cfg_path=%bis_config_dir%%DIR_SEP%!l_pkg_cfg_file!
+		rem проверяем xml-структуру конфигурациюнного файла
+rem		echo %xml_val_% "!l_pkg_cfg_path!"
+rem 		%xml_val_% "!l_pkg_cfg_path!"
+rem 		echo %ERRORLEVEL%
+rem 		pause
+rem 		exit
+		rem if ERRORLEVEL 1 (
+		rem 	call :echo -ri:CfgValSchemaError -v1:"!l_pkg_cfg_path!"
+		rem ) else (
+			for /F "tokens=1-4 delims=	()" %%a in ('%xml_sel_% "!res_val!" -v "./name" -o "	(" -v "./description" -o ")	" -v "./useLog" -o "	" -v "./logLevel" -n "!l_pkg_cfg_path!"') do (
+				set l_pkg_name=%%~a
+				set l_pkg_descr=%%~b
+				call :trim !l_pkg_name! l_trim_pkg_name
 
-			if "%_def_pkg_name%" EQU "" call :echo -rv:"!x! - !l_pkg_name!	!l_pkg_descr!" -rc:0F -cp:65001 -rs:8
-			set g_pkg[!x!]#File=!l_pkg_cfg_file!
-			set g_pkg[!x!]#Name=!l_pkg_name!
-			set g_pkg[!x!]#Descr=!l_pkg_descr!
-			set g_pkg[!x!]#UseLog=%%~c
-			set g_pkg[!x!]#LogLevel=%%~d
-			if /i "%_def_pkg_name%" EQU "!l_trim_pkg_name!" set _pkg_choice=!x!
-		)
-		set l_choice=!l_choice!!x!
-	 	set /a "x+=1"
+				if "%_def_pkg_name%" EQU "" call :echo -rv:"!x! - !l_pkg_name!	!l_pkg_descr!" -rc:0F -cp:65001 -rs:8
+				set g_pkg[!x!]#File=!l_pkg_cfg_file!
+				set g_pkg[!x!]#Name=!l_pkg_name!
+				set g_pkg[!x!]#Descr=!l_pkg_descr!
+				set g_pkg[!x!]#UseLog=%%~c
+				set g_pkg[!x!]#LogLevel=%%~d
+				if /i "%_def_pkg_name%" EQU "!l_trim_pkg_name!" set _pkg_choice=!x!
+			)
+			set l_choice=!l_choice!!x!
+			set /a "x+=1"
+		rem )
 	)
 	popd
 	set /a "g_pkg_cnt=!x!-1"
@@ -322,10 +333,10 @@ call :get_mod_install_dirs "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
 rem определяем каталог дистрибутива модуля (должен быть определён до :execute_choice)
 call :get_mod_distrib_params "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
 
+if /i "%EXEC_MODE%" EQU "%EM_RUN%" cls
 rem определяем установлен ли уже модуль
 call :is_mod_installed "%_mod_name%" "%_mod_ver%"
 rem если модуль установлен, переходим к выбору вариантов работы с модулем
-if /i "%EXEC_MODE%" EQU "%EM_RUN%" cls
 if ERRORLEVEL 1 endlocal & call :execute_choice "%_exec_choice%" "%_pkg_name%" "%_mod_name%" "%_mod_ver%" & exit /b !ERRORLEVEL!
 
 rem выполняем все фазы модуля
@@ -511,12 +522,12 @@ for /l %%n in (0,1,%goals_cnt%) do (
 		call :get_exec_name "%~0"
 		call :goal_cmd_shell "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "!exec_name!"
 	)
-	if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
+	if ERRORLEVEL 1 endlocal & exit /b !ERRORLEVEL!
 ) 
 :implicit_goals
 rem разбор неявных целей
 call :goal_add_path_env "%_mod_name%"
-if "!mods[%_mod_name%]#HomeEnv!" NEQ "" call :goal_add_env "!mods[%_mod_name%]#HomeEnv!" "!mods[%_mod_name%]#HomeDir!"
+call :goal_add_env "!mods[%_mod_name%]#HomeEnv!" "!mods[%_mod_name%]#HomeDir!"
 set l_result=%ERRORLEVEL%
 
 endlocal & (set "mods[%_mod_name%]#Installed=1" & exit /b %l_result%)
@@ -951,7 +962,8 @@ endlocal & exit /b 0
 rem ---------------------------------------------
 rem Добавляет заданный путь в переменную среды PATH
 rem (определяет похожие пути и запрашивает разрешение 
-rem на их удаление)
+rem на их удаление: необходимо при повторной установке
+rem модуля, когда первая прошла не удачно...)
 rem ---------------------------------------------
 :goal_add_path_env
 setlocal
@@ -1017,6 +1029,8 @@ setlocal
 set _env=%~1
 set _val=%~2
 
+if not defined _env endlocal & exit /b 0
+
 call :print_exec_name "%~0"
 
 call :get_reg_value "" "%RH_HKCU%" "%_env%"
@@ -1041,7 +1055,7 @@ set _env=%~1
 call :print_exec_name "%~0"
 
 call :echo -ri:DelEnv -v1:"%_env%" -rc:0F -ln:%VL_FALSE%
-rem call :reg -oc:%RC_DEL% -vn:"%_env%"
+echo call :reg -oc:%RC_DEL% -vn:"%_env%"
 call :echo -ri:ResultOk -rc:0A
 endlocal & exit /b 0
 
@@ -1159,14 +1173,18 @@ set _move_num=%~5
 call :echo -ri:CmdMove -rc:0F -ln:%VL_FALSE%
 
 rem получаем пути файлов источников
-call :get_cmd_objects XPathCmdCopySrc "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" %_move_num% l_src_dir l_src_paths src_cnt
+call :get_cmd_objects XPathCmdMoveSrc "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" %_move_num% l_src_dir l_src_paths src_cnt
+call :echo -rv:"%~0: XPathCmdMoveSrc _pkg_name=%_pkg_name%; _mod_name=%_mod_name%; _mod_ver=%_mod_ver%; _exec_name=%_exec_name%; _move_num=%_move_num%; l_src_dir=%l_src_dir%; src_cnt=%src_cnt%" -rl:5FINE
 
 rem получаем пути файлов назначения
-call :get_cmd_objects XPathCmdCopyDst "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" %_move_num% l_dst_dir l_dst_paths dst_cnt
+call :get_cmd_objects XPathCmdMoveDst "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" %_move_num% l_dst_dir l_dst_paths dst_cnt
+call :echo -rv:"%~0: XPathCmdMoveDst _pkg_name=%_pkg_name%; _mod_name=%_mod_name%; _mod_ver=%_mod_ver%; _exec_name=%_exec_name%; _move_num=%_move_num%; l_dst_dir=%l_dst_dir%; dst_cnt=%dst_cnt%" -rl:5FINE
 
 rem КОНТРОЛЬ:
 call :get_exec_name "%~0"
 call :validate_src_dst_cnts "!exec_name!" %src_cnt% %dst_cnt%
+pause
+exit
 if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
 
 rem ВЫПОЛНЕНИЕ:
@@ -1330,6 +1348,7 @@ call :get_res_val -rf:"%xpaths_file%" -ri:%_res_id% -v1:"%_mod_name%" -v2:"%_mod
 for /F "tokens=1,2" %%a in ('%xml_sel_% "!res_val!" -v "./directory" -o "	" -v "./includes/include" -n "%g_pkg_cfg_file%"') do (
 	set l_dir=%%a
 	set l_file=%%b
+	call :echo -rv:"%~0: l_dir=!l_dir!; l_file=!l_file!" -rl:5FINE
 
 	if "!l_file!" EQU "" call :binding_var "%_pkg_name%" "%_mod_name%" "!l_dir!" %7 & exit /b 0
 	if "!l_file!" EQU "*" call :binding_var "%_pkg_name%" "%_mod_name%" "!l_dir!" %7 & exit /b 0
@@ -2108,7 +2127,7 @@ call :parse_params %~0 %bis_param_defs% %*
 rem ошибка разбора определений параметров
 rem if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
 rem вывод справки
-if ERRORLEVEL 1 call :bis_help & endlocal & exit /b 0
+if ERRORLEVEL 1 call :bis_help & endlocal & exit /b 1
 
 rem вывод значений параметров запуска системы
 if /i "%EXEC_MODE%" EQU "%EM_DBG%" set l_is_print_params=%VL_TRUE%
@@ -2143,9 +2162,12 @@ call :echo -rv:"[" -rc:08 -ln:%VL_FALSE%
 
 rem проверяем наличие прав администратора
 call :check_permissions
-if %ERRORLEVEL% EQU 0 call :echo -rv:"ADMIN; " -rc:0F -ln:%VL_FALSE%
-
-call :echo -rv:"MODE: %EXEC_MODE%" -rc:0F -ln:%VL_FALSE%
+if %ERRORLEVEL% EQU 0 (
+	call :echo -rv:"ADMIN" -rc:0C -ln:%VL_FALSE%
+) else (
+	call :echo -rv:"USR" -rc:0F -ln:%VL_FALSE%
+)
+call :echo -rv:"; MODE: %EXEC_MODE%" -rc:0F -ln:%VL_FALSE%
 if defined p_use_log call :echo -rv:"; LOG_LEVEL: %p_log_level%" -rc:0F -ln:%VL_FALSE%
 rem call :echo -rv:""
 call :echo -rv:"]" -rc:08
@@ -2155,14 +2177,6 @@ call :echo -ri:InitSetupParams -ln:%VL_FALSE% -be:1
 rem call :echo -ri:ProcArchDefError -be:1
 call :echo -ri:ProcArchInfo -v1:%proc_arch%
 
-rem утилиты
-set z7_=%bis_utils_dir%%DIR_SEP%7-zip%DIR_SEP%7za.exe
-set copy_=robocopy.exe
-set xml_=%bis_utils_dir%%DIR_SEP%xml.exe
-set xml_sel_=%bis_utils_dir%%DIR_SEP%xml.exe sel -T -t -m
-set curl_=%bis_utils_dir%%DIR_SEP%curl%DIR_SEP%bin%DIR_SEP%curl.exe
-set wget_=%bis_utils_dir%%DIR_SEP%wget%DIR_SEP%wget.exe
-
 rem Формируем пути от начала текущего диска (http://www.rsdn.ru/forum/setup/2810022.hot)
 for /f %%i in ("%bis_log_dir%") do set bis_log_dir=%%~dpnxi
 for /f %%i in ("%bis_distrib_dir%") do set bis_distrib_dir=%%~dpnxi
@@ -2170,6 +2184,17 @@ for /f %%i in ("%bis_utils_dir%") do set bis_utils_dir=%%~dpnxi
 for /f %%i in ("%bis_config_dir%") do set bis_config_dir=%%~dpnxi
 for /f %%i in ("%bis_backup_data_dir%") do set bis_backup_data_dir=%%~dpnxi
 for /f %%i in ("%bis_res_dir%") do set bis_res_dir=%%~dpnxi
+
+set cfg_val_schema=%bis_config_dir%%DIR_SEP%bis.xsd
+
+rem утилиты
+set z7_=%bis_utils_dir%%DIR_SEP%7-zip%DIR_SEP%7za.exe
+set copy_=robocopy.exe
+set xml_=%bis_utils_dir%%DIR_SEP%xml.exe
+set xml_sel_=%bis_utils_dir%%DIR_SEP%xml.exe sel -T -t -m
+set xml_val_=%bis_utils_dir%%DIR_SEP%xml.exe val -b -e --xsd %cfg_val_schema%
+set curl_=%bis_utils_dir%%DIR_SEP%curl%DIR_SEP%bin%DIR_SEP%curl.exe
+set wget_=%bis_utils_dir%%DIR_SEP%wget%DIR_SEP%wget.exe
 
 call :echo -ri:ResultOk -rc:0A
 
@@ -2202,6 +2227,8 @@ if not exist "%bis_distrib_dir%" call :echo -ri:DistribDirExistError -v1:"%bis_d
 if not exist "%bis_utils_dir%" call :echo -ri:UtilsDirExistError -v1:"%bis_utils_dir%" & endlocal & exit /b 1
 if not exist "%bis_config_dir%" call :echo -ri:ConfigDirExistError -v1:"%bis_config_dir%" & endlocal & exit /b 1
 if not exist "%bis_backup_data_dir%" call :echo -ri:BackupDirExistError -v1:"%bis_backup_data_dir%" & endlocal & exit /b 1
+rem наличие файла схемы проверки xml-конфигурации
+if not exist "%cfg_val_schema%" call :echo -ri:CfgValSchemaExistError -v1:"%cfg_val_schema%" & endlocal & exit /b 1
 
 call :echo -ri:ResultOk -rc:0A
 

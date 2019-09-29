@@ -20,8 +20,9 @@ rem ---------------------------------------------
 setlocal
 rem Устанавливаем все необходимые параметры и ресурсы для работы скрипта, и проверяем их корректность
 call :echo_res_setup %*
+if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
 call :echo_res_check_setup
-if ERRORLEVEL 1 endlocal & exit /b 1
+if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
 
 if defined p_cmd if /i "%p_cmd%" EQU "GET" call :get_res_val & echo !res_val! & endlocal & exit /b !ERRORLEVEL!
 rem echo "%script_hdr%" "%res_path%" "%p_res_id%"
@@ -37,7 +38,7 @@ if defined res_val (
 	rem иначе получаем ресурс по его ИД
 	call :get_res_val
 	rem echo !res_code! !res_categ! !categ_num! !categ_name! !res_val! "!result!"
-	if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
+	if ERRORLEVEL 1 endlocal & exit /b !ERRORLEVEL!
 
 	rem если не только вывод в файл
 	if /i "!categ_name!" NEQ "%CTG_FILE%" (
@@ -106,7 +107,7 @@ rem						g_res[%res_name%][%p_res_id%]#CategNum
 rem						g_res[%res_name%][%p_res_id%]#CategName)
 rem ---------------------------------------------
 :get_res_val _proc_param...
-set _proc_name=%~0
+set _get_res_val_proc_name=%~0
 set _proc_param=%~1
 
 rem если передан хотя бы один параметр, прогоняем их все через установку
@@ -176,7 +177,7 @@ rem подставляем значения переменных ресурса
 for /l %%i in (1,1,%values_cnt%) do if defined p_val_%%i (call :res_bind_var "!res_val!" {%V_SYMB%%%i} p_val_%%i & set res_val=!bind_var!) else (goto end_get_res_val)
 
 :end_get_res_val
-set %_proc_name:~5%=!res_val!
+set %_get_res_val_proc_name:~5%=!res_val!
 exit /b 0
 
 rem ---------------------------------------------
@@ -278,9 +279,9 @@ rem если не в режиме тестирования или в нём, но задано игнорирование этого режим
 if /i "%EXEC_MODE%" NEQ "%EM_TST%" goto echo_res_any_case
 if /i "%ignore_test_exec_mode%" NEQ "%VL_TRUE%" endlocal & exit /b 0
 :echo_res_any_case
-if "%_categ_num%" EQU "" set _categ_num=0
+if not defined _categ_num set _categ_num=0
 rem если задан уровень логгирования, то контролируем его
-if "%_log_lvl%" NEQ "" (
+if defined _log_lvl (
 	rem echo if %_categ_num% LEQ %_log_lvl% call :echo_res_val "%_res_val%" "%_ln%"
 	if %_categ_num% LEQ %_log_lvl% call :echo_res_val "%_res_val%" "%_ln%"
 ) else (
@@ -450,20 +451,6 @@ rem ---------------------------------------------
 rem УСТАНОВКА И ОПРЕДЕЛЕНИЕ ЗНАЧЕНИЙ ПО УМОЛЧАНИЮ:
 rem цвет выводимого ресурса
 set DEF_RES_COLOR=08
-rem Категории ресурсов:
-rem вывод значения ресурса только в файл
-set CTG_FILE=FILE
-rem вывод значения ресурса на экран/в файл
-set CTG_CON=CON
-rem ресурс-ошибка
-set CTG_ERR=ERR
-rem ресурс-предупреждение
-set CTG_WRN=WRN
-rem ресурс-информация
-set CTG_INF=INF
-rem ресурс-отладка
-set CTG_FINE=FINE
-
 rem идентификаторы подстановочных переменных
 set V_SYMB=V
 
@@ -474,13 +461,12 @@ set categ_num=
 set categ_name=
 
 rem РАЗБОР ПАРАМЕТРОВ ЗАПУСКА:
-set echo_res_param_defs="-sh,script_hdr,%g_script_header%;-cm,p_cmd;-rf,res_path,%g_res_file%;-ri,p_res_id;-rv,res_val,~,p_res_val_empty;-rc,res_color,%DEF_RES_COLOR%;-rl,res_categ;-v,p_val_,~,~,values_cnt;-vc,p_val_color;-c,p_val_color_,~,~,colors_cnt;-ln,ln,%VL_TRUE%;-rs,right_shift_cnt,0;-be,before_echo_cnt,0;-ae,after_echo_cnt,0;-lf,log_path,%g_log_file%;-ll,log_lvl,%g_log_level%;-it,ignore_test_exec_mode,%VL_FALSE%;-cp,code_page,1251"
-call :parse_params %~0 %echo_res_param_defs% %*
-rem ошибка разбора определений параметров
-rem if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
-rem вывод справки
-if ERRORLEVEL 1 call :echo_res_help & endlocal & exit /b 0
-if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :print_params %~0
+rem ПРЕДВАРИТЕЛЬНЫЙ - уровней логгирования
+set echo_log_param_defs="-rl,res_categ;-ll,log_lvl,%g_log_level%"
+set echo_log_param_scope=%~0_log_level
+call :parse_params %echo_log_param_scope% %echo_log_param_defs% %*
+
+if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :print_params %echo_log_param_scope%
 
 rem При отсутствии заданных значений, устанавливаем по умолчанию
 if not defined log_lvl set log_lvl=%DEF_LOG_LEVEL%
@@ -489,6 +475,21 @@ if defined res_categ (
 	set categ_num=%res_categ:~0,1%
 	set categ_name=%res_categ:~1%
 )
+rem КОНТРОЛЬ уровня логгирования сообщения
+if not defined categ_num goto echo_parse_params
+if not defined log_lvl goto echo_parse_params
+if %categ_num% GTR %log_lvl% endlocal & exit /b 1
+
+:echo_parse_params
+rem ОСНОВНОЙ - остальных параметров
+set echo_res_param_defs="-sh,script_hdr,%g_script_header%;-cm,p_cmd;-rf,res_path,%g_res_file%;-ri,p_res_id;-rv,res_val,~,p_res_val_empty;-rc,res_color,%DEF_RES_COLOR%;-v,p_val_,~,~,values_cnt;-vc,p_val_color;-c,p_val_color_,~,~,colors_cnt;-ln,ln,%VL_TRUE%;-rs,right_shift_cnt,0;-be,before_echo_cnt,0;-ae,after_echo_cnt,0;-lf,log_path,%g_log_file%;-it,ignore_test_exec_mode,%VL_FALSE%;-cp,code_page,1251"
+call :parse_params %~0 %echo_res_param_defs% %*
+rem ошибка разбора определений параметров
+rem if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
+rem вывод справки
+if ERRORLEVEL 1 call :echo_res_help & endlocal & exit /b 1
+if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :print_params %~0
+
 rem определяем путь и праметры утилиты изменения цвета
 call :chgcolor_setup "%CUR_DIR%"
 exit /b 0
@@ -512,7 +513,7 @@ if not defined p_res_id if not defined res_val if /i "%p_res_val_empty%" NEQ "%V
 	) else (
 		call :echo_log "%log_path%" "!l_err_msg!" "%categ_num%" "%log_lvl%" "%script_hdr%"
 	)
-	endlocal & exit /b 1
+	endlocal & exit /b 2
 )
 if defined p_res_id if not exist "%res_path%" (
 	set l_err_msg=ERR -1: Для ресурса [ИД=%p_res_id%] не найден ресурсный файл "%res_path%". Проверьте, пожалуйста, его наличие.
@@ -525,7 +526,7 @@ if defined p_res_id if not exist "%res_path%" (
 	) else (
 		call :echo_log "%log_path%" "!l_err_msg!" "%categ_num%" "%log_lvl%" "%script_hdr%"
 	)
-	endlocal & exit /b 1
+	endlocal & exit /b 3
 )
 endlocal & exit /b 0
 

@@ -21,6 +21,19 @@ set DEF_LOG_LEVEL=%LL_ERR%
 rem логические константы
 set VL_TRUE=true
 set VL_FALSE=false
+rem Категории ресурсов:
+rem вывод значения ресурса только в файл
+set CTG_FILE=FILE
+rem вывод значения ресурса на экран/в файл
+set CTG_CON=CON
+rem ресурс-ошибка
+set CTG_ERR=ERR
+rem ресурс-предупреждение
+set CTG_WRN=WRN
+rem ресурс-информация
+set CTG_INF=INF
+rem ресурс-отладка
+set CTG_FINE=FINE
 rem режимы выполнения системы: эмуляции, тестовый, промышленный, отладки
 set EM_EML=EML
 set EM_TST=TST

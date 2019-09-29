@@ -137,10 +137,14 @@ exit /b 0
 
 rem ---------------------------------------------
 rem Запрашивает подтверждение выполнения процесса
+rem (ИД строковых ресурсов берутся из ресурсного 
+rem пакета меню %menus_file%)
+rem Возврат: 	%choice% - код выбора
+rem 			%process% - наименование процесса
 rem ---------------------------------------------
 :choice_process
 setlocal
-set _proc_name=%~0
+set _choice_proc_name=%~0
 set _exec_name=%~1
 set _res_id=%~2
 set _delay=%~3
@@ -170,8 +174,8 @@ rem ChangeColor 15 0
 %ChangeColor_15_0%
 1>nul chcp 1251
 Choice /C %_choice% /T %_delay% /D %_def_choice% /M "%res_val%"
-set l_result=%ERRORLEVEL%
+
 rem echo l_result="%l_result%"
-endlocal & (set "%_proc_name:~8%=%exec_name%" & set "%_proc_name:~1,6%=%l_result%" & exit /b %l_result%)
+endlocal & (set "l_result=%ERRORLEVEL%" & set "%_choice_proc_name:~8%=%exec_name%" & set "%_choice_proc_name:~1,6%=!l_result!" & exit /b !l_result!)
 
 rem ---------------- EOF utils.cmd ----------------

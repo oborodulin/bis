@@ -12,25 +12,25 @@ ProgramLicenseMsg		001	1CON	^(Программа бесплатна для некоммерческого использова
 InitSetupParams			002	1CON	Инициализация параметров установки...
 CheckSetupParams		003	1CON	Проверка параметров установки...
 ResultOk				004	1CON	Ok
-LogDir					005	5FINE	Каталог логов системы: {V1}
-DistribDir				006	5FINE	Каталог дистрибутивов системы: {V1}
-UtilsDir				007	5FINE	Каталог утилит системы: {V1}
-ModulesDir				008	5FINE	Каталог модулей системы: {V1}
-BackupDir				009	5FINE	Каталог бэкапов системы: {V1}
-ConfigDir				010	5FINE	Каталог конфигураций системы: {V1}
-CfgFile					011	5FINE	Конфигурация пакета: {V1}
-SetupDir				012	5FINE	Каталог установки пакета: {V1}
-SetupAbort				013	5FINE	Установка прервана пользователем
-ExecPhaseId				014	5FINE	Фаза выполнения: {V1}
+LogDir					005	4INF	Каталог логов системы: {V1}
+DistribDir				006	4INF	Каталог дистрибутивов системы: {V1}
+UtilsDir				007	4INF	Каталог утилит системы: {V1}
+ModulesDir				008	4INF	Каталог модулей системы: {V1}
+BackupDir				009	4INF	Каталог бэкапов системы: {V1}
+ConfigDir				010	4INF	Каталог конфигураций системы: {V1}
+CfgFile					011	4INF	Конфигурация пакета: {V1}
+SetupDir				012	4INF	Каталог установки пакета: {V1}
+SetupAbort				013	4INF	Установка прервана пользователем
+ExecPhaseId				014	4INF	Фаза выполнения: {V1}
 ProcArchInfo			015	5FINE	Архитектура процессора: {V1}
 LocaleInfo				016	5FINE	Локаль системы: {V1}
-ModDistribPath			017	5FINE	Путь к дистрибутиву модуля {V1}: {V2}
-ModDistribUrl			018	5FINE	URL дистрибутива модуля {V1}: {V2}
+ModDistribPath			017	4INF	Путь к дистрибутиву модуля {V1}: {V2}
+ModDistribUrl			018	4INF	URL дистрибутива модуля {V1}: {V2}
 DownloadDistribFile		019	1CON	Загрузка дистрибутива: {V1} в {V2}...
 ModDistribFound			020	1CON	Найден дистрибутив {V1}
-ModBinDir				021	5FINE	Каталог исполняемых файлов модуля {V1}: {V2}
-ModSetupDir				022	5FINE	Каталог установки модуля {V1}: {V2}
-ExecGoal				023	5FINE	Цель выполнения: {V1}
+ModBinDir				021	4INF	Каталог исполняемых файлов модуля {V1}: {V2}
+ModSetupDir				022	4INF	Каталог установки модуля {V1}: {V2}
+ExecGoal				023	4INF	Цель выполнения: {V1}
 Unpack7zSfx				024	1CON	Распаковка 7z SFX-архива {V1} в каталог {V2}...
 AddPathEnv				025	1CON	Добавление каталога {V1} в переменную среды PATH...
 DelPathEnv				026	1CON	Удаление каталога {V1} из переменной среды PATH...
@@ -51,7 +51,7 @@ ResultYes				040	5FINE	Да
 ResultNo				041	5FINE	Нет
 SilentInstall			042	1CON	Тихая установка дистрибутива {V1}...
 SilentUninstall			043	1CON	Тихая деинсталляция модуля {V1}...
-ModHomeDir				044	5FINE	Домашний каталог модуля {V1} [{V2}]: {V3}
+ModHomeDir				044	4INF	Домашний каталог модуля {V1} [{V2}]: {V3}
 MoveUnpackSetupDir		045	1CON	Перемещение содержимого каталога {V1} в каталог {V2}...
 DefUnpackDir			046	1CON	Определение каталога распаковки дистрибутива...
 CheckModInstalledReg	047	5FINE	по данным реестра {V1}/{V2}...
@@ -61,9 +61,9 @@ UnpackDistribFile		050	1CON	Распаковка дистрибутива: {V1}...
 InstallDistribFile		051	1CON	Установка дистрибутива: {V1}...
 UninstallDistribFile	052	1CON	Деинсталляция дистрибутива: {V1}...
 SilentKeys				053	5FINE	Ключи тихого запуска дистрибутива {V1}: {V2}
-ProcessingAbort			054	5FINE	Процесс {V1} прерван пользователем
-PhaseExecAbort			055	5FINE	Фаза {V1} прервана пользователем
-GoalExecAbort			056	5FINE	Цель {V1} прервана пользователем
+ProcessingAbort			054	4INF	Процесс {V1} прерван пользователем
+PhaseExecAbort			055	4INF	Фаза {V1} прервана пользователем
+GoalExecAbort			056	4INF	Цель {V1} прервана пользователем
 CmdCopy					057	1CON	Копирование каталогов и/или файлов...
 CmdCopyMoveObjects		058	5FINE	каталог: {V1} в {V2}
 CmdMove					059	1CON	Перемещение каталогов и/или файлов...
@@ -74,20 +74,20 @@ ResultCountOk			063	1CON	[{V1} объектов] Ok
 CreatedCfgTmpFile		064	5FINE	Создан временный конфигурационный файл {V1}
 NeedApplyParamsCnt		065	5FINE	Необходимо применить {V1} параметров
 AddCfgParamsCnt			066	5FINE	Добавлено {V1} неприменённых параметров
-PkgSetupDir				067	5FINE	Каталог установки пакета {V1}: {V2}
-PkgLogDir				068	5FINE	Каталог логов пакета {V1}: {V2}
-PkgDistribDir			069	5FINE	Каталог дистрибутивов пакета {V1}: {V2}
-PkgBackupDataDir		070	5FINE	Каталог бэкапов данных пакета {V1}: {V2}
-PkgBackupConfigDir		071	5FINE	Каталог бэкапов конфигураций пакета {V1}: {V2}
+PkgSetupDir				067	4INF	Каталог установки пакета {V1}: {V2}
+PkgLogDir				068	4INF	Каталог логов пакета {V1}: {V2}
+PkgDistribDir			069	4INF	Каталог дистрибутивов пакета {V1}: {V2}
+PkgBackupDataDir		070	4INF	Каталог бэкапов данных пакета {V1}: {V2}
+PkgBackupConfigDir		071	4INF	Каталог бэкапов конфигураций пакета {V1}: {V2}
 CmdBatch				072	1CON	Выполнение пакета команд ...
 CmdBatchExec			073	5FINE	команда: {V1}...
 InputBindVarValue		074	1CON	Введите значение {V1}: 
-InputBindVarsAbort		075	5FINE	Ввод значений для {V1} прерван
-PkgMenuAbort			076	5FINE	Пользователь вышел из меню пакетов
-ModMenuAbort			077	5FINE	Пользователь вышел из меню модулей пакета {V1}
-InputModSetupDirAbort	078	5FINE	Пользователь не изменил каталог установки модуля {V1}
+InputBindVarsAbort		075	4INF	Ввод значений для {V1} прерван
+PkgMenuAbort			076	4INF	Пользователь вышел из меню пакетов
+ModMenuAbort			077	4INF	Пользователь вышел из меню модулей пакета {V1}
+InputModSetupDirAbort	078	4INF	Пользователь не изменил каталог установки модуля {V1}
 InputModSetupDir		079	5FINE	Введите новый каталог установки для модуля {V1}: 
-ChangeRegKeyValueAbort	080	5FINE	Изменение значение ключа реестра {V1} отменено
+ChangeRegKeyValueAbort	080	4INF	Изменение значение ключа реестра {V1} отменено
 ;
 ;ПРЕДУПРЕЖДЕНИЯ:
 ;===========================================
@@ -130,3 +130,5 @@ SrcFileExistError		031	2ERR	Не найден файл-источник {V1}. Проверьте, пожалуйста,
 DstDirExistError		032	2ERR	Не найден каталог назначения {V1}. Проверьте, пожалуйста, его наличие.
 ResultFail				033	2ERR	Ошибка
 ResultFailNum			034	2ERR	Ошибка {V1}
+CfgValSchemaExistError	035 2ERR	Не найден файл схемы проверки проверки xml-конфигурации пакета {V1}
+CfgValSchemaError		036 2ERR	Ошибка в xml-структуре конфигурации пакета {V1}
