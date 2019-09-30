@@ -19,12 +19,10 @@ rem ---------------------------------------------
 :echo %*
 setlocal
 rem Устанавливаем все необходимые параметры и ресурсы для работы скрипта, и проверяем их корректность
-call :echo_res_setup %*
-if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
-call :echo_res_check_setup
-if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
+call :echo_res_setup %* & if ERRORLEVEL 1 endlocal & exit /b !ERRORLEVEL!
+call :echo_res_check_setup & if ERRORLEVEL 1 endlocal & exit /b !ERRORLEVEL!
 
-if defined p_cmd if /i "%p_cmd%" EQU "GET" call :get_res_val & echo !res_val! & endlocal & exit /b !ERRORLEVEL!
+if defined p_cmd if /i "%p_cmd%" EQU "%RESC_GET%" call :get_res_val & echo !res_val! & endlocal & exit /b !ERRORLEVEL!
 rem echo "%script_hdr%" "%res_path%" "%p_res_id%"
 
 rem если передано значение ресурса
@@ -449,14 +447,8 @@ rem и ресурсы для работы скрипта
 rem ---------------------------------------------
 :echo_res_setup %*
 rem УСТАНОВКА И ОПРЕДЕЛЕНИЕ ЗНАЧЕНИЙ ПО УМОЛЧАНИЮ:
-rem цвет выводимого ресурса
-set DEF_RES_COLOR=08
-rem идентификаторы подстановочных переменных
-set V_SYMB=V
 
 rem СБРОС ГЛОБАЛЬНЫХ ПЕРЕМЕННЫХ:
-set res_val=
-set res_categ=
 set categ_num=
 set categ_name=
 
@@ -475,10 +467,10 @@ if defined res_categ (
 	set categ_num=%res_categ:~0,1%
 	set categ_name=%res_categ:~1%
 )
-rem КОНТРОЛЬ уровня логгирования сообщения
+rem КОНТРОЛЬ уровня логгирования сообщения только если не отладка
 if not defined categ_num goto echo_parse_params
 if not defined log_lvl goto echo_parse_params
-if %categ_num% GTR %log_lvl% endlocal & exit /b 1
+if /i "%EXEC_MODE%" NEQ "%EM_DBG%" if %categ_num% GTR %log_lvl% endlocal & exit /b 1
 
 :echo_parse_params
 rem ОСНОВНОЙ - остальных параметров
@@ -487,7 +479,7 @@ call :parse_params %~0 %echo_res_param_defs% %*
 rem ошибка разбора определений параметров
 rem if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
 rem вывод справки
-if ERRORLEVEL 1 call :echo_res_help & endlocal & exit /b 1
+if ERRORLEVEL 1 call :echo_res_help & endlocal & exit /b !ERRORLEVEL!
 if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :print_params %~0
 
 rem определяем путь и праметры утилиты изменения цвета

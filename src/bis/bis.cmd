@@ -89,9 +89,6 @@ goto mod_menu_loop
 endlocal & exit /b 0
 
 rem =======================================================================================
-rem Так как в условных конструкциях невозможно получить корректный Errorlevel от Choice, то 
-rem для взаимодействия с пользователем используются подпрограммы
-
 rem ---------------------------------------------
 rem Отображение меню конфигураций пакетов
 rem Возвращает: g_pkg_cfg_file g_pkg_name g_pkg_descr use_log g_log_level
@@ -192,7 +189,7 @@ rem ---------------------------------------------
 :modules_menu _def_mod_name _mod_choice _pkg_name _pkg_descr
 set _def_mod_name=%~1
 set _mod_choice=%~2
-set _pkg_name=%~3
+set _mm_pkg_name=%~3
 set _pkg_descr=%~4
 if /i "%EXEC_MODE%" EQU "%EM_RUN%" CLS
 set l_delay=%DEF_DELAY%
@@ -201,7 +198,7 @@ set l_choice=
 if "%_def_mod_name%" EQU "" (
 	call :echo -rf:"%menus_file%" -ri:MenuHeaderSeparator -rc:0E -be:1
 	call :echo -rf:"%menus_file%" -ri:ChoiceModule -v1:%l_delay% -rc:0E
-	call :echo -rv:"%_pkg_name% [%_pkg_descr%]" -rc:0E
+	call :echo -rv:"%_mm_pkg_name% [%_pkg_descr%]" -rc:0E
 	call :echo -rf:"%menus_file%" -ri:MenuHeaderSeparator -rc:0E -ae:1
 )
 pushd "%bis_config_dir%"
@@ -218,12 +215,12 @@ for /F "tokens=1-3 delims=	" %%a in ('%xml_sel_% "!res_val!" -v "./name" -o "	" 
 	set l_mod_descr=%%c
 
 	rem call :convert_case %CM_LOWER% "!l_trim_mod_name!" l_lw_mod_name
-	call :set_var_value %BV_MOD_NAME% "!l_trim_mod_name!" "%_pkg_name%" "!l_trim_mod_name!"
-	call :set_var_value %BV_MOD_VERSION% "!l_mod_ver!" "%_pkg_name%" "!l_trim_mod_name!"
+	call :set_var_value %BV_MOD_NAME% "!l_trim_mod_name!" "%_mm_pkg_name%" "!l_trim_mod_name!"
+	call :set_var_value %BV_MOD_VERSION% "!l_mod_ver!" "%_mm_pkg_name%" "!l_trim_mod_name!"
 
 	if "%_def_mod_name%" EQU "" call :echo -rv:"%BS%         !x! - !l_mod_name! v.!l_mod_ver! " -rc:0F -cp:65001 -ln:%VL_FALSE%
 	rem получаем каталог установки модуля, его каталог бинарных файлов и домашний каталог
-	call :get_mod_install_dirs "%_pkg_name%" "!l_mod_name!" "!l_mod_ver!"
+	call :get_mod_install_dirs "%_mm_pkg_name%" "!l_mod_name!" "!l_mod_ver!"
 	rem определяем установлен ли уже модуль
 	call :is_mod_installed "!l_mod_name!" "!l_mod_ver!"
 	rem если модуль установлен, переходим к выбору вариантов работы с модулем
@@ -259,7 +256,7 @@ call :get_res_val -rf:"%menus_file%" -ri:EnterModChoice -v1:%x%
 call :choice_process "" "" %l_delay% %ret_pkg% "%res_val%" "%l_choice%"
 set mod_num=%ERRORLEVEL%
 
-if %mod_num% GEQ %x% call :echo -ri:ModMenuAbort -v1:"%_pkg_name%" & exit /b 1
+if %mod_num% GEQ %x% call :echo -ri:ModMenuAbort -v1:"%_mm_pkg_name%" & exit /b 1
 if %mod_num% GEQ %ret_pkg% exit /b 2
 if %mod_num% GEQ %all_num% exit /b 3
 
@@ -279,42 +276,42 @@ rem 					pkgs[%_pkg_name%]#BackupDataDir
 rem 					pkgs[%_pkg_name%]#BackupConfigDir)
 rem ---------------------------------------------
 :get_pkg_dirs _pkg_name
-set _pkg_name=%~1
+set _gpd_pkg_name=%~1
 call :get_res_val -rf:"%xpaths_file%" -ri:XPathOSParams
 for /F "tokens=1-5" %%a in ('%xml_sel_% "!res_val!" -v "concat(./setupDir, substring('%EMPTY_NODE%', 1 div not(./setupDir)))" -o "	" -v "concat(./distribDir, substring('%EMPTY_NODE%', 1 div not(./distribDir)))" -o "	" -v "concat(./backupDataDir, substring('%EMPTY_NODE%', 1 div not(./backupDataDir)))" -o "	" -v "concat(./backupConfigDir, substring('%EMPTY_NODE%', 1 div not(./backupConfigDir)))" -o "	" -v "concat(./logDir, substring('%EMPTY_NODE%', 1 div not(./logDir)))" -n "%g_pkg_cfg_file%"') do (
-	set pkgs[%_pkg_name%]#SetupDir=%%~a
-	call :binding_var "%_pkg_name%" "" "!pkgs[%_pkg_name%]#SetupDir!" pkgs[%_pkg_name%]#SetupDir
-	call :set_var_value %BV_PKG_SETUP_DIR% "!pkgs[%_pkg_name%]#SetupDir!"
+	set pkgs[%_gpd_pkg_name%]#SetupDir=%%~a
+	call :binding_var "%_gpd_pkg_name%" "" "!pkgs[%_gpd_pkg_name%]#SetupDir!" pkgs[%_gpd_pkg_name%]#SetupDir
+	call :set_var_value %BV_PKG_SETUP_DIR% "!pkgs[%_gpd_pkg_name%]#SetupDir!"
 	if "%%~b" NEQ "%EMPTY_NODE%" (
-		set pkgs[%_pkg_name%]#DistribDir=%%~b
-		call :binding_var "%_pkg_name%" "" "!pkgs[%_pkg_name%]#DistribDir!" pkgs[%_pkg_name%]#DistribDir
+		set pkgs[%_gpd_pkg_name%]#DistribDir=%%~b
+		call :binding_var "%_gpd_pkg_name%" "" "!pkgs[%_gpd_pkg_name%]#DistribDir!" pkgs[%_gpd_pkg_name%]#DistribDir
 	) else (
-		set pkgs[%_pkg_name%]#DistribDir=%bis_distrib_dir%%DIR_SEP%%_pkg_name%
+		set pkgs[%_gpd_pkg_name%]#DistribDir=%bis_distrib_dir%%DIR_SEP%%_gpd_pkg_name%
 	)
 	if "%%~c" NEQ "%EMPTY_NODE%" (
-		set pkgs[%_pkg_name%]#BackupDataDir=%%~c
-		call :binding_var "%_pkg_name%" "" "!pkgs[%_pkg_name%]#BackupDataDir!" pkgs[%_pkg_name%]#BackupDataDir
+		set pkgs[%_gpd_pkg_name%]#BackupDataDir=%%~c
+		call :binding_var "%_gpd_pkg_name%" "" "!pkgs[%_gpd_pkg_name%]#BackupDataDir!" pkgs[%_gpd_pkg_name%]#BackupDataDir
 	) else (
-		set pkgs[%_pkg_name%]#BackupDataDir=%bis_backup_data_dir%
+		set pkgs[%_gpd_pkg_name%]#BackupDataDir=%bis_backup_data_dir%
 	)
 	if "%%~d" NEQ "%EMPTY_NODE%" (
-		set pkgs[%_pkg_name%]#BackupConfigDir=%%~d
-		call :binding_var "%_pkg_name%" "" "!pkgs[%_pkg_name%]#BackupConfigDir!" pkgs[%_pkg_name%]#BackupConfigDir
+		set pkgs[%_gpd_pkg_name%]#BackupConfigDir=%%~d
+		call :binding_var "%_gpd_pkg_name%" "" "!pkgs[%_gpd_pkg_name%]#BackupConfigDir!" pkgs[%_gpd_pkg_name%]#BackupConfigDir
 	) else (
-		set pkgs[%_pkg_name%]#BackupConfigDir=%bis_backup_config_dir%
+		set pkgs[%_gpd_pkg_name%]#BackupConfigDir=%bis_backup_config_dir%
 	)
 	if "%%~e" NEQ "%EMPTY_NODE%" (
-		set pkgs[%_pkg_name%]#LogDir=%%~e
-		call :binding_var "%_pkg_name%" "" "!pkgs[%_pkg_name%]#LogDir!" pkgs[%_pkg_name%]#LogDir
+		set pkgs[%_gpd_pkg_name%]#LogDir=%%~e
+		call :binding_var "%_gpd_pkg_name%" "" "!pkgs[%_gpd_pkg_name%]#LogDir!" pkgs[%_gpd_pkg_name%]#LogDir
 	) else (
-		set pkgs[%_pkg_name%]#LogDir=%bis_log_dir%
+		set pkgs[%_gpd_pkg_name%]#LogDir=%bis_log_dir%
 	)
 )
-call :echo -ri:PkgSetupDir -v1:%_pkg_name% -v2:"!pkgs[%_pkg_name%]#SetupDir!"
-call :echo -ri:PkgLogDir -v1:%_pkg_name% -v2:"!pkgs[%_pkg_name%]#LogDir!"
-call :echo -ri:PkgDistribDir -v1:%_pkg_name% -v2:"!pkgs[%_pkg_name%]#DistribDir!"
-call :echo -ri:PkgBackupDataDir -v1:%_pkg_name% -v2:"!pkgs[%_pkg_name%]#BackupDataDir!"
-call :echo -ri:PkgBackupConfigDir -v1:%_pkg_name% -v2:"!pkgs[%_pkg_name%]#BackupConfigDir!"
+call :echo -ri:PkgSetupDir -v1:%_gpd_pkg_name% -v2:"!pkgs[%_gpd_pkg_name%]#SetupDir!"
+call :echo -ri:PkgLogDir -v1:%_gpd_pkg_name% -v2:"!pkgs[%_gpd_pkg_name%]#LogDir!"
+call :echo -ri:PkgDistribDir -v1:%_gpd_pkg_name% -v2:"!pkgs[%_gpd_pkg_name%]#DistribDir!"
+call :echo -ri:PkgBackupDataDir -v1:%_gpd_pkg_name% -v2:"!pkgs[%_gpd_pkg_name%]#BackupDataDir!"
+call :echo -ri:PkgBackupConfigDir -v1:%_gpd_pkg_name% -v2:"!pkgs[%_gpd_pkg_name%]#BackupConfigDir!"
 exit /b 0
 
 rem ---------------------------------------------
@@ -322,25 +319,25 @@ rem Выполняет установку заданного модуля
 rem (устанавливает: 	mods[%_mod_name%]#DistribDir)
 rem ---------------------------------------------
 :execute_module
-set _exec_choice=%~1
-set _pkg_name=%~2
-set _mod_name=%~3
-set _mod_ver=%~4
+set _em_exec_choice=%~1
+set _em_pkg_name=%~2
+set _em_mod_name=%~3
+set _em_mod_ver=%~4
 
 rem получаем каталог установки модуля, его каталог бинарных файлов и домашний каталог
-call :get_mod_install_dirs "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
+call :get_mod_install_dirs "%_em_pkg_name%" "%_em_mod_name%" "%_em_mod_ver%"
 
 rem определяем каталог дистрибутива модуля (должен быть определён до :execute_choice)
-call :get_mod_distrib_params "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
+call :get_mod_distrib_params "%_em_pkg_name%" "%_em_mod_name%" "%_em_mod_ver%"
 
 if /i "%EXEC_MODE%" EQU "%EM_RUN%" cls
 rem определяем установлен ли уже модуль
-call :is_mod_installed "%_mod_name%" "%_mod_ver%"
+call :is_mod_installed "%_em_mod_name%" "%_em_mod_ver%"
 rem если модуль установлен, переходим к выбору вариантов работы с модулем
-if ERRORLEVEL 1 endlocal & call :execute_choice "%_exec_choice%" "%_pkg_name%" "%_mod_name%" "%_mod_ver%" & exit /b !ERRORLEVEL!
+if ERRORLEVEL 1 endlocal & call :execute_choice "%_em_exec_choice%" "%_em_pkg_name%" "%_em_mod_name%" "%_em_mod_ver%" & exit /b !ERRORLEVEL!
 
 rem выполняем все фазы модуля
-call :execute_mod_phases "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
+call :execute_mod_phases "%_em_pkg_name%" "%_em_mod_name%" "%_em_mod_ver%"
 exit /b 0
 
 rem ---------------------------------------------
@@ -393,22 +390,22 @@ exit /b 0
 
 rem ---------------------------------------------
 rem Выполняет заданную фазу
+rem (устанавливает: 	mods[%_mod_name%]#Installed)
 rem ---------------------------------------------
 :execute_phase
-setlocal
-set _phase_id=%~1
-set _phase=%~2
-set _pkg_name=%~3
-set _mod_name=%~4
-set _mod_ver=%~5
+set _ep_phase_id=%~1
+set _ep_phase=%~2
+set _ep_pkg_name=%~3
+set _ep_mod_name=%~4
+set _ep_mod_ver=%~5
 
-call :echo -ri:ExecPhaseId -v1:"%_phase_id%" -ae:1
-call :choice_process "%_phase_id%" ProcessingPhase
-if ERRORLEVEL %NO% call :echo -ri:PhaseExecAbort -v1:"%_phase_id%" & endlocal & exit /b 0
-if /i "%_phase%" EQU "%PH_DOWNLOAD%" call :phase_download "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
-if /i "%_phase%" EQU "%PH_INSTALL%" call :phase_install "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
-if /i "%_phase%" EQU "%PH_CONFIG%" call :phase_config "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
-endlocal & exit /b %ERRORLEVEL%
+call :echo -ri:ExecPhaseId -v1:"%_ep_phase_id%" -ae:1
+call :choice_process "%_ep_phase_id%" ProcessingPhase
+if ERRORLEVEL %NO% call :echo -ri:PhaseExecAbort -v1:"%_ep_phase_id%" & endlocal & exit /b 0
+if /i "%_ep_phase%" EQU "%PH_DOWNLOAD%" call :phase_download "%_ep_pkg_name%" "%_ep_mod_name%" "%_ep_mod_ver%"
+if /i "%_ep_phase%" EQU "%PH_INSTALL%" call :phase_install "%_ep_pkg_name%" "%_ep_mod_name%" "%_ep_mod_ver%"
+if /i "%_ep_phase%" EQU "%PH_CONFIG%" call :phase_config "%_ep_pkg_name%" "%_ep_mod_name%" "%_ep_mod_ver%"
+exit /b %ERRORLEVEL%
 
 rem ---------------------------------------------
 rem Возвращает параметры дистрибуции заданного модуля
@@ -475,7 +472,8 @@ call :download "%curl_%" "!mods[%_mod_name%]#DistribUrl!" "!mods[%_mod_name%]#Di
 endlocal & exit /b %ERRORLEVEL%
 
 rem ---------------------------------------------
-rem Обеспечивает управляемую установку приложения
+rem Обеспечивает управляемую установку модуля
+rem (устанавливает: 	mods[%_mod_name%]#Installed)
 rem ---------------------------------------------
 :phase_install
 setlocal
@@ -506,31 +504,61 @@ if "!mods[%_mod_name%]#SetupDir!" NEQ "" if not exist "!mods[%_mod_name%]#SetupD
 	1>nul MD "!mods[%_mod_name%]#SetupDir!"
 	call :echo -ri:ResultOk -rc:0A
 )
-rem если модуль установлен, переходим к выполнению неявных целей
-call :is_mod_installed "%_mod_name%" "%_mod_ver%"
-if ERRORLEVEL 1 goto implicit_goals
-rem иначе получаем цели фазы установки
+rem получаем цели фазы установки
 call :get_phase_goals "%_mod_name%" "%_mod_ver%" "%PH_INSTALL%" goals_cnt
+
+rem проверяем установлен ли модуль
+set l_mod_installed=%VL_FALSE%
+call :is_mod_installed "%_mod_name%" "%_mod_ver%"
+if ERRORLEVEL 1 set l_mod_installed=%VL_TRUE%
+
 rem разбор по явным целям в порядке следования
 for /l %%n in (0,1,%goals_cnt%) do ( 
-	set install_goal=!phase_goals[%%n]!
-	call :echo -ri:ExecGoal -v1:"!install_goal!" -ae:1
-	if /i "!install_goal!" EQU "%GL_UNPACK_7Z_SFX%" call :goal_unpack_7z_sfx "%_mod_name%"
-	if /i "!install_goal!" EQU "%GL_UNPACK_ZIP%" call :goal_unpack_zip "%_mod_name%"
-	if /i "!install_goal!" EQU "%GL_SILENT%" call :goal_silent %PH_INSTALL% "%_mod_name%" "%_mod_ver%"
-	if /i "!install_goal!" EQU "%GL_CMD_SHELL%" (
-		call :get_exec_name "%~0"
-		call :goal_cmd_shell "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "!exec_name!"
+	rem если модуль не установлен, то сплошное выполнение целей
+	if /i "%l_mod_installed%" NEQ "%VL_TRUE%" (
+		call :phase_install_goals "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "!phase_goals[%%n]!"
+	) else (
+		rem иначе выборочное выполнение целей
+		call :choice_process "!phase_goals[%%n]!" ProcessingGoal
+		if ERRORLEVEL %NO% (
+			call :echo -ri:GoalExecAbort -v1:"!phase_goals[%%n]!"
+		) else (
+			call :phase_install_goals "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "!phase_goals[%%n]!"
+		)
 	)
 	if ERRORLEVEL 1 endlocal & exit /b !ERRORLEVEL!
-) 
-:implicit_goals
+)
 rem разбор неявных целей
 call :goal_add_path_env "%_mod_name%"
 call :goal_add_env "!mods[%_mod_name%]#HomeEnv!" "!mods[%_mod_name%]#HomeDir!"
 set l_result=%ERRORLEVEL%
 
 endlocal & (set "mods[%_mod_name%]#Installed=1" & exit /b %l_result%)
+
+rem ---------------------------------------------
+rem Выполняет цели фазы установки модуля
+rem ---------------------------------------------
+:phase_install_goals
+setlocal
+set _pkg_name=%~1
+set _mod_name=%~2
+set _mod_ver=%~3
+set _install_goal=%~4
+
+call :echo -ri:ExecGoal -v1:"%_install_goal%" -ae:1
+if /i "%_install_goal%" EQU "%GL_UNPACK_7Z_SFX%" (
+	call :goal_unpack_7z_sfx "%_mod_name%"
+) else if /i "%_install_goal%" EQU "%GL_UNPACK_ZIP%" ( 
+	call :goal_unpack_zip "%_mod_name%"
+) else if /i "%_install_goal%" EQU "%GL_SILENT%" (
+	call :goal_silent %PH_INSTALL% "%_mod_name%" "%_mod_ver%"
+) else if /i "%_install_goal%" EQU "%GL_CMD_SHELL%" (
+	rem call :get_exec_name "%~0"
+	call :goal_cmd_shell "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%PH_INSTALL%"
+)
+if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
+
+endlocal & exit /b 0
 
 rem ---------------------------------------------
 rem Определяет каталоги модуля: установки,
@@ -605,7 +633,7 @@ if "!mods[%_mod_name%]#SetupDir!" NEQ "" (
 )
 call :get_res_val -rf:"%xpaths_file%" -ri:XPathInstallVer -v1:"%_mod_name%" -v2:"%_mod_ver%"
 for /F "tokens=1,2" %%i in ('%xml_sel_% "!res_val!" -v "./regKey" -o "	" -v "./regParam" -n "%g_pkg_cfg_file%"') do (
-        set l_regKey=%%i
+	set l_regKey=%%i
 	set l_regParam=%%j
 	call :echo -ri:CheckModInstalledReg -v1:"!l_regKey!" -v2:"!l_regParam!" -rl:0FILE
 	call :reg -oc:%RC_GET% -kn:"!l_regKey!" -vn:"!l_regParam!"
@@ -643,41 +671,42 @@ exit /b 0
 
 rem ---------------------------------------------
 rem Выполняет действия с уже установленным модулем
+rem (устанавливает: 	mods[%_mod_name%]#Installed)
 rem ---------------------------------------------
 :execute_choice
-set _exec_choice=%~1
-set _pkg_name=%~2
-set _mod_name=%~3
-set _mod_ver=%~4
+set _ec_exec_choice=%~1
+set _ec_pkg_name=%~2
+set _ec_mod_name=%~3
+set _ec_mod_ver=%~4
 
 set l_delay=%DEF_DELAY%
 set l_choice=
-call :echo -rf:"%menus_file%" -ri:ExecModChoice -v1:"%_mod_name%" -v2:%l_delay% -rc:0E -be:1
+call :echo -rf:"%menus_file%" -ri:ExecModChoice -v1:"%_ec_mod_name%" -v2:%l_delay% -rc:0E -be:1
 rem получаем фазы выполнения
-call :get_mod_phases "%_mod_name%" "%_mod_ver%"
+call :get_mod_phases "%_ec_mod_name%" "%_ec_mod_ver%"
 rem разбор по явным целям в порядке следования
 set "x=1" 
-for /l %%n in (0,1,!mods[%_mod_name%]#PhaseCnt!) do ( 
-	set l_mod_choice[!x!]#Phase=!mods[%_mod_name%]#Phase[%%n]@Name!
-	set l_mod_choice[!x!]#Id=!mods[%_mod_name%]#Phase[%%n]@Id!
+for /l %%n in (0,1,!mods[%_ec_mod_name%]#PhaseCnt!) do ( 
+	set l_mod_choice[!x!]#Phase=!mods[%_ec_mod_name%]#Phase[%%n]@Name!
+	set l_mod_choice[!x!]#Id=!mods[%_ec_mod_name%]#Phase[%%n]@Id!
 	
-	if /i "!mods[%_mod_name%]#Phase[%%n]@Name!" EQU "%PH_INSTALL%" (
+	if /i "!mods[%_ec_mod_name%]#Phase[%%n]@Name!" EQU "%PH_INSTALL%" (
 		call :echo -rf:"%menus_file%" -ri:RepairModSetup -v1:!x! -rc:0F -rs:8
 		set l_choice=!l_choice!!x!
  		set /a "x+=1"
 	)
-	if /i "!mods[%_mod_name%]#Phase[%%n]@Name!" EQU "%PH_CONFIG%" (
+	if /i "!mods[%_ec_mod_name%]#Phase[%%n]@Name!" EQU "%PH_CONFIG%" (
 		call :echo -rf:"%menus_file%" -ri:ApplyModConfig -v1:!x! -rc:0F -rs:8
 		set l_choice=!l_choice!!x!
  		set /a "x+=1"
 	)
-	if /i "!mods[%_mod_name%]#Phase[%%n]@Name!" EQU "%PH_BACKUP%" (
+	if /i "!mods[%_ec_mod_name%]#Phase[%%n]@Name!" EQU "%PH_BACKUP%" (
 		call :echo -rf:"%menus_file%" -ri:BackupRestore -v1:!x! -rc:0F -rs:8
 		set l_choice=!l_choice!!x!
  		set /a "x+=1"
 	)
-	if /i "!mods[%_mod_name%]#Phase[%%n]@Name!" EQU "%PH_UNINSTALL%" (
-		set "l_phase_uninstall_id=!mods[%_mod_name%]#Phase[%%n]@Id!"
+	if /i "!mods[%_ec_mod_name%]#Phase[%%n]@Name!" EQU "%PH_UNINSTALL%" (
+		set "l_phase_uninstall_id=!mods[%_ec_mod_name%]#Phase[%%n]@Id!"
 		set "phase_uninstall_exist=%VL_TRUE%"
 	)
 )
@@ -686,7 +715,7 @@ set l_mod_choice[!x!]#Phase=%PH_UNINSTALL%
 if defined l_phase_uninstall_id (
 	set l_mod_choice[!x!]#Id=!l_phase_uninstall_id!
 ) else (
-	set l_mod_choice[!x!]#Id=%_mod_name%-%PH_UNINSTALL% [%PH_INSTALL%]
+	set l_mod_choice[!x!]#Id=%_ec_mod_name%-%PH_UNINSTALL% [%PH_INSTALL%]
 )
 set l_phase_uninstall_id=
 set l_choice=!l_choice!!x!
@@ -697,7 +726,7 @@ set l_choice=!l_choice!!x!
 call :echo -rf:"%menus_file%" -ri:ActionNo -v1:%x% -rc:0F -rs:8 -ae:1
 
 rem если определён выбор выполнения по умолчанию
-if "%_exec_choice%" NEQ "" set "exec_num=%_exec_choice%" & goto execute_def
+if "%_ec_exec_choice%" NEQ "" set "exec_num=%_ec_exec_choice%" & goto execute_def
 
 call :get_res_val -rf:"%menus_file%" -ri:ChoiceModExec
 call :choice_process "" "" %l_delay% %x% "%res_val%" "%l_choice%"
@@ -720,21 +749,21 @@ if ERRORLEVEL %NO% call :echo -ri:PhaseExecAbort -v1:"%l_mod_choice_cur#Phase%" 
 :continue_execute_choice
 if /i "%l_mod_choice_cur#Phase%" EQU "%PH_INSTALL%" (
 	rem выполняем все фазы модуля
-	call :execute_mod_phases "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
+	call :execute_mod_phases "%_ec_pkg_name%" "%_ec_mod_name%" "%_ec_mod_ver%"
 ) else if /i "%l_mod_choice_cur#Phase%" EQU "%PH_CONFIG%" (
-	call :phase_config "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
+	call :phase_config "%_ec_pkg_name%" "%_ec_mod_name%" "%_ec_mod_ver%"
 ) else if /i "%l_mod_choice_cur#Phase%" EQU "%PH_BACKUP%" (
-	call :phase_backup "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
+	call :phase_backup "%_ec_pkg_name%" "%_ec_mod_name%" "%_ec_mod_ver%"
 ) else if /i "%l_mod_choice_cur#Phase%" EQU "%PH_UNINSTALL%" (
 	rem получаем каталог установки модуля, его каталог бинарных файлов и домашний каталог
-rem	call :get_mod_install_dirs "%_mod_name%" "%_mod_ver%"
+rem	call :get_mod_install_dirs "%_ec_mod_name%" "%_ec_mod_ver%"
 	rem каталоги гарантированно получены ранее до вызова текущей процедуры
 
 	rem если есть фаза деинсталляции, то выполяем деинсталляцию по ней, иначе - по фазе инсталляции
 	if /i "%phase_uninstall_exist%" EQU "%VL_TRUE%" (
-		call :phase_uninstall "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
+		call :phase_uninstall "%_ec_pkg_name%" "%_ec_mod_name%" "%_ec_mod_ver%"
 	) else (
-		call :phase_module_uninstall "%_pkg_name%" "%_mod_name%" "%_mod_ver%"
+		call :phase_module_uninstall "%_ec_pkg_name%" "%_ec_mod_name%" "%_ec_mod_ver%"
 	)
 )
 if ERRORLEVEL 1 exit /b %ERRORLEVEL%
@@ -760,8 +789,8 @@ for /l %%n in (0,1,%goals_cnt%) do (
 	set config_goal=!phase_goals[%%n]!
 	call :echo -ri:ExecGoal -v1:"!config_goal!" & echo.
 	if /i "!config_goal!" EQU "%GL_CMD_SHELL%" (
-		call :get_exec_name "%~0"
-		call :goal_cmd_shell "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "!exec_name!"
+		rem call :get_exec_name "%~0"
+		call :goal_cmd_shell "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%PH_CONFIG%"
 	)
 	if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
 ) 
@@ -792,6 +821,7 @@ endlocal & exit /b 0
 
 rem ---------------------------------------------
 rem Деинсталлирует модуль согласно фазе деинсталляции
+rem (устанавливает: 	mods[%_mod_name%]#Installed)
 rem ---------------------------------------------
 :phase_uninstall
 setlocal
@@ -818,6 +848,7 @@ endlocal & (set "mods[%_mod_name%]#Installed=0" & exit /b %l_result%)
 
 rem ---------------------------------------------
 rem Деинсталлирует модуль согласно фазе инсталляции
+rem (устанавливает: 	mods[%_mod_name%]#Installed)
 rem ---------------------------------------------
 :phase_module_uninstall
 setlocal
@@ -1041,7 +1072,7 @@ if defined reg_value (
 )
 call :echo -ri:AddEnv -v1:"%_env%" -v2:"%_val%" -rc:0F -ln:%VL_FALSE%
 call :convert_slashes %CSD_WIN% "%_val%" _val
-echo call :reg -oc:%RC_SET% -vn:"%_env%" -vv:"%_val%"
+call :reg -oc:%RC_SET% -vn:"%_env%" -vv:"%_val%"
 call :echo -ri:ResultOk -rc:0A
 endlocal & exit /b 0
 
@@ -1055,7 +1086,7 @@ set _env=%~1
 call :print_exec_name "%~0"
 
 call :echo -ri:DelEnv -v1:"%_env%" -rc:0F -ln:%VL_FALSE%
-echo call :reg -oc:%RC_DEL% -vn:"%_env%"
+call :reg -oc:%RC_DEL% -vn:"%_env%"
 call :echo -ri:ResultOk -rc:0A
 endlocal & exit /b 0
 
@@ -1067,18 +1098,18 @@ setlocal
 set _pkg_name=%~1
 set _mod_name=%~2
 set _mod_ver=%~3
-set _exec_name=%~4
+set _phase=%~4
 rem получаем команды процессора
-call :get_res_val -rf:"%xpaths_file%" -ri:XPathCmdCommands -v1:"%_mod_name%" -v2:"%_mod_ver%" -v3:"%_exec_name%"
+call :get_res_val -rf:"%xpaths_file%" -ri:XPathCmdCommands -v1:"%_mod_name%" -v2:"%_mod_ver%" -v3:"%_phase%"
 set "copy_num=0"
 set "move_num=0"
 set "md_num=0"
 for /F "tokens=1" %%a in ('%xml_sel_% "!res_val!" -v "name()" -n "%g_pkg_cfg_file%"') do (
 	set l_cmd=%%a
-	if /i "!l_cmd!" EQU "COPY" set /a "copy_num+=1" & call :cmd_copy "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" !copy_num!
-	if /i "!l_cmd!" EQU "MOVE" set /a "move_num+=1" & call :cmd_move "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" !move_num!
-	if /i "!l_cmd!" EQU "MD" set /a "md_num+=1" & call :cmd_md "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" !md_num!
-	if /i "!l_cmd!" EQU "BATCH" call :cmd_batch "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%"
+	if /i "!l_cmd!" EQU "COPY" set /a "copy_num+=1" & call :cmd_copy "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_phase%" !copy_num!
+	if /i "!l_cmd!" EQU "MOVE" set /a "move_num+=1" & call :cmd_move "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_phase%" !move_num!
+	if /i "!l_cmd!" EQU "MD" set /a "md_num+=1" & call :cmd_md "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_phase%" !md_num!
+	if /i "!l_cmd!" EQU "BATCH" call :cmd_batch "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_phase%"
 )
 endlocal & exit /b %ERRORLEVEL%
 
@@ -1091,16 +1122,16 @@ setlocal EnableExtensions EnableDelayedExpansion
 set _pkg_name=%~1
 set _mod_name=%~2
 set _mod_ver=%~3
-set _exec_name=%~4
+set _phase=%~4
 set _copy_num=%~5
 
 call :echo -ri:CmdCopy -rc:0F -ln:%VL_FALSE%
 
 rem получаем пути файлов источников
-call :get_cmd_objects XPathCmdCopySrc "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" %_copy_num% l_src_dir l_src_paths src_cnt
+call :get_cmd_objects XPathCmdCopySrc "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_phase%" %_copy_num% l_src_dir l_src_paths src_cnt
 
 rem получаем пути файлов назначения
-call :get_cmd_objects XPathCmdCopyDst "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" %_copy_num% l_dst_dir l_dst_paths dst_cnt
+call :get_cmd_objects XPathCmdCopyDst "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_phase%" %_copy_num% l_dst_dir l_dst_paths dst_cnt
 
 rem КОНТРОЛЬ:
 call :get_exec_name "%~0"
@@ -1167,24 +1198,22 @@ setlocal EnableExtensions EnableDelayedExpansion
 set _pkg_name=%~1
 set _mod_name=%~2
 set _mod_ver=%~3
-set _exec_name=%~4
+set _phase=%~4
 set _move_num=%~5
 
 call :echo -ri:CmdMove -rc:0F -ln:%VL_FALSE%
 
 rem получаем пути файлов источников
-call :get_cmd_objects XPathCmdMoveSrc "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" %_move_num% l_src_dir l_src_paths src_cnt
-call :echo -rv:"%~0: XPathCmdMoveSrc _pkg_name=%_pkg_name%; _mod_name=%_mod_name%; _mod_ver=%_mod_ver%; _exec_name=%_exec_name%; _move_num=%_move_num%; l_src_dir=%l_src_dir%; src_cnt=%src_cnt%" -rl:5FINE
+call :get_cmd_objects XPathCmdMoveSrc "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_phase%" %_move_num% l_src_dir l_src_paths src_cnt
+call :echo -rv:"%~0: XPathCmdMoveSrc _pkg_name=%_pkg_name%; _mod_name=%_mod_name%; _mod_ver=%_mod_ver%; _phase=%_phase%; _move_num=%_move_num%; l_src_dir=%l_src_dir%; src_cnt=%src_cnt%" -rl:5FINE
 
 rem получаем пути файлов назначения
-call :get_cmd_objects XPathCmdMoveDst "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_exec_name%" %_move_num% l_dst_dir l_dst_paths dst_cnt
-call :echo -rv:"%~0: XPathCmdMoveDst _pkg_name=%_pkg_name%; _mod_name=%_mod_name%; _mod_ver=%_mod_ver%; _exec_name=%_exec_name%; _move_num=%_move_num%; l_dst_dir=%l_dst_dir%; dst_cnt=%dst_cnt%" -rl:5FINE
+call :get_cmd_objects XPathCmdMoveDst "%_pkg_name%" "%_mod_name%" "%_mod_ver%" "%_phase%" %_move_num% l_dst_dir l_dst_paths dst_cnt
+call :echo -rv:"%~0: XPathCmdMoveDst _pkg_name=%_pkg_name%; _mod_name=%_mod_name%; _mod_ver=%_mod_ver%; _phase=%_phase%; _move_num=%_move_num%; l_dst_dir=%l_dst_dir%; dst_cnt=%dst_cnt%" -rl:5FINE
 
 rem КОНТРОЛЬ:
 call :get_exec_name "%~0"
 call :validate_src_dst_cnts "!exec_name!" %src_cnt% %dst_cnt%
-pause
-exit
 if ERRORLEVEL 1 endlocal & exit /b %ERRORLEVEL%
 
 rem ВЫПОЛНЕНИЕ:
@@ -1232,12 +1261,12 @@ setlocal
 set _pkg_name=%~1
 set _mod_name=%~2
 set _mod_ver=%~3
-set _exec_name=%~4
+set _phase=%~4
 set _md_num=%~5
 
 call :echo -ri:CmdMd -rc:0F -ln:%VL_FALSE%
 rem получаем каталоги
-call :get_res_val -rf:"%xpaths_file%" -ri:XPathCmdMdDirs -v1:"%_mod_name%" -v2:"%_mod_ver%" -v3:"%_exec_name%" -v4:%_md_num%
+call :get_res_val -rf:"%xpaths_file%" -ri:XPathCmdMdDirs -v1:"%_mod_name%" -v2:"%_mod_ver%" -v3:"%_phase%" -v4:%_md_num%
 set "i=0"
 for /F "tokens=1" %%a in ('%xml_sel_% "!res_val!" -v "./directory" -n "%g_pkg_cfg_file%"') do (
 	set l_dir=%%~a
@@ -1256,12 +1285,12 @@ setlocal
 set _pkg_name=%~1
 set _mod_name=%~2
 set _mod_ver=%~3
-set _exec_name=%~4
+set _phase=%~4
 
 call :echo -ri:CmdBatch -rc:0F
 rem -ln:%VL_FALSE%
 rem получаем команды
-call :get_res_val -rf:"%xpaths_file%" -ri:XPathCmdBatch -v1:"%_mod_name%" -v2:"%_mod_ver%" -v3:"%_exec_name%"
+call :get_res_val -rf:"%xpaths_file%" -ri:XPathCmdBatch -v1:"%_mod_name%" -v2:"%_mod_ver%" -v3:"%_phase%"
 set "i=0"
 for /F "tokens=*" %%a in ('%xml_sel_% "!res_val!" -v "./exec" -n "%g_pkg_cfg_file%"') do (
 	set l_exec_cmd=%%~a
@@ -1339,23 +1368,23 @@ set _res_id=%~1
 set _pkg_name=%~2
 set _mod_name=%~3
 set _mod_ver=%~4
-set _exec_name=%~5
+set _phase=%~5
 set _cmd_num=%~6
 
 set "i=0"
-rem set /a "%9=%i%-1"
-call :get_res_val -rf:"%xpaths_file%" -ri:%_res_id% -v1:"%_mod_name%" -v2:"%_mod_ver%" -v3:"%_exec_name%" -v4:%_cmd_num%
+call :get_res_val -rf:"%xpaths_file%" -ri:%_res_id% -v1:"%_mod_name%" -v2:"%_mod_ver%" -v3:"%_phase%" -v4:%_cmd_num%
 for /F "tokens=1,2" %%a in ('%xml_sel_% "!res_val!" -v "./directory" -o "	" -v "./includes/include" -n "%g_pkg_cfg_file%"') do (
 	set l_dir=%%a
 	set l_file=%%b
 	call :echo -rv:"%~0: l_dir=!l_dir!; l_file=!l_file!" -rl:5FINE
 
-	if "!l_file!" EQU "" call :binding_var "%_pkg_name%" "%_mod_name%" "!l_dir!" %7 & exit /b 0
-	if "!l_file!" EQU "*" call :binding_var "%_pkg_name%" "%_mod_name%" "!l_dir!" %7 & exit /b 0
+	if "!l_file!" EQU "" call :binding_var "%_pkg_name%" "%_mod_name%" "!l_dir!" %7 & goto end_cmd_objects
+	if "!l_file!" EQU "*" call :binding_var "%_pkg_name%" "%_mod_name%" "!l_dir!" %7 & goto end_cmd_objects
 
 	set "%8[!i!]=!l_dir!%DIR_SEP%!l_file!"
 	set /a "i+=1"
 )
+:end_cmd_objects
 set /a "%9=%i%-1"
 for /l %%n in (0,1,%9) do call :binding_var "%_pkg_name%" "%_mod_name%" "!%8[%%n]!" %8[%%n]
 exit /b 0
@@ -2127,7 +2156,7 @@ call :parse_params %~0 %bis_param_defs% %*
 rem ошибка разбора определений параметров
 rem if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
 rem вывод справки
-if ERRORLEVEL 1 call :bis_help & endlocal & exit /b 1
+if ERRORLEVEL 1 call :bis_help & endlocal & exit /b !ERRORLEVEL!
 
 rem вывод значений параметров запуска системы
 if /i "%EXEC_MODE%" EQU "%EM_DBG%" set l_is_print_params=%VL_TRUE%
@@ -2187,12 +2216,16 @@ for /f %%i in ("%bis_res_dir%") do set bis_res_dir=%%~dpnxi
 
 set cfg_val_schema=%bis_config_dir%%DIR_SEP%bis.xsd
 
-rem утилиты
+rem Утилиты:
+rem архиватор
 set z7_=%bis_utils_dir%%DIR_SEP%7-zip%DIR_SEP%7za.exe
+rem копирование
 set copy_=robocopy.exe
+rem xml-файлы
 set xml_=%bis_utils_dir%%DIR_SEP%xml.exe
 set xml_sel_=%bis_utils_dir%%DIR_SEP%xml.exe sel -T -t -m
 set xml_val_=%bis_utils_dir%%DIR_SEP%xml.exe val -b -e --xsd %cfg_val_schema%
+rem загрузчики
 set curl_=%bis_utils_dir%%DIR_SEP%curl%DIR_SEP%bin%DIR_SEP%curl.exe
 set wget_=%bis_utils_dir%%DIR_SEP%wget%DIR_SEP%wget.exe
 

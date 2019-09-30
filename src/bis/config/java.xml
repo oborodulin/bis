@@ -57,6 +57,55 @@
                         </execution>
                     </executions>
                 </module>
+                <module>
+                    <name>eclipse</name>
+                    <version>2019-09R</version>
+                    <description>Eclipse IDE for Enterprise Java Developers</description>
+                    <executions>
+                        <execution>
+                            <id>eclipse-download</id>
+                            <phase>download</phase>
+                            <configuration>
+                                <processor>
+                                    <architecture>x64</architecture>
+                                    <distribUrl>https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2019-09/R/eclipse-inst-win64.exe^&amp;mirror_id=1099</distribUrl>
+                                    <distribFile>eclipse-inst-win64.exe</distribFile>
+                                </processor>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>eclipse-install</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>unpack-zip</goal>
+								<!--goal>cmd-shell</goal-->
+                            </goals>
+                            <configuration>
+                                <modSetupDir>C:/Dev/${mod.name}</modSetupDir>
+								<!--modBinDirs>
+									<directory>${mod.setupdir}/bin</directory>
+								</modBinDirs>
+								<modHomeDir>
+									<envVar>JAVA_HOME</envVar>
+									<directory>${mod.setupdir}</directory>
+								</modHomeDir>
+								<commands>
+									<move>
+										<source>
+											<directory>${mod.setupdir}/jdk-${mod.version}</directory>
+											<includes>
+												<include>*</include>
+											</includes>
+										</source>
+										<destination>
+											<directory>${mod.setupdir}</directory>
+										</destination>
+									</move>
+								</commands-->
+                            </configuration>
+                        </execution>
+                    </executions>
+                </module>
             </modules>
         </windows>
     </os>
