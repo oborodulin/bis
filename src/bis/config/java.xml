@@ -68,7 +68,7 @@
                             <configuration>
                                 <processor>
                                     <architecture>x64</architecture>
-                                    <distribUrl>https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2019-09/R/eclipse-inst-win64.exe^&amp;mirror_id=1099</distribUrl>
+                                    <distribUrl>https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2019-09/R/eclipse-inst-win64.exe&amp;mirror_id=1099</distribUrl>
                                     <distribFile>eclipse-inst-win64.exe</distribFile>
                                 </processor>
                             </configuration>

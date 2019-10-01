@@ -1,0 +1,43 @@
+<?xml version = '1.0' encoding = 'windows-1251'?>
+<package>
+    <name>IDE  </name>
+    <description>Интегрированные среды разработки</description>
+    <useLog>true</useLog>
+    <logLevel>5</logLevel>
+    <os>
+        <windows>
+			<setupDir>${env.programfiles}</setupDir>
+            <modules>
+                <module>
+                    <name>autoit3</name>
+                    <version>3.3.14.5</version>
+                    <description>AutoIt is scripting language designed for automating the Windows GUI</description>
+                    <executions>
+                        <execution>
+                            <id>autoit-download</id>
+                            <phase>download</phase>
+                            <configuration>
+                                <processor>
+                                    <architecture>x86</architecture>
+                                    <distribUrl>https://www.autoitscript.com/cgi-bin/getfile.pl?autoit3/autoit-v3-setup.exe</distribUrl>
+                                    <distribFile>autoit-v3-setup.exe</distribFile>
+                                </processor>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>autoit-install</id>
+                            <phase>install</phase>
+							<goals>
+								<goal>silent</goal>
+							</goals>
+							<configuration>
+                                <modSetupDir>${env.programfilesx86}/${mod.name}</modSetupDir>
+								<keys>/S</keys>
+							</configuration>
+                        </execution>
+                    </executions>
+                </module>
+            </modules>
+        </windows>
+    </os>
+</package>

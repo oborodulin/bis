@@ -13,17 +13,16 @@ rem ---------------------------------------------
 :download _util _url _path
 setlocal
 set _util=%~1
-set _url=%~2
+set _url=%2
 set _path=%~3
 
 rem КОНТРОЛЬ:
 rem отсутствие утилиты загрузки
 if not exist "%_util%" call :echo -ri:DwnldUtilExistError -v1:"%_util%" & endlocal & exit /b 1
 rem отсутствие параметров: URL'a или пути дистрибутива
-if "%_url%" EQU "" call :echo -ri:DistribUrlParamError & endlocal & exit /b 1
+if [%_url%] EQU [] call :echo -ri:DistribUrlParamError & endlocal & exit /b 1
 if "%_path%" EQU "" call :echo -ri:DistribPathParamError & endlocal & exit /b 1
-
-for /f %%i in ("%_url%") do Set l_download_file=%%~nxi
+rem определяем имя и каталог дистрибутива
 for /f %%i in ("%_path%") do (
 	Set l_distrib_dir=%%~dpi
 	Set l_distrib_file=%%~nxi
@@ -46,7 +45,7 @@ if "%reg%" NEQ "" (
 rem Загрузка
 rem http://docs.rackspace.com/servers/api/v2/cn-gettingstarted/content/curl.html
 rem http://stackoverflow.com/questions/11029551/curl-command-does-not-do-what-i-exoect-in-batch
-call :get_res_val -ri:DownloadDistribFile -v1:"%l_download_file%" -v2:"%l_distrib_dir%"
+call :get_res_val -ri:DownloadDistribFile -v1:"%l_distrib_file%" -v2:"%l_distrib_dir%"
 start "%res_val%" /D "%l_distrib_dir%" /WAIT "%_util%" -A "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0" ^
 						-H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" ^
 						-H "Accept-Encoding: gzip, deflate" ^
