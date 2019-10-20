@@ -103,7 +103,7 @@ setlocal
 set _proc_name=%~1
 
 call :get_exec_name %_proc_name%
-set $exec=%_proc_name:goal=%
+set "$exec=%_proc_name:goal=%"
 if /i "%$exec%" NEQ "%_proc_name%" (
 	call :echo -ri:ExecGoal -v1:"%exec_name%" -ae:1
 ) else (
@@ -120,11 +120,11 @@ setlocal
 set _exec_name=%~0
 set _proc_name=%~1
 
-set $exec=%_proc_name:goal=%
+set "$exec=%_proc_name:goal=%"
 if /i "%$exec%" NEQ "%_proc_name%" (
 	set l_exec_name=%_proc_name:~6%
 ) else (
-	set $exec=%_proc_name:phase=%
+	set "$exec=%_proc_name:phase=%"
 	if /i "!$exec!" NEQ "%_proc_name%" (
 		set l_exec_name=%_proc_name:~7%
 	) else (
@@ -170,7 +170,7 @@ if defined _exec_name (
 if defined _res_id (
 	call :get_res_val -rf:"%menus_file%" -ri:%_res_id% -v1:%_delay% -v2:"%exec_name%"
 ) else (
-	set res_val=%_res_val%
+	set "res_val=%_res_val%"
 )
 rem ChangeColor 15 0
 %ChangeColor_15_0%
@@ -179,5 +179,36 @@ Choice /C %_choice% /T %_delay% /D %_def_choice% /M "%res_val%"
 
 rem echo l_result="%l_result%"
 endlocal & (set "l_result=%ERRORLEVEL%" & set "%_choice_proc_name:~8%=%exec_name%" & set "%_choice_proc_name:~1,6%=!l_result!" & exit /b !l_result!)
+
+rem ---------------------------------------------
+rem Возвращает короткий путь к каталогу/файлу в 
+rem DOS-формате (8.3)
+rem https://stackoverflow.com/questions/4051088/get-dos-path-instead-of-windows-path
+rem ---------------------------------------------
+:get_dos_path
+setlocal
+set _proc_name=%~0
+set _path=%~1
+
+for %%i in ("%_path%") do set l_dos_path=%%~si
+
+endlocal & set "%_proc_name:~5%=%l_dos_path%"
+exit /b 0
+
+rem ---------------------------------------------
+rem Возвращает полный путь к каталогу/файлу в 
+rem Windows-формате
+rem https://stackoverflow.com/questions/34473934/how-can-i-convert-a-windows-short-name-path-into-long-names-within-a-batch-scrip
+rem ---------------------------------------------
+:get_full_path
+setlocal
+set _proc_name=%~0
+set _path=%~1
+
+set l_full_path=%_path%
+for /F "tokens=*" %%r in ('powershell "(Get-Item -LiteralPath '%_path%').FullName" 2^>nul') do set l_full_path=%%r
+
+endlocal & set "%_proc_name:~5%=%l_full_path%"
+exit /b 0
 
 rem ---------------- EOF utils.cmd ----------------

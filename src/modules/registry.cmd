@@ -12,8 +12,7 @@ setlocal
 set _proc_name=%~0
 rem Устанавливаем все необходимые параметры и ресурсы для работы скрипта, и проверяем их корректность
 call :reg_setup %*
-call :reg_check_setup
-if ERRORLEVEL 1 endlocal & exit /b 1
+call :reg_check_setup & if ERRORLEVEL 1 endlocal & exit /b !ERRORLEVEL!
 
 rem получение значения параметра реестра
 if /i "%oper_code%" NEQ "%RC_GET%" goto reg_not_get_cmd
@@ -28,7 +27,7 @@ exit /b 0
 :reg_not_get_cmd
 rem установка значения параметра реестра
 if /i "%oper_code%" EQU "%RC_SET%" (
-	call :get_reg_value "%oper_code%" "%key_name%" "%value_name%" 
+	call :get_reg_value "%oper_code%" "%key_name%" "%value_name%"
 	if /i "!reg_value!" NEQ "%value_value%" (
 		rem разбор куста
 		if /i "%key_name%" EQU "%RH_HKLM%" (
@@ -42,10 +41,10 @@ if /i "%oper_code%" EQU "%RC_SET%" (
 )
 rem добавление значения параметра реестра
 if /i "%oper_code%" EQU "%RC_ADD%" (
-	call :get_reg_value "%oper_code%" "%key_name%" "%value_name%" 
-	set $check_value=!reg_value:%value_value%=!
+	call :get_reg_value "%oper_code%" "%key_name%" "%value_name%"
+	set "$check_value=!reg_value:%value_value%=!"
 	if /i "!$check_value!" EQU "!reg_value!" (
-		if "!reg_value:~-1!"==";" set reg_value=!reg_value:~0,-1!
+		if "!reg_value:~-1!"==";" set "reg_value=!reg_value:~0,-1!"
 		rem разбор куста
 		if /i "%key_name%" EQU "%RH_HKLM%" (
 			1>nul setx.exe %value_name% "!reg_value!;%value_value%" /M
@@ -61,9 +60,9 @@ if /i "%oper_code%" EQU "%RC_DEL%" (
 	rem Если удаляемое значение задано
 	if "%value_value%" NEQ "" (
 		call :get_reg_value "%oper_code%" "%key_name%" "%value_name%" 
-		set new_value=!reg_value:;%value_value%=!
-		set new_value=!new_value:%value_value%;=!
-		set new_value=!new_value:%value_value%=!
+		set "new_value=!reg_value:;%value_value%=!"
+		set "new_value=!new_value:%value_value%;=!"
+		set "new_value=!new_value:%value_value%=!"
 		if /i "!new_value!" NEQ "!reg_value!" (
 			rem разбор куста
 			if /i "%key_name%" EQU "%RH_HKLM%" (
@@ -98,7 +97,6 @@ set _oper_code=%~1
 set _key_name=%~2
 set _value_name=%~3
 
-call :reg_setup_globals
 rem Если задан куст HKLM, то читаем из него
 if /i "%_key_name%" EQU "%RH_HKLM%" (
 	FOR /F "usebackq tokens=1,2*" %%A IN (`REG QUERY %HKLM% /v %_value_name% 2^>nul ^| findstr /i %_value_name% 2^>nul`) do set l_value=%%C
@@ -120,30 +118,35 @@ endlocal & set %_proc_name:~5%=%l_value%
 exit /b 0
 
 rem ---------------------------------------------
-rem Устанавливает все необходимые глобальные переменные
-rem ---------------------------------------------
-:reg_setup_globals
-rem ветки переменных окружения
-set HKLM="HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
-set HKCU="HKCU\Environment"
-exit /b 0
-
-rem ---------------------------------------------
 rem Устанавливает все необходимые параметры
 rem и ресурсы для работы скрипта
 rem ---------------------------------------------
 :reg_setup %*
-call :reg_setup_globals
-
 rem РАЗБОР ПАРАМЕТРОВ ЗАПУСКА:
+:start_reg_params_parse
+set p_prm=%~1
+set p_key=%p_prm:~0,3%
+set p_val=%p_prm:~4%
+set p_val=%p_val:"=%
+
+if not defined p_prm goto end_reg_params_parse
+
+rem разбор параметров вывода справки
+if [%p_prm%] EQU [/?] set "p_key_help=%VL_TRUE%" & exit /b 1
+if /i [%p_prm%] EQU [--help] set "p_key_help=%VL_TRUE%" & exit /b 1
+
+if /i [%p_key%] EQU [-oc] set "oper_code=%p_val%"
+if /i [%p_key%] EQU [-vn] set "value_name=%p_val%"
+if /i [%p_key%] EQU [-vv] set "value_value=%p_val%"
+if /i [%p_key%] EQU [-kn] set "key_name=%p_val%"
+
+shift
+goto start_reg_params_parse
+:end_reg_params_parse
+
 rem если не указан куст, задаём ветку переменных окружения пользователя
-set reg_param_defs="-oc,oper_code;-vn,value_name;-vv,value_value;-kn,key_name,%RH_HKCU%"
-call :parse_params %~0 %reg_param_defs% %*
-rem ошибка разбора определений параметров
-if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
-rem вывод справки
-if ERRORLEVEL 1 call :reg_help & endlocal & exit /b 0
-rem call :print_params %~0
+if not defined key_name set key_name=%RH_HKCU%
+rem echo -oc:"%oper_code%" -vn:"%value_name%" -vv:"%value_value%" -kn:"%key_name%"
 exit /b 0
 
 rem ---------------------------------------------

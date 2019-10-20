@@ -9,9 +9,7 @@ rem УСТАНОВКА И ОПРЕДЕЛЕНИЕ ЗНАЧЕНИЙ ПО УМОЛЧАНИЮ:
 set g_script_name=%~nx0
 
 call :echo %*
-if ERRORLEVEL 1 endlocal & exit /b 1
-
-endlocal & exit /b 0
+endlocal & exit /b %ERRORLEVEL%
 
 rem ---------------------------------------------
 rem Получает и отображает ресурс (строковый)
@@ -22,12 +20,16 @@ rem Устанавливаем все необходимые параметры и ресурсы для работы скрипта, и пров
 call :echo_res_setup %* & if ERRORLEVEL 1 endlocal & exit /b !ERRORLEVEL!
 call :echo_res_check_setup & if ERRORLEVEL 1 endlocal & exit /b !ERRORLEVEL!
 
-if defined p_cmd if /i "%p_cmd%" EQU "%RESC_GET%" call :get_res_val & echo !res_val! & endlocal & exit /b !ERRORLEVEL!
+if defined p_cmd if /i "%p_cmd%" EQU "%RESC_GET%" (
+	call :get_res_val
+	echo !res_val!
+	endlocal & exit /b !ERRORLEVEL!
+)
 rem echo "%script_hdr%" "%res_path%" "%p_res_id%"
 
 rem если передано значение ресурса
 if defined res_val (
-	if /i "%categ_name%" NEQ "" set res_val=%categ_name%: %res_val%
+	if /i "%categ_name%" NEQ "" set "res_val=%categ_name%: %res_val%"
 	call :set_res_color %res_color% 
 	call :echo_level_res "%res_val%" "%ln%" "%log_lvl%" "%categ_num%"
 ) else if /i "%p_res_val_empty%" EQU "%VL_TRUE%" (
@@ -44,19 +46,19 @@ if defined res_val (
 		if /i "!categ_name!" EQU "%CTG_ERR%" (
 			rem ресурс-ошибка
 			set l_res_color=0C
-			set res_val=!categ_name!-!res_code!: %p_res_id%: !res_val!
+			set "res_val=!categ_name!-!res_code!: %p_res_id%: !res_val!"
 		) else if /i "!categ_name!" EQU "%CTG_WRN%" (
 			rem ресурс-предупреждение
 			set l_res_color=0E
-			set res_val=!categ_name!-!res_code!: %p_res_id%: !res_val!
+			set "res_val=!categ_name!-!res_code!: %p_res_id%: !res_val!"
 		) else if /i "!categ_name!" EQU "%CTG_INF%" (
 			rem ресурс-информация
 			set l_res_color=09
-			set res_val=!categ_name!-!res_code!: !res_val!
+			set "res_val=!categ_name!-!res_code!: !res_val!"
 		) else if /i "!categ_name!" EQU "%CTG_FINE%" (
 			rem ресурс-отладка
 			set l_res_color=08
-			set res_val=!categ_name!-!res_code!: !res_val!
+			set "res_val=!categ_name!-!res_code!: !res_val!"
 		) else (
 			set l_res_color=%res_color%
 		)
@@ -87,12 +89,14 @@ if not exist "%_log_path%" (
 )
 rem FOR /F "usebackq tokens=*" %%A IN (`%modules_dir%iso_date.cmd -df:DATE_TIME 2^>nul`) DO set iso_date_time=%%A
 if "%_categ_num%" EQU "" set _categ_num=0
-set l_res_val=%DATE% %TIME%: %_res_val%
+set "l_res_val=%DATE% %TIME%: %_res_val%"
 rem для вывода круглых скобок echo должны быть на отдельных строках
 if defined _log_lvl (
-	if %_categ_num% LEQ %_log_lvl% echo %l_res_val% >> "%_log_path%"
+	if %_categ_num% LEQ %_log_lvl% (
+		echo "%l_res_val%" >> "%_log_path%"
+	)
 ) else (
-	echo %l_res_val% >> "%_log_path%"
+	echo "%l_res_val%" >> "%_log_path%"
 )
 endlocal & exit /b 0
 
@@ -119,7 +123,7 @@ if defined g_res[%res_name%][%p_res_id%]#Val (
 	set res_categ=!g_res[%res_name%][%p_res_id%]#Categ!
 	set categ_num=!g_res[%res_name%][%p_res_id%]#CategNum!
 	set categ_name=!g_res[%res_name%][%p_res_id%]#CategName!
-	set res_val=!g_res[%res_name%][%p_res_id%]#Val!
+	set "res_val=!g_res[%res_name%][%p_res_id%]#Val!"
 	goto res_found
 ) else (
 	rem иначе выполняем поиск ресурса
@@ -137,7 +141,7 @@ if defined g_res[%res_name%][%p_res_id%]#Val (
 				set categ_num=!l_categ:~0,1!
 				set categ_name=!l_categ:~1!
 			)
-			set res_val=!l_val!
+			set "res_val=!l_val!"
 			set g_res[%res_name%][%p_res_id%]#Val=!l_val!
 			set g_res[%res_name%][%p_res_id%]#Code=!l_code!
 			set g_res[%res_name%][%p_res_id%]#Categ=!res_categ!
@@ -172,10 +176,10 @@ goto end_get_res_val
 
 :res_val_create
 rem подставляем значения переменных ресурса
-for /l %%i in (1,1,%values_cnt%) do if defined p_val_%%i (call :res_bind_var "!res_val!" {%V_SYMB%%%i} p_val_%%i & set res_val=!bind_var!) else (goto end_get_res_val)
+for /l %%i in (1,1,%values_cnt%) do if defined p_val_%%i (call :res_bind_var "!res_val!" {%V_SYMB%%%i} p_val_%%i & set "res_val=!bind_var!") else (goto end_get_res_val)
 
 :end_get_res_val
-set %_get_res_val_proc_name:~5%=!res_val!
+set "%_get_res_val_proc_name:~5%=!res_val!"
 exit /b 0
 
 rem ---------------------------------------------
@@ -188,9 +192,9 @@ set _res_val=%~1
 set _var=%~2
 set _val=!%3!
 
-set _res_val=!_res_val:%_var%=%_val%!
+set "_res_val=!_res_val:%_var%=%_val%!"
 
-endlocal & set %_proc_name:~5%=%_res_val%
+endlocal & set "%_proc_name:~5%=%_res_val%"
 exit /b 0
 
 rem ---------------------------------------------
@@ -210,7 +214,7 @@ rem если определён размер шаблона последовательности вывода, то переходим к её ф
 if defined g_res_tpl[%_res_name%][%_res_id%][0]#Cnt goto res_parts_loop
 
 rem иначе - опредляем шаблон
-set l_tmp_val=%_res_val%
+set "l_tmp_val=%_res_val%"
 set er=0
 set l_vars_cnt=0
 :res_output_loop
@@ -239,7 +243,7 @@ rem echo "%g_res_output_cnt%"
 for /l %%j in (0,1,%g_res_output_cnt%) do (
 	set l_res_part=!g_res_tpl[%_res_name%][%_res_id%][%%j]#Part!
 
-	set $check_part=!l_res_part!
+	set "$check_part=!l_res_part!"
 	for /l %%i in (1,1,%l_vars_cnt%) do (
 		if "!l_res_part!" EQU "!V_SYMB!%%i" (
 			if defined p_val_%%i (
@@ -306,7 +310,7 @@ if defined g_res_output_cnt (
 	for /l %%j in (0,1,%g_res_output_cnt%) do (
 		if defined g_res_output[%%j]#Part (
 			call :set_res_color !g_res_output[%%j]#Color!
-			set l_part=!g_res_output[%%j]#Part!
+			set "l_part=!g_res_output[%%j]#Part!"
 			call :get_end_space %%j
 			rem для вывода круглых скобок echo должны быть на отдельных строках
 			if %right_shift_cnt% EQU 0 (
@@ -328,20 +332,14 @@ if defined g_res_output_cnt (
 		if /i "%_ln%" EQU "%VL_TRUE%" echo.
 	) else (
 		1>nul chcp %code_page%
-		rem  если определено значение ресурса, то учитываем отсутуп справа и перевод строки
+		rem  если определено значение ресурса, то учитываем отступ справа и перевод строки
 		rem для вывода круглых скобок echo должны быть на отдельных строках
 		if %right_shift_cnt% EQU 0 (
-			if /i "%_ln%" EQU "%VL_TRUE%" (
-				echo %_res_val%
-			) else (
-				echo | set /p "dummyName=%_res_val%"
-			)
+			echo | set /p "dummyName=%_res_val%"
+			if /i "%_ln%" EQU "%VL_TRUE%" echo.
 		) else (
-			if /i "%_ln%" EQU "%VL_TRUE%" (
-				echo !l_spaces!%_res_val%
-			) else (
-				echo | set /p "dummyName=%BS%!l_spaces!%_res_val%"
-			)
+			echo | set /p "dummyName=%BS%!l_spaces!%_res_val%"
+			if /i "%_ln%" EQU "%VL_TRUE%" echo.
 		)
 rem 1>&2 - для ошибки		
 	)
@@ -493,34 +491,47 @@ rem ---------------------------------------------
 :echo_res_check_setup
 setlocal
 rem КОНТРОЛЬ:
-rem отсутствие ИД ресурса или файла ресурсов
-if not defined p_res_id if not defined res_val if /i "%p_res_val_empty%" NEQ "%VL_TRUE%" (
-	set l_err_msg=ERR -1: Не задано ни ИД ресурса, ни его значение. Укажите, пожалуйста, корректный ИД ресурса или его значение.
-	rem если не только вывод в файл
-	if /i "%categ_name%" NEQ "%CTG_FILE%" (
-		rem ChangeColor 12 0
-		%ChangeColor_12_0%
-		1>nul chcp %code_page% & echo !l_err_msg!
-		call :echo_res_help
-	) else (
-		call :echo_log "%log_path%" "!l_err_msg!" "%categ_num%" "%log_lvl%" "%script_hdr%"
+rem отсутствие ИД ресурса (или значения) или файла ресурсов
+if defined res_val (
+	endlocal & exit /b 0
+) else (
+	if not defined p_res_id (
+		if /i "%p_res_val_empty%" NEQ "%VL_TRUE%" (
+			set l_err_msg=ERR -1: Не задано ни ИД ресурса, ни его значение. Укажите, пожалуйста, корректный ИД ресурса или его значение.
+			rem если не только вывод в файл
+			if /i "%categ_name%" NEQ "%CTG_FILE%" (
+				rem ChangeColor 12 0
+				%ChangeColor_12_0%
+				1>nul chcp %code_page% & echo !l_err_msg!
+				call :echo_res_help
+			) else (
+				call :echo_log "%log_path%" "!l_err_msg!" "%categ_num%" "%log_lvl%" "%script_hdr%"
+			)
+			endlocal & exit /b 2
+		)
+	) else if not exist "%res_path%" (
+		set l_err_msg=ERR -1: Для ресурса [ИД=%p_res_id%] не найден ресурсный файл "%res_path%". Проверьте, пожалуйста, его наличие.
+		rem если не только вывод в файл
+		if /i "%categ_name%" NEQ "%CTG_FILE%" (
+			rem ChangeColor 12 0
+			%ChangeColor_12_0%
+			1>nul chcp %code_page% & echo !l_err_msg!
+			call :echo_res_help
+		) else (
+			call :echo_log "%log_path%" "!l_err_msg!" "%categ_num%" "%log_lvl%" "%script_hdr%"
+		)
+		endlocal & exit /b 3
 	)
-	endlocal & exit /b 2
-)
-if defined p_res_id if not exist "%res_path%" (
-	set l_err_msg=ERR -1: Для ресурса [ИД=%p_res_id%] не найден ресурсный файл "%res_path%". Проверьте, пожалуйста, его наличие.
-	rem если не только вывод в файл
-	if /i "%categ_name%" NEQ "%CTG_FILE%" (
-		rem ChangeColor 12 0
-		%ChangeColor_12_0%
-		1>nul chcp %code_page% & echo !l_err_msg!
-		call :echo_res_help
-	) else (
-		call :echo_log "%log_path%" "!l_err_msg!" "%categ_num%" "%log_lvl%" "%script_hdr%"
-	)
-	endlocal & exit /b 3
 )
 endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Отображает признак положительного результата 
+rem выполнения процесса: Ok
+rem ---------------------------------------------
+:echoOk
+call :echo -rv:Ok -rc:0A
+exit /b 0
 
 rem ---------------------------------------------
 rem Формат запуска утилиты

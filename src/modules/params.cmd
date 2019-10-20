@@ -18,9 +18,10 @@ if defined g_prms[%prm_scope%]#Count goto end_param_defs
 set l_prm_defs=%_prm_defs%
 set "prm=0"
 :param_defs_loop
-for /f "tokens=1* delims=;" %%i in ("%l_prm_defs%") do (
-	rem echo param definition: "%%i"
-	set l_prm_def=%%i
+for /f "tokens=1* delims=;" %%p in ("%l_prm_defs%") do (
+	rem echo param definition: "%%p"
+	set l_prm_def=%%p
+	set l_next_prm_def=%%q
 	for /f "tokens=1-5 delims=," %%a in ("!l_prm_def!") do (
 		rem echo param definition parts: "%%a" "%%b" "%%c" "%%d" "%%e"
 		set l_key=%%~a
@@ -53,7 +54,7 @@ for /f "tokens=1* delims=;" %%i in ("%l_prm_defs%") do (
 		set g_prms[%prm_scope%][!prm!]#Count=1
 		set /a "prm+=1"
 	)
-	set l_prm_defs=%%j
+	set l_prm_defs=!l_next_prm_def!
 )
 if defined l_prm_defs goto :param_defs_loop
 set /a "g_prms[%prm_scope%]#Count=%prm%-1"
@@ -63,9 +64,9 @@ rem СБРОС ПАРАМЕТРОВ:
 for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
 	rem echo reset: "!g_prms[%prm_scope%][%%n]#Key!" "!g_prms[%prm_scope%][%%n]#Name!" "!g_prms[%prm_scope%][%%n]#DefValue!"
 	if defined !g_prms[%prm_scope%][%%n]#CountVar! (
-		for /l %%i in (1,1,!g_prms[%prm_scope%][%%n]#Count!) do (
-			set !g_prms[%prm_scope%][%%n]#Name!%%i=
-			set g_prms[%prm_scope%][%%n]#Value%%i=
+		for /l %%p in (1,1,!g_prms[%prm_scope%][%%n]#Count!) do (
+			set !g_prms[%prm_scope%][%%n]#Name!%%p=
+			set g_prms[%prm_scope%][%%n]#Value%%p=
 		)
 		set !g_prms[%prm_scope%][%%n]#CountVar!=
 		set g_prms[%prm_scope%][%%n]#Count=1
@@ -98,7 +99,7 @@ set p_key=%p_prm:~0,3%
 set p_val=%p_prm:~4%
 set p_val=%p_val:"=%
 
-if [%p_prm%] EQU [] goto end_params_parse
+if not defined p_prm goto end_params_parse
 
 rem разбор параметров вывода справки
 if [%p_prm%] EQU [/?] set "p_key_help=%VL_TRUE%" & exit /b 1
@@ -112,22 +113,22 @@ for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
 			rem если полное совпадение ключа
 			rem echo if /i "%p_key%" EQU "!g_prms[%prm_scope%][%%n]#Key!!g_prms[%prm_scope%][%%n]#Count!" 
 			if /i "%p_key%" EQU "!g_prms[%prm_scope%][%%n]#Key!!g_prms[%prm_scope%][%%n]#Count!" (
-				set !g_prms[%prm_scope%][%%n]#Name!!g_prms[%prm_scope%][%%n]#Count!=%p_val%
-				set g_prms[%prm_scope%][%%n]#Value!g_prms[%prm_scope%][%%n]#Count!=%p_val%
-				set !g_prms[%prm_scope%][%%n]#CountVar!=!g_prms[%prm_scope%][%%n]#Count!
+				set "!g_prms[%prm_scope%][%%n]#Name!!g_prms[%prm_scope%][%%n]#Count!=%p_val%"
+				set "g_prms[%prm_scope%][%%n]#Value!g_prms[%prm_scope%][%%n]#Count!=%p_val%"
+				set "!g_prms[%prm_scope%][%%n]#CountVar!=!g_prms[%prm_scope%][%%n]#Count!"
 				set /a "g_prms[%prm_scope%][%%n]#Count+=1"
 			) else (
 				rem проверка неполного совпадения ключа
 				set half_key=%p_key:~0,2%
 				set key_num=%p_key:~2%
 				if /i "!half_key!" EQU "!g_prms[%prm_scope%][%%n]#Key!" (
-					set "l_check_key_num="&for /f "delims=0123456789" %%i in ("!key_num!") do set l_check_key_num=%%i
+					set "l_check_key_num="&for /f "delims=0123456789" %%p in ("!key_num!") do set l_check_key_num=%%p
 					if not defined l_check_key_num (
 						if !key_num! GTR !g_prms[%prm_scope%][%%n]#Count! (
 							set g_prms[%prm_scope%][%%n]#Count=!key_num!
-							set !g_prms[%prm_scope%][%%n]#Name!!g_prms[%prm_scope%][%%n]#Count!=%p_val%
-							set g_prms[%prm_scope%][%%n]#Value!g_prms[%prm_scope%][%%n]#Count!=%p_val%
-							set !g_prms[%prm_scope%][%%n]#CountVar!=!g_prms[%prm_scope%][%%n]#Count!
+							set "!g_prms[%prm_scope%][%%n]#Name!!g_prms[%prm_scope%][%%n]#Count!=%p_val%"
+							set "g_prms[%prm_scope%][%%n]#Value!g_prms[%prm_scope%][%%n]#Count!=%p_val%"
+							set "!g_prms[%prm_scope%][%%n]#CountVar!=!g_prms[%prm_scope%][%%n]#Count!"
 							set /a "g_prms[%prm_scope%][%%n]#Count+=1"
 						)	
 					)
@@ -142,12 +143,12 @@ for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
 				rem то устанавливаем заднное значение, только если он не определён
 				if not defined !g_prms[%prm_scope%][%%n]#Name! (
 					rem echo undefined param set value: !g_prms[%prm_scope%][%%n]#Name!=%p_val%
-					set !g_prms[%prm_scope%][%%n]#Name!=%p_val%
-					set g_prms[%prm_scope%][%%n]#Value=%p_val%
+					set "!g_prms[%prm_scope%][%%n]#Name!=%p_val%"
+					set "g_prms[%prm_scope%][%%n]#Value=%p_val%"
 				)
 			) else (
-				set !g_prms[%prm_scope%][%%n]#Name!=%p_val%
-				set g_prms[%prm_scope%][%%n]#Value=%p_val%
+				set "!g_prms[%prm_scope%][%%n]#Name!=%p_val%"
+				set "g_prms[%prm_scope%][%%n]#Value=%p_val%"
 			)
 		) else (
 			rem установка признака пустого значения
@@ -163,8 +164,8 @@ for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
 	rem устанавливаем значение только, если задано значение для не определённого параметра и он не определён
 	if defined g_prms[%prm_scope%][%%n]#EmptyVal if not defined !g_prms[%prm_scope%][%%n]#Name! (
 		rem echo set empty value: !g_prms[%prm_scope%][%%n]#Name!=!g_prms[%prm_scope%][%%n]#EmptyVal!
-		set !g_prms[%prm_scope%][%%n]#Name!=!g_prms[%prm_scope%][%%n]#EmptyVal!
-		set g_prms[%prm_scope%][%%n]#Value=!g_prms[%prm_scope%][%%n]#EmptyVal!
+		set "!g_prms[%prm_scope%][%%n]#Name!=!g_prms[%prm_scope%][%%n]#EmptyVal!"
+		set "g_prms[%prm_scope%][%%n]#Value=!g_prms[%prm_scope%][%%n]#EmptyVal!"
 	)
 )
 exit /b 0
@@ -224,7 +225,7 @@ if "%_prm_scope:~0,1%" EQU ":" (
 	set l_prm_scope=%_prm_scope:~1%
 ) else if exist "%_prm_scope%" (
 	rem если область видимости сценарий
-	for /f %%i in ("%_prm_scope%") do set l_prm_scope=%%~ni
+	for /f %%p in ("%_prm_scope%") do set l_prm_scope=%%~np
 )
 endlocal & set %_proc_name:~5%=%l_prm_scope%
 exit /b 0

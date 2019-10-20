@@ -39,24 +39,9 @@ rem сбрасываем заданный выбор и позволяем системе завершиться самостоятельно
 set p_pkg_choice=
 set p_pkg_name=
 
-rem если параметров логгирования нет у пакета, то устанавливаем системные
-if not defined use_log set use_log=%p_use_log%
-if not defined g_log_level set g_log_level=%p_log_level%
-
-call :echo -rv:"%~0: g_pkg_cfg_file=%g_pkg_cfg_file%; g_pkg_name=%g_pkg_name%; g_pkg_descr=%g_pkg_descr%; use_log=%use_log%; g_log_level=%g_log_level%" -rl:5FINE
-
-rem определяем общий каталог установки
-call :get_pkg_dirs "%g_pkg_name%"
-
-rem при необходимости, если задано логгирование в пакете, переопределяем общий лог-файл на пакетный
-if /i "%use_log%" EQU "%VL_TRUE%" (
-	if not exist "!pkgs[%g_pkg_name%]#LogDir!" 1>nul MD "!pkgs[%g_pkg_name%]#LogDir!"
-	set g_log_file=!pkgs[%g_pkg_name%]#LogDir!%DIR_SEP%%g_pkg_name%.log
-)
 rem Цикл отображения меню выбора модулей
 :mod_menu_loop
- 
-call :modules_menu "%p_mod_name%" "%p_mod_choice%" "%g_pkg_name%" "%g_pkg_descr%"
+ call :modules_menu "%p_mod_name%" "%p_mod_choice%" "%g_pkg_name%" "%g_pkg_descr%"
 rem "Установить все модули"
 if ERRORLEVEL 3 call :echo -ri:FuncNotImpl & endlocal & exit /b 0
 rem "Возврат"
@@ -89,7 +74,7 @@ endlocal & exit /b 0
 rem =======================================================================================
 rem ---------------------------------------------
 rem Отображение меню конфигураций пакетов
-rem Возвращает: g_pkg_cfg_file g_pkg_name g_pkg_descr use_log g_log_level
+rem Возвращает: g_pkg_cfg_file g_pkg_name g_pkg_descr g_use_log g_log_level
 rem ---------------------------------------------
 :packages_menu _def_pkg_name _pkg_choice
 if /i "%EXEC_MODE%" EQU "%EM_RUN%" CLS
@@ -97,7 +82,13 @@ set _def_pkg_name=%~1
 set _pkg_choice=%~2
 set l_delay=%DEF_DELAY%
 set l_choice=
+
+set g_log_file=
+if /i "%p_use_log%" EQU "%VL_TRUE%" set g_log_file=%bis_log_dir%%DIR_SEP%BIS.log
+
 if "%_def_pkg_name%" EQU "" (
+	rem выводим заголовок программы
+	call :print_header "%g_script_header%" "%g_user_account%" %g_uat_clr%
 	call :echo -rf:"%menus_file%" -ri:MenuHeaderSeparator -rc:0E -be:1
 	call :echo -rf:"%menus_file%" -ri:ChoicePackage -v1:%l_delay% -rc:0E
 	call :echo -rf:"%menus_file%" -ri:MenuHeaderSeparator -rc:0E -ae:1
@@ -170,8 +161,23 @@ call :trim %l_pkg_cur#Name% g_pkg_name
 call :set_var_value %BV_PKG_NAME% "%g_pkg_name%"
 set g_pkg_cfg_file=%bis_config_dir%%DIR_SEP%%l_pkg_cur#File%
 set g_pkg_descr=%l_pkg_cur#Descr%
-set use_log=%l_pkg_cur#UseLog%
+set g_use_log=%l_pkg_cur#UseLog%
 set g_log_level=%l_pkg_cur#LogLevel%
+
+rem если параметров логгирования нет у пакета, то устанавливаем системные
+if not defined g_use_log set g_use_log=%p_use_log%
+if not defined g_log_level set g_log_level=%p_log_level%
+
+call :echo -rv:"%~0: g_pkg_cfg_file=%g_pkg_cfg_file%; g_pkg_name=%g_pkg_name%; g_pkg_descr=%g_pkg_descr%; g_use_log=%g_use_log%; g_log_level=%g_log_level%" -rl:5FINE
+
+rem определяем каталоги установки пакета
+call :get_pkg_dirs "%g_pkg_name%"
+
+rem при необходимости, если задано логгирование в пакете, переопределяем общий лог-файл на пакетный
+if /i "%g_use_log%" EQU "%VL_TRUE%" (
+	if not exist "!pkgs[%g_pkg_name%]#LogDir!" 1>nul MD "!pkgs[%g_pkg_name%]#LogDir!"
+	set g_log_file=!pkgs[%g_pkg_name%]#LogDir!%DIR_SEP%%g_pkg_name%.log
+)
 exit /b 0
 
 rem ---------------------------------------------
@@ -194,6 +200,8 @@ set l_delay=%DEF_DELAY%
 set l_choice=
 
 if "%_def_mod_name%" EQU "" (
+	rem выводим заголовок программы
+	call :print_header "%g_script_header%" "%g_user_account%" %g_uat_clr%
 	call :echo -rf:"%menus_file%" -ri:MenuHeaderSeparator -rc:0E -be:1
 	call :echo -rf:"%menus_file%" -ri:ChoiceModule -v1:%l_delay% -rc:0E
 	call :echo -rv:"%_mm_pkg_name% [%_pkg_descr%]" -rc:0E
@@ -302,7 +310,7 @@ for /F "tokens=1-5" %%a in ('%xml_sel_% "!res_val!" -v "concat(./setupDir, subst
 		set pkgs[%_gpd_pkg_name%]#LogDir=%%~e
 		call :binding_var "%_gpd_pkg_name%" "" "!pkgs[%_gpd_pkg_name%]#LogDir!" pkgs[%_gpd_pkg_name%]#LogDir
 	) else (
-		set pkgs[%_gpd_pkg_name%]#LogDir=%bis_log_dir%
+		set pkgs[%_gpd_pkg_name%]#LogDir=%bis_log_dir%%DIR_SEP%%_gpd_pkg_name%
 	)
 )
 call :echo -ri:PkgSetupDir -v1:%_gpd_pkg_name% -v2:"!pkgs[%_gpd_pkg_name%]#SetupDir!"
@@ -535,8 +543,8 @@ for /l %%n in (0,1,%goals_cnt%) do (
 	if ERRORLEVEL 1 endlocal & exit /b !ERRORLEVEL!
 )
 rem разбор неявных целей
-call :goal_add_path_env "%_pkg_name%" "%_mod_name%"
 call :goal_add_env "!mods[%_mod_name%]#HomeEnv!" "!mods[%_mod_name%]#HomeDir!"
+call :goal_add_path_env "%_pkg_name%" "%_mod_name%"
 set l_result=%ERRORLEVEL%
 
 endlocal & (set "mods[%_mod_name%]#Installed=1" & exit /b %l_result%)
@@ -577,7 +585,7 @@ rem если задан каталог установки модуля и его нет, то создаём его
 if "!mods[%_mod_name%]#SetupDir!" NEQ "" if not exist "!mods[%_mod_name%]#SetupDir!" (
 	call :echo -ri:CreateModSetupDir -v1:"%_mod_name%" -v2:"!mods[%_mod_name%]#SetupDir!" -rc:0F -ln:%VL_FALSE%
 	1>nul MD "!mods[%_mod_name%]#SetupDir!"
-	call :echo -ri:ResultOk -rc:0A
+	call :echoOk
 )
 endlocal & exit /b 0
 
@@ -598,35 +606,39 @@ rem получаем каталог установки модуля и его домашний каталог
 if not defined mods[%_mod_name%]#SetupDir if not defined mods[%_mod_name%]#HomeDir (
 	call :get_res_val -rf:"%xpaths_file%" -ri:XPathPhaseConfig -v1:"%_mod_name%" -v2:"%_mod_ver%" -v3:%PH_INSTALL%
 	for /F "tokens=1-3" %%a in ('%xml_sel_% "!res_val!" -v "concat(./modSetupDir, substring('%EMPTY_NODE%', 1 div not(./modSetupDir)))" -o "	" -v "concat(./modHomeDir/envVar, substring('%EMPTY_NODE%', 1 div not(./modHomeDir/envVar)))" -o "	" -v "concat(./modHomeDir/directory, substring('%EMPTY_NODE%', 1 div not(./modHomeDir/directory)))" -n "%g_pkg_cfg_file%"') do (
-		if "%%a" NEQ "%EMPTY_NODE%" set mods[%_mod_name%]#SetupDir=%%~a
+		if "%%a" NEQ "%EMPTY_NODE%" (
+			set mods[%_mod_name%]#SetupDir=%%~a
+			call :binding_var "%_pkg_name%" "%_mod_name%" "!mods[%_mod_name%]#SetupDir!" mods[%_mod_name%]#SetupDir
+			call :convert_slashes %CSD_DEF% "!mods[%_mod_name%]#SetupDir!" mods[%_mod_name%]#SetupDir
+			call :set_var_value %BV_MOD_SETUP_DIR% "!mods[%_mod_name%]#SetupDir!" "%_pkg_name%" "%_mod_name%"
+			call :echo -ri:ModSetupDir -v1:%_mod_name% -v2:"!mods[%_mod_name%]#SetupDir!"
+		)
 		if "%%b" NEQ "%EMPTY_NODE%" set mods[%_mod_name%]#HomeEnv=%%~b
-		if "%%c" NEQ "%EMPTY_NODE%" set mods[%_mod_name%]#HomeDir=%%~c
+		if "%%c" NEQ "%EMPTY_NODE%" (
+			set mods[%_mod_name%]#HomeDir=%%~c
+			call :binding_var "%_pkg_name%" "%_mod_name%" "!mods[%_mod_name%]#HomeDir!" mods[%_mod_name%]#HomeDir
+			call :convert_slashes %CSD_DEF% "!mods[%_mod_name%]#HomeDir!" mods[%_mod_name%]#HomeDir
+			call :set_var_value %BV_MOD_HOME_DIR% "!mods[%_mod_name%]#HomeDir!" "%_pkg_name%" "%_mod_name%"
+			call :echo -ri:ModHomeDir -v1:%_mod_name% -v2:"!mods[%_mod_name%]#HomeEnv!" -v3:"!mods[%_mod_name%]#HomeDir!"
+		)
 	)
-	if defined mods[%_mod_name%]#SetupDir (
-		call :binding_var "%_pkg_name%" "%_mod_name%" "!mods[%_mod_name%]#SetupDir!" mods[%_mod_name%]#SetupDir
-		call :set_var_value %BV_MOD_SETUP_DIR% "!mods[%_mod_name%]#SetupDir!" "%_pkg_name%" "%_mod_name%"
-	)
-	if defined mods[%_mod_name%]#HomeDir (
-		call :binding_var "%_pkg_name%" "%_mod_name%" "!mods[%_mod_name%]#HomeDir!" mods[%_mod_name%]#HomeDir
-		call :set_var_value %BV_MOD_HOME_DIR% "!mods[%_mod_name%]#HomeDir!" "%_pkg_name%" "%_mod_name%"
-	)	
-	call :echo -ri:ModSetupDir -v1:%_mod_name% -v2:"!mods[%_mod_name%]#SetupDir!"
-	call :echo -ri:ModHomeDir -v1:%_mod_name% -v2:"!mods[%_mod_name%]#HomeEnv!" -v3:"!mods[%_mod_name%]#HomeDir!"
 )
 rem получаем каталоги бинарных файлов модуля
 if not defined mods[%_mod_name%]#BinDirCnt (
 	call :get_res_val -rf:"%xpaths_file%" -ri:XPathModBinDirs -v1:"%_mod_name%" -v2:"%_mod_ver%"
 	set "i=0"
 	for /F "tokens=1" %%a in ('%xml_sel_% "!res_val!" -v "./directory" -n "%g_pkg_cfg_file%"') do (
-		set mods[%_mod_name%]#BinDirs[!i!]=%%~a
+		set l_bin_dir=%%~a
+
+		call :binding_var "%_pkg_name%" "%_mod_name%" "!l_bin_dir!" l_bin_dir
+		call :convert_slashes %CSD_DEF% "!l_bin_dir!" l_bin_dir
+		call :set_var_value !BV_MOD_BIN_DIR!%%j "!l_bin_dir!" "%_pkg_name%" "%_mod_name%"
+		call :echo -ri:ModBinDir -v1:%_mod_name% -v2:"!l_bin_dir!"
+
+		set mods[%_mod_name%]#BinDirs[!i!]=!l_bin_dir!
 		set /a "i+=1"
 	)
 	set /a mods[%_mod_name%]#BinDirCnt=!i!-1
-	for /l %%j in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
-		call :binding_var "%_pkg_name%" "%_mod_name%" "!mods[%_mod_name%]#BinDirs[%%j]!" mods[%_mod_name%]#BinDirs[%%j]
-		call :set_var_value !BV_MOD_BIN_DIR!%%j "!mods[%_mod_name%]#BinDirs[%%j]!" "%_pkg_name%" "%_mod_name%"
-		call :echo -ri:ModBinDir -v1:%_mod_name% -v2:"!mods[%_mod_name%]#BinDirs[%%j]!"
-	)
 )
 exit /b 0
 
@@ -836,8 +848,7 @@ set _mod_ver=%~3
 
 call :echo -ri:DefFuncNotImpl -v1:"%~0" & endlocal & exit /b 0
 
-call :echo -ri:AddPathEnv -v1:%_dir% -rc:0F -ln:%VL_FALSE%
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 endlocal & exit /b 0
 
 rem ---------------------------------------------
@@ -919,7 +930,7 @@ call :get_res_val -ri:UnpackDistribFile -v1:"!mods[%_mod_name%]#DistribFile!"
 start "%res_val%" /D "!mods[%_mod_name%]#SetupDir!" /WAIT "!mods[%_mod_name%]#DistribPath!" -y
 rem -gm2 -InstallPath="!mods[%_mod_name%]#SetupDir!"
 rem -y -o"!mods[%_mod_name%]#SetupDir!"
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 
 call :echo -ri:DefUnpackDir -rc:0F -ln:%VL_FALSE%
 rem так как распаковка выполняется в каталог дистрибутива, то считаем, сколько в нём каталогов и файлов, кроме самого дистрибутива
@@ -927,17 +938,17 @@ pushd "!mods[%_mod_name%]#DistribDir!"
 set "x=0" 
 for /F %%i in ('dir * /b') do if /i "%%i" NEQ "!mods[%_mod_name%]#DistribFile!" set /a "x+=1" & set l_src_obj=%%i
 rem echo %x% %l_src_obj%
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 rem если требуется перенести содержимое только одного каталога
 if %x% EQU 1 (
 	call :echo -ri:MoveModDistribSetupDir -v1:"!mods[%_mod_name%]#DistribDir!%DIR_SEP%%l_src_obj%" -v2:"!mods[%_mod_name%]#SetupDir!" -rc:0F -ln:%VL_FALSE%
 	1>nul %copy_% "!mods[%_mod_name%]#DistribDir!%DIR_SEP%%l_src_obj%" "!mods[%_mod_name%]#SetupDir!" /E /MOVE
-	call :echo -ri:ResultOk -rc:0A
+	call :echoOk
 ) else if %x% GTR 1 (
 	rem иначе переносим все каталоги и файлы, кроме дистрибутива
 	call :echo -ri:MoveUnpackSetupDir -v1:"!mods[%_mod_name%]#DistribDir!" -v2:"!mods[%_mod_name%]#SetupDir!" -rc:0F -ln:%VL_FALSE%
 	for /F %%i in ('dir * /b') do if /i "%%i" NEQ "!mods[%_mod_name%]#DistribFile!" 1>nul move "!mods[%_mod_name%]#DistribDir!\%%i" "!mods[%_mod_name%]#SetupDir!"
-	call :echo -ri:ResultOk -rc:0A
+	call :echoOk
 )
 popd
 endlocal & exit /b 0
@@ -967,7 +978,7 @@ call :echo -ri:SilentKeys -v1:!mods[%_mod_name%]#DistribFile! -v2:"%l_keys%"
 
 start "%goal_title%" /WAIT "!mods[%_mod_name%]#DistribPath!" %l_keys%
 
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 
 endlocal & exit /b 0
 
@@ -989,7 +1000,7 @@ call :get_exec_name "%~0"
 call :get_res_val -ri:UnpackDistribFile -v1:"!mods[%_mod_name%]#DistribFile!"
 start "%res_val%" /WAIT "%z7_%" x "!mods[%_mod_name%]#DistribPath!" -o"!mods[%_mod_name%]#SetupDir!" -r 1> "%bis_log_dir%%DIR_SEP%%_mod_name%-%exec_name%.log" 2>&1
 
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 
 endlocal & exit /b 0
 
@@ -1009,12 +1020,13 @@ call :choice_process "%~0" DelExistModSetupDir %DEF_DELAY% N
 if ERRORLEVEL %NO% call :echo -ri:ProcessingAbort -v1:%process% & endlocal & exit /b 0
 
 1>nul RD /S /Q "!mods[%_mod_name%]#SetupDir!"
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 
 endlocal & exit /b 0
 
 rem ---------------------------------------------
-rem Добавляет заданный путь в переменную среды PATH
+rem Добавляет бинарные каталоги заданного модуля 
+rem в переменную среды PATH
 rem (определяет похожие пути и запрашивает разрешение 
 rem на их удаление: необходимо при повторной установке
 rem модуля, когда первая прошла не удачно...)
@@ -1024,58 +1036,70 @@ setlocal
 set _pkg_name=%~1
 set _mod_name=%~2
 
+call :print_exec_name "%~0"
+rem если хотя бы один каталог не существует, то ни один не добавляем
+for /l %%n in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
+	if not exist "!mods[%_mod_name%]#BinDirs[%%n]!" call :echo -ri:PathDirExistError -v1:"!mods[%_mod_name%]#BinDirs[%%n]!" & endlocal & exit /b 1
+)
 call :convert_case %CM_LOWER% "%_pkg_name%" l_cl_pkg_name
 call :convert_case %CM_LOWER% "%_mod_name%" l_cl_mod_name
 
-call :print_exec_name "%~0"
-rem если хотя бы один каталог не существует, то ни один не добавляем
-for /l %%j in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
-	if not exist "!mods[%_mod_name%]#BinDirs[%%j]!" call :echo -ri:PathDirExistError -v1:"!mods[%_mod_name%]#BinDirs[%%j]!" & endlocal & exit /b 1
-)
 rem поиск и ручное удаление похожих существующих путей
 set l_reg_key_name=%RH_HKCU%
 
 :get_path_env
-call :get_reg_value "" "%l_reg_key_name%" PATH
+call :get_reg_value "" %l_reg_key_name% PATH
 set l_paths=!reg_value!
 
-:paths_loop
-for /f "tokens=1* delims=;" %%i in ("%l_paths%") do (
-	set l_path=%%i
-	set l_short_path=%%~si
-	call :convert_case %CM_LOWER% "!l_path!" l_cl_path
-	set $check_path=!l_cl_path:%l_cl_pkg_name%=!
-	set $check_path=!$check_path:%l_cl_mod_name%=!
-
-	if /i "!$check_path!" NEQ "!l_cl_path!" (
-		call :get_res_val -rf:"%menus_file%" -ri:ExistModPathEnv -v1:"%_mod_name%" -v2:"!l_short_path!" -v3:%DEF_DELAY%
-		call :choice_process "" "" %DEF_DELAY% N "!res_val!"
-		if !choice! EQU %YES% (
-			call :echo -ri:DelPathEnv -v1:"!l_short_path!" -rc:0F -ln:%VL_FALSE%
-			call :reg -oc:%RC_DEL% -kn:%l_reg_key_name% -vn:PATH -vv:"!l_path!"
-			call :echo -ri:ResultOk -rc:0A
+:start_paths_loop
+for /f "tokens=1* delims=%PATH_SEP%" %%i in ("%l_paths%") do (
+	set l_path=%%~i
+	for /l %%n in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
+		if /i "!l_path!" EQU "!mods[%_mod_name%]#BinDirs[%%n]!" (
+			set "l_bin_dir[%%n]#RegKeyName=%l_reg_key_name%"
+			set "l_bin_dir[%%n]#Exist=%VL_TRUE%"
+			rem echo l_bin_dir[%%n]#Exist=!l_bin_dir[%%n]#Exist!
 		)
 	)
-	set l_paths=%%j
+	set l_next_paths=%%j
+	call :convert_case %CM_LOWER% "!l_path!" l_cl_path
+	set "$check_path=!l_cl_path:%l_cl_pkg_name%=!"
+	set "$check_path=!$check_path:%l_cl_mod_name%=!"
+	if /i "!$check_path!" NEQ "!l_cl_path!" (
+		call :get_res_val -rf:"%menus_file%" -ri:ExistModPathEnv -v1:"%_mod_name%" -v2:%l_reg_key_name% -v3:"!l_path!" -v4:%DEF_DELAY%
+		call :choice_process "" "" %DEF_DELAY% N "!res_val!"
+		if !choice! EQU %YES% (
+			call :echo -ri:DelPathEnv -v1:"!l_path!" -v2:%l_reg_key_name% -rc:0F -ln:%VL_FALSE%
+			call :reg -oc:%RC_DEL% -kn:%l_reg_key_name% -vn:PATH -vv:"!l_path!"
+			call :echoOk
+		)
+	)
+	set l_paths=!l_next_paths!
 )
-if defined l_paths goto :paths_loop
-
-if %l_reg_key_name% EQU %RH_HKLM% goto end_path_env
+if defined l_paths goto :start_paths_loop
+rem echo on
+if %l_reg_key_name% EQU %RH_HKLM% goto add_path_env
 set "l_reg_key_name=%RH_HKLM%" & goto get_path_env
 
-:end_path_env
+:add_path_env
+set l_reg_key_name=%RH_HKCU%
+
 rem добавление путей
 for /l %%j in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
-	call :echo -ri:AddPathEnv -v1:"!mods[%_mod_name%]#BinDirs[%%j]!" -rc:0F -ln:%VL_FALSE%
-	rem call :convert_case %CM_LOWER% "!mods[%_mod_name%]#BinDirs[%%j]!" l_bin_dir
-	call :convert_slashes %CSD_WIN% "!mods[%_mod_name%]#BinDirs[%%j]!" l_bin_dir
-	call :reg -oc:%RC_ADD% -vn:PATH -vv:"!l_bin_dir!"
-	call :echo -ri:ResultOk -rc:0A
+	rem echo l_bin_dir[%%j]#Exist=!l_bin_dir[%%j]#Exist!
+	if /i "!l_bin_dir[%%j]#Exist!" EQU "%VL_TRUE%" (
+		call :echo -ri:PathEnvDirExist -v1:"!l_bin_dir[%%j]#RegKeyName!" -v2:"!mods[%_mod_name%]#BinDirs[%%j]!" -rc:0F
+	) else (
+		call :echo -ri:AddPathEnv -v1:"!mods[%_mod_name%]#BinDirs[%%j]!" -v2:%l_reg_key_name% -rc:0F -ln:%VL_FALSE%
+		echo call :reg -oc:%RC_ADD% -kn:%l_reg_key_name% -vn:PATH -vv:"!l_bin_dir!"
+		call :echoOk
+	)
 )
 endlocal & exit /b 0
 
 rem ---------------------------------------------
-rem Удаляет заданный путь из переменной среды PATH
+rem Удаляет бинарные пути заданного модуля из 
+rem переменной среды PATH
 rem ---------------------------------------------
 :goal_del_path_env
 setlocal
@@ -1083,14 +1107,16 @@ set _mod_name=%~1
 
 call :print_exec_name "%~0"
 
+set l_reg_key_name=%RH_HKCU%
+
+:del_path_env
 for /l %%j in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
-	call :echo -ri:DelPathEnv -v1:"!mods[%_mod_name%]#BinDirs[%%j]!" -rc:0F -ln:%VL_FALSE%
-	rem call :convert_case %CM_LOWER% "!mods[%_mod_name%]#BinDirs[%%j]!" l_bin_dir
-	call :convert_slashes %CSD_WIN% "!mods[%_mod_name%]#BinDirs[%%j]!" l_bin_dir
-	call :reg -oc:%RC_DEL% -vn:PATH -vv:"!l_bin_dir!"
-	call :echo -ri:ResultOk -rc:0A
+	call :echo -ri:DelPathEnv -v1:"!mods[%_mod_name%]#BinDirs[%%j]!" -v2:%l_reg_key_name% -rc:0F -ln:%VL_FALSE%
+	call :reg -oc:%RC_DEL% -kn:%l_reg_key_name% -vn:PATH -vv:"!l_bin_dir!"
+	call :echoOk
 )
-endlocal & exit /b 0
+if %l_reg_key_name% EQU %RH_HKLM% endlocal & exit /b 0
+set "l_reg_key_name=%RH_HKLM%" & goto del_path_env
 
 rem ---------------------------------------------
 rem Добавляет переменную среды с заданным значением
@@ -1104,16 +1130,47 @@ if not defined _env endlocal & exit /b 0
 
 call :print_exec_name "%~0"
 
-call :get_reg_value "" "%RH_HKCU%" "%_env%"
+set l_reg_key_name=%RH_HKCU%
+
+:get_env_value
+call :get_reg_value "" %l_reg_key_name% "%_env%"
 if defined reg_value (
-	call :get_res_val -rf:"%menus_file%" -ri:ChangeRegKeyValue -v1:"%_env%" -v2:"%reg_value%" -v3:"%_val%"
+	call :get_res_val -rf:"%menus_file%" -ri:DelExistRegKeyValue -v1:%l_reg_key_name% -v2:"%_env%" -v3:"%reg_value%"
 	call :choice_process "" "" %DEF_DELAY% N "!res_val!"
-	if !choice! EQU %NO% call :echo -ri:ChangeRegKeyValueAbort -v1:"%_env%" & endlocal & exit /b 0
+	if !choice! EQU %YES% (
+		call :echo -ri:DelEnv -v1:%l_reg_key_name% -v2:"%_env%" -rc:0F -ln:%VL_FALSE%
+		call :reg -oc:%RC_DEL% -kn:%l_reg_key_name% -vn:"%_env%"
+		call :echoOk
+	) else (
+		call :get_res_val -rf:"%menus_file%" -ri:ChangeRegKeyValue -v1:%l_reg_key_name% -v2:"%_env%" -v3:"%reg_value%" -v4:"%_val%"
+		call :choice_process "" "" %DEF_DELAY% N "!res_val!"
+		if !choice! EQU %YES% (
+			call :set_env_value %l_reg_key_name% "%_env%" "%_val%"
+			set l_is_change_env_value=%VL_TRUE%
+		) else (
+			call :echo -ri:ChangeRegKeyValueAbort -v1:%l_reg_key_name% -v2:"%_env%"
+		)
+	)
 )
-call :echo -ri:AddEnv -v1:"%_env%" -v2:"%_val%" -rc:0F -ln:%VL_FALSE%
-call :convert_slashes %CSD_WIN% "%_val%" _val
-call :reg -oc:%RC_SET% -vn:"%_env%" -vv:"%_val%"
-call :echo -ri:ResultOk -rc:0A
+if /i %l_reg_key_name% EQU %RH_HKLM% (
+	if /i "!l_is_change_env_value!" NEQ "%VL_TRUE%" call :set_env_value %RH_HKCU% "%_env%" "%_val%"
+	endlocal & exit /b 0
+)
+set "l_reg_key_name=%RH_HKLM%" & goto get_env_value
+
+rem ---------------------------------------------
+rem Устанавливает заданное значение переменной среды
+rem ---------------------------------------------
+:set_env_value
+setlocal
+set _key=%~1
+set _env=%~2
+set _val=%~3
+
+call :echo -ri:AddEnv -v1:%l_reg_key_name% -v2:"%_env%" -v3:"%_val%" -rc:0F -ln:%VL_FALSE%
+call :convert_slashes %CSD_DEF% "%_val%" _val
+call :reg -oc:%RC_SET% -kn:%l_reg_key_name% -vn:"%_env%" -vv:"%_val%"
+call :echoOk
 endlocal & exit /b 0
 
 rem ---------------------------------------------
@@ -1125,9 +1182,9 @@ set _env=%~1
 
 call :print_exec_name "%~0"
 
-call :echo -ri:DelEnv -v1:"%_env%" -rc:0F -ln:%VL_FALSE%
+call :echo -ri:DelEnv -v1:%l_reg_key_name% -v2:"%_env%" -rc:0F -ln:%VL_FALSE%
 call :reg -oc:%RC_DEL% -vn:"%_env%"
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 endlocal & exit /b 0
 
 rem ---------------------------------------------
@@ -1192,8 +1249,8 @@ if %src_cnt% GTR -1 if %dst_cnt% EQU -1 (
 		call :echo -ri:CmdCopyMoveObjects -v1:"!l_src_paths[%%n]!" -v2:"%l_dst_dir%"
 		if not exist "!l_src_paths[%%n]!" call :echo -ri:SrcFileExistError -v1:"!l_src_paths[%%n]!" & endlocal & exit /b 1
 		if not exist "%l_dst_dir%" call :echo -ri:DstDirExistError -v1:"%l_dst_dir%" & endlocal & exit /b 1
-		call :convert_slashes %CSD_WIN% "!l_src_paths[%%n]!" l_src_paths[%%n]
-		call :convert_slashes %CSD_WIN% "%l_dst_dir%" l_dst_dir
+		call :convert_slashes %CSD_DEF% "!l_src_paths[%%n]!" l_src_paths[%%n]
+		call :convert_slashes %CSD_DEF% "%l_dst_dir%" l_dst_dir
 		1>nul copy /y "!l_src_paths[%%n]!" "!l_dst_dir!"
 	)
 	set /a "obj_cnt=%src_cnt%+1"
@@ -1206,8 +1263,8 @@ if %src_cnt% GTR -1 if %dst_cnt% EQU %src_cnt% (
 		if not exist "!l_src_paths[%%n]!" call :echo -ri:SrcFileExistError -v1:"!l_src_paths[%%n]!" & endlocal & exit /b 1
 		for /f %%l in ("!l_dst_paths[%%n]!") do set l_dst_dir=%%~dpl
 		if not exist "!l_dst_dir!" call :echo -ri:DstDirExistError -v1:"!l_dst_dir!" & endlocal & exit /b 1
-		call :convert_slashes %CSD_WIN% "!l_src_paths[%%n]!" l_src_paths[%%n]
-		call :convert_slashes %CSD_WIN% "!l_dst_paths[%%n]!" l_dst_paths[%%n]
+		call :convert_slashes %CSD_DEF% "!l_src_paths[%%n]!" l_src_paths[%%n]
+		call :convert_slashes %CSD_DEF% "!l_dst_paths[%%n]!" l_dst_paths[%%n]
 		1>nul copy /y "!l_src_paths[%%n]!" "!l_dst_paths[%%n]!"
 	) 
 	set /a "obj_cnt=%src_cnt%+1"
@@ -1215,13 +1272,13 @@ if %src_cnt% GTR -1 if %dst_cnt% EQU %src_cnt% (
 )
 rem если указан один файл источник и несколько файлов назначения
 if %src_cnt% EQU 0 if %dst_cnt% GTR %src_cnt% (
-	call :convert_slashes %CSD_WIN% "!l_src_paths[0]!" l_src_paths[0]
+	call :convert_slashes %CSD_DEF% "!l_src_paths[0]!" l_src_paths[0]
 	for /l %%n in (0,1,%dst_cnt%) do ( 
 		call :echo -ri:CmdCopyMoveObjects -v1:"!l_src_paths[0]!" -v2:"!l_dst_paths[%%n]!"
 		if not exist "!l_src_paths[0]!" call :echo -ri:SrcFileExistError -v1:"!l_src_paths[0]!" & endlocal & exit /b 1
 		for /f %%l in ("!l_dst_paths[%%n]!") do set l_dst_dir=%%~dpl
 		if not exist "!l_dst_dir!" call :echo -ri:DstDirExistError -v1:"!l_dst_dir!" & endlocal & exit /b 1
-		call :convert_slashes %CSD_WIN% "!l_dst_paths[%%n]!" l_dst_paths[%%n]
+		call :convert_slashes %CSD_DEF% "!l_dst_paths[%%n]!" l_dst_paths[%%n]
 		1>nul copy /y "!l_src_paths[0]!" "!l_dst_paths[%%n]!"
 	) 
 	set /a "obj_cnt=%dst_cnt%+1"
@@ -1270,8 +1327,8 @@ if %src_cnt% GTR -1 if %dst_cnt% EQU -1 (
 		call :echo -ri:CmdCopyMoveObjects -v1:"!l_src_paths[%%n]!" -v2:"%l_dst_dir%"
 		if not exist "!l_src_paths[%%n]!" call :echo -ri:SrcFileExistError -v1:"!l_src_paths[%%n]!" & endlocal & exit /b 1
 		if not exist "%l_dst_dir%" call :echo -ri:DstDirExistError -v1:"%l_dst_dir%" & endlocal & exit /b 1
-		call :convert_slashes %CSD_WIN% "!l_src_paths[%%n]!" l_src_paths[%%n]
-		call :convert_slashes %CSD_WIN% "%l_dst_dir%" l_dst_dir
+		call :convert_slashes %CSD_DEF% "!l_src_paths[%%n]!" l_src_paths[%%n]
+		call :convert_slashes %CSD_DEF% "%l_dst_dir%" l_dst_dir
 		1>nul move /y "!l_src_paths[%%n]!" "!l_dst_dir!"
 	)
 	set /a "obj_cnt=%src_cnt%+1"
@@ -1284,8 +1341,8 @@ if %src_cnt% GTR -1 if %dst_cnt% EQU %src_cnt% (
 		if not exist "!l_src_paths[%%n]!" call :echo -ri:SrcFileExistError -v1:"!l_src_paths[%%n]!" & endlocal & exit /b 1
 		for /f %%l in ("!l_dst_paths[%%n]!") do set l_dst_dir=%%~dpl
 		if not exist "!l_dst_dir!" call :echo -ri:DstDirExistError -v1:"!l_dst_dir!" & endlocal & exit /b 1
-		call :convert_slashes %CSD_WIN% "!l_src_paths[%%n]!" l_src_paths[%%n]
-		call :convert_slashes %CSD_WIN% "!l_dst_paths[%%n]!" l_dst_paths[%%n]
+		call :convert_slashes %CSD_DEF% "!l_src_paths[%%n]!" l_src_paths[%%n]
+		call :convert_slashes %CSD_DEF% "!l_dst_paths[%%n]!" l_dst_paths[%%n]
 		1>nul move /y "!l_src_paths[%%n]!" "!l_dst_paths[%%n]!"
 	) 
 	set /a "obj_cnt=%src_cnt%+1"
@@ -1345,7 +1402,7 @@ for /F "tokens=*" %%a in ('%xml_sel_% "!res_val!" -v "./exec" -n "%g_pkg_cfg_fil
 		if !l_exec_res! NEQ 0 (
 			call :echo -ri:ResultFailNum -v1:"!l_exec_res!" -rl:5FINE
 		) else (
-			call :echo -ri:ResultOk -rc:0A -rl:5FINE
+			call :echoOk -rl:5FINE
 		)
 		set /a "i+=1"
 	)
@@ -1376,8 +1433,8 @@ for /f "tokens=1* delims= " %%a in ("%l_exec_cmd%") do (
 	set l_exec_params=%%b
 )
 call :echo -rv:"%~0: l_exec_file=%l_exec_file%; l_exec_ext=%l_exec_ext%; l_exec_params=%l_exec_params%" -rl:5FINE
-call :convert_slashes %CSD_WIN% "%l_exec_file%" l_exec_file
-set $check_file=!l_exec_file:%DIR_SEP%=!
+call :convert_slashes %CSD_DEF% "%l_exec_file%" l_exec_file
+set "$check_file=!l_exec_file:%DIR_SEP%=!"
 rem если в команде указан путь выполнения и указано расширение исполняемого файла, то возвращаем команду на исполнение как есть
 if /i "%$check_file%" NEQ "%l_exec_file%" (
 	if defined l_exec_ext (
@@ -1638,7 +1695,7 @@ echo 13
 )
 :all_prm_applied
 exit
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 endlocal & exit /b 0
 
 rem ---------------------------------------------
@@ -1677,7 +1734,7 @@ if "!l_ln:~0,%_cmt_len%!" EQU "%_cfg_cmt%" (
 	)
 )
 set l_ln_pname=%l_ln_pname:"=%
-set $ln=!l_ln_pname:%l_chk_pname%=!
+set "$ln=!l_ln_pname:%l_chk_pname%=!"
 
 echo "%$ln%" "%l_ln_pname%" "!l_chk_pname!"
 rem если не удалось получить имя параметра из строки или строка не содержит искомый параметр, то возвращаем 3
@@ -1797,7 +1854,7 @@ if defined l_prms[%_j%]#PrmVal endlocal & set "%_proc_name:~5%=!l_prms[%_j%]#Prm
 set l_val=!l_prms[%_j%]#Val!
 
 rem убираем кавычки, связываем и возвращаем значение параметра
-set $quot_val=%l_val:"=%
+set "$quot_val=%l_val:"=%"
 call :binding_var "%_pkg_name%" "%_mod_name%" "%$quot_val%" l_bind_val
 
 rem если у значения не было кавычек, то используем без кавычек, иначе - ставим их
@@ -1826,8 +1883,7 @@ set _mod_ver=%~2
 
 call :echo -ri:DefFuncNotImpl -v1:"%~0" & endlocal & exit /b 0
 
-call :echo -ri:AddPathEnv -v1:%_dir% -rc:0F -ln:%VL_FALSE%
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 endlocal & exit /b 0
 
 rem ---------------------------------------------
@@ -1841,8 +1897,7 @@ set _mod_ver=%~2
 
 call :echo -ri:DefFuncNotImpl -v1:"%~0" & endlocal & exit /b 0
 
-call :echo -ri:AddPathEnv -v1:%_dir% -rc:0F -ln:%VL_FALSE%
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 endlocal & exit /b 0
 
 rem ---------------------------------------------
@@ -1859,7 +1914,7 @@ set _var=%~3
 rem echo on
 call :echo -rv:"%~0: _var=%_var%" -rl:5FINE
 if not defined _var endlocal & set "%4=" & exit /b 0
-set $bind_var=%_var:${=%
+set "$bind_var=%_var:${=%"
 rem если не нужно связывать переменную, то возвращаем её "как есть"
 if /i "%$bind_var%" EQU "%_var%" endlocal & set "%4=%_var%" & exit /b 0
 
@@ -1868,7 +1923,7 @@ set l_vars=%_var%
 for /f "tokens=1* delims=$}" %%i in ("!l_vars!") do (
 	set l_var=%%i
 	call :echo -rv:"%~0: l_var=!l_var!" -rl:5FINE
-	set $check_var=!l_var:~0,1!
+	set "$check_var=!l_var:~0,1!"
 	if /i "!$check_var!" EQU "{" (
 		set l_var=!l_var:~1!
 		call :convert_case %CM_LOWER% "!l_var!" l_lc_var
@@ -1905,7 +1960,7 @@ set l_vars=%_var%
 :input_vars_loop
 for /f "tokens=1* delims=$}" %%i in ("!l_vars!") do (
 	set l_input_var=%%i
-	set $check_input_var=!l_input_var:~0,1!
+	set "$check_input_var=!l_input_var:~0,1!"
 	if /i "!$check_input_var!" EQU "{" (
 		set l_input_var=!l_input_var:~1!
 		call :get_res_val -ri:InputBindVarValue -v1:!l_input_var!
@@ -1943,7 +1998,7 @@ set _proc_name=%~0
 set _svname=%~1
 
 set l_scope_mark=%BV_PKG_SCOPE%
-set $check_var_name=%_svname:.=%
+set "$check_var_name=%_svname:.=%"
 call :echo -rv:"%~0: _svname=%_svname% - %_svname:~0,4%" -rl:5FINE
 if /i "%$check_var_name%" EQU "%_svname%" (
 	set l_scope_pkg=%DEF_VAR_PKG%
@@ -2126,6 +2181,26 @@ endlocal & set %_proc_name:~5%=%EM_EML%
 exit /b %EM_EML%
 
 rem ---------------------------------------------
+rem Выводит заголовок программы, а так же информацию 
+rem о режиме запуска и заданном при запуске уровне 
+rem логгирования
+rem ---------------------------------------------
+:print_header
+setlocal
+set _script_header=%~1
+set _user_account=%~2
+set _uat_clr=%~3
+
+if /i "%is_header_printed%" EQU "%VL_TRUE%" if /i "%EXEC_MODE%" NEQ "%EM_DBG%" endlocal & exit /b 0
+call :echo -rv:"%_script_header% [" -rc:08 -ln:%VL_FALSE%
+call :echo -rv:"%_user_account%" -rc:%_uat_clr% -ln:%VL_FALSE%
+call :echo -rv:"; MODE: %EXEC_MODE%" -rc:0F -ln:%VL_FALSE%
+if defined p_use_log call :echo -rv:"; LOG_LEVEL: %p_log_level%" -rc:0F -ln:%VL_FALSE%
+call :echo -rv:"]" -rc:08
+endlocal & set is_header_printed=%VL_TRUE%
+exit /b 0
+
+rem ---------------------------------------------
 rem Устанавливает все необходимые параметры
 rem и ресурсы для работы системы
 rem ---------------------------------------------
@@ -2225,28 +2300,25 @@ set xpaths_file=%bis_res_dir%%DIR_SEP%xpaths.txt
 
 if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :echo -ri:LocaleInfo -v1:%locale%
 
-rem выводим заголовок программы
-call :echo -rv:"%g_script_header% " -rc:08 -ln:%VL_FALSE%
-rem выводим информацию о режиме запуска и заданном при запуске уровне логгирования
-call :echo -rv:"[" -rc:08 -ln:%VL_FALSE%
-
 rem проверяем наличие прав администратора
 call :check_permissions
-if %ERRORLEVEL% EQU 0 (
-	call :echo -rv:"ADMIN" -rc:0C -ln:%VL_FALSE%
+if ERRORLEVEL 1 (
+	set g_user_account=%UA_USR%
+	set g_uat_clr=0A
 ) else (
-	call :echo -rv:"USR" -rc:0F -ln:%VL_FALSE%
+	set g_user_account=%UA_ADM%
+	set g_uat_clr=0C
 )
-call :echo -rv:"; MODE: %EXEC_MODE%" -rc:0F -ln:%VL_FALSE%
-if defined p_use_log call :echo -rv:"; LOG_LEVEL: %p_log_level%" -rc:0F -ln:%VL_FALSE%
-rem call :echo -rv:""
-call :echo -rv:"]" -rc:08
+rem выводим заголовок программы
+call :print_header "%g_script_header%" "%g_user_account%" %g_uat_clr%
+
 rem если не найден файл лицензии
 if not exist "%p_license_file%" call :echo -ri:ProgramLicenseMsg -rc:0F
 call :echo -ri:InitSetupParams -ln:%VL_FALSE% -be:1
 rem call :echo -ri:ProcArchDefError -be:1
 if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :echo -ri:ProcArchInfo -v1:%proc_arch%
 
+rem call :echo -rv:""
 rem Формируем пути от начала текущего диска (http://www.rsdn.ru/forum/setup/2810022.hot)
 for /f %%i in ("%bis_log_dir%") do set bis_log_dir=%%~dpnxi
 for /f %%i in ("%bis_distrib_dir%") do set bis_distrib_dir=%%~dpnxi
@@ -2270,7 +2342,7 @@ rem загрузчики
 set curl_=%bis_utils_dir%%DIR_SEP%curl%DIR_SEP%bin%DIR_SEP%curl.exe
 set wget_=%bis_utils_dir%%DIR_SEP%wget%DIR_SEP%wget.exe
 
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 
 exit /b 0
 
@@ -2304,7 +2376,7 @@ if not exist "%bis_backup_data_dir%" call :echo -ri:BackupDirExistError -v1:"%bi
 rem наличие файла xsd-схемы проверки xml-конфигурации
 if not exist "%cfg_val_schema%" call :echo -ri:CfgValSchemaExistError -v1:"%cfg_val_schema%" & endlocal & exit /b 1
 
-call :echo -ri:ResultOk -rc:0A
+call :echoOk
 
 call :echo -ri:LogDir -v1:"%bis_log_dir%"
 call :echo -ri:DistribDir -v1:"%bis_distrib_dir%"

@@ -1097,7 +1097,7 @@ set l_paths=!reg_value!
 :paths_loop
 for /f "tokens=1* delims=;" %%i in ("%l_paths%") do (
 	set l_path=%%i
-	set $check_path=!l_path:%_mod_name%=!
+	set "$check_path=!l_path:%_mod_name%=!"
 	if /i "!$check_path!" NEQ "!l_path!" (
 		call :get_res_val -rf:"%menus_file%" -ri:ExistModPathEnv -v1:"%_mod_name%" -v2:"!l_path!" -v3:%DEF_DELAY%
 		call :choice_process "" "" %DEF_DELAY% N "!res_val!"
@@ -1663,7 +1663,7 @@ if "!l_ln:~0,%_cmt_len%!" EQU "%_cfg_cmt%" (
 	)
 )
 set l_ln_pname=%l_ln_pname:"=%
-set $ln=!l_ln_pname:%l_chk_pname%=!
+set "$ln=!l_ln_pname:%l_chk_pname%=!"
 
 echo "%$ln%" "%l_ln_pname%" "!l_chk_pname!"
 rem если не удалось получить имя параметра из строки или строка не содержит искомый параметр, то возвращаем 3
@@ -1783,7 +1783,7 @@ if defined l_prms[%_j%]#PrmVal endlocal & set "%_proc_name:~5%=!l_prms[%_j%]#Prm
 set l_val=!l_prms[%_j%]#Val!
 
 rem убираем кавычки, связываем и возвращаем значение параметра
-set $quot_val=%l_val:"=%
+set "$quot_val=%l_val:"=%"
 call :binding_var "%_pkg_name%" "%_mod_name%" "%$quot_val%" l_bind_val
 
 rem если у значения не было кавычек, то используем без кавычек, иначе - ставим их
