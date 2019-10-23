@@ -57,7 +57,8 @@ for /f "tokens=1* delims=;" %%p in ("%l_prm_defs%") do (
 	set l_prm_defs=!l_next_prm_def!
 )
 if defined l_prm_defs goto :param_defs_loop
-set /a "g_prms[%prm_scope%]#Count=%prm%-1"
+set /a "l_prms_count=%prm%-1"
+set "g_prms[%prm_scope%]#Count=%l_prms_count%"
 
 :end_param_defs
 rem СБРОС ПАРАМЕТРОВ:
@@ -116,7 +117,9 @@ for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
 				set "!g_prms[%prm_scope%][%%n]#Name!!g_prms[%prm_scope%][%%n]#Count!=%p_val%"
 				set "g_prms[%prm_scope%][%%n]#Value!g_prms[%prm_scope%][%%n]#Count!=%p_val%"
 				set "!g_prms[%prm_scope%][%%n]#CountVar!=!g_prms[%prm_scope%][%%n]#Count!"
-				set /a "g_prms[%prm_scope%][%%n]#Count+=1"
+				set "l_prms_count=!g_prms[%prm_scope%][%%n]#Count!"
+				set /a "l_prms_count+=1"
+				set "g_prms[%prm_scope%][%%n]#Count=!l_prms_count!"
 			) else (
 				rem проверка неполного совпадения ключа
 				set half_key=%p_key:~0,2%
@@ -129,7 +132,9 @@ for /l %%n in (0,1,!g_prms[%prm_scope%]#Count!) do (
 							set "!g_prms[%prm_scope%][%%n]#Name!!g_prms[%prm_scope%][%%n]#Count!=%p_val%"
 							set "g_prms[%prm_scope%][%%n]#Value!g_prms[%prm_scope%][%%n]#Count!=%p_val%"
 							set "!g_prms[%prm_scope%][%%n]#CountVar!=!g_prms[%prm_scope%][%%n]#Count!"
-							set /a "g_prms[%prm_scope%][%%n]#Count+=1"
+							set "l_prms_count=!g_prms[%prm_scope%][%%n]#Count!"
+							set /a "l_prms_count+=1"
+							set "g_prms[%prm_scope%][%%n]#Count=!l_prms_count!"
 						)	
 					)
 				)

@@ -35,7 +35,7 @@ set LL_WRN=3
 set LL_INF=4
 set LL_DBG=5
 rem уровень логгирования по умолчанию: ошибки
-set DEF_LOG_LEVEL=%LL_ERR%
+set LL_DEF=%LL_ERR%
 
 rem =========================================== РЕСУРСЫ ===========================================
 ::Define a BS variable containing a backspace (0x08) character
@@ -81,9 +81,13 @@ set RC_GET=GET
 set RC_SET=SET
 set RC_ADD=ADD
 set RC_DEL=DEL
-rem предопределённые разделы реестра: ветки и переменных окружения пользователя
-set RH_HKLM=HKLM
+rem предопределённые разделы реестра: компьютера (для всех пользователей) и текущего пользователя
 set RH_HKCU=HKCU
+set RH_HKLM=HKLM
+set RH_DEF=%RH_HKCU%
+set RH_HK[0]=%RH_HKCU%
+set RH_HK[1]=%RH_HKLM%
+set RH_CNT=1
 rem ветки переменных окружения
 set HKLM="HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
 set HKCU="HKCU\Environment"

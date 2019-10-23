@@ -31,9 +31,9 @@ rem ---------------------------------------------
 rem Возвращает длину строки
 rem ---------------------------------------------
 :len
-setlocal enabledelayedexpansion&set l=0&set str=%~1
+setlocal enabledelayedexpansion&set l=0&set "str=%~1"
 :len_loop
-set x=!str:~%l%,1!&if not defined x (endlocal&set "%~2=%l%"&exit /b 0)
+set "x=!str:~%l%,1!"&if not defined x (endlocal&set "%~2=%l%"&exit /b 0)
 set /a l+=1&goto :len_loop
 
 rem ---------------------------------------------
@@ -43,16 +43,16 @@ rem ---------------------------------------------
 :convert_case _case_mark _src_str conv_str
 setlocal
 Set _case_mark=%~1
-Set _src_str=%~2
+Set "_src_str=%~2"
 
 if /i "%_case_mark%" EQU "%CM_UPPER%" (
 	CALL :UCase "%_src_str%"
-	call :echo -ri:CaseConvert -v1:"%_src_str%" -v2:"%_case_mark%" -v3:"!UCase!"
-	set l_conv_str=!UCase!
+	if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :echo -ri:CaseConvert -v1:"%_src_str%" -v2:"%_case_mark%" -v3:"!UCase!"
+	set "l_conv_str=!UCase!"
 ) else if /i "%_case_mark%" EQU "%CM_LOWER%" (
 	CALL :LCase "%_src_str%"
-	call :echo -ri:CaseConvert -v1:"%_src_str%" -v2:"%_case_mark%" -v3:"!LCase!"
-	set l_conv_str=!LCase!
+	if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :echo -ri:CaseConvert -v1:"%_src_str%" -v2:"%_case_mark%" -v3:"!LCase!"
+	set "l_conv_str=!LCase!"
 ) else (
 	call :echo -ri:CaseMarkUndefError
 	rem call :exec_format & endlocal & exit /b 1

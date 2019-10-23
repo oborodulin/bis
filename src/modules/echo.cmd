@@ -67,6 +67,8 @@ if defined res_val (
 	)
 )
 call :echo_log "%log_path%" "%res_val%" "%categ_num%" "%log_lvl%" "%script_hdr%"
+if /i "%categ_name%" EQU "%CTG_ERR%" call :set_res_color %DEF_RES_COLOR% & pause
+
 endlocal & exit /b 0
 
 rem ---------------------------------------------
@@ -90,14 +92,23 @@ if not exist "%_log_path%" (
 rem FOR /F "usebackq tokens=*" %%A IN (`%modules_dir%iso_date.cmd -df:DATE_TIME 2^>nul`) DO set iso_date_time=%%A
 if "%_categ_num%" EQU "" set _categ_num=0
 set "l_res_val=%DATE% %TIME%: %_res_val%"
-rem дл€ вывода круглых скобок echo должны быть на отдельных строках
+rem дл€ вывода круглых скобок echo должны быть на отдельных строках (в процедурах)
 if defined _log_lvl (
 	if %_categ_num% LEQ %_log_lvl% (
-		echo "%l_res_val%" >> "%_log_path%"
+		call :fecho "%l_res_val%" "%_log_path%"
 	)
 ) else (
-	echo "%l_res_val%" >> "%_log_path%"
+		if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :fecho "%l_res_val%" "%_log_path%"
 )
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem ¬ыводит значение ресурса (строкового)
+rem с переводом строки
+rem ---------------------------------------------
+:fecho _res_val _log_file
+setlocal
+echo %~1 >> "%~2"
 endlocal & exit /b 0
 
 rem ---------------------------------------------
@@ -232,7 +243,8 @@ for /f "tokens=1* delims={}" %%a in ("%l_tmp_val%") do (
  	set /a "er+=1"
 )
 if defined l_tmp_val goto :res_output_loop
-set /a "g_res_tpl[%_res_name%][%_res_id%][0]#Cnt=%er%-1"
+set /a "l_res_tpl_cnt=%er%-1"
+set "g_res_tpl[%_res_name%][%_res_id%][0]#Cnt=%l_res_tpl_cnt%"
 
 :res_parts_loop
 set g_res_output_cnt=!g_res_tpl[%_res_name%][%_res_id%][0]#Cnt!
@@ -335,17 +347,32 @@ if defined g_res_output_cnt (
 		rem  если определено значение ресурса, то учитываем отступ справа и перевод строки
 		rem дл€ вывода круглых скобок echo должны быть на отдельных строках
 		if %right_shift_cnt% EQU 0 (
-			echo | set /p "dummyName=%_res_val%"
-			if /i "%_ln%" EQU "%VL_TRUE%" echo.
+			if /i "%_ln%" EQU "%VL_TRUE%" (
+				call :echo_ln "%_res_val%"
+			) else (
+				echo | set /p "dummyName=%_res_val%"
+			)
 		) else (
-			echo | set /p "dummyName=%BS%!l_spaces!%_res_val%"
-			if /i "%_ln%" EQU "%VL_TRUE%" echo.
+			if /i "%_ln%" EQU "%VL_TRUE%" (
+				call :echo_ln "!l_spaces!%_res_val%"
+			) else (
+				echo | set /p "dummyName=%BS%!l_spaces!%_res_val%"
+			)
 		)
 rem 1>&2 - дл€ ошибки		
 	)
 )
 rem выполн€ем заданное кол-во переводов строк после вывода значени€ ресурса
 for /l %%i in (1,1,%after_echo_cnt%) do echo.
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem ¬ыводит значение ресурса (строкового)
+rem с переводом строки
+rem ---------------------------------------------
+:echo_ln _res_val
+setlocal
+echo %~1
 endlocal & exit /b 0
 
 rem ---------------------------------------------
@@ -459,7 +486,7 @@ call :parse_params %echo_log_param_scope% %echo_log_param_defs% %*
 if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :print_params %echo_log_param_scope%
 
 rem ѕри отсутствии заданных значений, устанавливаем по умолчанию
-if not defined log_lvl set log_lvl=%DEF_LOG_LEVEL%
+if not defined log_lvl set log_lvl=%LL_DEF%
 rem определ€ем номер категории ресурса
 if defined res_categ (
 	set categ_num=%res_categ:~0,1%
@@ -645,7 +672,7 @@ rem ChangeColor 8 0
 echo | set /p "dummyName=:уровень логгировани€ (по умолчанию "
 rem ChangeColor 15 0
 %ChangeColor_15_0%
-echo | set /p "dummyName=%DEF_LOG_LEVEL%"
+echo | set /p "dummyName=%LL_DEF%"
 rem ChangeColor 8 0
 %ChangeColor_8_0%
 echo ). ћожно в вызывающем сценарии определить переменную g_log_level [0 - сообщени€ в файл, 1 - сообщени€ на экран, 2 - ошибки, 3 - предупреждени€, 4 - информаци€, 5 - отладка]

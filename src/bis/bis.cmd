@@ -213,18 +213,19 @@ set "x=1"
 rem получаем имена и версии всех модулей в заданном пакете
 call :get_res_val -rf:"%xpaths_file%" -ri:XPathMods
 for /F "tokens=1-3 delims=	" %%a in ('%xml_sel_% "!res_val!" -v "./name" -o "	" -v "./version" -o "	" -v "./description" -n "%g_pkg_cfg_file%"') do (
-	set l_mod_name=%%a
-	set l_mod_name=!l_mod_name:~0,10!
+	set l_mod_name=%%~a
+	rem set l_mod_name=!l_mod_name:~0,15!
 	call :trim !l_mod_name! l_trim_mod_name
-	set l_mod_ver=%%b
-	set l_mod_ver=!l_mod_ver:~0,12!
-	set l_mod_descr=%%c
+	set l_mod_ver=%%~b
+	rem set l_mod_ver=!l_mod_ver:~0,12!
+	set l_mod_descr=%%~c
 
 	rem call :convert_case %CM_LOWER% "!l_trim_mod_name!" l_lw_mod_name
 	call :set_var_value %BV_MOD_NAME% "!l_trim_mod_name!" "%_mm_pkg_name%" "!l_trim_mod_name!"
 	call :set_var_value %BV_MOD_VERSION% "!l_mod_ver!" "%_mm_pkg_name%" "!l_trim_mod_name!"
 
 	if "%_def_mod_name%" EQU "" call :echo -rv:"%BS%         !x! - !l_mod_name! v.!l_mod_ver! " -rc:0F -cp:65001 -ln:%VL_FALSE%
+	rem if "!l_mod_name!" EQU "apache-tomcat" echo on
 	rem получаем каталог установки модуля, его каталог бинарных файлов и домашний каталог
 	call :get_mod_install_dirs "%_mm_pkg_name%" "!l_mod_name!" "!l_mod_ver!"
 	rem определяем установлен ли уже модуль
@@ -629,16 +630,19 @@ if not defined mods[%_mod_name%]#BinDirCnt (
 	set "i=0"
 	for /F "tokens=1" %%a in ('%xml_sel_% "!res_val!" -v "./directory" -n "%g_pkg_cfg_file%"') do (
 		set l_bin_dir=%%~a
-
+		set "l_bin_dir=!l_bin_dir:%%=%%%%!"
 		call :binding_var "%_pkg_name%" "%_mod_name%" "!l_bin_dir!" l_bin_dir
+		set "l_bin_dir=!l_bin_dir:%%=%%%%!"
 		call :convert_slashes %CSD_DEF% "!l_bin_dir!" l_bin_dir
-		call :set_var_value !BV_MOD_BIN_DIR!%%j "!l_bin_dir!" "%_pkg_name%" "%_mod_name%"
+		set "l_bin_dir=!l_bin_dir:%%=%%%%!"
+		call :set_var_value !BV_MOD_BIN_DIR!!i! "!l_bin_dir!" "%_pkg_name%" "%_mod_name%"
 		call :echo -ri:ModBinDir -v1:%_mod_name% -v2:"!l_bin_dir!"
 
-		set mods[%_mod_name%]#BinDirs[!i!]=!l_bin_dir!
+		set "mods[%_mod_name%]#BinDirs[!i!]=!l_bin_dir!"
 		set /a "i+=1"
 	)
-	set /a mods[%_mod_name%]#BinDirCnt=!i!-1
+	set /a "l_bin_dir_cnt=!i!-1"
+	set "mods[%_mod_name%]#BinDirCnt=!l_bin_dir_cnt!"
 )
 exit /b 0
 
@@ -1025,6 +1029,78 @@ call :echoOk
 endlocal & exit /b 0
 
 rem ---------------------------------------------
+rem Добавляет переменную среды с заданным значением
+rem ---------------------------------------------
+:goal_add_env
+setlocal
+set _env=%~1
+set _val=%~2
+
+if not defined _env endlocal & exit /b 0
+
+call :print_exec_name "%~0"
+
+for /l %%a in (0,1,%RH_CNT%) do (
+	call :get_reg_value "" !RH_HK[%%a]! "%_env%"
+	if defined reg_value (
+		call :get_res_val -rf:"%menus_file%" -ri:DelExistRegKeyValue -v1:!RH_HK[%%a]! -v2:"%_env%" -v3:"!reg_value!"
+		call :choice_process "" "" %DEF_DELAY% N "!res_val!"
+		if !choice! EQU %YES% (
+			call :echo -ri:DelEnv -v1:!RH_HK[%%a]! -v2:"%_env%" -rc:0F -ln:%VL_FALSE%
+			call :reg -oc:%RC_DEL% -kn:!RH_HK[%%a]! -vn:"%_env%"
+			call :echoOk
+		) else (
+			if /i "!reg_value!" EQU "!_val!" (
+				set l_is_exist_env=%VL_TRUE%
+			) else (
+				call :get_res_val -rf:"%menus_file%" -ri:ChangeRegKeyValue -v1:!RH_HK[%%a]! -v2:"%_env%" -v3:"!reg_value!" -v4:"%_val%"
+				call :choice_process "" "" %DEF_DELAY% N "!res_val!"
+				if !choice! EQU %YES% (
+					call :set_env_value !RH_HK[%%a]! "%_env%" "%_val%"
+					set l_is_change_env=%VL_TRUE%
+				) else (
+					call :echo -ri:ChangeRegKeyValueAbort -v1:!RH_HK[%%a]! -v2:"%_env%"
+				)
+			)
+		)
+	)
+)
+if defined l_is_exist_env if /i "%l_is_exist_env%" NEQ "%VL_TRUE%" set l_is_set_env=%VL_TRUE%
+if defined l_is_change_env if /i "%l_is_change_env%" NEQ "%VL_TRUE%" set l_is_set_env=%VL_TRUE%
+if /i "%l_is_set_env%" EQU "%VL_TRUE%" call :set_env_value %RH_DEF% "%_env%" "%_val%"
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Устанавливает заданное значение переменной среды
+rem ---------------------------------------------
+:set_env_value
+setlocal
+set _key=%~1
+set _env=%~2
+set _val=%~3
+
+call :echo -ri:AddEnv -v1:%_key% -v2:"%_env%" -v3:"%_val%" -rc:0F -ln:%VL_FALSE%
+call :convert_slashes %CSD_DEF% "%_val%" _val
+call :reg -oc:%RC_SET% -kn:%_key% -vn:"%_env%" -vv:"%_val%"
+call :echoOk
+endlocal & exit /b 0
+
+rem ---------------------------------------------
+rem Удаляет переменную среды с заданным именем
+rem ---------------------------------------------
+:goal_del_env
+setlocal
+set _env=%~1
+
+call :print_exec_name "%~0"
+for /l %%a in (0,1,%RH_CNT%) do (
+	call :echo -ri:DelEnv -v1:!RH_HK[%%a]! -v2:"%_env%" -rc:0F -ln:%VL_FALSE%
+	call :reg -oc:%RC_DEL% -kn:!RH_HK[%%a]! -vn:"%_env%"
+	call :echoOk
+)
+endlocal & exit /b 0
+
+rem ---------------------------------------------
 rem Добавляет бинарные каталоги заданного модуля 
 rem в переменную среды PATH
 rem (определяет похожие пути и запрашивает разрешение 
@@ -1039,7 +1115,17 @@ set _mod_name=%~2
 call :print_exec_name "%~0"
 rem если хотя бы один каталог не существует, то ни один не добавляем
 for /l %%n in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
-	if not exist "!mods[%_mod_name%]#BinDirs[%%n]!" call :echo -ri:PathDirExistError -v1:"!mods[%_mod_name%]#BinDirs[%%n]!" & endlocal & exit /b 1
+	set "l_bin_dir=!mods[%_mod_name%]#BinDirs[%%n]!"
+	set $check_env=!l_bin_dir:%%%%=!
+	if /i "!$check_env!" NEQ "!l_bin_dir!" (
+		for /f "tokens=1* delims=%%" %%i in ("!l_bin_dir!") do (
+			set "l_env=%%i"
+			set "l_sec_path=%%j"
+			for /l %%a in (0,1,%RH_CNT%) do if not defined reg_value call :get_reg_value "" !RH_HK[%%a]! "!l_env!"
+		)
+		set "l_bin_dir=!reg_value!!l_sec_path!"
+	)
+	if not exist "!l_bin_dir!" call :echo -ri:PathDirExistError -v1:"!l_bin_dir!" & endlocal & exit /b 1
 )
 call :convert_case %CM_LOWER% "%_pkg_name%" l_cl_pkg_name
 call :convert_case %CM_LOWER% "%_mod_name%" l_cl_mod_name
@@ -1053,7 +1139,7 @@ set l_paths=!reg_value!
 
 :start_paths_loop
 for /f "tokens=1* delims=%PATH_SEP%" %%i in ("%l_paths%") do (
-	set l_path=%%~i
+	set "l_path=%%~i"
 	for /l %%n in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
 		if /i "!l_path!" EQU "!mods[%_mod_name%]#BinDirs[%%n]!" (
 			set "l_bin_dir[%%n]#RegKeyName=%l_reg_key_name%"
@@ -1086,12 +1172,14 @@ set l_reg_key_name=%RH_HKCU%
 
 rem добавление путей
 for /l %%j in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
+	set "l_bin_dir=!mods[%_mod_name%]#BinDirs[%%j]!"
+	set "l_bin_dir=!l_bin_dir:%%=%%%%!"
 	rem echo l_bin_dir[%%j]#Exist=!l_bin_dir[%%j]#Exist!
 	if /i "!l_bin_dir[%%j]#Exist!" EQU "%VL_TRUE%" (
 		call :echo -ri:PathEnvDirExist -v1:"!l_bin_dir[%%j]#RegKeyName!" -v2:"!mods[%_mod_name%]#BinDirs[%%j]!" -rc:0F
 	) else (
-		call :echo -ri:AddPathEnv -v1:"!mods[%_mod_name%]#BinDirs[%%j]!" -v2:%l_reg_key_name% -rc:0F -ln:%VL_FALSE%
-		echo call :reg -oc:%RC_ADD% -kn:%l_reg_key_name% -vn:PATH -vv:"!l_bin_dir!"
+		call :echo -ri:AddPathEnv -v1:"!l_bin_dir!" -v2:%l_reg_key_name% -rc:0F -ln:%VL_FALSE%
+		call :reg -oc:%RC_ADD% -kn:%l_reg_key_name% -vn:PATH -vv:"!l_bin_dir!"
 		call :echoOk
 	)
 )
@@ -1107,84 +1195,13 @@ set _mod_name=%~1
 
 call :print_exec_name "%~0"
 
-set l_reg_key_name=%RH_HKCU%
-
-:del_path_env
-for /l %%j in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
-	call :echo -ri:DelPathEnv -v1:"!mods[%_mod_name%]#BinDirs[%%j]!" -v2:%l_reg_key_name% -rc:0F -ln:%VL_FALSE%
-	call :reg -oc:%RC_DEL% -kn:%l_reg_key_name% -vn:PATH -vv:"!l_bin_dir!"
-	call :echoOk
-)
-if %l_reg_key_name% EQU %RH_HKLM% endlocal & exit /b 0
-set "l_reg_key_name=%RH_HKLM%" & goto del_path_env
-
-rem ---------------------------------------------
-rem Добавляет переменную среды с заданным значением
-rem ---------------------------------------------
-:goal_add_env
-setlocal
-set _env=%~1
-set _val=%~2
-
-if not defined _env endlocal & exit /b 0
-
-call :print_exec_name "%~0"
-
-set l_reg_key_name=%RH_HKCU%
-
-:get_env_value
-call :get_reg_value "" %l_reg_key_name% "%_env%"
-if defined reg_value (
-	call :get_res_val -rf:"%menus_file%" -ri:DelExistRegKeyValue -v1:%l_reg_key_name% -v2:"%_env%" -v3:"%reg_value%"
-	call :choice_process "" "" %DEF_DELAY% N "!res_val!"
-	if !choice! EQU %YES% (
-		call :echo -ri:DelEnv -v1:%l_reg_key_name% -v2:"%_env%" -rc:0F -ln:%VL_FALSE%
-		call :reg -oc:%RC_DEL% -kn:%l_reg_key_name% -vn:"%_env%"
+for /l %%a in (0,1,%RH_CNT%) do (
+	for /l %%j in (0,1,!mods[%_mod_name%]#BinDirCnt!) do (
+		call :echo -ri:DelPathEnv -v1:"!mods[%_mod_name%]#BinDirs[%%j]!" -v2:!RH_HK[%%a]! -rc:0F -ln:%VL_FALSE%
+		call :reg -oc:%RC_DEL% -kn:!RH_HK[%%a]! -vn:PATH -vv:"!l_bin_dir!"
 		call :echoOk
-	) else (
-		call :get_res_val -rf:"%menus_file%" -ri:ChangeRegKeyValue -v1:%l_reg_key_name% -v2:"%_env%" -v3:"%reg_value%" -v4:"%_val%"
-		call :choice_process "" "" %DEF_DELAY% N "!res_val!"
-		if !choice! EQU %YES% (
-			call :set_env_value %l_reg_key_name% "%_env%" "%_val%"
-			set l_is_change_env_value=%VL_TRUE%
-		) else (
-			call :echo -ri:ChangeRegKeyValueAbort -v1:%l_reg_key_name% -v2:"%_env%"
-		)
 	)
 )
-if /i %l_reg_key_name% EQU %RH_HKLM% (
-	if /i "!l_is_change_env_value!" NEQ "%VL_TRUE%" call :set_env_value %RH_HKCU% "%_env%" "%_val%"
-	endlocal & exit /b 0
-)
-set "l_reg_key_name=%RH_HKLM%" & goto get_env_value
-
-rem ---------------------------------------------
-rem Устанавливает заданное значение переменной среды
-rem ---------------------------------------------
-:set_env_value
-setlocal
-set _key=%~1
-set _env=%~2
-set _val=%~3
-
-call :echo -ri:AddEnv -v1:%l_reg_key_name% -v2:"%_env%" -v3:"%_val%" -rc:0F -ln:%VL_FALSE%
-call :convert_slashes %CSD_DEF% "%_val%" _val
-call :reg -oc:%RC_SET% -kn:%l_reg_key_name% -vn:"%_env%" -vv:"%_val%"
-call :echoOk
-endlocal & exit /b 0
-
-rem ---------------------------------------------
-rem Удаляет переменную среды с заданным именем
-rem ---------------------------------------------
-:goal_del_env
-setlocal
-set _env=%~1
-
-call :print_exec_name "%~0"
-
-call :echo -ri:DelEnv -v1:%l_reg_key_name% -v2:"%_env%" -rc:0F -ln:%VL_FALSE%
-call :reg -oc:%RC_DEL% -vn:"%_env%"
-call :echoOk
 endlocal & exit /b 0
 
 rem ---------------------------------------------
@@ -1909,7 +1926,7 @@ setlocal
 set _proc_name=%~0
 set _pkg_name=%~1
 set _mod_name=%~2
-set _var=%~3
+set "_var=%~3"
 
 rem echo on
 call :echo -rv:"%~0: _var=%_var%" -rl:5FINE
@@ -1918,37 +1935,37 @@ set "$bind_var=%_var:${=%"
 rem если не нужно связывать переменную, то возвращаем её "как есть"
 if /i "%$bind_var%" EQU "%_var%" endlocal & set "%4=%_var%" & exit /b 0
 
-set l_vars=%_var%
+set "l_vars=%_var%"
 :bind_vars_loop
 for /f "tokens=1* delims=$}" %%i in ("!l_vars!") do (
-	set l_var=%%i
+	set "l_var=%%i"
 	call :echo -rv:"%~0: l_var=!l_var!" -rl:5FINE
 	set "$check_var=!l_var:~0,1!"
 	if /i "!$check_var!" EQU "{" (
-		set l_var=!l_var:~1!
+		set "l_var=!l_var:~1!"
 		call :convert_case %CM_LOWER% "!l_var!" l_lc_var
 		call :echo -rv:"%~0: _var=!_var!; l_var=!l_var!; l_lc_var=!l_lc_var!" -rl:5FINE
 		rem если не определён текущий модуль то используем заданную область видимости
 		if not defined g_mod_name (
-			call :get_var_scope !l_lc_var! l_scope_pkg l_scope_mod
+			call :get_var_scope "!l_lc_var!" l_scope_pkg l_scope_mod
 			if /i "!var_scope!" EQU "%BV_MOD_SCOPE%" (
-				call :get_var_value_by_scope !l_lc_var! "%_pkg_name%" "%_mod_name%"
-				set var_value=!var_value_by_scope!
+				call :get_var_value_by_scope "!l_lc_var!" "%_pkg_name%" "%_mod_name%"
+				set "var_value=!var_value_by_scope!"
 			) else (
-				call :get_var_value !l_lc_var!
+				call :get_var_value "!l_lc_var!"
 			)
 		) else (
-			call :get_var_value !l_lc_var!
+			call :get_var_value "!l_lc_var!"
 		)
 		call :echo -rv:"%~0: var_value=!var_value!" -rl:5FINE
 		if defined var_value call :binding_var_value "!_var!" "!l_var!" "!var_value!" _var
 	)
-	set l_vars=%%j
+	set "l_vars=%%j"
 )
 if defined l_vars goto bind_vars_loop
 
 rem echo 6. "%_var%"
-set $bind_var=%_var:${=%
+set "$bind_var=%_var:${=%"
 rem если не нужно связывать переменную, то возвращаем её "как есть"
 if /i "%$bind_var%" EQU "%_var%" endlocal & set "%4=%_var%" & exit /b 0
 rem иначе - пытаемся запросить у пользователя её значение
@@ -1956,7 +1973,7 @@ call :get_res_val -rf:"%menus_file%" -ri:InputBindVarsValues -v1:"%_var%"
 call :choice_process "" "" %SHORT_DELAY% N "!res_val!"
 if %choice% EQU %NO% call :echo -ri:InputBindVarsAbort -v1:"%_var%" & endlocal & exit /b 1
 
-set l_vars=%_var%
+set "l_vars=%_var%"
 :input_vars_loop
 for /f "tokens=1* delims=$}" %%i in ("!l_vars!") do (
 	set l_input_var=%%i
@@ -1968,10 +1985,10 @@ for /f "tokens=1* delims=$}" %%i in ("!l_vars!") do (
 		set l_input_val=!l_input_val:"=!
 		call :binding_var_value "%_var%" "!l_input_var!" "!l_input_val!" _var
 	)
-	set l_vars=%%j
+	set "l_vars=%%j"
 )
 if defined l_vars goto input_vars_loop
-endlocal & set %4=%_var%
+endlocal & set "%4=%_var%"
 exit /b 0
 
 rem ---------------------------------------------
@@ -1980,12 +1997,12 @@ rem значениями
 rem ---------------------------------------------
 :binding_var_value _str _var _val
 setlocal
-set _str=%~1
-set _var=%~2
-set _val=%~3
+set "_str=%~1"
+set "_var=%~2"
+set "_val=%~3"
 call :echo -rv:"%~0: _str=%_str%; _var=%_var%; _val=%_val%" -rl:5FINE
-set l_bind_str=!_str:${%_var%}=%_val%!
-endlocal & set %4=%l_bind_str%
+set "l_bind_str=!_str:${%_var%}=%_val%!"
+endlocal & set "%4=%l_bind_str%"
 exit /b 0
 
 rem ---------------------------------------------
@@ -2025,7 +2042,7 @@ set vs=0
 for /f "tokens=1* delims=." %%i in ("!l_var_scopes!") do (
 	set l_scopes[!vs!]=%%i
 	set l_var_scopes=%%j
-	set /a vs=!vs!+1
+	set /a "vs+=1"
 )
 if defined l_var_scopes goto var_scope_loop
 
@@ -2037,22 +2054,22 @@ rem Устанавливает для подстановочных переменных
 rem связываемые значения
 rem ---------------------------------------------
 :set_var_value _var_name _var_value _svv_pkg_name _svv_mod_name
-set _var_name=%~1
-set _var_value=%~2
+set "_var_name=%~1"
+set "_var_value=%~2"
 set _svv_pkg_name=%~3
 set _svv_mod_name=%~4
 
 rem echo %~0: _var_name=%_var_name%; _var_value=%_var_value%; _svv_pkg_name=%_svv_pkg_name%; _svv_mod_name=%_svv_mod_name%
 rem если не задана область видимости переменной, то определяем её по имени
 if not defined _svv_pkg_name (
-	call :get_var_scope %_var_name% svv_scope_pkg svv_scope_mod
+	call :get_var_scope "%_var_name%" svv_scope_pkg svv_scope_mod
 ) else (
 	set svv_scope_pkg=%_svv_pkg_name%
 	set svv_scope_mod=%_svv_mod_name%
 )
 call :echo -rv:"%~0: svv_scope_pkg=%svv_scope_pkg%; svv_scope_mod=%svv_scope_mod%" -rl:5FINE
 rem пытаемся получить значение переменной в определённой области видимости
-call :get_var_value_by_scope %_var_name% %svv_scope_pkg% %svv_scope_mod%
+call :get_var_value_by_scope "%_var_name%" %svv_scope_pkg% %svv_scope_mod%
 call :echo -rv:"%~0: var_value_by_scope=%var_value_by_scope%; svv_scope_pkg=%svv_scope_pkg%; svv_scope_mod=%svv_scope_mod%" -rl:5FINE
 rem pause
 rem необходимо использование дополнительной переменной http://qaru.site/questions/14072091/batch-set-a-missing-operator
@@ -2065,15 +2082,15 @@ call :echo -rv:"%~0: l_curr_var_idx=%l_curr_var_idx%" -rl:5FINE
 if defined svv_scope_mod (
 	if not defined l_curr_var_idx set l_curr_var_idx=-1
 	if not defined var_value_by_scope set /a "l_curr_var_idx+=1"
-	set g_vars[%svv_scope_pkg%][%svv_scope_mod%][!l_curr_var_idx!]#Name=%_var_name%
-	set g_vars[%svv_scope_pkg%][%svv_scope_mod%][!l_curr_var_idx!]#Val=%_var_value%
-	set g_vars[%svv_scope_pkg%][%svv_scope_mod%]#Cnt=!l_curr_var_idx!
+	set "g_vars[%svv_scope_pkg%][%svv_scope_mod%][!l_curr_var_idx!]#Name=%_var_name%"
+	set "g_vars[%svv_scope_pkg%][%svv_scope_mod%][!l_curr_var_idx!]#Val=%_var_value%"
+	set "g_vars[%svv_scope_pkg%][%svv_scope_mod%]#Cnt=!l_curr_var_idx!"
 ) else (
 	if not defined l_curr_var_idx set l_curr_var_idx=-1
 	if not defined var_value_by_scope set /a "l_curr_var_idx+=1"
-	set g_vars[%svv_scope_pkg%][!l_curr_var_idx!]#Name=%_var_name%
-	set g_vars[%svv_scope_pkg%][!l_curr_var_idx!]#Val=%_var_value%
-	set g_vars[%svv_scope_pkg%]#Cnt=!l_curr_var_idx!
+	set "g_vars[%svv_scope_pkg%][!l_curr_var_idx!]#Name=%_var_name%"
+	set "g_vars[%svv_scope_pkg%][!l_curr_var_idx!]#Val=%_var_value%"
+	set "g_vars[%svv_scope_pkg%]#Cnt=!l_curr_var_idx!"
 )
 call :echo -rv:"%~0: l_curr_var_idx=%l_curr_var_idx%" -rl:5FINE
 exit /b 0
@@ -2089,7 +2106,7 @@ rem ---------------------------------------------
 :get_var_value_by_scope _var_name _scope_pkg _scope_mod
 setlocal
 set _proc_name=%~0
-set _var_name=%~1
+set "_var_name=%~1"
 set _scope_pkg=%~2
 set _scope_mod=%~3
 
@@ -2267,7 +2284,7 @@ call :get_proc_arch
 if not defined proc_arch set proc_arch=%PA_X86%
 
 rem РАЗБОР ПАРАМЕТРОВ ЗАПУСКА:
-set bis_param_defs="-ul,p_use_log;-ll,p_log_level,%DEF_LOG_LEVEL%;-pa,proc_arch,%proc_arch%;-lc,locale;-ld,bis_log_dir,%DEF_LOG_DIR%;-dd,bis_distrib_dir,%DEF_DISTRIB_DIR%;-ud,bis_utils_dir,%DEF_UTL_DIR%;-bd,bis_backup_data_dir,%DEF_BAK_DAT_DIR%;-bc,bis_backup_config_dir,%DEF_BAK_CFG_DIR%;-md,bis_modules_dir,%DEF_MOD_DIR%;-cd,bis_config_dir,%DEF_CFG_DIR%;-rd,bis_res_dir,%DEF_RES_DIR%;-lf,p_license_file;-em,EXEC_MODE,#,%EM_RUN%;-pc,p_pkg_choice;-mc,p_mod_choice;-ec,p_exec_choice;-pn,p_pkg_name;-mn,p_mod_name"
+set bis_param_defs="-ul,p_use_log;-ll,p_log_level,%LL_DEF%;-pa,proc_arch,%proc_arch%;-lc,locale;-ld,bis_log_dir,%DEF_LOG_DIR%;-dd,bis_distrib_dir,%DEF_DISTRIB_DIR%;-ud,bis_utils_dir,%DEF_UTL_DIR%;-bd,bis_backup_data_dir,%DEF_BAK_DAT_DIR%;-bc,bis_backup_config_dir,%DEF_BAK_CFG_DIR%;-md,bis_modules_dir,%DEF_MOD_DIR%;-cd,bis_config_dir,%DEF_CFG_DIR%;-rd,bis_res_dir,%DEF_RES_DIR%;-lf,p_license_file;-em,EXEC_MODE,#,%EM_RUN%;-pc,p_pkg_choice;-mc,p_mod_choice;-ec,p_exec_choice;-pn,p_pkg_name;-mn,p_mod_name"
 call :parse_params %~0 %bis_param_defs% %*
 rem ошибка разбора определений параметров
 rem if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
@@ -2275,10 +2292,7 @@ rem вывод справки
 if ERRORLEVEL 1 call :bis_help & endlocal & exit /b !ERRORLEVEL!
 
 rem вывод значений параметров запуска системы
-if /i "%EXEC_MODE%" EQU "%EM_DBG%" set l_is_print_params=%VL_TRUE%
-if /i "%EXEC_MODE%" EQU "%EM_TST%" set l_is_print_params=%VL_TRUE%
-if defined p_log_level if %p_log_level% GTR %LL_INF% set l_is_print_params=%VL_TRUE%
-if defined l_is_print_params call :print_params %~0
+if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :print_params %~0
 
 rem глобальный уровень логгирования
 set g_log_level=%p_log_level%

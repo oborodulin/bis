@@ -106,6 +106,58 @@
                         </execution>
                     </executions>
                 </module>
+                <module>
+                    <name>apache-tomcat</name>
+                    <version>9.0.27</version>
+                    <description> онтейнер сервлетов с открытым исходным кодом</description>
+                    <executions>
+                        <execution>
+                            <phase>download</phase>
+                            <configuration>
+                                <processor>
+                                    <architecture>x86</architecture>
+                                    <distribUrl>http://apache.ip-connect.vn.ua/tomcat/tomcat-9/v9.0.27/bin/apache-tomcat-9.0.27-windows-x86.zip</distribUrl>
+                                    <distribFile>apache-tomcat-9.0.27-windows-x86.zip</distribFile>
+                                </processor>
+                                <processor>
+                                    <architecture>x64</architecture>
+                                    <distribUrl>http://ftp.man.poznan.pl/apache/tomcat/tomcat-9/v9.0.27/bin/apache-tomcat-9.0.27-windows-x64.zip</distribUrl>
+                                    <distribFile>apache-tomcat-9.0.27-windows-x64.zip</distribFile>
+                                </processor>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>unpack-zip</goal>
+								<goal>cmd-shell</goal>
+                            </goals>
+                            <configuration>
+                                <modSetupDir>C:/Dev/${mod.name}-${mod.version}</modSetupDir>
+								<modBinDirs>
+									<directory>%CATALINA_HOME%/bin</directory>
+								</modBinDirs>
+								<modHomeDir>
+									<envVar>CATALINA_HOME</envVar>
+									<directory>${mod.setupdir}</directory>
+								</modHomeDir>
+								<commands>
+									<move>
+										<source>
+											<directory>${mod.setupdir}/${mod.name}-${mod.version}</directory>
+											<includes>
+												<include>*</include>
+											</includes>
+										</source>
+										<destination>
+											<directory>${mod.setupdir}</directory>
+										</destination>
+									</move>
+								</commands>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </module>
             </modules>
         </windows>
     </os>

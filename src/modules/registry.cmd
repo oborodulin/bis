@@ -126,7 +126,7 @@ rem РАЗБОР ПАРАМЕТРОВ ЗАПУСКА:
 :start_reg_params_parse
 set p_prm=%~1
 set p_key=%p_prm:~0,3%
-set p_val=%p_prm:~4%
+set "p_val=%p_prm:~4%"
 set p_val=%p_val:"=%
 
 if not defined p_prm goto end_reg_params_parse
@@ -145,7 +145,7 @@ goto start_reg_params_parse
 :end_reg_params_parse
 
 rem если не указан куст, задаём ветку переменных окружения пользователя
-if not defined key_name set key_name=%RH_HKCU%
+if not defined key_name set key_name=%RH_DEF%
 rem echo -oc:"%oper_code%" -vn:"%value_name%" -vv:"%value_value%" -kn:"%key_name%"
 exit /b 0
 

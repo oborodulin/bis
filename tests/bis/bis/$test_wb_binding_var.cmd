@@ -17,7 +17,7 @@ set LL_WRN=3
 set LL_INF=4
 set LL_DBG=5
 rem уровень логгирования по умолчанию: ошибки
-set DEF_LOG_LEVEL=%LL_ERR%
+set LL_DEF=%LL_ERR%
 rem логические константы
 set VL_TRUE=true
 set VL_FALSE=false
@@ -2103,7 +2103,7 @@ call :get_proc_arch
 if not defined proc_arch set proc_arch=%PA_X86%
 
 rem РАЗБОР ПАРАМЕТРОВ ЗАПУСКА:
-set bis_param_defs="-ul,p_use_log;-ll,p_log_level,%DEF_LOG_LEVEL%;-pa,proc_arch,%proc_arch%;-lc,locale;-ld,bis_log_dir,%DEF_LOG_DIR%;-dd,bis_distrib_dir,%DEF_DISTRIB_DIR%;-ud,bis_utils_dir,%DEF_UTL_DIR%;-bd,bis_backup_data_dir,%DEF_BAK_DAT_DIR%;-bc,bis_backup_config_dir,%DEF_BAK_CFG_DIR%;-md,bis_modules_dir,%DEF_MOD_DIR%;-cd,bis_config_dir,%DEF_CFG_DIR%;-rd,bis_res_dir,%DEF_RES_DIR%;-lf,p_license_file;-em,EXEC_MODE,#,%EM_RUN%;-pc,p_pkg_choice;-mc,p_mod_choice;-ec,p_exec_choice;-pn,p_pkg_name;-mn,p_mod_name"
+set bis_param_defs="-ul,p_use_log;-ll,p_log_level,%LL_DEF%;-pa,proc_arch,%proc_arch%;-lc,locale;-ld,bis_log_dir,%DEF_LOG_DIR%;-dd,bis_distrib_dir,%DEF_DISTRIB_DIR%;-ud,bis_utils_dir,%DEF_UTL_DIR%;-bd,bis_backup_data_dir,%DEF_BAK_DAT_DIR%;-bc,bis_backup_config_dir,%DEF_BAK_CFG_DIR%;-md,bis_modules_dir,%DEF_MOD_DIR%;-cd,bis_config_dir,%DEF_CFG_DIR%;-rd,bis_res_dir,%DEF_RES_DIR%;-lf,p_license_file;-em,EXEC_MODE,#,%EM_RUN%;-pc,p_pkg_choice;-mc,p_mod_choice;-ec,p_exec_choice;-pn,p_pkg_name;-mn,p_mod_name"
 call :parse_params %~0 %bis_param_defs% %*
 rem ошибка разбора определений параметров
 rem if ERRORLEVEL 2 set p_def_prm_err=%VL_TRUE%
@@ -2711,7 +2711,7 @@ if ERRORLEVEL 1 call :echo_res_help & endlocal & exit /b 0
 if /i "%EXEC_MODE%" EQU "%EM_DBG%" call :print_params %~0
 
 rem При отсутствии заданных значений, устанавливаем по умолчанию
-if not defined log_lvl set log_lvl=%DEF_LOG_LEVEL%
+if not defined log_lvl set log_lvl=%LL_DEF%
 rem определяем номер категории ресурса
 if defined res_categ (
 	set categ_num=%res_categ:~0,1%
@@ -2869,7 +2869,7 @@ rem ChangeColor 8 0
 echo | set /p "dummyName=:уровень логгирования (по умолчанию "
 rem ChangeColor 15 0
 %ChangeColor_15_0%
-echo | set /p "dummyName=%DEF_LOG_LEVEL%"
+echo | set /p "dummyName=%LL_DEF%"
 rem ChangeColor 8 0
 %ChangeColor_8_0%
 echo ). Можно в вызывающем сценарии определить переменную g_log_level [0 - сообщения в файл, 1 - сообщения на экран, 2 - ошибки, 3 - предупреждения, 4 - информация, 5 - отладка]
